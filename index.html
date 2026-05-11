@@ -1,123 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Saad Ahmed | Lecturer & Researcher | BAUST</title>
-    <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/graduation-cap.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <script>
-        (function() {
-            const theme = localStorage.getItem('theme');
-            if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark-theme');
-            }
-        })();
-    </script>
-</head>
-<body>
+    <meta
+      name="description"
+      content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning."
+    />
+    <meta
+      name="keywords"
+      content="Saad Ahmed, BAUST, Lecturer, Researcher, Computer Vision, Deep Learning, Image Processing"
+    />
+    <meta name="author" content="Saad Ahmed" />
 
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <main class="main-block">
-        <aside class="sidebar">
-            <nav>
-                <a href="#about">About</a>
-                <a href="#journals">Journals</a>
-                <a href="#conferences">Conferences</a>
-                <a href="#contact">Contact</a>
-                <a href="javascript:void(0)" id="theme-button" class="nav-toggle">
-                    <i class="fas fa-moon"></i> <span class="nav-text">Theme</span>
-                </a>
-            </nav>
-        </aside>
+      <aside class="sidebar">
+        <nav>
+          <a href="#about">About</a>
+          <a href="#journals">Journals</a>
+          <a href="#conferences">Conferences</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </aside>
 
-        <div class="content">
-            <header id="about" class="hero">
-                <img src="Formal-3.png" alt="Saad Ahmed" class="profile-circle">
-                <div class="hero-info">
-                    <h1>Saad Ahmed</h1>
-                    <p class="subtitle">Lecturer, Dept of CSE</p>
-                    <p class="institution">BAUST</p>
-                    
-                    <div class="metrics-container">
-                        <div class="metric-item"><span class="metric-value" id="total-citations">0</span><span class="metric-label">Citations</span></div>
-                        <div class="metric-item"><span class="metric-value" id="h-index">0</span><span class="metric-label">h-index</span></div>
-                        <div class="metric-item"><span class="metric-value" id="i10-index">0</span><span class="metric-label">i10-index</span></div>
-                    </div>
+      <div class="content">
+        <header id="about" class="hero">
+          <img src="Formal-3.png" alt="Saad Ahmed" class="profile-circle" />
+          <div class="hero-info">
+            <h1>Saad Ahmed</h1>
+            <p class="subtitle">Lecturer, Dept of CSE</p>
+            <p class="institution">
+              Bangladesh Army University of Science and Technology (BAUST)
+            </p>
 
-                    <div class="social-icons">
-                        <a href="#" class="icon github"><i class="fab fa-github"></i></a>
-                        <a href="#" class="icon linkedin"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="icon scholar"><i class="fas fa-graduation-cap"></i></a>
-                        <a href="#" class="icon researchgate"><i class="fab fa-researchgate"></i></a>
-                        <a href="#" class="icon orchid"><i class="fab fa-orcid"></i></a>
-                        <a href="mailto:saadahmed@baust.edu.bd" class="icon gmail"><i class="fas fa-envelope"></i></a>
-                        <a href="https://wa.me/8801724407189" class="icon whatsapp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="icon youtube"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </header>
+            <div class="metrics-container" id="metrics">
+              <div class="metric-item">
+                <span class="metric-value" id="total-citations">0</span>
+                <span class="metric-label">Citations</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value" id="h-index">0</span>
+                <span class="metric-label">h-index</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value" id="i10-index">0</span>
+                <span class="metric-label">i10-index</span>
+              </div>
+            </div>
 
-            <hr class="divider">
-            <section id="journals"><h2 class="section-title">Journal Articles</h2><div id="journal-list"></div></section>
-            <section id="conferences"><h2 class="section-title">Conference Proceedings</h2><div id="conference-list"></div></section>
-            
-            <section id="contact">
-                <h2 class="section-title">Contact</h2>
-                <div class="contact-details">
-                    <p><i class="fas fa-envelope"></i> saadahmed@baust.edu.bd</p>
-                    <p><i class="fas fa-phone"></i> +8801724407189</p>
-                </div>
-            </section>
+            <div class="research-interests">
+              <p>
+                <strong>Research Interests:</strong> Image Processing, Computer
+                Vision, and Deep Learning.
+              </p>
+            </div>
 
-            <footer>
-                <p>&copy; 2026 Saad Ahmed • BAUST</p>
-            </footer>
-        </div>
+            <div class="social-icons">
+              <a href="https://github.com" class="icon github" title="GitHub"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a
+                href="https://linkedin.com"
+                class="icon linkedin"
+                title="LinkedIn"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a
+                href="https://scholar.google.com"
+                class="icon scholar"
+                title="Google Scholar"
+                ><i class="fas fa-graduation-cap"></i
+              ></a>
+            </div>
+          </div>
+        </header>
+
+        <hr class="divider" />
+
+        <section id="journals">
+          <h2 class="section-title">Journal Articles</h2>
+          <div id="journal-list"></div>
+        </section>
+
+        <section id="conferences">
+          <h2 class="section-title">Conference Proceedings</h2>
+          <div id="conference-list"></div>
+        </section>
+
+        <hr class="divider" />
+
+        <section id="contact">
+          <h2 class="section-title">Contact Information</h2>
+          <div class="contact-details">
+            <p><i class="fas fa-user-tie"></i> <strong>Saad Ahmed</strong></p>
+            <p><i class="fas fa-building"></i> Lecturer, Dept of CSE, BAUST</p>
+            <p><i class="fas fa-phone"></i> +8801724407189</p>
+            <p><i class="fas fa-envelope"></i> saadahmed@baust.edu.bd</p>
+          </div>
+        </section>
+
+        <footer>
+          <p>&copy; 2026 Saad Ahmed • BAUST, Saidpur</p>
+        </footer>
+      </div>
     </main>
 
     <script src="papers.js"></script>
     <script>
-        const btn = document.getElementById("theme-button");
-        const icon = btn.querySelector("i");
-        const root = document.documentElement;
+      function renderContent() {
+        document.getElementById("total-citations").innerText =
+          scholarStats.citations;
+        document.getElementById("h-index").innerText = scholarStats.hIndex;
+        document.getElementById("i10-index").innerText = scholarStats.i10Index;
 
-        // Function to update icon
-        function updateIcon() {
-            if (root.classList.contains("dark-theme")) {
-                icon.classList.replace("fa-moon", "fa-sun");
-            } else {
-                icon.classList.replace("fa-sun", "fa-moon");
-            }
-        }
+        const journalContainer = document.getElementById("journal-list");
+        const conferenceContainer = document.getElementById("conference-list");
 
-        // Initial icon check
-        updateIcon();
+        const processedPapers = myPapers
+          .map((p) => {
+            const isJournal = p.bibtex
+              .trim()
+              .toLowerCase()
+              .startsWith("@article");
+            const yearMatch =
+              p.bibtex.match(/year\s*=\s*\{+(.*?)\}+/i) ||
+              p.bibtex.match(/year\s*=\s*([0-9]{4})/i);
+            const year = parseInt(yearMatch?.[1] || "0");
+            return { ...p, isJournal, year };
+          })
+          .sort((a, b) => b.year - a.year);
 
-        btn.addEventListener("click", () => {
-            root.classList.toggle("dark-theme");
-            const isDark = root.classList.contains("dark-theme");
-            localStorage.setItem("theme", isDark ? "dark" : "light");
-            updateIcon();
+        processedPapers.forEach((paper, index) => {
+          const title =
+            paper.bibtex.match(/title\s*=\s*\{+(.*?)\}+/i)?.[1] || "Untitled";
+          const authors =
+            paper.bibtex.match(/author\s*=\s*\{+(.*?)\}+/i)?.[1] ||
+            "Unknown Authors";
+          const venue =
+            paper.bibtex.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/i)?.[2] ||
+            "Venue";
+          const cleanAuthors = authors.split(" and ").join(", ");
+
+          const html = `
+                    <div class="paper">
+                        <h3 class="paper-title">${title}</h3>
+                        <p class="authors">${cleanAuthors}</p>
+                        <p class="venue">${venue}, ${paper.year}</p>
+                        <div class="paper-actions">
+                            <a href="${paper.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI Link</a>
+                            <button class="btn-cite" onclick="toggleBib('bib-${index}')"><i class="fas fa-quote-right"></i> BibTeX</button>
+                        </div>
+                        <pre id="bib-${index}" class="bibtex-box">${paper.bibtex.trim()}</pre>
+                    </div>
+                `;
+          if (paper.isJournal) journalContainer.innerHTML += html;
+          else conferenceContainer.innerHTML += html;
         });
+      }
 
-        function renderContent() {
-            document.getElementById('total-citations').innerText = scholarStats.citations;
-            document.getElementById('h-index').innerText = scholarStats.hIndex;
-            document.getElementById('i10-index').innerText = scholarStats.i10Index;
-            const jList = document.getElementById('journal-list');
-            const cList = document.getElementById('conference-list');
-            myPapers.forEach((paper, index) => {
-                const isJ = paper.bibtex.trim().toLowerCase().startsWith('@article');
-                const title = paper.bibtex.match(/title\s*=\s*\{+(.*?)\}+/i)?.[1] || "Untitled";
-                const html = `<div class="paper"><h3 class="paper-title">${title}</h3><div class="paper-actions"><a href="${paper.doi}" target="_blank" class="doi-link">DOI</a><button class="btn-cite" onclick="toggleBib('bib-${index}')">BibTeX</button></div><pre id="bib-${index}" class="bibtex-box">${paper.bibtex.trim()}</pre></div>`;
-                if (isJ) jList.innerHTML += html; else cList.innerHTML += html;
-            });
-        }
-        function toggleBib(id) { const el = document.getElementById(id); el.style.display = (el.style.display === 'block') ? 'none' : 'block'; }
-        window.onload = renderContent;
+      function toggleBib(id) {
+        const el = document.getElementById(id);
+        el.style.display = el.style.display === "block" ? "none" : "block";
+      }
+      window.onload = renderContent;
     </script>
-</body>
+  </body>
 </html>
