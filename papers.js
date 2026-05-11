@@ -3,9 +3,9 @@
  * Update these numbers manually whenever your profile updates.
  */
 const scholarStats = {
-    citations: 14,  // Update this
-    hIndex: 2,       // Update this
-    i10Index: 2      // Update this
+    citations: 124,  // Update this
+    hIndex: 6,       // Update this
+    i10Index: 4      // Update this
 };
 
 /**

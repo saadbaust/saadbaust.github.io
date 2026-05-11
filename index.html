@@ -1,88 +1,20 @@
 <!doctype html>
 <html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Saad Ahmed | Lecturer & Researcher | BAUST</title>
-    <meta name="description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning.">
-    <meta name="keywords" content="Saad Ahmed, BAUST, Lecturer, Researcher, Computer Vision, Deep Learning, Image Processing">
-    <meta name="author" content="Saad Ahmed">
+    <meta
+      name="description"
+      content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning."
+    />
+    <meta
+      name="keywords"
+      content="Saad Ahmed, BAUST, Lecturer, Researcher, Computer Vision, Deep Learning, Image Processing"
+    />
+    <meta name="author" content="Saad Ahmed" />
 
-    <meta property="og:title" content="Saad Ahmed | Lecturer & Researcher">
-    <meta property="og:description" content="Research portfolio and academic profile of Saad Ahmed.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourusername.github.io/">
-  </head>
-  <body>
-    <main class="main-block">
-      <aside class="sidebar">
-        <nav>
-          <a href="#about">About</a>
-          <a href="#journals">Journals</a>
-          <a href="#conferences">Conferences</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </aside>
-
-      <div class="content">
-        <header id="about" class="hero">
-          <img src="Formal-3.png" alt="Saad Ahmed" class="profile-circle" />
-          <div class="hero-info">
-            <h1>Saad Ahmed</h1>
-            <p class="subtitle">Lecturer, Dept of CSE</p>
-            <p class="institution">
-              Bangladesh Army University of Science and Technology (BAUST)
-            </p>
-
-            <div class="metrics-container" id="metrics">
-              <div class="metric-item">
-                <span class="metric-value" id="total-citations">0</span>
-                <span class="metric-label">Citations</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value" id="h-index">0</span>
-                <span class="metric-label">h-index</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value" id="i10-index">0</span>
-                <span class="metric-label">i10-index</span>
-              </div>
-            </div>
-
-            <div class="research-interests">
-              <p>
-                <strong>Research Interests:</strong> Image Processing, Computer
-                Vision, and Deep Learning.
-              </p>
-            </div>
-
-            <div class="social-icons">
-              <a href="https://github.com" class="icon github" title="GitHub"
-                ><i class="fab fa-github"></i
-              ></a>
-              <a
-                href="https://linkedin.com"
-                class="icon linkedin"
-                title="LinkedIn"
-                ><i class="fab fa-linkedin"></i
-              ></a>
-              <a
-                href="https://scholar.google.com"
-                class="icon scholar"
-                title="Google Scholar"
-                ><i class="fas fa-graduation-cap"></i
-              ></a>
-            </div>
-          </div>
-        </header>
-
-        <hr class="divider" />
-
-        <section id="journals">
-          <h2 class="section-title">Journal Articles</h2>
-          <div id="journal-list"></div>
-        </section>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link
       rel="stylesheet"
@@ -190,13 +122,11 @@
     <script src="papers.js"></script>
     <script>
       function renderContent() {
-        // Render Stats
         document.getElementById("total-citations").innerText =
           scholarStats.citations;
         document.getElementById("h-index").innerText = scholarStats.hIndex;
         document.getElementById("i10-index").innerText = scholarStats.i10Index;
 
-        // Render Papers
         const journalContainer = document.getElementById("journal-list");
         const conferenceContainer = document.getElementById("conference-list");
 
