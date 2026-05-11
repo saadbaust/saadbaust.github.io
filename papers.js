@@ -1,16 +1,11 @@
-/**
- * GOOGLE SCHOLAR METRICS
- * Update these numbers manually whenever your profile updates.
- */
+// Google Scholar Metrics
 const scholarStats = {
-    citations: 124,  // Update this
-    hIndex: 6,       // Update this
-    i10Index: 4      // Update this
+    citations: 124, 
+    hIndex: 6,      
+    i10Index: 4     
 };
 
-/**
- * PAPERS DATABASE
- */
+// Publications Database
 const myPapers = [
     {
         doi: "https://doi.org/10.1109/COMPAS60761.2024.10797170",
