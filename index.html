@@ -8,12 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script>
+        (function() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark-theme');
+            }
+        })();
+    </script>
 </head>
 <body>
-
-    <div class="theme-toggle" id="theme-button" title="Toggle Dark/Light Mode">
-        <i class="fas fa-moon"></i>
-    </div>
 
     <main class="main-block">
         <aside class="sidebar">
@@ -22,6 +27,9 @@
                 <a href="#journals">Journals</a>
                 <a href="#conferences">Conferences</a>
                 <a href="#contact">Contact</a>
+                <a href="javascript:void(0)" id="theme-button" class="nav-toggle">
+                    <i class="fas fa-moon"></i> <span class="nav-text">Theme</span>
+                </a>
             </nav>
         </aside>
 
@@ -56,7 +64,15 @@
             <section id="journals"><h2 class="section-title">Journal Articles</h2><div id="journal-list"></div></section>
             <section id="conferences"><h2 class="section-title">Conference Proceedings</h2><div id="conference-list"></div></section>
             
-            <footer style="margin-top: 4rem; text-align: center; font-size: 0.8rem; color: var(--gray);">
+            <section id="contact">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-details">
+                    <p><i class="fas fa-envelope"></i> saadahmed@baust.edu.bd</p>
+                    <p><i class="fas fa-phone"></i> +8801724407189</p>
+                </div>
+            </section>
+
+            <footer>
                 <p>&copy; 2026 Saad Ahmed • BAUST</p>
             </footer>
         </div>
@@ -64,30 +80,29 @@
 
     <script src="papers.js"></script>
     <script>
-        // Dark Mode Logic with Toggle & Persistence
         const btn = document.getElementById("theme-button");
         const icon = btn.querySelector("i");
-        const currentTheme = localStorage.getItem("theme");
+        const root = document.documentElement;
 
-        // If user has a saved preference, use it. Otherwise, use system default.
-        if (currentTheme === "dark" || (!currentTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-            document.body.classList.add("dark-theme");
-            icon.classList.replace("fa-moon", "fa-sun");
-        }
-
-        btn.addEventListener("click", () => {
-            document.body.classList.toggle("dark-theme");
-            let theme = "light";
-            if (document.body.classList.contains("dark-theme")) {
-                theme = "dark";
+        // Function to update icon
+        function updateIcon() {
+            if (root.classList.contains("dark-theme")) {
                 icon.classList.replace("fa-moon", "fa-sun");
             } else {
                 icon.classList.replace("fa-sun", "fa-moon");
             }
-            localStorage.setItem("theme", theme);
+        }
+
+        // Initial icon check
+        updateIcon();
+
+        btn.addEventListener("click", () => {
+            root.classList.toggle("dark-theme");
+            const isDark = root.classList.contains("dark-theme");
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+            updateIcon();
         });
 
-        // Rendering Logic (Previous)
         function renderContent() {
             document.getElementById('total-citations').innerText = scholarStats.citations;
             document.getElementById('h-index').innerText = scholarStats.hIndex;
