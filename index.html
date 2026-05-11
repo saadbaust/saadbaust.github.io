@@ -142,3 +142,81 @@
     </script>
 </body>
 </html>
+            <section id="journals">
+                <h2 class="section-title">Journal Articles</h2>
+                <div id="journal-list"></div>
+            </section>
+
+            <section id="conferences">
+                <h2 class="section-title">Conference Proceedings</h2>
+                <div id="conference-list"></div>
+            </section>
+
+            <hr class="divider">
+
+            <section id="contact">
+                <h2 class="section-title">Contact Information</h2>
+                <div class="contact-details">
+                    <p><i class="fas fa-user-tie"></i> <strong>Saad Ahmed</strong></p>
+                    <p><i class="fas fa-building"></i> Lecturer, Dept of CSE, BAUST</p>
+                    <p><i class="fas fa-phone"></i> +8801724407189</p>
+                    <p><i class="fas fa-envelope"></i> saadahmed@baust.edu.bd</p>
+                </div>
+            </section>
+
+            <footer>
+                <p>&copy; 2026 Saad Ahmed • BAUST, Saidpur</p>
+            </footer>
+        </div>
+    </main>
+
+    <script src="papers.js"></script>
+    
+    <script>
+        function renderContent() {
+            // Update Stats
+            document.getElementById('total-citations').innerText = scholarStats.citations;
+            document.getElementById('h-index').innerText = scholarStats.hIndex;
+            document.getElementById('i10-index').innerText = scholarStats.i10Index;
+
+            const journalList = document.getElementById('journal-list');
+            const conferenceList = document.getElementById('conference-list');
+
+            // Categorize and Sort
+            const sortedPapers = myPapers.map(p => {
+                const isJournal = p.bibtex.trim().toLowerCase().startsWith('@article');
+                const yearMatch = p.bibtex.match(/year\s*=\s*\{+(.*?)\}+/i) || p.bibtex.match(/year\s*=\s*([0-9]{4})/i);
+                const year = parseInt(yearMatch?.[1] || "0");
+                return { ...p, isJournal, year };
+            }).sort((a, b) => b.year - a.year);
+
+            sortedPapers.forEach((paper, index) => {
+                const title = paper.bibtex.match(/title\s*=\s*\{+(.*?)\}+/i)?.[1] || "Untitled";
+                const authors = paper.bibtex.match(/author\s*=\s*\{+(.*?)\}+/i)?.[1] || "Unknown";
+                const venue = paper.bibtex.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/i)?.[2] || "Publication Venue";
+                
+                const html = `
+                    <div class="paper">
+                        <h3 class="paper-title">${title}</h3>
+                        <p class="authors">${authors.split(' and ').join(', ')}</p>
+                        <p class="venue">${venue}, ${paper.year}</p>
+                        <div class="paper-actions">
+                            <a href="${paper.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI</a>
+                            <button class="btn-cite" onclick="toggleBib('bib-${index}')"><i class="fas fa-quote-right"></i> BibTeX</button>
+                        </div>
+                        <pre id="bib-${index}" class="bibtex-box">${paper.bibtex.trim()}</pre>
+                    </div>
+                `;
+                if (paper.isJournal) journalList.innerHTML += html;
+                else conferenceList.innerHTML += html;
+            });
+        }
+
+        function toggleBib(id) {
+            const el = document.getElementById(id);
+            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        }
+        window.onload = renderContent;
+    </script>
+</body>
+</html>
