@@ -6,59 +6,63 @@
     --gray: #64748b;
     --border: #e2e8f0;
     --light-bg: #f8fafc;
-    --sidebar-bg: #fafafa;
 }
 
-.dark-theme {
-    --bg-page: #0f172a;
-    --bg-block: #1e293b;
-    --text: #f1f5f9;
-    --accent: #60a5fa;
-    --gray: #94a3b8;
-    --border: #334155;
-    --light-bg: #0f172a;
-    --sidebar-bg: #1a2234;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background-color: var(--bg-page); color: var(--text); display: flex; justify-content: center; padding: 50px 20px; line-height: 1.6; }
 
-* { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.1s; }
-body { font-family: 'Inter', sans-serif; background-color: var(--bg-page); color: var(--text); display: flex; justify-content: center; padding: 40px 15px; }
+.main-block { background: var(--bg-block); width: 100%; max-width: 1050px; display: flex; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); overflow: hidden; }
 
-.main-block { background: var(--bg-block); width: 100%; max-width: 1050px; display: flex; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; }
-
-/* Sidebar Navigation */
-.sidebar { width: 220px; padding: 50px 30px; background: var(--sidebar-bg); border-right: 1px solid var(--border); }
+.sidebar { width: 180px; padding: 50px 30px; background: #fafafa; border-right: 1px solid var(--border); }
 .sidebar nav { display: flex; flex-direction: column; gap: 1.8rem; position: sticky; top: 50px; }
-.sidebar a { text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
+.sidebar a { text-decoration: none; color: var(--text); font-size: 0.95rem; font-weight: 500; }
 .sidebar a:hover { color: var(--accent); }
-
-/* Toggle specific styling */
-.nav-toggle i { color: var(--accent); font-size: 1.1rem; }
 
 .content { flex: 1; padding: 60px 70px; }
 .hero { display: flex; align-items: center; gap: 3rem; margin-bottom: 2rem; }
-.profile-circle { width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--border); object-fit: cover; }
+.profile-circle { width: 170px; height: 170px; border-radius: 50%; object-fit: cover; border: 3px solid var(--border); }
 
-.metrics-container { display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
-.metric-item { background: var(--light-bg); padding: 12px; border-radius: 12px; text-align: center; border: 1px solid var(--border); flex: 1; }
-.metric-value { display: block; font-size: 1.3rem; font-weight: 600; color: var(--accent); }
-.metric-label { font-size: 0.65rem; color: var(--gray); text-transform: uppercase; font-weight: 700; }
+h1 { font-size: 2.1rem; letter-spacing: -1px; margin-bottom: 0.2rem; }
+.subtitle { color: var(--accent); font-weight: 600; font-size: 1.1rem; }
+.institution { font-size: 0.95rem; margin-bottom: 1rem; }
 
-.social-icons { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 15px; }
-.icon { font-size: 1.4rem; color: var(--gray); text-decoration: none; }
+/* Metrics Styling */
+.metrics-container { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
+.metric-item { background: var(--light-bg); padding: 10px 20px; border-radius: 12px; text-align: center; border: 1px solid var(--border); min-width: 100px; }
+.metric-value { display: block; font-size: 1.4rem; font-weight: 600; color: var(--accent); }
+.metric-label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+.research-interests { font-size: 0.9rem; color: var(--gray); margin-bottom: 1.5rem; }
+.social-icons { display: flex; gap: 1.2rem; }
+.icon { font-size: 1.3rem; transition: 0.2s; }
 .icon:hover { transform: translateY(-2px); }
-.icon.github:hover { color: #333; }
-.icon.linkedin:hover { color: #0077b5; }
-.icon.scholar:hover { color: #4285f4; }
-.icon.whatsapp:hover { color: #25d366; }
-.icon.youtube:hover { color: #ff0000; }
+.github { color: #333; }
+.linkedin { color: #0077b5; }
+.scholar { color: #4285f4; }
 
-.paper-title { font-size: 1.1rem; color: var(--accent); font-weight: 600; }
-.bibtex-box { display: none; background: var(--light-bg); padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.75rem; margin-top: 10px; border: 1px solid var(--border); overflow-x: auto; color: var(--text); }
+.divider { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+.section-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; color: #94a3b8; margin: 2rem 0; font-weight: 600; }
 
-@media (max-width: 900px) {
-    .main-block { flex-direction: column; border-radius: 0; }
-    .sidebar { width: 100%; border-right: none; position: sticky; top: 0; z-index: 1000; padding: 15px; }
-    .sidebar nav { flex-direction: row; justify-content: space-around; top: 0; }
-    .nav-text { display: none; } /* Hide the word "Theme" on mobile to save space */
-    .content { padding: 30px 20px; }
+.paper { margin-bottom: 2.5rem; }
+.paper-title { font-size: 1.1rem; color: var(--accent); font-weight: 600; line-height: 1.4; }
+.authors { font-size: 0.9rem; color: #334155; }
+.venue { font-size: 0.85rem; color: var(--gray); font-style: italic; }
+
+.paper-actions { margin-top: 0.8rem; display: flex; gap: 1.5rem; }
+.doi-link, .btn-cite { font-size: 0.8rem; color: var(--gray); text-decoration: none; border: none; background: none; font-weight: 600; display: flex; align-items: center; gap: 5px; cursor: pointer; }
+
+.bibtex-box { display: none; background: #f8fafc; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.75rem; margin-top: 10px; border: 1px solid var(--border); }
+
+.contact-details { font-size: 0.95rem; line-height: 2; }
+.contact-details i { color: var(--accent); margin-right: 10px; width: 20px; }
+
+footer { margin-top: 5rem; color: #94a3b8; font-size: 0.8rem; text-align: center; }
+
+@media (max-width: 800px) {
+    .main-block { flex-direction: column; }
+    .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
+    .sidebar nav { flex-direction: row; justify-content: center; position: static; }
+    .content { padding: 40px 30px; }
+    .hero { flex-direction: column; text-align: center; }
+    .metrics-container { justify-content: center; }
 }
