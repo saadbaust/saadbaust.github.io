@@ -12,15 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider round">
-                <i class="fas fa-sun"></i>
-                <i class="fas fa-moon"></i>
-            </div>
-        </label>
-    </div>
 
     <main class="main-block">
         <aside class="sidebar">
@@ -38,7 +29,7 @@
                 <div class="hero-info">
                     <h1>Saad Ahmed</h1>
                     <p class="subtitle">Lecturer, Dept of CSE</p>
-                    <p class="institution">BAUST</p>
+                    <p class="institution">Bangladesh Army University of Science and Technology (BAUST)</p>
                     
                     <div class="metrics-container">
                         <div class="metric-item"><span class="metric-value" id="total-citations">0</span><span class="metric-label">Citations</span></div>
@@ -46,15 +37,19 @@
                         <div class="metric-item"><span class="metric-value" id="i10-index">0</span><span class="metric-label">i10-index</span></div>
                     </div>
 
-                    <div class="social-grid">
-                        <a href="#" class="s-icon github"><i class="fab fa-github"></i></a>
-                        <a href="#" class="s-icon linkedin"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="s-icon scholar"><i class="fas fa-graduation-cap"></i></a>
-                        <a href="#" class="s-icon researchgate"><i class="fab fa-researchgate"></i></a>
-                        <a href="#" class="s-icon orchid"><i class="fab fa-orcid"></i></a>
-                        <a href="mailto:saadahmed@baust.edu.bd" class="s-icon gmail"><i class="fas fa-envelope"></i></a>
-                        <a href="https://wa.me/8801724407189" class="s-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#" class="s-icon youtube"><i class="fab fa-youtube"></i></a>
+                    <div class="research-interests">
+                        <p><strong>Research Interests:</strong> Image Processing, Computer Vision, and Deep Learning.</p>
+                    </div>
+                    
+                    <div class="social-icons">
+                        <a href="#" class="icon github" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="icon linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="icon scholar" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+                        <a href="#" class="icon researchgate" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+                        <a href="#" class="icon orchid" title="ORCID"><i class="fab fa-orcid"></i></a>
+                        <a href="mailto:saadahmed@baust.edu.bd" class="icon gmail" title="Gmail"><i class="fas fa-envelope"></i></a>
+                        <a href="https://wa.me/8801724407189" class="icon whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="icon youtube" title="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
             </header>
@@ -65,47 +60,59 @@
             <hr class="divider">
 
             <section id="contact">
-                <h2 class="section-title">Contact</h2>
+                <h2 class="section-title">Contact Information</h2>
                 <div class="contact-details">
+                    <p><i class="fas fa-user-tie"></i> <strong>Saad Ahmed</strong></p>
+                    <p><i class="fas fa-building"></i> Lecturer, Dept of CSE, BAUST</p>
                     <p><i class="fas fa-phone"></i> +8801724407189</p>
                     <p><i class="fas fa-envelope"></i> saadahmed@baust.edu.bd</p>
                 </div>
             </section>
+
+            <footer>
+                <p>&copy; 2026 Saad Ahmed • BAUST, Saidpur</p>
+            </footer>
         </div>
     </main>
 
     <script src="papers.js"></script>
     <script>
-        // Dark Mode Logic
-        const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-        function switchTheme(e) {
-            if (e.target.checked) { document.documentElement.setAttribute('data-theme', 'dark'); }
-            else { document.documentElement.setAttribute('data-theme', 'light'); }    
-        }
-        toggleSwitch.addEventListener('change', switchTheme, false);
-
-        // Rendering Logic (Same as previous)
         function renderContent() {
             document.getElementById('total-citations').innerText = scholarStats.citations;
             document.getElementById('h-index').innerText = scholarStats.hIndex;
             document.getElementById('i10-index').innerText = scholarStats.i10Index;
-            const jList = document.getElementById('journal-list');
-            const cList = document.getElementById('conference-list');
+
+            const journalList = document.getElementById('journal-list');
+            const conferenceList = document.getElementById('conference-list');
+
             myPapers.forEach((paper, index) => {
-                const isJ = paper.bibtex.trim().toLowerCase().startsWith('@article');
+                const isJournal = paper.bibtex.trim().toLowerCase().startsWith('@article');
                 const title = paper.bibtex.match(/title\s*=\s*\{+(.*?)\}+/i)?.[1] || "Untitled";
-                const html = `<div class="paper">
-                    <h3 class="paper-title">${title}</h3>
-                    <div class="paper-actions">
-                        <a href="${paper.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI</a>
-                        <button class="btn-cite" onclick="toggleBib('bib-${index}')"><i class="fas fa-quote-right"></i> BibTeX</button>
+                const authors = paper.bibtex.match(/author\s*=\s*\{+(.*?)\}+/i)?.[1] || "Unknown";
+                const venue = paper.bibtex.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/i)?.[2] || "Venue";
+                const yearMatch = paper.bibtex.match(/year\s*=\s*\{+(.*?)\}+/i) || paper.bibtex.match(/year\s*=\s*([0-9]{4})/i);
+                const year = yearMatch?.[1] || "";
+
+                const html = `
+                    <div class="paper">
+                        <h3 class="paper-title">${title}</h3>
+                        <p class="authors">${authors.split(' and ').join(', ')}</p>
+                        <p class="venue">${venue}, ${year}</p>
+                        <div class="paper-actions">
+                            <a href="${paper.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI</a>
+                            <button class="btn-cite" onclick="toggleBib('bib-${index}')"><i class="fas fa-quote-right"></i> BibTeX</button>
+                        </div>
+                        <pre id="bib-${index}" class="bibtex-box">${paper.bibtex.trim()}</pre>
                     </div>
-                    <pre id="bib-${index}" class="bibtex-box">${paper.bibtex.trim()}</pre>
-                </div>`;
-                if (isJ) jList.innerHTML += html; else cList.innerHTML += html;
+                `;
+                if (isJournal) journalList.innerHTML += html;
+                else conferenceList.innerHTML += html;
             });
         }
-        function toggleBib(id) { const el = document.getElementById(id); el.style.display = (el.style.display === 'block') ? 'none' : 'block'; }
+        function toggleBib(id) {
+            const el = document.getElementById(id);
+            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+        }
         window.onload = renderContent;
     </script>
 </body>
