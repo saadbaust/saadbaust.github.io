@@ -9,8 +9,7 @@
     --sidebar-bg: #fafafa;
 }
 
-/* Dark Theme Overrides */
-body.dark-theme {
+.dark-theme {
     --bg-page: #0f172a;
     --bg-block: #1e293b;
     --text: #f1f5f9;
@@ -21,46 +20,45 @@ body.dark-theme {
     --sidebar-bg: #1a2234;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s; }
+* { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.1s; }
 body { font-family: 'Inter', sans-serif; background-color: var(--bg-page); color: var(--text); display: flex; justify-content: center; padding: 40px 15px; }
 
-/* Theme Toggle Button Style */
-.theme-toggle {
-    position: fixed; top: 20px; right: 20px; width: 45px; height: 45px;
-    background: var(--bg-block); border: 1px solid var(--border);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 2000; color: var(--accent);
-}
-
 .main-block { background: var(--bg-block); width: 100%; max-width: 1050px; display: flex; border-radius: 20px; border: 1px solid var(--border); overflow: hidden; }
-.sidebar { width: 200px; padding: 50px 30px; background: var(--sidebar-bg); border-right: 1px solid var(--border); }
-.content { flex: 1; padding: 60px 70px; }
 
-/* Hero & Icons */
+/* Sidebar Navigation */
+.sidebar { width: 220px; padding: 50px 30px; background: var(--sidebar-bg); border-right: 1px solid var(--border); }
+.sidebar nav { display: flex; flex-direction: column; gap: 1.8rem; position: sticky; top: 50px; }
+.sidebar a { text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.95rem; display: flex; align-items: center; gap: 10px; }
+.sidebar a:hover { color: var(--accent); }
+
+/* Toggle specific styling */
+.nav-toggle i { color: var(--accent); font-size: 1.1rem; }
+
+.content { flex: 1; padding: 60px 70px; }
 .hero { display: flex; align-items: center; gap: 3rem; margin-bottom: 2rem; }
-.profile-circle { width: 170px; height: 170px; border-radius: 50%; border: 3px solid var(--border); }
+.profile-circle { width: 160px; height: 160px; border-radius: 50%; border: 3px solid var(--border); object-fit: cover; }
+
+.metrics-container { display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
+.metric-item { background: var(--light-bg); padding: 12px; border-radius: 12px; text-align: center; border: 1px solid var(--border); flex: 1; }
+.metric-value { display: block; font-size: 1.3rem; font-weight: 600; color: var(--accent); }
+.metric-label { font-size: 0.65rem; color: var(--gray); text-transform: uppercase; font-weight: 700; }
 
 .social-icons { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 15px; }
-.icon { font-size: 1.4rem; color: var(--gray); transition: 0.2s; text-decoration: none; }
+.icon { font-size: 1.4rem; color: var(--gray); text-decoration: none; }
 .icon:hover { transform: translateY(-2px); }
 .icon.github:hover { color: #333; }
 .icon.linkedin:hover { color: #0077b5; }
 .icon.scholar:hover { color: #4285f4; }
 .icon.whatsapp:hover { color: #25d366; }
 .icon.youtube:hover { color: #ff0000; }
-.icon.orchid:hover { color: #a6ce39; }
-.icon.researchgate:hover { color: #00ccbb; }
-.icon.gmail:hover { color: #ea4335; }
-
-.metrics-container { display: flex; gap: 1rem; margin: 1.5rem 0; flex-wrap: wrap; }
-.metric-item { background: var(--light-bg); padding: 12px; border-radius: 12px; text-align: center; border: 1px solid var(--border); flex: 1; }
-.metric-value { display: block; font-size: 1.3rem; font-weight: 600; color: var(--accent); }
 
 .paper-title { font-size: 1.1rem; color: var(--accent); font-weight: 600; }
 .bibtex-box { display: none; background: var(--light-bg); padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.75rem; margin-top: 10px; border: 1px solid var(--border); overflow-x: auto; color: var(--text); }
 
 @media (max-width: 900px) {
-    .main-block { flex-direction: column; }
-    .sidebar { width: 100%; border-right: none; position: static; }
-    .hero { flex-direction: column; text-align: center; }
+    .main-block { flex-direction: column; border-radius: 0; }
+    .sidebar { width: 100%; border-right: none; position: sticky; top: 0; z-index: 1000; padding: 15px; }
+    .sidebar nav { flex-direction: row; justify-content: space-around; top: 0; }
+    .nav-text { display: none; } /* Hide the word "Theme" on mobile to save space */
+    .content { padding: 30px 20px; }
 }
