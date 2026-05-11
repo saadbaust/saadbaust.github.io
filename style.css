@@ -69,17 +69,17 @@ footer { margin-top: 5rem; color: #94a3b8; font-size: 0.8rem; text-align: center
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg-page: #0f172a;       /* Dark background */
-        --bg-block: #1e293b;      /* Darker block background */
-        --text: #f1f5f9;          /* Light text */
-        --accent: #60a5fa;        /* Brighter blue for visibility */
-        --gray: #94a3b8;          /* Light gray text */
-        --border: #334155;        /* Subtle dark borders */
-        --light-bg: #1e293b;      /* Metric item background */
+        --bg-page: #0f172a;       
+        --bg-block: #1e293b;      
+        --text: #f1f5f9;          
+        --accent: #60a5fa;        
+        --gray: #94a3b8;          
+        --border: #334155;        
+        --light-bg: #1e293b;      
     }
 
     .sidebar {
-        background: #111827;      /* Darker sidebar */
+        background: #111827;      
         border-right-color: var(--border);
     }
 
@@ -91,10 +91,19 @@ footer { margin-top: 5rem; color: #94a3b8; font-size: 0.8rem; text-align: center
         color: var(--accent);
     }
 
+    /* FIX FOR VISIBILITY */
+    .authors {
+        color: #cbd5e1; /* Lightened from #334155 */
+    }
+
+    .venue {
+        color: #94a3b8; /* Lightened from var(--gray) */
+    }
+
     .bibtex-box {
         background: #0f172a;
         color: #94a3b8;
     }
 
-    .github { color: #f1f5f9; } /* White logo for dark mode */
+    .github { color: #f1f5f9; }
 }
