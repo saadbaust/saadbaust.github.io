@@ -100,29 +100,33 @@
     </main>
 
     <script>
-      // REPLACE THIS with your "Published to Web" CSV URL from Google Sheets
+      // 1. PLACE YOUR PUBLISHED CSV URL HERE
       const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_lDeiXkSj2LmJz4HSfyUQN3EQdU6QkFDOesBYUvrV0GIjA8VzGUckl5s8-S3u3u5CmnDWrjPJ1N8a/pubhtml";
 
       async function fetchAndRender() {
         try {
           const response = await fetch(SHEET_CSV_URL);
-          const csvText = await response.text();
+          const csvData = await response.text();
           
-          // Split into raw rows. BibTeX entries starting with @ are handled correctly.
-          // Google Sheets CSV wraps long cells in quotes and doubles internal quotes.
-          const rawEntries = csvText.split('\n').map(row => row.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+          // Robust parser that handles the multi-line cells seen in your screenshot
+          // We split the data based on the start of a paper '@' or the keyword 'STATS:'
+          const entries = csvData.split(/(?=@|STATS:)/g);
           
           let bibtexEntries = [];
-          
-          rawEntries.forEach(entry => {
-            if (entry.startsWith("STATS:")) {
-              // Extract stats: "STATS:14,2,0" -> [14, 2, 0]
-              const stats = entry.replace("STATS:", "").split(",");
-              document.getElementById("total-citations").innerText = stats[0] || 0;
-              document.getElementById("h-index").innerText = stats[1] || 0;
-              document.getElementById("i10-index").innerText = stats[2] || 0;
-            } else if (entry.startsWith("@")) {
-              bibtexEntries.push(entry);
+
+          entries.forEach(item => {
+            let cleanItem = item.trim()
+                .replace(/^"|"$/g, '') // Remove wrapping quotes
+                .replace(/""/g, '"');  // Fix double quotes
+
+            if (cleanItem.startsWith("STATS:")) {
+              const statsValue = cleanItem.split('\n')[0]; // Ensure we only get the line with numbers
+              const parts = statsValue.replace("STATS:", "").split(",");
+              document.getElementById("total-citations").innerText = parts[0] || "0";
+              document.getElementById("h-index").innerText = parts[1] || "0";
+              document.getElementById("i10-index").innerText = parts[2] || "0";
+            } else if (cleanItem.startsWith("@")) {
+              bibtexEntries.push(cleanItem);
             }
           });
 
@@ -135,11 +139,14 @@
       function renderPapers(bibtexArray) {
         const journalList = document.getElementById("journal-list");
         const conferenceList = document.getElementById("conference-list");
+        
+        journalList.innerHTML = "";
+        conferenceList.innerHTML = "";
 
         const processed = bibtexArray.map((bib, index) => {
           const isJournal = bib.toLowerCase().startsWith("@article");
           
-          // Improved Regex to handle multi-line BibTeX blocks from CSV
+          // Use 's' flag for multi-line regex matching
           const title = bib.match(/title\s*=\s*\{+(.*?)\}+/is)?.[1] || "Untitled";
           const authors = (bib.match(/author\s*=\s*\{+(.*?)\}+/is)?.[1] || "Unknown").split(/\s+and\s+/i).join(", ");
           const venue = bib.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/is)?.[2] || "Venue";
