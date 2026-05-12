@@ -99,75 +99,73 @@
       </div>
     </main>
 
-    <script src="papers.js"></script>
-    
     <script>
-      // 1. PLACE YOUR PUBLISHED CSV URL HERE
-      const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_lDeiXkSj2LmJz4HSfyUQN3EQdU6QkFDOesBYUvrV0GIjA8VzGUckl5s8-S3u3u5CmnDWrjPJ1N8a/pub?output=csv";
+      // REPLACE THIS with your "Published to Web" CSV URL from Google Sheets
+      const SHEET_CSV_URL = "YOUR_LINK_HERE";
 
       async function fetchAndRender() {
         try {
           const response = await fetch(SHEET_CSV_URL);
           const csvText = await response.text();
           
-          /**
-           * IMPROVED PARSER:
-           * Splits by the "@" symbol to separate entries, as standard CSV 
-           * line-splitting fails with BibTeX's internal line breaks.
-           */
-          const rawEntries = csvText.split(/(?=@)/g); 
-          const papers = rawEntries
-            .map(entry => entry.trim().replace(/^"|"$/g, '').replace(/""/g, '"'))
-            .filter(entry => entry.startsWith('@'));
+          // Split into raw rows. BibTeX entries starting with @ are handled correctly.
+          // Google Sheets CSV wraps long cells in quotes and doubles internal quotes.
+          const rawEntries = csvText.split('\n').map(row => row.trim().replace(/^"|"$/g, '').replace(/""/g, '"'));
+          
+          let bibtexEntries = [];
+          
+          rawEntries.forEach(entry => {
+            if (entry.startsWith("STATS:")) {
+              // Extract stats: "STATS:14,2,0" -> [14, 2, 0]
+              const stats = entry.replace("STATS:", "").split(",");
+              document.getElementById("total-citations").innerText = stats[0] || 0;
+              document.getElementById("h-index").innerText = stats[1] || 0;
+              document.getElementById("i10-index").innerText = stats[2] || 0;
+            } else if (entry.startsWith("@")) {
+              bibtexEntries.push(entry);
+            }
+          });
 
-          renderPapers(papers);
+          renderPapers(bibtexEntries);
         } catch (err) {
-          console.error("Fetch error:", err);
-          document.getElementById("journal-list").innerHTML = "Error loading papers.";
+          console.error("Error loading data:", err);
         }
       }
 
       function renderPapers(bibtexArray) {
-        // Stats from papers.js
-        if (typeof scholarStats !== 'undefined') {
-          document.getElementById("total-citations").innerText = scholarStats.citations;
-          document.getElementById("h-index").innerText = scholarStats.hIndex;
-          document.getElementById("i10-index").innerText = scholarStats.i10Index;
-        }
-
         const journalList = document.getElementById("journal-list");
         const conferenceList = document.getElementById("conference-list");
 
         const processed = bibtexArray.map((bib, index) => {
-          // Identify if Article or Inproceedings
           const isJournal = bib.toLowerCase().startsWith("@article");
           
-          // Regex extraction
-          const title = bib.match(/title\s*=\s*\{+(.*?)\}+/i)?.[1] || "Untitled";
-          const authors = (bib.match(/author\s*=\s*\{+(.*?)\}+/i)?.[1] || "Unknown").split(" and ").join(", ");
-          const venue = bib.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/i)?.[2] || "Unknown Venue";
+          // Improved Regex to handle multi-line BibTeX blocks from CSV
+          const title = bib.match(/title\s*=\s*\{+(.*?)\}+/is)?.[1] || "Untitled";
+          const authors = (bib.match(/author\s*=\s*\{+(.*?)\}+/is)?.[1] || "Unknown").split(/\s+and\s+/i).join(", ");
+          const venue = bib.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/is)?.[2] || "Venue";
           const year = bib.match(/year\s*=\s*\{?(\d{4})\}?/i)?.[1] || "0";
-          const doiMatch = bib.match(/doi\s*=\s*\{+(.*?)\}+/i);
+          
+          const doiMatch = bib.match(/doi\s*=\s*\{+(.*?)\}+/is);
           const doi = doiMatch ? (doiMatch[1].startsWith('http') ? doiMatch[1] : `https://doi.org/${doiMatch[1]}`) : null;
 
           return { bib, isJournal, title, authors, venue, year: parseInt(year), doi, id: index };
         }).sort((a, b) => b.year - a.year);
 
         processed.forEach(p => {
-          const card = `
+          const html = `
             <div class="paper">
               <h3 class="paper-title">${p.title}</h3>
               <p class="authors">${p.authors}</p>
               <p class="venue">${p.venue}, ${p.year}</p>
               <div class="paper-actions">
-                ${p.doi ? `<a href="${p.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI Link</a>` : ''}
+                ${p.doi ? `<a href="${p.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI</a>` : ''}
                 <button class="btn-cite" onclick="toggleBib('bib-${p.id}')"><i class="fas fa-quote-right"></i> BibTeX</button>
               </div>
               <pre id="bib-${p.id}" class="bibtex-box">${p.bib.trim()}</pre>
             </div>`;
           
-          if (p.isJournal) journalList.innerHTML += card;
-          else conferenceList.innerHTML += card;
+          if (p.isJournal) journalList.innerHTML += html;
+          else conferenceList.innerHTML += html;
         });
       }
 
