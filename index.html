@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Saad Ahmed | Lecturer & Researcher | BAUST</title>
-    <meta name="description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning." />
-    <meta name="keywords" content="Saad Ahmed, BAUST, Lecturer, Researcher, Computer Vision, Deep Learning, Image Processing" />
+    <meta name="description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST." />
     <meta name="author" content="Saad Ahmed" />
 
     <link rel="icon" type="image/x-icon" href="images/favicon-16x16-sq.png" />
@@ -29,9 +28,7 @@
           <div class="hero-info">
             <h1>Saad Ahmed</h1>
             <p class="subtitle">Lecturer, Dept of CSE</p>
-            <p class="institution">
-              Bangladesh Army University of Science and Technology (BAUST)
-            </p>
+            <p class="institution">Bangladesh Army University of Science and Technology (BAUST)</p>
 
             <div class="metrics-container" id="metrics">
               <div class="metric-item">
@@ -49,9 +46,7 @@
             </div>
 
             <div class="research-interests">
-              <p>
-                <strong>Research Interests:</strong> Image Processing, Computer Vision, and Deep Learning.
-              </p>
+              <p><strong>Research Interests:</strong> Image Processing, Computer Vision, and Deep Learning.</p>
             </div>
 
             <div class="social-icons">
@@ -81,99 +76,88 @@
           <div id="conference-list"></div>
         </section>
 
-        <hr class="divider" />
-
-        <section id="contact">
-          <h2 class="section-title">Contact Information</h2>
-          <div class="contact-details">
-            <p><i class="fas fa-user-tie"></i> <strong>Saad Ahmed</strong></p>
-            <p><i class="fas fa-building"></i> Lecturer, Dept of CSE, BAUST</p>
-            <p><i class="fas fa-phone"></i> +8801724407189</p>
-            <p><i class="fas fa-envelope"></i> saadahmed@baust.edu.bd</p>
-          </div>
-        </section>
-
         <footer>
           <p>&copy; 2026 Saad Ahmed • BAUST, Saidpur</p>
         </footer>
       </div>
     </main>
 
-    <script src="papers.js"></script>
-    
     <script>
-      // 1. PLACE YOUR PUBLISHED CSV URL HERE
-      const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_lDeiXkSj2LmJz4HSfyUQN3EQdU6QkFDOesBYUvrV0GIjA8VzGUckl5s8-S3u3u5CmnDWrjPJ1N8a/pubhtml";
+      // Your specific CSV link (converted from pubhtml to pub?output=csv)
+      const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_lDeiXkSj2LmJz4HSfyUQN3EQdU6QkFDOesBYUvrV0GIjA8VzGUckl5s8-S3u3u5CmnDWrjPJ1N8a/pub?output=csv";
 
       async function fetchAndRender() {
         try {
           const response = await fetch(SHEET_CSV_URL);
-          const csvText = await response.text();
+          const csvData = await response.text();
           
-          /**
-           * IMPROVED PARSER:
-           * Splits by the "@" symbol to separate entries, as standard CSV 
-           * line-splitting fails with BibTeX's internal line breaks.
-           */
-          const rawEntries = csvText.split(/(?=@)/g); 
-          const papers = rawEntries
-            .map(entry => entry.trim().replace(/^"|"$/g, '').replace(/""/g, '"'))
-            .filter(entry => entry.startsWith('@'));
+          // Split data by finding the start of new entries (@ or STATS:)
+          const entries = csvData.split(/(?=@|STATS:)/g);
+          let bibtexEntries = [];
 
-          renderPapers(papers);
+          entries.forEach(item => {
+            let cleanItem = item.trim()
+                .replace(/^"|"$/g, '') // Remove wrapping quotes
+                .replace(/""/g, '"');  // Fix double quotes
+
+            if (cleanItem.startsWith("STATS:")) {
+              const statsLine = cleanItem.split('\n')[0];
+              const parts = statsLine.replace("STATS:", "").split(",");
+              document.getElementById("total-citations").innerText = parts[0] || "0";
+              document.getElementById("h-index").innerText = parts[1] || "0";
+              document.getElementById("i10-index").innerText = parts[2] || "0";
+            } else if (cleanItem.startsWith("@")) {
+              bibtexEntries.push(cleanItem);
+            }
+          });
+
+          renderPapers(bibtexEntries);
         } catch (err) {
-          console.error("Fetch error:", err);
-          document.getElementById("journal-list").innerHTML = "Error loading papers.";
+          console.error("Error loading data:", err);
         }
       }
 
       function renderPapers(bibtexArray) {
-        // Stats from papers.js
-        if (typeof scholarStats !== 'undefined') {
-          document.getElementById("total-citations").innerText = scholarStats.citations;
-          document.getElementById("h-index").innerText = scholarStats.hIndex;
-          document.getElementById("i10-index").innerText = scholarStats.i10Index;
-        }
-
         const journalList = document.getElementById("journal-list");
         const conferenceList = document.getElementById("conference-list");
+        
+        journalList.innerHTML = "";
+        conferenceList.innerHTML = "";
 
         const processed = bibtexArray.map((bib, index) => {
-          // Identify if Article or Inproceedings
           const isJournal = bib.toLowerCase().startsWith("@article");
-          
-          // Regex extraction
-          const title = bib.match(/title\s*=\s*\{+(.*?)\}+/i)?.[1] || "Untitled";
-          const authors = (bib.match(/author\s*=\s*\{+(.*?)\}+/i)?.[1] || "Unknown").split(" and ").join(", ");
-          const venue = bib.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/i)?.[2] || "Unknown Venue";
+          const title = bib.match(/title\s*=\s*\{+(.*?)\}+/is)?.[1] || "Untitled";
+          const authors = (bib.match(/author\s*=\s*\{+(.*?)\}+/is)?.[1] || "Unknown").split(/\s+and\s+/i).join(", ");
+          const venue = bib.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/is)?.[2] || "Venue";
           const year = bib.match(/year\s*=\s*\{?(\d{4})\}?/i)?.[1] || "0";
-          const doiMatch = bib.match(/doi\s*=\s*\{+(.*?)\}+/i);
+          
+          const doiMatch = bib.match(/doi\s*=\s*\{+(.*?)\}+/is);
           const doi = doiMatch ? (doiMatch[1].startsWith('http') ? doiMatch[1] : `https://doi.org/${doiMatch[1]}`) : null;
 
           return { bib, isJournal, title, authors, venue, year: parseInt(year), doi, id: index };
         }).sort((a, b) => b.year - a.year);
 
         processed.forEach(p => {
-          const card = `
+          const html = `
             <div class="paper">
               <h3 class="paper-title">${p.title}</h3>
               <p class="authors">${p.authors}</p>
               <p class="venue">${p.venue}, ${p.year}</p>
               <div class="paper-actions">
-                ${p.doi ? `<a href="${p.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI Link</a>` : ''}
+                ${p.doi ? `<a href="${p.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI</a>` : ''}
                 <button class="btn-cite" onclick="toggleBib('bib-${p.id}')"><i class="fas fa-quote-right"></i> BibTeX</button>
               </div>
               <pre id="bib-${p.id}" class="bibtex-box">${p.bib.trim()}</pre>
             </div>`;
           
-          if (p.isJournal) journalList.innerHTML += card;
-          else conferenceList.innerHTML += card;
+          if (p.isJournal) journalList.innerHTML += html;
+          else conferenceList.innerHTML += html;
         });
       }
 
       function toggleBib(id) {
         const el = document.getElementById(id);
-        el.style.display = el.style.display === "block" ? "none" : "block";
+        el.style.display = (el.style.display === "block") ? "none" : "block";
       }
 
       window.onload = fetchAndRender;
