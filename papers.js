@@ -1,8 +1,8 @@
 // Google Scholar Metrics
 const scholarStats = {
-    citations: 124, 
-    hIndex: 6,      
-    i10Index: 4     
+    citations: 14, 
+    hIndex: 2,      
+    i10Index: 0     
 };
 
 // Publications Database

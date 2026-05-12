@@ -41,6 +41,30 @@ h1 { font-size: 2.1rem; letter-spacing: -1px; margin-bottom: 0.2rem; }
 .linkedin { color: #0077b5; }
 .scholar { color: #4285f4; }
 
+/* --- Social Icons Update --- */
+.social-icons {
+    display: flex;
+    gap: 30px; /* Adds space between icons */
+    margin-top: 20px;
+}
+
+.social-icons a {
+    font-size: 1.8rem; /* This makes them bigger (standard was likely 1rem or 1.2rem) */
+    transition: transform 0.2s ease, color 0.2s ease;
+    color: var(--gray); /* Default color before hover */
+}
+
+.social-icons a:hover {
+    transform: translateY(-3px); /* Lifts icon slightly on hover */
+}
+
+/* Brand Colors on Hover */
+.social-icons a.github:hover { color: #333; }
+.social-icons a.linkedin:hover { color: #0077b5; }
+.social-icons a.scholar:hover { color: #4285f4; }
+.social-icons a.researchgate:hover { color: #00ccbb; } /* ResearchGate Green/Teal */
+.social-icons a.youtube:hover { color: #ff0000; }      /* YouTube Red */
+
 /* --- Full-Width Side-by-Side Charts --- */
 .hero-images-container {
     display: flex;
@@ -126,4 +150,41 @@ footer { margin-top: 5rem; color: #94a3b8; font-size: 0.8rem; text-align: center
     
     .bibtex-box { background: #0f172a; color: #94a3b8; }
     .github { color: #f1f5f9; }
+}
+
+/* Gallery Container - 2 columns */
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Exactly 2 equal columns */
+    gap: 20px;                             /* Space between photos */
+    align-items: start;                    /* Keeps photos at their natural height */
+}
+
+/* Individual Gallery Item */
+.gallery-item {
+    background: var(--light-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* The Image - No Crop */
+.gallery-item img {
+    width: 100%;       /* Fills the 1/2 row width */
+    height: auto;      /* Height adjusts automatically (No cropping) */
+    display: block;    /* Removes bottom whitespace gaps */
+    object-fit: contain; /* Extra safety to ensure the whole image fits */
+}
+
+/* Responsive: 1 column on small phones so photos aren't too tiny */
+@media (max-width: 600px) {
+    .gallery-container {
+        grid-template-columns: 1fr; 
+    }
 }
