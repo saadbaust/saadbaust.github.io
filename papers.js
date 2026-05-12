@@ -8,7 +8,6 @@ const scholarStats = {
 // Publications Database
 const myPapers = [
     {
-        doi: "https://doi.org/10.1109/COMPAS60761.2024.10797170",
         bibtex: `@INPROCEEDINGS{10797170,
   author={Syfullah, Md. Khalid and Amin, Rohul and Manirujjaman, Md. and Hasan, Md. Mahadi and Ragib Abid, Md. and Ahmed, Saad},
   booktitle={2024 IEEE International Conference on Computing, Applications and Systems (COMPAS)}, 
@@ -18,7 +17,6 @@ const myPapers = [
   doi={10.1109/COMPAS60761.2024.10797170}}`
     },
     {
-        doi: "https://doi.org/10.1109/ECCE64574.2025.11013535",
         bibtex: `@INPROCEEDINGS{11013535,
   author={Kadir, Md. Abdul and Nassar, Benazir and Jahangir Alam, S. M. and Ahmed, Saad and Syfullah, Md. Khalid},
   booktitle={2025 International Conference on Electrical, Computer and Communication Engineering (ECCE)}, 
@@ -28,17 +26,16 @@ const myPapers = [
   doi={10.1109/ECCE64574.2025.11013535}}`
     },
     {
-        doi: "https://doi.org/10.1016/j.hazadv.2025.100840",
         bibtex: `@article{HAQUE2025100840,
   title = {Co-exposure toxicity of microplastic and sumithion in Nile tilapia – changes in growth, hematology, histopathology of internal tissues and immune-antioxidant genes expression},
   journal = {Journal of Hazardous Materials Advances},
   volume = {19},
   pages = {100840},
   year = {2025},
-  author = {Md Ahsanul Haque and Mobassir Bin Anwar and AKM Afzal Hossain and Saad Ahmed and Md Mahiuddin Zahangir and Md Shahjahan}}`
+  author = {Md Ahsanul Haque and Mobassir Bin Anwar and AKM Afzal Hossain and Saad Ahmed and Md Mahiuddin Zahangir and Md Shahjahan},
+  doi = {10.1016/j.hazadv.2025.100840}}`
     },
     {
-        doi: "https://doi.org/10.66039/4_1_9",
         bibtex: `@article{SM2025attendance,
   title = {Automatic Attendance System Using Face Recognition},
   author = {Jahangir Alam SM and Md Khalid Syfullah and Saad Ahmed and Rohul Amin and Md. Shameem Reza},
@@ -49,7 +46,6 @@ const myPapers = [
   doi = {10.66039/4_1_9}}`
     },
     {
-        doi: "https://doi.org/10.1109/ICCIT68739.2025.11490109",
         bibtex: `@INPROCEEDINGS{11490109,
   author={Mandal, Md. Abdullah and Khushi, Sumaiya Siddika and Hassan, Md. Zahid and Ali, Aroshi and Ahmed, Saad and Amin, Rohul},
   booktitle={2025 28th International Conference on Computer and Information Technology (ICCIT)}, 
@@ -59,7 +55,6 @@ const myPapers = [
   doi={10.1109/ICCIT68739.2025.11490109}}`
     },
     {
-        doi: "https://doi.org/10.1109/ICCIT68739.2025.11490516",
         bibtex: `@INPROCEEDINGS{11490516,
   author={Ali, Aroshi and Jahan, Nusrat and Sagor, Anite Halim and Alam, S.M. Jahangir and Ahmed, Saad},
   booktitle={2025 28th International Conference on Computer and Information Technology (ICCIT)}, 
