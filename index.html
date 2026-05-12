@@ -180,3 +180,149 @@
     </script>
   </body>
 </html>
+<div class="metric-item">
+                <span class="metric-value" id="total-citations">0</span>
+                <span class="metric-label">Citations</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value" id="h-index">0</span>
+                <span class="metric-label">h-index</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-value" id="i10-index">0</span>
+                <span class="metric-label">i10-index</span>
+              </div>
+            </div>
+
+            <div class="research-interests">
+              <p>
+                <strong>Research Interests:</strong> Image Processing, Computer Vision, and Deep Learning.
+              </p>
+            </div>
+
+            <div class="social-icons">
+              <a href="https://github.com/YOUR_USERNAME" class="icon github" title="GitHub"><i class="fab fa-github"></i></a>
+              <a href="https://linkedin.com/in/YOUR_USERNAME" class="icon linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="https://scholar.google.com/citations?user=YOUR_ID" class="icon scholar" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+              <a href="https://www.researchgate.net/profile/YOUR_PROFILE" class="icon researchgate" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+              <a href="https://youtube.com/@YOUR_CHANNEL" class="icon youtube" title="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </header>
+
+        <hr class="divider" />
+
+        <div class="hero-images-container">
+           <img src="images/a.png" alt="Research Interest Score" class="hero-promo-img" />
+           <img src="images/b.png" alt="Stats History" class="hero-promo-img" />
+        </div>
+
+        <section id="journals">
+          <h2 class="section-title">Journal Articles</h2>
+          <div id="journal-list"></div>
+        </section>
+
+        <section id="conferences">
+          <h2 class="section-title">Conference Proceedings</h2>
+          <div id="conference-list"></div>
+        </section>
+
+        <hr class="divider" />
+
+        <section id="contact">
+          <h2 class="section-title">Contact Information</h2>
+          <div class="contact-details">
+            <p><i class="fas fa-user-tie"></i> <strong>Saad Ahmed</strong></p>
+            <p><i class="fas fa-building"></i> Lecturer, Dept of CSE, BAUST</p>
+            <p><i class="fas fa-phone"></i> +8801724407189</p>
+            <p><i class="fas fa-envelope"></i> saadahmed@baust.edu.bd</p>
+          </div>
+        </section>
+
+        <footer>
+          <p>&copy; 2026 Saad Ahmed • BAUST, Saidpur</p>
+        </footer>
+      </div>
+    </main>
+
+    <script src="papers.js"></script>
+    
+    <script>
+      // 1. PLACE YOUR PUBLISHED CSV URL HERE
+      const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_lDeiXkSj2LmJz4HSfyUQN3EQdU6QkFDOesBYUvrV0GIjA8VzGUckl5s8-S3u3u5CmnDWrjPJ1N8a/pubhtml";
+
+      async function fetchAndRender() {
+        try {
+          const response = await fetch(SHEET_CSV_URL);
+          const csvText = await response.text();
+          
+          /**
+           * IMPROVED PARSER:
+           * Splits by the "@" symbol to separate entries, as standard CSV 
+           * line-splitting fails with BibTeX's internal line breaks.
+           */
+          const rawEntries = csvText.split(/(?=@)/g); 
+          const papers = rawEntries
+            .map(entry => entry.trim().replace(/^"|"$/g, '').replace(/""/g, '"'))
+            .filter(entry => entry.startsWith('@'));
+
+          renderPapers(papers);
+        } catch (err) {
+          console.error("Fetch error:", err);
+          document.getElementById("journal-list").innerHTML = "Error loading papers.";
+        }
+      }
+
+      function renderPapers(bibtexArray) {
+        // Stats from papers.js
+        if (typeof scholarStats !== 'undefined') {
+          document.getElementById("total-citations").innerText = scholarStats.citations;
+          document.getElementById("h-index").innerText = scholarStats.hIndex;
+          document.getElementById("i10-index").innerText = scholarStats.i10Index;
+        }
+
+        const journalList = document.getElementById("journal-list");
+        const conferenceList = document.getElementById("conference-list");
+
+        const processed = bibtexArray.map((bib, index) => {
+          // Identify if Article or Inproceedings
+          const isJournal = bib.toLowerCase().startsWith("@article");
+          
+          // Regex extraction
+          const title = bib.match(/title\s*=\s*\{+(.*?)\}+/i)?.[1] || "Untitled";
+          const authors = (bib.match(/author\s*=\s*\{+(.*?)\}+/i)?.[1] || "Unknown").split(" and ").join(", ");
+          const venue = bib.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/i)?.[2] || "Unknown Venue";
+          const year = bib.match(/year\s*=\s*\{?(\d{4})\}?/i)?.[1] || "0";
+          const doiMatch = bib.match(/doi\s*=\s*\{+(.*?)\}+/i);
+          const doi = doiMatch ? (doiMatch[1].startsWith('http') ? doiMatch[1] : `https://doi.org/${doiMatch[1]}`) : null;
+
+          return { bib, isJournal, title, authors, venue, year: parseInt(year), doi, id: index };
+        }).sort((a, b) => b.year - a.year);
+
+        processed.forEach(p => {
+          const card = `
+            <div class="paper">
+              <h3 class="paper-title">${p.title}</h3>
+              <p class="authors">${p.authors}</p>
+              <p class="venue">${p.venue}, ${p.year}</p>
+              <div class="paper-actions">
+                ${p.doi ? `<a href="${p.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI Link</a>` : ''}
+                <button class="btn-cite" onclick="toggleBib('bib-${p.id}')"><i class="fas fa-quote-right"></i> BibTeX</button>
+              </div>
+              <pre id="bib-${p.id}" class="bibtex-box">${p.bib.trim()}</pre>
+            </div>`;
+          
+          if (p.isJournal) journalList.innerHTML += card;
+          else conferenceList.innerHTML += card;
+        });
+      }
+
+      function toggleBib(id) {
+        const el = document.getElementById(id);
+        el.style.display = el.style.display === "block" ? "none" : "block";
+      }
+
+      window.onload = fetchAndRender;
+    </script>
+  </body>
+</html>
