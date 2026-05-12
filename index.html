@@ -54,13 +54,13 @@
               </p>
             </div>
 
-            <div class="social-icons">
-              <a href="https://github.com/YOUR_USERNAME" class="icon github" title="GitHub"><i class="fab fa-github"></i></a>
-              <a href="https://linkedin.com/in/YOUR_USERNAME" class="icon linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-              <a href="https://scholar.google.com/citations?user=YOUR_ID" class="icon scholar" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
-              <a href="https://www.researchgate.net/profile/YOUR_PROFILE" class="icon researchgate" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
-              <a href="https://youtube.com/@YOUR_CHANNEL" class="icon youtube" title="YouTube"><i class="fab fa-youtube"></i></a>
-            </div>
+<div class="social-icons">
+  <a href="https://github.com/YOUR_USERNAME" class="icon github" title="GitHub"><i class="fab fa-github"></i></a>
+  <a href="https://linkedin.com/in/YOUR_USERNAME" class="icon linkedin" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+  <a href="https://scholar.google.com/citations?user=YOUR_ID" class="icon scholar" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+  <a href="https://www.researchgate.net/profile/YOUR_PROFILE" class="icon researchgate" title="ResearchGate"><i class="fab fa-researchgate"></i></a>
+  <a href="https://youtube.com/@YOUR_CHANNEL" class="icon youtube" title="YouTube"><i class="fab fa-youtube"></i></a>
+</div>
           </div>
         </header>
 
@@ -99,85 +99,55 @@
       </div>
     </main>
 
+    <script src="papers.js"></script>
     <script>
-      const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT_lDeiXkSj2LmJz4HSfyUQN3EQdU6QkFDOesBYUvrV0GIjA8VzGUckl5s8-S3u3u5CmnDWrjPJ1N8a/pub?output=csv";
-
-      async function fetchAndRender() {
-        try {
-          const response = await fetch(SHEET_CSV_URL);
-          const csvData = await response.text();
-          
-          // Splits by @ or STATS: to separate entries cleanly
-          const entries = csvData.split(/(?=@|STATS:)/g);
-          let bibtexEntries = [];
-
-          entries.forEach(item => {
-            // Remove wrapping quotes and double-quotes added by CSV format
-            let cleanItem = item.trim().replace(/^"|"$/g, '').replace(/""/g, '"');
-
-            if (cleanItem.startsWith("STATS:")) {
-              // Extract values and remove any trailing quotes or newline characters
-              const statsValue = cleanItem.split('\n')[0].replace(/[^0-9,STATS:]/g, '');
-              const parts = statsValue.replace("STATS:", "").split(",");
-              
-              document.getElementById("total-citations").innerText = parts[0] || "0";
-              document.getElementById("h-index").innerText = parts[1] || "0";
-              document.getElementById("i10-index").innerText = parts[2] || "0";
-            } else if (cleanItem.startsWith("@")) {
-              bibtexEntries.push(cleanItem);
-            }
-          });
-
-          renderPapers(bibtexEntries);
-        } catch (err) {
-          console.error("Error loading data:", err);
+      function renderContent() {
+        if (typeof scholarStats !== 'undefined') {
+            document.getElementById("total-citations").innerText = scholarStats.citations;
+            document.getElementById("h-index").innerText = scholarStats.hIndex;
+            document.getElementById("i10-index").innerText = scholarStats.i10Index;
         }
-      }
 
-      function renderPapers(bibtexArray) {
-        const journalList = document.getElementById("journal-list");
-        const conferenceList = document.getElementById("conference-list");
-        
-        journalList.innerHTML = "";
-        conferenceList.innerHTML = "";
+        const journalContainer = document.getElementById("journal-list");
+        const conferenceContainer = document.getElementById("conference-list");
 
-        const processed = bibtexArray.map((bib, index) => {
-          const isJournal = bib.toLowerCase().startsWith("@article");
-          const title = bib.match(/title\s*=\s*\{+(.*?)\}+/is)?.[1] || "Untitled";
-          const authors = (bib.match(/author\s*=\s*\{+(.*?)\}+/is)?.[1] || "Unknown").split(/\s+and\s+/i).join(", ");
-          const venue = bib.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/is)?.[2] || "Venue";
-          const year = bib.match(/year\s*=\s*\{?(\d{4})\}?/i)?.[1] || "0";
-          
-          const doiMatch = bib.match(/doi\s*=\s*\{+(.*?)\}+/is);
-          const doi = doiMatch ? (doiMatch[1].startsWith('http') ? doiMatch[1] : `https://doi.org/${doiMatch[1]}`) : null;
+        const processedPapers = myPapers
+          .map((p) => {
+            const isJournal = p.bibtex.trim().toLowerCase().startsWith("@article");
+            const yearMatch = p.bibtex.match(/year\s*=\s*\{+(.*?)\}+/i) || p.bibtex.match(/year\s*=\s*([0-9]{4})/i);
+            const year = parseInt(yearMatch?.[1] || "0");
+            return { ...p, isJournal, year };
+          })
+          .sort((a, b) => b.year - a.year);
 
-          return { bib, isJournal, title, authors, venue, year: parseInt(year), doi, id: index };
-        }).sort((a, b) => b.year - a.year);
+        processedPapers.forEach((paper, index) => {
+          const title = paper.bibtex.match(/title\s*=\s*\{+(.*?)\}+/i)?.[1] || "Untitled";
+          const authors = paper.bibtex.match(/author\s*=\s*\{+(.*?)\}+/i)?.[1] || "Unknown Authors";
+          const venue = paper.bibtex.match(/(journal|booktitle)\s*=\s*\{+(.*?)\}+/i)?.[2] || "Venue";
+          const cleanAuthors = authors.split(" and ").join(", ");
 
-        processed.forEach(p => {
           const html = `
-            <div class="paper">
-              <h3 class="paper-title">${p.title}</h3>
-              <p class="authors">${p.authors}</p>
-              <p class="venue">${p.venue}, ${p.year}</p>
-              <div class="paper-actions">
-                ${p.doi ? `<a href="${p.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI</a>` : ''}
-                <button class="btn-cite" onclick="toggleBib('bib-${p.id}')"><i class="fas fa-quote-right"></i> BibTeX</button>
-              </div>
-              <pre id="bib-${p.id}" class="bibtex-box">${p.bib.trim()}</pre>
-            </div>`;
-          
-          if (p.isJournal) journalList.innerHTML += html;
-          else conferenceList.innerHTML += html;
+                    <div class="paper">
+                        <h3 class="paper-title">${title}</h3>
+                        <p class="authors">${cleanAuthors}</p>
+                        <p class="venue">${venue}, ${paper.year}</p>
+                        <div class="paper-actions">
+                            <a href="${paper.doi}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI Link</a>
+                            <button class="btn-cite" onclick="toggleBib('bib-${index}')"><i class="fas fa-quote-right"></i> BibTeX</button>
+                        </div>
+                        <pre id="bib-${index}" class="bibtex-box">${paper.bibtex.trim()}</pre>
+                    </div>
+                `;
+          if (paper.isJournal) journalContainer.innerHTML += html;
+          else conferenceContainer.innerHTML += html;
         });
       }
 
       function toggleBib(id) {
         const el = document.getElementById(id);
-        el.style.display = (el.style.display === "block") ? "none" : "block";
+        el.style.display = el.style.display === "block" ? "none" : "block";
       }
-
-      window.onload = fetchAndRender;
+      window.onload = renderContent;
     </script>
   </body>
 </html>
