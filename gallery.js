@@ -35,7 +35,7 @@ function tryExtension(extIndex) {
     imgTest.src = `${folderPath}${imageIndex}.${currentExt}`;
 
     // SUCCESS: The image exists!
-    imgTest.onload = function() {
+    imgTest.onload = function () {
         // 1. Create the wrapper div
         const itemDiv = document.createElement("div");
         itemDiv.className = "gallery-item";
@@ -56,7 +56,7 @@ function tryExtension(extIndex) {
     };
 
     // FAIL: This specific file extension doesn't exist
-    imgTest.onerror = function() {
+    imgTest.onerror = function () {
         // Try the next extension in the list (e.g., if .jpg fails, try .jpeg)
         tryExtension(extIndex + 1);
     };
