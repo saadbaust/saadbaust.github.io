@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://saadbaust.github.io/sahmed/</loc>
+    <loc>https://saadbaust.github.io/</loc>
     <priority>1.0</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
-    <loc>https://saadbaust.github.io/sahmed/gallery.html</loc>
+    <loc>https://saadbaust.github.io/gallery.html</loc>
     <priority>0.5</priority>
     <changefreq>monthly</changefreq>
   </url>

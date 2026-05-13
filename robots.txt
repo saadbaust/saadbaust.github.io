@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://saadbaust.github.io/sahmed/sitemap.xml
+Sitemap: https://saadbaust.github.io/sitemap.xml
