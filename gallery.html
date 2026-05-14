@@ -23,11 +23,22 @@
   <body>
     <main class="main-block">
       <aside class="sidebar">
-        <nav>
-          <a href="index.html">Home</a>
-          <a href="gallery.html" style="color: var(--accent); font-weight: 600"
-            >Gallery</a
-          >
+        <nav class="sticky-nav">
+          <div class="nav-group">
+            <small class="nav-label">Main</small>
+            <a href="index.html" class="active">Home</a>
+            <a href="gallery.html">Gallery</a>
+          </div>
+
+          <div class="nav-group">
+            <small class="nav-label">Sections</small>
+            <a href="#experience">Experience</a>
+            <a href="#journals">Publications</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+          </div>
         </nav>
       </aside>
 

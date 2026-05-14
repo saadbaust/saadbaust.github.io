@@ -17,23 +17,12 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://saadbaust.github.io/" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="profile" />
-    <meta
-      property="og:title"
-      content="Saad Ahmed | Lecturer & Researcher | BAUST"
-    />
-    <meta
-      property="og:description"
-      content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning."
-    />
+    <meta property="og:title" content="Saad Ahmed | Lecturer & Researcher | BAUST" />
+    <meta property="og:description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning." />
     <meta property="og:url" content="https://saadbaust.github.io/" />
-    <meta
-      property="og:image"
-      content="https://saadbaust.github.io/sahmed/images/formal.png"
-    />
+    <meta property="og:image" content="https://saadbaust.github.io/sahmed/images/formal.png" />
 
-    <!-- Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -58,47 +47,48 @@
     </script>
 
     <link rel="icon" type="image/x-icon" href="" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <main class="main-block">
       <aside class="sidebar">
-        <nav>
-          <a href="index.html">Home</a>
-          <a href="gallery.html">Gallery</a>
+        <nav class="sticky-nav">
+          <div class="nav-group">
+            <small class="nav-label">Main</small>
+            <a href="index.html" class="active">Home</a>
+            <a href="gallery.html">Gallery</a>
+          </div>
+          <div class="nav-group">
+            <small class="nav-label">Sections</small>
+            <a href="#experience">Experience</a>
+            <a href="#journals">Publications</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+          </div>
         </nav>
       </aside>
 
       <div class="content">
         <header id="about" class="hero">
-          <img
-            src="images/formal.png"
-            alt="Saad Ahmed"
-            class="profile-circle"
-          />
+          <img src="images/formal.png" alt="Saad Ahmed" class="profile-circle" />
           <div class="hero-info">
             <h1>Saad Ahmed</h1>
             <p class="subtitle">Lecturer, Dept of CSE</p>
-            <p class="institution">
-              Bangladesh Army University of Science and Technology (BAUST)
-            </p>
+            <p class="institution">Bangladesh Army University of Science and Technology (BAUST)</p>
 
+            <!-- Citations is first and highlighted; order matters for visual weight -->
             <div class="metrics-container" id="metrics">
+              <div class="metric-item metric-highlight">
+                <span class="metric-value" id="total-citations">0</span>
+                <span class="metric-label">Citations</span>
+              </div>
               <div class="metric-item">
                 <span class="metric-value" id="total-papers">0</span>
                 <span class="metric-label">Papers</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value" id="total-citations">0</span>
-                <span class="metric-label">Citations</span>
               </div>
               <div class="metric-item">
                 <span class="metric-value" id="h-index">0</span>
@@ -112,52 +102,16 @@
 
             <div class="research-interests">
               <p>
-                <strong>Research Interests:</strong> Image Processing, Computer
-                Vision, and Deep Learning.
+                <strong>Research Interests:</strong> Image Processing, Computer Vision, and Deep Learning.
               </p>
             </div>
 
             <div class="social-icons">
-              <a
-                href="https://github.com/saadbaust"
-                class="icon github"
-                title="GitHub"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><i class="fab fa-github"></i
-              ></a>
-              <a
-                href="https://linkedin.com/in/saadbaust"
-                class="icon linkedin"
-                title="LinkedIn"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><i class="fab fa-linkedin"></i
-              ></a>
-              <a
-                href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&hl"
-                class="icon scholar"
-                title="Google Scholar"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><i class="fas fa-graduation-cap"></i
-              ></a>
-              <a
-                href="https://www.researchgate.net/profile/Saad-Ahmed-96"
-                class="icon researchgate"
-                title="ResearchGate"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><i class="fab fa-researchgate"></i
-              ></a>
-              <a
-                href="https://youtube.com/@saadbaust"
-                class="icon youtube"
-                title="YouTube"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><i class="fab fa-youtube"></i
-              ></a>
+              <a href="https://github.com/saadbaust" class="icon github" title="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+              <a href="https://linkedin.com/in/saadbaust" class="icon linkedin" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
+              <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&hl" class="icon scholar" title="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i></a>
+              <a href="https://www.researchgate.net/profile/Saad-Ahmed-96" class="icon researchgate" title="ResearchGate" target="_blank" rel="noopener noreferrer"><i class="fab fa-researchgate"></i></a>
+              <a href="https://youtube.com/@saadbaust" class="icon youtube" title="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
             </div>
           </div>
         </header>
@@ -165,13 +119,14 @@
         <hr class="divider" />
 
         <div class="hero-images-container">
-          <img
-            src="images/a.png"
-            alt="Research Interest Score"
-            class="hero-promo-img"
-          />
+          <img src="images/a.png" alt="Research Interest Score" class="hero-promo-img" />
           <img src="images/b.png" alt="Stats History" class="hero-promo-img" />
         </div>
+
+        <section id="experience">
+          <h2 class="section-title">Experience</h2>
+          <div id="experience-list"></div>
+        </section>
 
         <section id="journals">
           <h2 class="section-title">Journal Articles</h2>
@@ -181,6 +136,26 @@
         <section id="conferences">
           <h2 class="section-title">Conference Proceedings</h2>
           <div id="conference-list"></div>
+        </section>
+
+        <section id="projects">
+          <h2 class="section-title">Selected Projects</h2>
+          <div id="project-list"></div>
+        </section>
+
+        <section id="education">
+          <h2 class="section-title">Education</h2>
+          <div id="education-list"></div>
+        </section>
+
+        <section id="skills">
+          <h2 class="section-title">Technical Skills</h2>
+          <div id="skills-list" style="margin-top: 10px;"></div>
+        </section>
+
+        <section id="certs">
+          <h2 class="section-title">Certifications & Activities</h2>
+          <div id="cert-list"></div>
         </section>
 
         <hr class="divider" />
@@ -202,78 +177,134 @@
     </main>
 
     <script src="papers.js"></script>
+    <script src="extra.js"></script>
+
     <script>
-      function renderContent() {
-        if (typeof myPapers !== "undefined") {
-          document.getElementById("total-papers").innerText = myPapers.length;
-        }
-        if (typeof scholarStats !== "undefined") {
-          document.getElementById("total-citations").innerText =
-            scholarStats.citations;
-          document.getElementById("h-index").innerText = scholarStats.hIndex;
-          document.getElementById("i10-index").innerText =
-            scholarStats.i10Index;
-        }
-
-        const journalContainer = document.getElementById("journal-list");
-        const conferenceContainer = document.getElementById("conference-list");
-
-        const processedPapers = myPapers
-          .map((p) => {
-            const isJournal = p.bibtex
-              .trim()
-              .toLowerCase()
-              .startsWith("@article");
-            const yearMatch =
-              p.bibtex.match(/\byear\s*=\s*\{((?:[^{}]|\{[^{}]*\})*)\}/i) ||
-              p.bibtex.match(/year\s*=\s*([0-9]{4})/i);
-            const year = parseInt(yearMatch?.[1] || "0");
-            return { ...p, isJournal, year };
-          })
-          .sort((a, b) => b.year - a.year);
-
-        processedPapers.forEach((paper, index) => {
-          // KEY FIX: \b (word boundary) before "title" stops "booktitle" from
-          // being matched when we only want the "title" field.
-          const title =
-            paper.bibtex.match(
-              /\btitle\s*=\s*\{((?:[^{}]|\{[^{}]*\})*)\}/i,
-            )?.[1] || "Untitled";
-          const authors =
-            paper.bibtex.match(
-              /\bauthor\s*=\s*\{((?:[^{}]|\{[^{}]*\})*)\}/i,
-            )?.[1] || "Unknown Authors";
-          const venue =
-            paper.bibtex.match(
-              /(?:journal|booktitle)\s*=\s*\{((?:[^{}]|\{[^{}]*\})*)\}/i,
-            )?.[1] || "Venue";
-          const doiRaw =
-            paper.bibtex.match(/\bdoi\s*=\s*\{([^}]+)\}/i)?.[1] || "";
-          const doiUrl = doiRaw ? `https://doi.org/${doiRaw}` : "#";
-          const cleanAuthors = authors.split(" and ").join(", ");
-
-          const html = `
-            <div class="paper">
-              <h3 class="paper-title">${title}</h3>
-              <p class="authors">${cleanAuthors}</p>
-              <p class="venue">${venue}, ${paper.year}</p>
-              <div class="paper-actions">
-                <a href="${doiUrl}" target="_blank" class="doi-link"><i class="fas fa-link"></i> DOI Link</a>
-                <button class="btn-cite" onclick="toggleBib('bib-${index}')"><i class="fas fa-quote-right"></i> BibTeX</button>
-              </div>
-              <pre id="bib-${index}" class="bibtex-box">${paper.bibtex.trim()}</pre>
-            </div>
-          `;
-          if (paper.isJournal) journalContainer.innerHTML += html;
-          else conferenceContainer.innerHTML += html;
-        });
-      }
-
       function toggleBib(id) {
         const el = document.getElementById(id);
         el.style.display = el.style.display === "block" ? "none" : "block";
       }
 
+      // ─── Single renderContent function ────────────────────────────────────────
+      // BUG FIX: previously window.onload was defined twice; the second
+      // `window.onload = renderContent` silently overwrote the first anonymous
+      // function, breaking all rendering. Now there is exactly one definition.
+      function renderContent() {
+
+        // 1. Metrics
+        if (typeof myPapers !== "undefined") {
+          document.getElementById("total-papers").innerText = myPapers.length;
+        }
+        if (typeof scholarStats !== "undefined") {
+          document.getElementById("total-citations").innerText = scholarStats.citations;
+          document.getElementById("h-index").innerText = scholarStats.hIndex;
+          document.getElementById("i10-index").innerText = scholarStats.i10Index;
+        }
+
+        // 2. Publications — sorted newest first, with type badge + DOI button
+        const jList = document.getElementById("journal-list");
+        const cList = document.getElementById("conference-list");
+
+        const sortedPapers = [...myPapers].sort((a, b) => {
+          const yA = parseInt(a.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1] || "0");
+          const yB = parseInt(b.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1] || "0");
+          return yB - yA;
+        });
+
+        sortedPapers.forEach((p, i) => {
+          const isJournal = /^\s*@article/i.test(p.bibtex);
+          const title    = p.bibtex.match(/\btitle\s*=\s*\{([^}]+)\}/i)?.[1]              || "Untitled";
+          const authors  = p.bibtex.match(/\bauthor\s*=\s*\{([^}]+)\}/i)?.[1]             || "Unknown Authors";
+          const venue    = p.bibtex.match(/(?:journal|booktitle)\s*=\s*\{([^}]+)\}/i)?.[1] || "Venue";
+          const year     = p.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1]                   || "";
+          const doi      = p.bibtex.match(/\bdoi\s*=\s*\{([^}]+)\}/i)?.[1]                || "";
+          const cleanAuthors = authors.split(" and ").join(", ");
+
+          const doiBtn = doi
+            ? `<a href="https://doi.org/${doi}" class="btn-doi" target="_blank" rel="noopener noreferrer">
+                 <i class="fas fa-external-link-alt"></i> DOI
+               </a>`
+            : "";
+
+          const html = `
+            <div class="paper-card">
+              <div class="paper-meta-top">
+                <span class="badge ${isJournal ? "badge-journal" : "badge-conf"}">
+                  ${isJournal ? "Journal" : "Conference"}
+                </span>
+                <span class="paper-year">${year}</span>
+              </div>
+              <h3 class="paper-title">${title}</h3>
+              <p class="authors">${cleanAuthors}</p>
+              <p class="venue">${venue}</p>
+              <div class="paper-actions">
+                ${doiBtn}
+                <button class="btn-cite" onclick="toggleBib('bib-${i}')">
+                  <i class="fas fa-quote-right"></i> BibTeX
+                </button>
+              </div>
+              <pre id="bib-${i}" class="bibtex-box">${p.bibtex.trim()}</pre>
+            </div>`;
+
+          isJournal ? (jList.innerHTML += html) : (cList.innerHTML += html);
+        });
+
+        // 3. Experience & Education (timeline)
+        if (typeof academicInfo !== "undefined") {
+          const expList = document.getElementById("experience-list");
+          expList.className = "timeline-container";
+          academicInfo.experience.forEach((e) => {
+            expList.innerHTML += `
+              <div class="timeline-item">
+                <div class="timeline-header">
+                  <span class="timeline-title">${e.role}</span>
+                  <span class="timeline-date">${e.period}</span>
+                </div>
+                <div class="timeline-org">${e.org}</div>
+                <p class="timeline-desc">${e.desc}</p>
+              </div>`;
+          });
+
+          const eduList = document.getElementById("education-list");
+          eduList.className = "timeline-container";
+          academicInfo.education.forEach((ed) => {
+            eduList.innerHTML += `
+              <div class="timeline-item">
+                <div class="timeline-header">
+                  <span class="timeline-title">${ed.degree}</span>
+                  <span class="timeline-date">${ed.year}</span>
+                </div>
+                <div class="timeline-org">${ed.inst}</div>
+                <p class="timeline-desc" style="color:var(--accent); font-weight:600;">${ed.result}</p>
+              </div>`;
+          });
+
+          // 4. Projects
+          const projList = document.getElementById("project-list");
+          academicInfo.projects.forEach((p) => {
+            projList.innerHTML += `
+              <div class="project-card">
+                <h3 class="paper-title" style="margin-bottom:5px;">${p.title}</h3>
+                <p class="authors" style="font-size:0.9rem;">${p.desc}</p>
+                <p class="venue" style="margin-top:8px;"><strong>Stack:</strong> ${p.tech}</p>
+              </div>`;
+          });
+
+          // 5. Skills
+          const skillList = document.getElementById("skills-list");
+          academicInfo.skills.forEach((s) => {
+            skillList.innerHTML += `<span class="skill-tag">${s}</span>`;
+          });
+
+          // 6. Certifications
+          const certList = document.getElementById("cert-list");
+          academicInfo.certifications.forEach((c) => {
+            certList.innerHTML += `<p class="cert-item"><i class="fas fa-certificate"></i> ${c}</p>`;
+          });
+        }
+      }
+
+      // Single assignment — no second window.onload that would overwrite this
       window.onload = renderContent;
     </script>
   </body>
