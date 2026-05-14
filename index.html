@@ -18,10 +18,19 @@
     <link rel="canonical" href="https://saadbaust.github.io/" />
 
     <meta property="og:type" content="profile" />
-    <meta property="og:title" content="Saad Ahmed | Lecturer & Researcher | BAUST" />
-    <meta property="og:description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning." />
+    <meta
+      property="og:title"
+      content="Saad Ahmed | Lecturer & Researcher | BAUST"
+    />
+    <meta
+      property="og:description"
+      content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning."
+    />
     <meta property="og:url" content="https://saadbaust.github.io/" />
-    <meta property="og:image" content="https://saadbaust.github.io/sahmed/images/formal.png" />
+    <meta
+      property="og:image"
+      content="https://saadbaust.github.io/sahmed/images/formal.png"
+    />
 
     <script type="application/ld+json">
       {
@@ -47,9 +56,106 @@
     </script>
 
     <link rel="icon" type="image/x-icon" href="" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* --- Academic Branding Styles --- */
+
+      /* About Me Callout Box */
+      .academic-summary {
+        margin: 1.5rem 0 2rem 0;
+        padding: 1.25rem 1.5rem;
+        background-color: var(--light-bg);
+        border-left: 5px solid var(--accent);
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
+      .academic-summary:hover {
+        background-color: #ffffff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      }
+      .academic-summary p {
+        font-size: 1rem;
+        line-height: 1.75;
+        color: var(--text);
+        text-align: justify;
+        margin: 0;
+        font-weight: 400;
+        font-style: italic;
+      }
+
+      /* Publication Card Accents */
+      .paper-card {
+        border-left: 5px solid transparent; /* Placeholder */
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .paper-card:hover {
+        transform: translateX(4px);
+      }
+
+      /* Specific colors for Journals and Conferences */
+      .journal-card {
+        border-left-color: #2563eb; /* Academic Blue */
+      }
+      .conference-card {
+        border-left-color: #10b981; /* Emerald Green */
+      }
+
+      /* Formatting for Headings & Details */
+      .institution {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--gray);
+        margin-bottom: 0.2rem;
+      }
+      .research-interests {
+        margin-top: 1.2rem;
+        padding: 8px 12px;
+        border-radius: 6px;
+        background: rgba(37, 99, 235, 0.05);
+        display: inline-block;
+      }
+
+      .resume-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: var(--accent);
+        color: white !important;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+      }
+      .resume-btn:hover {
+        background-color: #1d4ed8;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      }
+
+      @media (max-width: 800px) {
+        .academic-summary {
+          border-left: none;
+          border-top: 5px solid var(--accent);
+          text-align: center;
+        }
+        .academic-summary p {
+          text-align: center;
+        }
+      }
+    </style>
   </head>
   <body>
     <main class="main-block">
@@ -64,7 +170,6 @@
             <small class="nav-label">Sections</small>
             <a href="#experience">Experience</a>
             <a href="#journals">Publications</a>
-            <a href="#projects">Projects</a>
             <a href="#education">Education</a>
             <a href="#skills">Skills</a>
             <a href="#contact">Contact</a>
@@ -74,13 +179,29 @@
 
       <div class="content">
         <header id="about" class="hero">
-          <img src="images/formal.png" alt="Saad Ahmed" class="profile-circle" />
+          <img
+            src="images/formal.png"
+            alt="Saad Ahmed"
+            class="profile-circle"
+          />
           <div class="hero-info">
             <h1>Saad Ahmed</h1>
             <p class="subtitle">Lecturer, Dept of CSE</p>
-            <p class="institution">Bangladesh Army University of Science and Technology (BAUST)</p>
+            <p class="institution">
+              Bangladesh Army University of Science and Technology (BAUST)
+            </p>
 
-            <!-- Citations is first and highlighted; order matters for visual weight -->
+            <div class="academic-summary">
+              <p>
+                "I am a Lecturer at the Department of CSE, Bangladesh Army
+                University of Science and Technology (BAUST). My research
+                interests focus on Image Processing, Computer Vision, and Deep
+                Learning, with a dedication to developing intelligent systems
+                that solve real-world problems and contribute to the global
+                advancement of technology."
+              </p>
+            </div>
+
             <div class="metrics-container" id="metrics">
               <div class="metric-item metric-highlight">
                 <span class="metric-value" id="total-citations">0</span>
@@ -102,16 +223,52 @@
 
             <div class="research-interests">
               <p>
-                <strong>Research Interests:</strong> Image Processing, Computer Vision, and Deep Learning.
+                <strong>Research Focus:</strong> Image Processing, Computer
+                Vision, & Deep Learning.
               </p>
             </div>
 
             <div class="social-icons">
-              <a href="https://github.com/saadbaust" class="icon github" title="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-              <a href="https://linkedin.com/in/saadbaust" class="icon linkedin" title="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-              <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&hl" class="icon scholar" title="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i></a>
-              <a href="https://www.researchgate.net/profile/Saad-Ahmed-96" class="icon researchgate" title="ResearchGate" target="_blank" rel="noopener noreferrer"><i class="fab fa-researchgate"></i></a>
-              <a href="https://youtube.com/@saadbaust" class="icon youtube" title="YouTube" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+              <a
+                href="https://github.com/saadbaust"
+                class="icon github"
+                title="GitHub"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-github"></i
+              ></a>
+              <a
+                href="https://linkedin.com/in/saadbaust"
+                class="icon linkedin"
+                title="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a
+                href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&hl"
+                class="icon scholar"
+                title="Google Scholar"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fas fa-graduation-cap"></i
+              ></a>
+              <a
+                href="https://www.researchgate.net/profile/Saad-Ahmed-96"
+                class="icon researchgate"
+                title="ResearchGate"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-researchgate"></i
+              ></a>
+              <a
+                href="https://youtube.com/@saadbaust"
+                class="icon youtube"
+                title="YouTube"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><i class="fab fa-youtube"></i
+              ></a>
             </div>
           </div>
         </header>
@@ -119,7 +276,11 @@
         <hr class="divider" />
 
         <div class="hero-images-container">
-          <img src="images/a.png" alt="Research Interest Score" class="hero-promo-img" />
+          <img
+            src="images/a.png"
+            alt="Research Interest Score"
+            class="hero-promo-img"
+          />
           <img src="images/b.png" alt="Stats History" class="hero-promo-img" />
         </div>
 
@@ -138,11 +299,6 @@
           <div id="conference-list"></div>
         </section>
 
-        <section id="projects">
-          <h2 class="section-title">Selected Projects</h2>
-          <div id="project-list"></div>
-        </section>
-
         <section id="education">
           <h2 class="section-title">Education</h2>
           <div id="education-list"></div>
@@ -150,7 +306,7 @@
 
         <section id="skills">
           <h2 class="section-title">Technical Skills</h2>
-          <div id="skills-list" style="margin-top: 10px;"></div>
+          <div id="skills-list" style="margin-top: 10px"></div>
         </section>
 
         <section id="certs">
@@ -176,8 +332,7 @@
       </div>
     </main>
 
-    <script src="papers.js"></script>
-    <script src="extra.js"></script>
+    <script src="data.js"></script>
 
     <script>
       function toggleBib(id) {
@@ -185,39 +340,47 @@
         el.style.display = el.style.display === "block" ? "none" : "block";
       }
 
-      // ─── Single renderContent function ────────────────────────────────────────
-      // BUG FIX: previously window.onload was defined twice; the second
-      // `window.onload = renderContent` silently overwrote the first anonymous
-      // function, breaking all rendering. Now there is exactly one definition.
       function renderContent() {
-
-        // 1. Metrics
         if (typeof myPapers !== "undefined") {
           document.getElementById("total-papers").innerText = myPapers.length;
         }
         if (typeof scholarStats !== "undefined") {
-          document.getElementById("total-citations").innerText = scholarStats.citations;
+          document.getElementById("total-citations").innerText =
+            scholarStats.citations;
           document.getElementById("h-index").innerText = scholarStats.hIndex;
-          document.getElementById("i10-index").innerText = scholarStats.i10Index;
+          document.getElementById("i10-index").innerText =
+            scholarStats.i10Index;
         }
 
-        // 2. Publications — sorted newest first, with type badge + DOI button
         const jList = document.getElementById("journal-list");
         const cList = document.getElementById("conference-list");
 
         const sortedPapers = [...myPapers].sort((a, b) => {
-          const yA = parseInt(a.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1] || "0");
-          const yB = parseInt(b.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1] || "0");
+          const yA = parseInt(
+            a.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1] || "0",
+          );
+          const yB = parseInt(
+            b.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1] || "0",
+          );
           return yB - yA;
         });
 
         sortedPapers.forEach((p, i) => {
           const isJournal = /^\s*@article/i.test(p.bibtex);
-          const title    = p.bibtex.match(/\btitle\s*=\s*\{([^}]+)\}/i)?.[1]              || "Untitled";
-          const authors  = p.bibtex.match(/\bauthor\s*=\s*\{([^}]+)\}/i)?.[1]             || "Unknown Authors";
-          const venue    = p.bibtex.match(/(?:journal|booktitle)\s*=\s*\{([^}]+)\}/i)?.[1] || "Venue";
-          const year     = p.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1]                   || "";
-          const doi      = p.bibtex.match(/\bdoi\s*=\s*\{([^}]+)\}/i)?.[1]                || "";
+
+          // Determine the class for the colored bar
+          const cardTypeClass = isJournal ? "journal-card" : "conference-card";
+
+          const title =
+            p.bibtex.match(/\btitle\s*=\s*\{([^}]+)\}/i)?.[1] || "Untitled";
+          const authors =
+            p.bibtex.match(/\bauthor\s*=\s*\{([^}]+)\}/i)?.[1] ||
+            "Unknown Authors";
+          const venue =
+            p.bibtex.match(/(?:journal|booktitle)\s*=\s*\{([^}]+)\}/i)?.[1] ||
+            "Venue";
+          const year = p.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1] || "";
+          const doi = p.bibtex.match(/\bdoi\s*=\s*\{([^}]+)\}/i)?.[1] || "";
           const cleanAuthors = authors.split(" and ").join(", ");
 
           const doiBtn = doi
@@ -226,8 +389,9 @@
                </a>`
             : "";
 
+          // Added cardTypeClass here
           const html = `
-            <div class="paper-card">
+            <div class="paper-card ${cardTypeClass}">
               <div class="paper-meta-top">
                 <span class="badge ${isJournal ? "badge-journal" : "badge-conf"}">
                   ${isJournal ? "Journal" : "Conference"}
@@ -249,7 +413,6 @@
           isJournal ? (jList.innerHTML += html) : (cList.innerHTML += html);
         });
 
-        // 3. Experience & Education (timeline)
         if (typeof academicInfo !== "undefined") {
           const expList = document.getElementById("experience-list");
           expList.className = "timeline-container";
@@ -279,24 +442,11 @@
               </div>`;
           });
 
-          // 4. Projects
-          const projList = document.getElementById("project-list");
-          academicInfo.projects.forEach((p) => {
-            projList.innerHTML += `
-              <div class="project-card">
-                <h3 class="paper-title" style="margin-bottom:5px;">${p.title}</h3>
-                <p class="authors" style="font-size:0.9rem;">${p.desc}</p>
-                <p class="venue" style="margin-top:8px;"><strong>Stack:</strong> ${p.tech}</p>
-              </div>`;
-          });
-
-          // 5. Skills
           const skillList = document.getElementById("skills-list");
           academicInfo.skills.forEach((s) => {
             skillList.innerHTML += `<span class="skill-tag">${s}</span>`;
           });
 
-          // 6. Certifications
           const certList = document.getElementById("cert-list");
           academicInfo.certifications.forEach((c) => {
             certList.innerHTML += `<p class="cert-item"><i class="fas fa-certificate"></i> ${c}</p>`;
@@ -304,7 +454,6 @@
         }
       }
 
-      // Single assignment — no second window.onload that would overwrite this
       window.onload = renderContent;
     </script>
   </body>
