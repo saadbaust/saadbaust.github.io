@@ -144,13 +144,34 @@ section {
   margin-bottom: 2rem;
 }
 
-.profile-circle {
+/* Profile card (square, rounded, with chip) */
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.profile-photo {
   width: 170px;
   height: 170px;
-  border-radius: 50%;
+  border-radius: 16px;
   object-fit: cover;
   border: 3px solid var(--border);
-  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.12);
+}
+
+.profile-chip {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
 }
 
 .hero-info {
@@ -272,49 +293,36 @@ h1 {
 /* ═══════════════════════════════════════════
    METRICS
 ═══════════════════════════════════════════ */
-.metrics-container {
+/* Metrics — compact single row */
+.metrics-grid {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: nowrap;
 }
 
 .metric-item {
   background: var(--light-bg);
-  padding: 10px 20px;
-  border-radius: 12px;
+  padding: 7px 14px;
+  border-radius: 10px;
   text-align: center;
   border: 1px solid var(--border);
-  min-width: 90px;
+  min-width: 70px;
 }
 
 .metric-value {
   display: block;
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--accent);
 }
 
 .metric-label {
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   color: var(--gray);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
-}
-
-.metric-item.metric-highlight {
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-.metric-item.metric-highlight .metric-value {
-  color: #fff;
-  font-size: 1.6rem;
-}
-
-.metric-item.metric-highlight .metric-label {
-  color: rgba(255, 255, 255, 0.8);
 }
 
 /* ═══════════════════════════════════════════
@@ -340,9 +348,28 @@ h1 {
   background: #fff;
 }
 
-/* ═══════════════════════════════════════════
-   PUBLICATION CARDS
-═══════════════════════════════════════════ */
+/* Stat image wrappers & captions */
+.stat-image-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-image-caption {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-image-caption i {
+  color: var(--accent);
+  font-size: 0.8rem;
+}
 .paper-card {
   margin-bottom: 1.4rem;
   border: 1px solid var(--border);
@@ -359,7 +386,13 @@ h1 {
 }
 
 .journal-card    { border-left-color: #2563eb; }
-.conference-card { border-left-color: #10b981; }
+.conference-card { border-left-color: #2563eb; }
+
+/* Highlighted author name in paper cards */
+.author-self {
+  color: var(--accent);
+  font-weight: 700;
+}
 
 .paper-meta-top {
   display: flex;
@@ -547,11 +580,22 @@ h1 {
 /* ═══════════════════════════════════════════
    SKILLS
 ═══════════════════════════════════════════ */
-#skills-list {
+.skills-group-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  margin-bottom: 8px;
+  margin-top: 0.4rem;
+}
+
+#skills-research,
+#skills-dev {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 10px;
+  margin-top: 4px;
 }
 
 .skill-tag {
@@ -570,6 +614,18 @@ h1 {
   background: var(--accent);
   color: white;
   border-color: var(--accent);
+}
+
+/* Development skills — slightly muted */
+.skill-tag-dev {
+  color: var(--gray);
+  border-color: var(--border);
+}
+
+.skill-tag-dev:hover {
+  background: var(--gray);
+  color: white;
+  border-color: var(--gray);
 }
 
 /* ═══════════════════════════════════════════
@@ -726,9 +782,9 @@ footer {
     gap: 1.5rem;
   }
 
-  .profile-circle { width: 140px; height: 140px; }
+  .profile-photo  { width: 140px; height: 140px; }
 
-  .metrics-container { justify-content: center; }
+  .metrics-grid   { flex-wrap: wrap; justify-content: center; }
 
   .academic-summary {
     border-left: none;
@@ -773,11 +829,17 @@ footer {
   .btn-doi  { background: #1d4ed8; }
   .btn-cite { border-color: var(--border); }
 
-  .metric-item.metric-highlight { background: #1d4ed8; border-color: #1d4ed8; }
+  .metric-item { background: #1a2744; border-color: var(--border); }
 
   .paper-card:hover { box-shadow: 0 4px 20px rgba(96, 165, 250, 0.1); }
 
   .social-icons a.github:hover { color: #f1f5f9; }
 
   .academic-summary:hover { background-color: #273548; }
+
+  .profile-photo { border-color: #334155; }
+
+  .stat-image-caption { color: #94a3b8; }
+
+  .skill-tag-dev { color: #94a3b8; }
 }

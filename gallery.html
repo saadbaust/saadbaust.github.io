@@ -27,10 +27,185 @@
     <meta name="twitter:description" content="Photo gallery of Saad Ahmed, Lecturer at BAUST." />
     <meta name="twitter:image"       content="https://saadbaust.github.io/images/formal.png" />
 
-    <link rel="icon" type="image/x-icon" href="" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,sans-serif' font-weight='700' font-size='26' fill='white'>SA</text></svg>" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+      /* ── Masonry grid ── */
+      .masonry-grid {
+        columns: 3;
+        column-gap: 16px;
+        margin-top: 1rem;
+      }
+
+      .masonry-item {
+        break-inside: avoid;
+        margin-bottom: 16px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        position: relative;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.4s ease, transform 0.4s ease, box-shadow 0.25s ease;
+        background: var(--light-bg);
+      }
+
+      .masonry-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .masonry-item:hover {
+        box-shadow: 0 6px 24px rgba(37, 99, 235, 0.15);
+      }
+
+      .masonry-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+      }
+
+      /* Hover overlay */
+      .masonry-item::after {
+        content: '\f00e';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        inset: 0;
+        background: rgba(37, 99, 235, 0.55);
+        color: white;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+
+      .masonry-item:hover::after {
+        opacity: 1;
+      }
+
+      /* Photo count badge */
+      .photo-count {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--gray);
+        margin-left: 8px;
+        background: var(--light-bg);
+        border: 1px solid var(--border);
+        padding: 2px 10px;
+        border-radius: 12px;
+        vertical-align: middle;
+      }
+
+      /* ── Lightbox ── */
+      .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .lightbox.open {
+        display: flex;
+      }
+
+      .lightbox-img {
+        max-width: 90vw;
+        max-height: 85vh;
+        border-radius: 10px;
+        object-fit: contain;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        user-select: none;
+      }
+
+      .lightbox-counter {
+        color: rgba(255,255,255,0.55);
+        font-size: 0.82rem;
+        margin-top: 12px;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+      }
+
+      .lightbox-btn {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.1);
+        border: none;
+        color: white;
+        font-size: 1.4rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s ease;
+        z-index: 10000;
+      }
+
+      .lightbox-btn:hover { background: rgba(255,255,255,0.22); }
+      .lightbox-prev { left: 16px; }
+      .lightbox-next { right: 16px; }
+
+      .lightbox-close {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        background: rgba(255,255,255,0.1);
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s ease;
+        z-index: 10000;
+      }
+
+      .lightbox-close:hover { background: rgba(255,255,255,0.22); }
+
+      /* ── Placeholder / empty state ── */
+      .gallery-empty {
+        color: var(--gray);
+        font-size: 0.95rem;
+        padding: 2rem 0;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 800px) {
+        .masonry-grid { columns: 2; }
+        .lightbox-btn { width: 38px; height: 38px; font-size: 1.1rem; }
+        .lightbox-prev { left: 8px; }
+        .lightbox-next { right: 8px; }
+      }
+
+      @media (max-width: 500px) {
+        .masonry-grid { columns: 1; }
+      }
+
+      /* Dark mode */
+      @media (prefers-color-scheme: dark) {
+        .masonry-item { border-color: var(--border); }
+      }
+    </style>
   </head>
   <body>
     <main class="main-block">
@@ -64,10 +239,11 @@
         <hr class="divider" />
 
         <section id="gallery">
-          <h2 class="section-title">Photos</h2>
-          <div class="gallery-container" id="gallery-grid">
-            <!-- Gallery items rendered here -->
-          </div>
+          <h2 class="section-title">
+            Photos
+            <span class="photo-count" id="photo-count" style="display:none;"></span>
+          </h2>
+          <div class="masonry-grid" id="gallery-grid"></div>
         </section>
 
         <footer>
@@ -76,37 +252,140 @@
       </div>
     </main>
 
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
+      <button class="lightbox-btn lightbox-prev" id="lb-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+      <img class="lightbox-img" id="lb-img" src="" alt="Gallery photo" />
+      <span class="lightbox-counter" id="lb-counter"></span>
+      <button class="lightbox-btn lightbox-next" id="lb-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
     <button id="back-to-top" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
       <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
-      // Add your gallery image paths here
-      const galleryImages = [
-        // { src: "images/gallery/photo1.jpg", alt: "Description" },
-        // { src: "images/gallery/photo2.jpg", alt: "Description" },
-      ];
+      const grid        = document.getElementById("gallery-grid");
+      const countBadge  = document.getElementById("photo-count");
+      const lightbox    = document.getElementById("lightbox");
+      const lbImg       = document.getElementById("lb-img");
+      const lbCounter   = document.getElementById("lb-counter");
+      const lbClose     = document.getElementById("lb-close");
+      const lbPrev      = document.getElementById("lb-prev");
+      const lbNext      = document.getElementById("lb-next");
 
-      function renderGallery() {
-        const grid = document.getElementById("gallery-grid");
-        if (galleryImages.length === 0) {
-          grid.innerHTML = '<p style="color:var(--gray); font-size:0.95rem;">Photos coming soon.</p>';
+      const formats  = ["webp"];
+      const maxCheck = 30;
+
+      let loadedSrcs  = [];   // all successfully loaded image srcs in order
+      let currentIdx  = 0;
+      let pending     = maxCheck;
+      let anyLoaded   = false;
+
+      // ── Image loader ──
+      function tryImage(n, formatIndex) {
+        if (formatIndex >= formats.length) {
+          pending--;
+          checkDone();
           return;
         }
-        galleryImages.forEach(img => {
-          grid.innerHTML += `
-            <div class="gallery-item">
-              <img src="${img.src}" alt="${img.alt}" loading="lazy" />
-            </div>`;
-        });
+        const img = new Image();
+        const src = `images/gallery/${n}.${formats[formatIndex]}`;
+        img.onload = () => {
+          anyLoaded = true;
+          const idx = loadedSrcs.length;
+          loadedSrcs.push(src);
+
+          const item = document.createElement("div");
+          item.className = "gallery-item masonry-item";
+          item.dataset.idx = idx;
+          item.innerHTML = `<img src="${src}" alt="Gallery photo ${n}" loading="lazy" />`;
+          item.addEventListener("click", () => openLightbox(parseInt(item.dataset.idx)));
+          grid.appendChild(item);
+
+          // Update count badge
+          countBadge.textContent = `${loadedSrcs.length} photo${loadedSrcs.length !== 1 ? "s" : ""}`;
+          countBadge.style.display = "inline";
+
+          // Fade-in via IntersectionObserver
+          fadeObserver.observe(item);
+
+          pending--;
+          checkDone();
+        };
+        img.onerror = () => tryImage(n, formatIndex + 1);
+        img.src = src;
       }
 
-      window.onload = renderGallery;
+      function checkDone() {
+        if (pending > 0) return;
+        if (!anyLoaded) {
+          grid.innerHTML = '<p class="gallery-empty">Photos coming soon.</p>';
+        }
+      }
 
-      // Back to top
-      const backToTop = document.getElementById('back-to-top');
-      window.addEventListener('scroll', () => {
-        backToTop.classList.toggle('visible', window.scrollY > 300);
+      for (let i = 1; i <= maxCheck; i++) tryImage(i, 0);
+
+      // ── Fade-in on scroll ──
+      const fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add("visible");
+            fadeObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      // ── Lightbox ──
+      function openLightbox(idx) {
+        currentIdx = idx;
+        updateLightbox();
+        lightbox.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      function updateLightbox() {
+        lbImg.src = loadedSrcs[currentIdx];
+        lbCounter.textContent = `${currentIdx + 1} / ${loadedSrcs.length}`;
+      }
+
+      function prevPhoto() {
+        currentIdx = (currentIdx - 1 + loadedSrcs.length) % loadedSrcs.length;
+        updateLightbox();
+      }
+
+      function nextPhoto() {
+        currentIdx = (currentIdx + 1) % loadedSrcs.length;
+        updateLightbox();
+      }
+
+      lbClose.addEventListener("click", closeLightbox);
+      lbPrev.addEventListener("click", prevPhoto);
+      lbNext.addEventListener("click", nextPhoto);
+
+      // Close on backdrop click
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) closeLightbox();
+      });
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("open")) return;
+        if (e.key === "ArrowLeft")  prevPhoto();
+        if (e.key === "ArrowRight") nextPhoto();
+        if (e.key === "Escape")     closeLightbox();
+      });
+
+      // ── Back to top ──
+      const backToTop = document.getElementById("back-to-top");
+      window.addEventListener("scroll", () => {
+        backToTop.classList.toggle("visible", window.scrollY > 300);
       });
     </script>
   </body>

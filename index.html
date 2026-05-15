@@ -59,10 +59,10 @@
       }
     </script>
 
-    <link rel="icon" type="image/x-icon" href="" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,sans-serif' font-weight='700' font-size='26' fill='white'>SA</text></svg>" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <main class="main-block">
@@ -86,7 +86,10 @@
 
       <div class="content">
         <header id="about" class="hero">
-          <img src="images/formal.png" alt="Saad Ahmed" class="profile-circle" />
+          <div class="profile-card">
+            <img src="images/formal.png" alt="Saad Ahmed" class="profile-photo" />
+            <span class="profile-chip">Lecturer · BAUST</span>
+          </div>
           <div class="hero-info">
             <h1>Saad Ahmed</h1>
             <p class="subtitle">Lecturer, Dept of CSE</p>
@@ -103,8 +106,8 @@
               </p>
             </div>
 
-            <div class="metrics-container" id="metrics">
-              <div class="metric-item metric-highlight">
+            <div class="metrics-grid" id="metrics">
+              <div class="metric-item">
                 <span class="metric-value" id="total-citations">0</span>
                 <span class="metric-label">Citations</span>
               </div>
@@ -144,8 +147,14 @@
         <hr class="divider" />
 
         <div class="hero-images-container">
-          <img src="images/a.png" alt="Research Interest Score" class="hero-promo-img" />
-          <img src="images/b.png" alt="Stats History" class="hero-promo-img" />
+          <div class="stat-image-wrap">
+            <p class="stat-image-caption"><i class="fas fa-chart-pie"></i> Research Interest Distribution</p>
+            <img src="images/a.png" alt="Research Interest Score" class="hero-promo-img" />
+          </div>
+          <div class="stat-image-wrap">
+            <p class="stat-image-caption"><i class="fas fa-chart-line"></i> Citation History</p>
+            <img src="images/b.png" alt="Stats History" class="hero-promo-img" />
+          </div>
         </div>
 
         <section id="experience">
@@ -170,7 +179,10 @@
 
         <section id="skills">
           <h2 class="section-title">Technical Skills</h2>
-          <div id="skills-list"></div>
+          <p class="skills-group-label">Research &amp; AI</p>
+          <div id="skills-research"></div>
+          <p class="skills-group-label" style="margin-top:1rem;">Development &amp; Tools</p>
+          <div id="skills-dev"></div>
         </section>
 
         <section id="certs">
@@ -234,7 +246,12 @@
           const venue       = p.bibtex.match(/(?:journal|booktitle)\s*=\s*\{([^}]+)\}/i)?.[1] || "Venue";
           const year        = p.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1]                 || "";
           const doi         = p.bibtex.match(/\bdoi\s*=\s*\{([^}]+)\}/i)?.[1]              || "";
-          const cleanAuthors = authors.split(" and ").join(", ");
+          const cleanAuthors = authors.split(" and ").map(a => {
+            const trimmed = a.trim();
+            return trimmed.toLowerCase().includes("saad ahmed")
+              ? `<strong class="author-self">${trimmed}</strong>`
+              : trimmed;
+          }).join(", ");
 
           const doiBtn = doi
             ? `<a href="https://doi.org/${doi}" class="btn-doi" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> DOI</a>`
@@ -288,9 +305,24 @@
               </div>`;
           });
 
-          const skillList = document.getElementById("skills-list");
-          academicInfo.skills.forEach((s) => {
-            skillList.innerHTML += `<span class="skill-tag">${s}</span>`;
+          const researchSkills = [
+            "Python", "C/C++", "MATLAB",
+            "Deep Learning (Keras, TensorFlow, PyTorch)",
+            "Pandas", "Scikit-learn", "Matplotlib", "Numpy",
+            "LaTeX", "GitHub"
+          ];
+          const devSkills = [
+            "PHP", "JavaScript", "MySQL", "Firebase", "WordPress"
+          ];
+
+          const researchList = document.getElementById("skills-research");
+          const devList      = document.getElementById("skills-dev");
+
+          researchSkills.forEach(s => {
+            researchList.innerHTML += `<span class="skill-tag">${s}</span>`;
+          });
+          devSkills.forEach(s => {
+            devList.innerHTML += `<span class="skill-tag skill-tag-dev">${s}</span>`;
           });
 
           const certList = document.getElementById("cert-list");
