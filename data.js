@@ -104,27 +104,6 @@ const academicInfo = {
         }
     ],
 
-    projects: [
-        {
-            title: "EcoFishLab",
-            role: "WordPress Developer",
-            desc: "Developed and deployed the official website for Laboratory of Fish Ecophysiology.",
-            tech: "WordPress, HTML, CSS"
-        },
-        {
-            title: "Safeline Energy Tech",
-            role: "Full Stack Developer",
-            desc: "Online service platform built across the full software development life cycle.",
-            tech: "HTML, Tailwind CSS, MYSQL, PHP"
-        },
-        {
-            title: "KidsZone",
-            role: "Backend Developer",
-            desc: "Educational platform featuring puzzle games and math quizzes for children.",
-            tech: "JavaScript, ExpressJS, NodeJS, MYSQL"
-        }
-    ],
-
     skills: [
         "Python", "C/C++", "PHP", "JavaScript",
         "Deep Learning (Keras, TensorFlow, PyTorch)",
