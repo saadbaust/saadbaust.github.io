@@ -1,236 +1,93 @@
-# Academic Portfolio — Static Website
+# Saad Ahmed — Academic Portfolio
 
-A clean, responsive personal academic portfolio for researchers and lecturers. Built with plain HTML, CSS, and JavaScript — no frameworks, no build tools. Deployable to GitHub Pages or Vercel in minutes.
+Personal academic portfolio website for **Saad Ahmed**, Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST).
 
-**Live demo:** [saadbaust.github.io](https://saadbaust.github.io)
-
----
-
-## File Structure
-
-```
-portfolio/
-├── index.html        # Main page (bio, papers, contact)
-├── gallery.html      # Photo gallery page
-├── style.css         # All styling (light + dark mode + mobile)
-├── papers.js         # ← YOUR PUBLICATIONS & STATS GO HERE
-├── gallery.js        # Auto-loads images from images/gallery/
-├── robots.txt        # SEO crawler config
-├── sitemap.xml       # SEO sitemap
-└── images/
-    ├── formal.png    # Your profile photo
-    ├── a.png         # Google Scholar interest graph (screenshot)
-    ├── b.png         # Google Scholar citation history (screenshot)
-    └── gallery/      # Photos for the gallery page
-        ├── 1.jpg
-        ├── 2.jpg
-        └── ...       # Named sequentially: 1, 2, 3, ...
-```
+🌐 **Live site:** [saadbaust.github.io](https://saadbaust.github.io/)
 
 ---
 
-## Quick Start — If You Are Forking This Template
+## Files in This Project
 
-### Step 1 — Personal Information (`index.html`)
-
-Open `index.html` and update the following:
-
-**Page title and meta tags** (top of file, inside `<head>`):
-```html
-<title>Your Name | Lecturer & Researcher | Your University</title>
-<meta name="description" content="Your description here." />
-<meta name="keywords" content="Your Name, your keywords..." />
-<meta name="author" content="Your Name" />
-<link rel="canonical" href="https://yourusername.github.io/" />
-```
-
-**Open Graph tags** (for link previews on WhatsApp, LinkedIn, etc.):
-```html
-<meta property="og:title" content="Your Name | Your Title | Your University" />
-<meta property="og:description" content="Your description." />
-<meta property="og:url" content="https://yourusername.github.io/" />
-<meta property="og:image" content="https://yourusername.github.io/images/formal.png" />
-```
-
-**Structured data** (for Google search appearance — the JSON block inside `<script type="application/ld+json">`):
-```json
-{
-  "name": "Your Full Name",
-  "url": "https://yourusername.github.io/",
-  "image": "https://yourusername.github.io/images/formal.png",
-  "jobTitle": "Lecturer",
-  "worksFor": {
-    "name": "Your University Full Name"
-  },
-  "sameAs": [
-    "https://github.com/yourusername",
-    "https://linkedin.com/in/yourusername",
-    "https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID"
-  ]
-}
-```
-
-**Hero section** (your name, title, institution):
-```html
-<h1>Your Full Name</h1>
-<p class="subtitle">Your Title, Dept of CSE</p>
-<p class="institution">Your University Full Name</p>
-```
-
-**Social media links** — find the `social-icons` div and replace the `href` placeholders:
-```html
-<a href="https://github.com/yourusername" ...>
-<a href="https://linkedin.com/in/yourusername" ...>
-<a href="https://scholar.google.com/citations?user=YOUR_SCHOLAR_ID" ...>
-<a href="https://www.researchgate.net/profile/Your-Profile" ...>
-<a href="https://youtube.com/@yourchannel" ...>
-```
-
-**Contact section** (bottom of `index.html`):
-```html
-<p>Your Full Name</p>
-<p>Your Title, Dept of CSE, Your University</p>
-<p>+880XXXXXXXXXX</p>
-<p>yourname@university.edu.bd</p>
-```
-
-**Footer** (very bottom):
-```html
-<p>&copy; 2026 Your Name • Your University, City</p>
-```
-
----
-
-### Step 2 — Publications & Stats (`papers.js`)
-
-This is the only file you will edit regularly. It has two parts:
-
-#### Part A — Scholar Metrics
-
-```js
-const scholarStats = {
-    citations: 14,   // ← Your total citation count
-    hIndex: 2,       // ← Your h-index
-    i10Index: 0      // ← Your i10-index
-};
-```
-
-Get these numbers from your [Google Scholar profile](https://scholar.google.com). Update them manually whenever they change.
-
-#### Part B — Adding a Paper
-
-Each paper is one object inside the `myPapers` array. Paste the BibTeX directly — the website parses it automatically.
-
-**For a conference paper:**
-```js
-{
-    bibtex: `@INPROCEEDINGS{YourCiteKey,
-  author={Last, First and Last2, First2},
-  booktitle={2025 Conference Full Name (SHORT)},
-  title={Your Paper Title Here},
-  year={2025},
-  pages={1-6},
-  doi={10.XXXX/XXXXXXXX}}`
-}
-```
-
-**For a journal article:**
-```js
-{
-    bibtex: `@article{YourCiteKey,
-  title = {Your Paper Title Here},
-  journal = {Journal Full Name},
-  volume = {19},
-  pages = {100-110},
-  year = {2025},
-  doi = {10.XXXX/XXXXXXXX},
-  author = {First Last and First2 Last2}}`
-}
-```
-
-> **How the site separates journals from conferences:** It checks if the BibTeX starts with `@article` → goes to **Journal Articles** section. Anything else (`@INPROCEEDINGS`, `@inproceedings`) → goes to **Conference Proceedings**. Papers are automatically sorted by year, newest first.
-
-> **DOI:** If a paper has no DOI yet (e.g., accepted but not published), simply omit the `doi = {...}` line. The DOI button will show but link to `#` harmlessly.
-
----
-
-### Step 3 — Profile Photo & Images
-
-- Replace `images/formal.png` with your photo. Keep the filename the same, or update the `src` in `index.html`.
-- Replace `images/a.png` and `images/b.png` with screenshots from your Google Scholar profile (the "Cited by" interest graph and citation history chart). These appear below your bio.
-- Replace `images/favicon-16x16-sq.png` with your own favicon, or remove the `<link rel="icon">` line from `<head>`.
-
----
-
-### Step 4 — Photo Gallery (`images/gallery/`)
-
-The gallery auto-discovers images — you do not need to edit any code.
-
-**Rules:**
-- Name your photos sequentially: `1.jpg`, `2.jpg`, `3.jpg`, ...
-- Supported formats: `.jpg`, `.jpeg`, `.png`
-- Place them all inside `images/gallery/`
-- The gallery stops loading when it finds a missing number, so do not skip numbers
-
-**To add new photos:** Upload them as the next number in the sequence (e.g., if you have `1.jpg` to `5.jpg`, add `6.jpg`).
-
-**To remove a photo:** Remove it and rename the ones after it to fill the gap.
-
----
-
-### Step 5 — SEO Files
-
-**`robots.txt`** — Update the sitemap URL:
-```
-Sitemap: https://yourusername.github.io/sitemap.xml
-```
-
-**`sitemap.xml`** — Update all URLs from `saadbaust.github.io` to your own domain. Also update the `<lastmod>` date whenever you make major changes.
-
----
-
-## Deployment
-
-### GitHub Pages (Recommended)
-
-1. Create a repo named exactly `yourusername.github.io` (this is the special name GitHub recognizes).
-2. Push all files to the `main` branch.
-3. Go to repo **Settings → Pages → Source**, set branch to `main`, folder to `/ (root)`.
-4. Your site will be live at `https://yourusername.github.io` within a minute.
-
-### Vercel
-
-1. Import your GitHub repo into [vercel.com](https://vercel.com).
-2. No build settings needed — just deploy.
-3. Your site will be live at `https://yourusername.vercel.app`.
-
----
-
-## Features
-
-| Feature | How it works |
+| File | What it does |
 |---|---|
-| Auto paper sorting | BibTeX year field parsed, sorted newest first |
-| Journal/Conference split | Detected from `@article` vs `@inproceedings` BibTeX type |
-| BibTeX toggle | Click "BibTeX" under any paper to show/hide the raw entry |
-| Scholar metrics | Manually set in `papers.js` → displayed in animated counters |
-| Gallery | Sequential image discovery — just drop numbered files in the folder |
-| Dark mode | Automatic, based on OS/browser preference (`prefers-color-scheme`) |
-| Mobile responsive | Sidebar collapses to top nav, hero stacks vertically, gallery goes single column |
+| `index.html` | Main portfolio page (home) |
+| `gallery.html` | Photo gallery page |
+| `style.css` | All visual styling for both pages |
+| `data.js` | Your publications, experience, education, skills — edit this to update content |
+| `sitemap.xml` | Helps search engines find your pages |
+| `robots.txt` | Tells search engines what to crawl |
+| `images/` | Folder for your photos and stat images |
 
 ---
 
-## Routine Maintenance Checklist
+## Using This as Your Own Portfolio Template
 
-| When | What to update |
-|---|---|
-| New paper published | Add BibTeX to `myPapers` in `papers.js` |
-| Citation count changes | Update `scholarStats` in `papers.js` |
-| New gallery photo | Add next numbered image to `images/gallery/` |
-| Scholar graphs updated | Replace `images/a.png` and `images/b.png` with new screenshots |
+This template is designed so that **you only need to edit one file** to update almost everything on the site — `data.js`. Here's how to make it yours, step by step.
+
+### Step 1 — Get the files onto your computer
+
+Download or clone this repository to your computer. You'll see the files listed in the table above.
+
+### Step 2 — Replace the profile photo
+
+Go into the `images/` folder and replace `formal.png` with your own photo. Keep the filename the same, or remember to update it in `index.html` if you use a different name. A square or portrait photo works best.
+
+### Step 3 — Update your personal info in `index.html`
+
+Open `index.html` in any text editor (Notepad, VS Code, etc.) and find the following things to change:
+
+- **Your name** — appears in the `<h1>` tag and a few meta tags at the top
+- **Your job title and institution** — just below your name
+- **Your "About me" paragraph** — inside the `academic-summary` box
+- **Your CV link** — replace the Google Drive link with your own
+- **Your social media links** — GitHub, LinkedIn, Google Scholar, ResearchGate, YouTube
+- **Your contact details** — phone number and email address
+- **Your website URL** — search for `saadbaust.github.io` and replace with your own URL throughout the file
+
+### Step 4 — Update your content in `data.js`
+
+This is the main file to edit. Open it and update four things:
+
+**Google Scholar stats** — update your citation count, h-index, and i10-index. You can find these on your Google Scholar profile page.
+
+**Publications** — add or remove entries in the `myPapers` list. Each paper uses BibTeX format, which you can copy directly from Google Scholar or IEEE Xplore by clicking "Cite" on any paper. The site automatically separates journals and conferences for you.
+
+**Experience, education, skills, certifications** — all of these are in the `academicInfo` section. Just edit the text to match your own background. You can add or remove items by copying the pattern you see.
+
+### Step 5 — Add gallery photos (optional)
+
+Open `gallery.html` and find the `galleryImages` list near the bottom. Add your image file paths and descriptions there. Put your images in the `images/` folder first.
+
+### Step 6 — Update the SEO files
+
+Open `sitemap.xml` and `robots.txt` and replace `saadbaust.github.io` with your own website URL. Also update the `lastmod` date in the sitemap whenever you make changes.
+
+In `index.html` and `gallery.html`, search for `saadbaust.github.io` at the top of the file (in the meta tags) and replace those with your own URL too.
+
+### Step 7 — Publish it
+
+The easiest free way to host this is **GitHub Pages**:
+
+1. Create a free account at [github.com](https://github.com) if you don't have one
+2. Create a new repository named `yourusername.github.io`
+3. Upload all your files into it
+4. Go to the repository Settings → Pages → set source to the main branch
+5. Your site will be live at `https://yourusername.github.io` within a few minutes
 
 ---
 
-## License
+## Keeping It Updated
 
-Free to use and adapt for personal academic portfolios. Credit appreciated but not required.
+Whenever you publish a new paper, just open `data.js`, paste in the BibTeX, and push the changes. The site updates automatically. Same for adding a new job or updating your citation count — it all lives in `data.js`.
+
+---
+
+## Dark Mode
+
+The site automatically switches to a dark theme if the visitor's device is set to dark mode. No extra setup needed.
+
+---
+
+## Credits
+
+Built and designed by [Saad Ahmed](https://saadbaust.github.io/). Free to use as a personal academic portfolio template.

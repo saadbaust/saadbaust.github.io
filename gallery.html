@@ -3,22 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Photo Gallery | Saad Ahmed</title>
-    <meta
-      name="description"
-      content="Photo gallery and academic events for Saad Ahmed."
-    />
+
+    <title>Gallery | Saad Ahmed | BAUST</title>
+    <meta name="description" content="Photo gallery of Saad Ahmed, Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST)." />
+    <meta name="keywords" content="Saad Ahmed, Saad Ahmed BAUST, BAUST CSE, gallery" />
+    <meta name="author" content="Saad Ahmed" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://saadbaust.github.io/gallery.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="Gallery | Saad Ahmed | BAUST" />
+    <meta property="og:description" content="Photo gallery of Saad Ahmed, Lecturer at BAUST." />
+    <meta property="og:url"         content="https://saadbaust.github.io/gallery.html" />
+    <meta property="og:image"       content="https://saadbaust.github.io/images/formal.png" />
+    <meta property="og:image:alt"   content="Saad Ahmed profile photo" />
+    <meta property="og:site_name"   content="Saad Ahmed | BAUST" />
+    <meta property="og:locale"      content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary" />
+    <meta name="twitter:title"       content="Gallery | Saad Ahmed | BAUST" />
+    <meta name="twitter:description" content="Photo gallery of Saad Ahmed, Lecturer at BAUST." />
+    <meta name="twitter:image"       content="https://saadbaust.github.io/images/formal.png" />
 
     <link rel="icon" type="image/x-icon" href="" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <main class="main-block">
@@ -26,30 +38,37 @@
         <nav class="sticky-nav">
           <div class="nav-group">
             <small class="nav-label">Main</small>
-            <a href="index.html" class="active">Home</a>
-            <a href="gallery.html">Gallery</a>
+            <a href="index.html">Home</a>
+            <a href="gallery.html" class="active">Gallery</a>
           </div>
-
           <div class="nav-group">
-            <small class="nav-label">Sections</small>
-            <a href="#experience">Experience</a>
-            <a href="#journals">Publications</a>
-            <a href="#education">Education</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
+            <small class="nav-label">Home Sections</small>
+            <a href="index.html#experience">Experience</a>
+            <a href="index.html#journals">Publications</a>
+            <a href="index.html#education">Education</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="index.html#contact">Contact</a>
           </div>
         </nav>
       </aside>
 
       <div class="content">
-        <div class="gallery-header">
-          <h1>Photo Gallery</h1>
-          <p>Moments from conferences, research work, and academic life.</p>
-        </div>
+        <header class="hero" style="margin-bottom: 1rem;">
+          <div class="hero-info">
+            <h1>Gallery</h1>
+            <p class="subtitle">Saad Ahmed</p>
+            <p class="institution">Bangladesh Army University of Science and Technology (BAUST)</p>
+          </div>
+        </header>
 
-        <hr class="divider" style="margin: 2rem 0" />
+        <hr class="divider" />
 
-        <div id="photo-gallery" class="gallery-container"></div>
+        <section id="gallery">
+          <h2 class="section-title">Photos</h2>
+          <div class="gallery-container" id="gallery-grid">
+            <!-- Gallery items rendered here -->
+          </div>
+        </section>
 
         <footer>
           <p>&copy; 2026 Saad Ahmed • BAUST, Saidpur</p>
@@ -57,6 +76,38 @@
       </div>
     </main>
 
-    <script src="gallery.js"></script>
+    <button id="back-to-top" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+      // Add your gallery image paths here
+      const galleryImages = [
+        // { src: "images/gallery/photo1.jpg", alt: "Description" },
+        // { src: "images/gallery/photo2.jpg", alt: "Description" },
+      ];
+
+      function renderGallery() {
+        const grid = document.getElementById("gallery-grid");
+        if (galleryImages.length === 0) {
+          grid.innerHTML = '<p style="color:var(--gray); font-size:0.95rem;">Photos coming soon.</p>';
+          return;
+        }
+        galleryImages.forEach(img => {
+          grid.innerHTML += `
+            <div class="gallery-item">
+              <img src="${img.src}" alt="${img.alt}" loading="lazy" />
+            </div>`;
+        });
+      }
+
+      window.onload = renderGallery;
+
+      // Back to top
+      const backToTop = document.getElementById('back-to-top');
+      window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 300);
+      });
+    </script>
   </body>
 </html>
