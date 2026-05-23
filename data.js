@@ -65,8 +65,7 @@ const myPapers = [
     }
 ];
 
-// extra.js — Professional data. Edit this file to update content.
-
+// Professional data.
 const academicInfo = {
     experience: [
         {

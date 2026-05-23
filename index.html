@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Saad Ahmed | Lecturer & Researcher | BAUST</title>
-    <meta name="description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning." />
+    <meta name="description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher specializing in Image Processing, Computer Vision, and Deep Learning." />
     <meta name="keywords" content="Saad Ahmed, Saad Ahmed BAUST, Saad Ahmed researcher, BAUST CSE, Bangladesh Army University of Science and Technology, Lecturer CSE, Computer Vision, Deep Learning, Image Processing" />
     <meta name="author" content="Saad Ahmed" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -16,15 +16,15 @@
     <meta property="og:title"       content="Saad Ahmed | Lecturer & Researcher | BAUST" />
     <meta property="og:description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning." />
     <meta property="og:url"         content="https://saadbaust.github.io/" />
-    <meta property="og:image"       content="https://saadbaust.github.io/images/formal-main.png" />
-    <meta property="og:image:alt"   content="Saad Ahmed profile photo" />
+    <meta property="og:image"       content="https://saadbaust.github.io/images/saadahmed.png" />
+    <meta property="og:image:alt"   content="Saad Ahmed — Lecturer at BAUST, Researcher in Image Processing and Computer Vision" />
     <meta property="og:site_name"   content="Saad Ahmed | BAUST" />
     <meta property="og:locale"      content="en_US" />
 
-    <meta name="twitter:card"        content="summary" />
+    <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:title"       content="Saad Ahmed | Lecturer & Researcher | BAUST" />
     <meta name="twitter:description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning." />
-    <meta name="twitter:image"       content="https://saadbaust.github.io/images/formal-main.png" />
+    <meta name="twitter:image"       content="https://saadbaust.github.io/images/saadahmed.png" />
 
     <script type="application/ld+json">
       {
@@ -33,7 +33,7 @@
         "name": "Saad Ahmed",
         "url": "https://saadbaust.github.io/",
         "image": [
-          "https://saadbaust.github.io/images/formal.png"
+          "https://saadbaust.github.io/images/saadahmed.png"
         ],
         "jobTitle": "Lecturer",
         "email": "saadahmed@baust.edu.bd",
@@ -86,7 +86,7 @@
       <div class="content">
         <header id="about" class="hero">
           <div class="profile-card">
-            <img src="images/formal-main.png" alt="Saad Ahmed" class="profile-photo" />
+            <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" class="profile-photo" />
             <span class="profile-chip">Lecturer · BAUST</span>
           </div>
           <div class="hero-info">
@@ -148,11 +148,11 @@
         <div class="hero-images-container">
           <div class="stat-image-wrap">
             <p class="stat-image-caption"><i class="fas fa-chart-pie"></i> Research Interest Distribution</p>
-            <img src="images/a.png" alt="Research Interest Score" class="hero-promo-img" />
+            <img src="images/Research Interest Distribution.png" alt="Pie chart showing Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning" class="hero-promo-img" />
           </div>
           <div class="stat-image-wrap">
             <p class="stat-image-caption"><i class="fas fa-chart-line"></i> Citation History</p>
-            <img src="images/b.png" alt="Stats History" class="hero-promo-img" />
+            <img src="images/Citation History.png" alt="Bar chart showing Saad Ahmed's Google Scholar citation history over the years" class="hero-promo-img" />
           </div>
         </div>
 
@@ -245,9 +245,12 @@
           const venue       = p.bibtex.match(/(?:journal|booktitle)\s*=\s*\{([^}]+)\}/i)?.[1] || "Venue";
           const year        = p.bibtex.match(/year\s*=\s*\{(\d+)\}/i)?.[1]                 || "";
           const doi         = p.bibtex.match(/\bdoi\s*=\s*\{([^}]+)\}/i)?.[1]              || "";
+          
           const cleanAuthors = authors.split(" and ").map(a => {
             const trimmed = a.trim();
-            return trimmed.toLowerCase().includes("saad ahmed")
+            const lowerA = trimmed.toLowerCase();
+            // Robust match handling for "Saad Ahmed" and "Ahmed, Saad" profiles
+            return (lowerA.includes("saad ahmed") || lowerA.includes("ahmed, saad"))
               ? `<strong class="author-self">${trimmed}</strong>`
               : trimmed;
           }).join(", ");
@@ -333,7 +336,6 @@
 
       window.onload = renderContent;
 
-      // Scroll-spy: highlight active sidebar section
       const sectionIds = ['about', 'experience', 'journals', 'conferences', 'education', 'skills', 'certs', 'contact'];
       const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
 
@@ -355,7 +357,6 @@
         if (el) observer.observe(el);
       });
 
-      // Back to top: show/hide on scroll
       const backToTop = document.getElementById('back-to-top');
       window.addEventListener('scroll', () => {
         backToTop.classList.toggle('visible', window.scrollY > 300);
