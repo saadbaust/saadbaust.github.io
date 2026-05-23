@@ -25,6 +25,13 @@ html {
 }
 
 body {
+  /* ── Font options (swap the active line to change typeface) ──────────────
+     font-family: "Inter",         sans-serif;   ← current
+     font-family: "Roboto",        sans-serif;   ← clean & neutral
+     font-family: "Poppins",       sans-serif;   ← rounded, modern
+     font-family: "Source Sans 3", sans-serif;   ← academic / readable
+     font-family: "Lato",          sans-serif;   ← friendly & open
+  ──────────────────────────────────────────────────────────────────────── */
   font-family: "Inter", sans-serif;
   background-color: var(--bg-page);
   color: var(--text);
@@ -777,9 +784,13 @@ footer {
 }
 
 .masonry-item::after {
-  content: '\f00e';
-  font-family: 'Font Awesome 6 Free';
+  content: "\f00e";               /* fa-search-plus glyph */
+  font-family: "Font Awesome 6 Free";
   font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
   position: absolute;
   inset: 0;
   background: rgba(37, 99, 235, 0.55);
@@ -789,6 +800,7 @@ footer {
   align-items: center;
   justify-content: center;
   opacity: 0;
+  pointer-events: none;           /* let clicks pass through to the item */
   transition: opacity 0.25s ease;
 }
 
