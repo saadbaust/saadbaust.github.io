@@ -25,15 +25,17 @@
     <meta name="twitter:description" content="Photo gallery of academic events and memories of Saad Ahmed, Lecturer at BAUST." />
     <meta name="twitter:image"       content="https://saadbaust.github.io/images/saadahmed.png" />
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%232563eb'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,sans-serif' font-weight='700' font-size='26' fill='white'>SA</text></svg>" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231d4ed8'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Inter,sans-serif' font-weight='700' font-size='26' fill='white'>SA</text></svg>" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <main class="main-block">
+
+      <!-- ── Sidebar ─────────────────────────────────────────────────────── -->
       <aside class="sidebar">
-        <nav class="sticky-nav">
+        <nav>
           <div class="nav-group">
             <small class="nav-label">Main</small>
             <a href="index.html">Home</a>
@@ -50,9 +52,11 @@
         </nav>
       </aside>
 
+      <!-- ── Content ────────────────────────────────────────────────────── -->
       <div class="content">
-        <header class="hero" style="margin-bottom: 1rem;">
-          <div class="hero-info">
+
+        <header class="hero">
+          <div class="hero-info reveal">
             <h1>Gallery</h1>
             <p class="subtitle">Saad Ahmed</p>
             <p class="institution">Bangladesh Army University of Science and Technology (BAUST)</p>
@@ -61,120 +65,136 @@
 
         <hr class="divider" />
 
-        <div class="masonry-grid">
+        <!-- Masonry grid (items staggered by JS) -->
+        <div class="masonry-grid" id="gallery-grid">
           <div class="masonry-item">
-            <img src="images/events/basut-raising-day.webp" alt="Saad Ahmed at BAUST Raising Day ceremony" loading="lazy" />
+            <img src="images/events/basut-raising-day.webp"   alt="Saad Ahmed at BAUST Raising Day ceremony" loading="lazy" />
           </div>
           <div class="masonry-item">
-            <img src="images/events/pitha-uthsob-12.webp" alt="Saad Ahmed participating in Pitha Utsob, a traditional rice-cake festival event at BAUST" loading="lazy" />
+            <img src="images/events/pitha-uthsob-12.webp"    alt="Saad Ahmed participating in Pitha Utsob, a traditional rice-cake festival at BAUST" loading="lazy" />
           </div>
           <div class="masonry-item">
             <img src="images/events/uiu-coding-contest.webp" alt="Saad Ahmed at UIU inter-university coding contest" loading="lazy" />
           </div>
           <div class="masonry-item">
-            <img src="images/events/uiu-robotics.webp" alt="Saad Ahmed attending UIU robotics competition event" loading="lazy" />
+            <img src="images/events/uiu-robotics.webp"       alt="Saad Ahmed attending UIU robotics competition" loading="lazy" />
           </div>
           <div class="masonry-item">
-            <img src="images/memories/advising-batch-15.webp" alt="Saad Ahmed advising Batch 15 students at BAUST CSE department" loading="lazy" />
+            <img src="images/memories/advising-batch-15.webp" alt="Saad Ahmed advising Batch 15 students at BAUST CSE" loading="lazy" />
           </div>
           <div class="masonry-item">
-            <img src="images/memories/batch-19.webp" alt="Saad Ahmed with Batch 19 students at BAUST CSE department" loading="lazy" />
+            <img src="images/memories/batch-19.webp"         alt="Saad Ahmed with Batch 19 students at BAUST CSE" loading="lazy" />
           </div>
           <div class="masonry-item">
-            <img src="images/memories/baust-day.webp" alt="Saad Ahmed at BAUST Day celebration event" loading="lazy" />
+            <img src="images/memories/baust-day.webp"        alt="Saad Ahmed at BAUST Day celebration" loading="lazy" />
           </div>
           <div class="masonry-item">
-            <img src="images/memories/baust-night.webp" alt="Saad Ahmed at a BAUST campus night event" loading="lazy" />
+            <img src="images/memories/baust-night.webp"      alt="Saad Ahmed at a BAUST campus night event" loading="lazy" />
           </div>
           <div class="masonry-item">
-            <img src="images/memories/brother.webp" alt="Saad Ahmed with colleagues at BAUST" loading="lazy" />
+            <img src="images/memories/brother.webp"          alt="Saad Ahmed with colleagues at BAUST" loading="lazy" />
           </div>
           <div class="masonry-item">
-            <img src="images/memories/ragday-13-14.webp" alt="Saad Ahmed at Rag Day celebration with Batch 13 and 14 of BAUST CSE" loading="lazy" />
+            <img src="images/memories/ragday-13-14.webp"     alt="Saad Ahmed at Rag Day with Batch 13 and 14 of BAUST CSE" loading="lazy" />
           </div>
           <div class="masonry-item">
-            <img src="images/memories/sajek.webp" alt="Saad Ahmed at Sajek Valley during a faculty or student trip" loading="lazy" />
+            <img src="images/memories/sajek.webp"            alt="Saad Ahmed at Sajek Valley during a faculty trip" loading="lazy" />
           </div>
         </div>
 
         <footer>
-          <p>&copy; 2026 Saad Ahmed • BAUST, Saidpur</p>
+          <p>&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
         </footer>
       </div>
     </main>
 
-    <div class="lightbox" id="lightbox">
-      <button class="lightbox-close" id="lb-close" aria-label="Close Image Viewer"><i class="fas fa-times"></i></button>
-      <button class="lightbox-btn lightbox-prev" id="lb-prev" aria-label="Previous Image"><i class="fas fa-chevron-left"></i></button>
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="lightbox-close" id="lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
+      <button class="lightbox-btn lightbox-prev" id="lb-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
       <img class="lightbox-img" id="lb-img" src="" alt="Expanded gallery photo" />
       <span class="lightbox-counter" id="lb-counter"></span>
-      <button class="lightbox-btn lightbox-next" id="lb-next" aria-label="Next Image"><i class="fas fa-chevron-right"></i></button>
+      <button class="lightbox-btn lightbox-next" id="lb-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
     </div>
 
-    <button id="back-to-top" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <button id="back-to-top" aria-label="Scroll back to top">
       <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
-      const lightbox   = document.getElementById("lightbox");
-      const lbImg      = document.getElementById("lb-img");
-      const lbCounter  = document.getElementById("lb-counter");
-      const lbClose    = document.getElementById("lb-close");
-      const lbPrev     = document.getElementById("lb-prev");
-      const lbNext     = document.getElementById("lb-next");
+    /* ── Lightbox ─────────────────────────────────────────────────────────── */
+    const lightbox  = document.getElementById('lightbox');
+    const lbImg     = document.getElementById('lb-img');
+    const lbCounter = document.getElementById('lb-counter');
 
-      const items = document.querySelectorAll(".masonry-item");
-      const loadedSrcs = Array.from(items).map(item => item.querySelector("img").src);
-      let currentIdx = 0;
+    const items     = document.querySelectorAll('.masonry-item');
+    const srcs      = Array.from(items).map(item => ({
+      src: item.querySelector('img').src,
+      alt: item.querySelector('img').alt
+    }));
+    let current = 0;
 
-      items.forEach((item, index) => {
-        item.addEventListener("click", () => {
-          currentIdx = index;
-          updateLightbox();
-          lightbox.classList.add("open");
-          document.body.style.overflow = "hidden";
-        });
+    function updateLightbox() {
+      lbImg.src         = srcs[current].src;
+      lbImg.alt         = srcs[current].alt;
+      lbCounter.textContent = `${current + 1} / ${srcs.length}`;
+    }
+
+    function openLightbox(idx) {
+      current = idx;
+      updateLightbox();
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function prevPhoto() { current = (current - 1 + srcs.length) % srcs.length; updateLightbox(); }
+    function nextPhoto() { current = (current + 1)               % srcs.length; updateLightbox(); }
+
+    items.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+
+    document.getElementById('lb-close').addEventListener('click', closeLightbox);
+    document.getElementById('lb-prev').addEventListener('click', prevPhoto);
+    document.getElementById('lb-next').addEventListener('click', nextPhoto);
+
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'ArrowLeft')  prevPhoto();
+      if (e.key === 'ArrowRight') nextPhoto();
+      if (e.key === 'Escape')     closeLightbox();
+    });
+
+    /* ── Scroll Reveal for gallery items ─────────────────────────────────── */
+    const revealIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealIO.unobserve(entry.target);
+        }
       });
+    }, { threshold: 0.08 });
 
-      function closeLightbox() {
-        lightbox.classList.remove("open");
-        document.body.style.overflow = "";
-      }
+    document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 
-      function updateLightbox() {
-        lbImg.src = loadedSrcs[currentIdx];
-        lbCounter.textContent = `${currentIdx + 1} / ${loadedSrcs.length}`;
-      }
+    /* Staggered entrance for masonry items */
+    items.forEach((item, i) => {
+      item.classList.add('reveal');
+      item.style.transitionDelay = `${Math.min(i * 50, 400)}ms`;
+      revealIO.observe(item);
+    });
 
-      function prevPhoto() {
-        currentIdx = (currentIdx - 1 + loadedSrcs.length) % loadedSrcs.length;
-        updateLightbox();
-      }
-
-      function nextPhoto() {
-        currentIdx = (currentIdx + 1) % loadedSrcs.length;
-        updateLightbox();
-      }
-
-      lbClose.addEventListener("click", closeLightbox);
-      lbPrev.addEventListener("click", prevPhoto);
-      lbNext.addEventListener("click", nextPhoto);
-
-      lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-
-      document.addEventListener("keydown", (e) => {
-        if (!lightbox.classList.contains("open")) return;
-        if (e.key === "ArrowLeft")  prevPhoto();
-        if (e.key === "ArrowRight") nextPhoto();
-        if (e.key === "Escape")     closeLightbox();
-      });
-
-      const backToTop = document.getElementById("back-to-top");
-      window.addEventListener("scroll", () => {
-        backToTop.classList.toggle("visible", window.scrollY > 300);
-      });
+    /* ── Back-to-top ──────────────────────────────────────────────────────── */
+    const btn = document.getElementById('back-to-top');
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => {
+      btn.classList.toggle('visible', window.scrollY > 300);
+    }, { passive: true });
     </script>
   </body>
 </html>
