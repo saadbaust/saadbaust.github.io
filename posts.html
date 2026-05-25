@@ -31,7 +31,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
     <style>
-      /* ── Posts page ── */
       .posts-intro {
         display: flex;
         align-items: center;
@@ -49,7 +48,6 @@
       .posts-intro a { color: var(--accent); text-decoration: none; font-weight: 600; }
       .posts-intro a:hover { text-decoration: underline; }
 
-      /* Grid of embedded posts */
       .posts-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
@@ -71,55 +69,31 @@
         transform: translateY(-3px);
       }
 
-      /* ── KEY FIX: override LinkedIn's inline width/height attributes ── */
       .post-card iframe,
-      .post-card iframe[width],
-      .post-card iframe[height] {
+      .post-card iframe[width] {
         display: block !important;
         width: 100% !important;
         min-width: 0 !important;
-        height: 600px !important;
         border: none !important;
-      }
-
-      /* ── Empty state ── */
-      .posts-empty {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 4rem 2rem;
-        color: var(--gray);
-      }
-      .posts-empty i { font-size: 2.8rem; color: var(--border); display: block; margin-bottom: 1rem; }
-      .posts-empty p { font-size: 0.92rem; line-height: 1.7; max-width: 420px; margin: 0 auto; }
-      .posts-empty code {
-        background: var(--light-bg);
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        padding: 2px 7px;
-        font-size: 0.82rem;
-        color: var(--accent);
-        font-family: monospace;
       }
 
       @media (max-width: 800px) { .posts-grid { grid-template-columns: 1fr; } }
 
       @media (prefers-color-scheme: dark) {
         .posts-intro { background: rgba(96, 165, 250, 0.06); }
-        .posts-empty code { background: #0b1120; }
       }
     </style>
   </head>
   <body>
     <main class="main-block">
 
-      <!-- Sidebar -->
       <aside class="sidebar">
         <nav>
           <div class="nav-group">
             <small class="nav-label">Main</small>
             <a href="index.html">Home</a>
-            <a href="posts.html" class="active">Posts</a>
             <a href="gallery.html">Gallery</a>
+            <a href="posts.html" class="active">Posts</a>
           </div>
           <div class="nav-group">
             <small class="nav-label">Home Sections</small>
@@ -132,7 +106,6 @@
         </nav>
       </aside>
 
-      <!-- Main content -->
       <div class="content">
 
         <header class="hero">
@@ -145,30 +118,31 @@
 
         <hr class="divider" />
 
-        <!-- How-to hint -->
         <div class="posts-intro">
           <i class="fab fa-linkedin"></i>
           <span>
             Embedded directly from
             <a href="https://www.linkedin.com/in/" target="_blank" rel="noopener">LinkedIn</a>.
             To add a new post: open the post → click <strong>···</strong> → <strong>Embed this post</strong> → paste the
-            <code>&lt;iframe&gt;</code> inside a new <code>&lt;div class="post-card"&gt;</code> below.
+            <code>&lt;iframe&gt;</code> inside a new <code>&lt;div class="post-card"&gt;</code>.
           </span>
         </div>
 
-        <!-- ═══════════════════════════════════════════════════════════
-             PASTE YOUR LINKEDIN EMBED IFRAMES INSIDE THIS GRID.
-             Each post goes in its own <div class="post-card">.
-             ═══════════════════════════════════════════════════════════ -->
         <div class="posts-grid" id="posts-grid">
 
           <div class="post-card">
             <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7380925445178847232?collapsed=1" height="622" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
           </div>
 
-          <!-- Add more post-cards here -->
+          <div class="post-card">
+            <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7367565192794116098?collapsed=1" height="628" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+          </div>
 
-        </div><!-- /posts-grid -->
+          <div class="post-card">
+            <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7286424813743525889?collapsed=1" height="628" width="504" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
+          </div>
+
+        </div>
 
         <footer>
           <p>&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
@@ -181,7 +155,6 @@
     </button>
 
     <script>
-      /* Back-to-top */
       const btn = document.getElementById('back-to-top');
       btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
       window.addEventListener('scroll', () => {
