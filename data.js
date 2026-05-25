@@ -88,18 +88,6 @@ const academicInfo = {
             inst: "BAUST",
             year: "July 2020 – July 2024",
             result: "CGPA: 3.96 / 4.00"
-        },
-        {
-            degree: "Higher Secondary Certificate (HSC)",
-            inst: "Bangladesh Agricultural University College",
-            year: "2019",
-            result: "GPA: 4.25 (Science, Dhaka Board)"
-        },
-        {
-            degree: "Secondary Secondary Certificate (SSC)",
-            inst: "Bangladesh Agricultural University High School",
-            year: "2016",
-            result: "GPA: 5.00 (Science, Dhaka Board)"
         }
     ],
 
