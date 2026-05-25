@@ -1,4 +1,3 @@
-/* ─── Design Tokens ──────────────────────────────────────────────────────── */
 :root {
   --bg-page:    #eef2f7;
   --bg-block:   #ffffff;
@@ -9,29 +8,28 @@
   --border:     #dde4ee;
   --light-bg:   #f6f8fc;
 
-  /* Shadows */
+
   --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md:  0 4px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
   --shadow-lg:  0 12px 36px rgba(0,0,0,0.09), 0 2px 8px rgba(0,0,0,0.04);
 
-  /* Easing */
+
   --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring:cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Duration */
+
   --t-fast: 180ms;
   --t-base: 300ms;
   --t-slow: 500ms;
 }
 
-/* ─── Reset ──────────────────────────────────────────────────────────────── */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 
 body {
   font-family: "Inter", sans-serif;
@@ -46,7 +44,6 @@ body {
 
 section { scroll-margin-top: 40px; }
 
-/* ─── Layout Shell ───────────────────────────────────────────────────────── */
 .main-block {
   background: var(--bg-block);
   width: 100%;
@@ -55,15 +52,8 @@ section { scroll-margin-top: 40px; }
   border-radius: 20px;
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  animation: blockEntrance var(--t-slow) var(--ease-spring) both;
 }
 
-@keyframes blockEntrance {
-  from { opacity: 0; transform: translateY(20px) scale(0.99); }
-  to   { opacity: 1; transform: translateY(0)    scale(1);    }
-}
-
-/* ─── Sidebar ────────────────────────────────────────────────────────────── */
 .sidebar {
   position: sticky;
   top: 0;
@@ -124,7 +114,6 @@ section { scroll-margin-top: 40px; }
   box-shadow: 0 2px 8px rgba(29, 78, 216, 0.25);
 }
 
-/* ─── Content Area ───────────────────────────────────────────────────────── */
 .content { flex: 1; padding: 60px 70px; min-width: 0; }
 
 .divider {
@@ -142,7 +131,6 @@ section { scroll-margin-top: 40px; }
   font-weight: 700;
 }
 
-/* ─── Hero ───────────────────────────────────────────────────────────────── */
 .hero {
   display: flex;
   align-items: flex-start;
@@ -210,7 +198,6 @@ h1 {
   margin-bottom: 0.2rem;
 }
 
-/* ─── Bio Box ────────────────────────────────────────────────────────────── */
 .academic-summary {
   margin: 1.5rem 0 2rem;
   padding: 1.2rem 1.5rem;
@@ -236,7 +223,6 @@ h1 {
   font-weight: 400;
 }
 
-/* ─── Research Interests Tag ─────────────────────────────────────────────── */
 .research-interests {
   margin-top: 1.2rem;
   padding: 8px 12px;
@@ -247,7 +233,6 @@ h1 {
   color: var(--gray);
 }
 
-/* ─── Hero Actions ───────────────────────────────────────────────────────── */
 .hero-actions {
   display: flex;
   align-items: center;
@@ -269,20 +254,15 @@ h1 {
   font-size: 0.88rem;
   flex-shrink: 0;
   transition: background var(--t-fast) ease,
-              box-shadow  var(--t-fast) ease,
-              transform   var(--t-fast) ease;
+              box-shadow  var(--t-fast) ease;
   box-shadow: 0 2px 8px rgba(29, 78, 216, 0.25);
 }
 
 .resume-btn:hover {
   background: #1a46c0;
   box-shadow: 0 4px 14px rgba(29, 78, 216, 0.35);
-  transform: translateY(-1px);
 }
 
-.resume-btn:active { transform: translateY(0); }
-
-/* ─── Social Icons ───────────────────────────────────────────────────────── */
 .social-icons {
   display: flex;
   gap: 18px;
@@ -303,7 +283,6 @@ h1 {
 .social-icons a.researchgate:hover { color: #00ccbb; }
 .social-icons a.youtube:hover  { color: #ff0000; }
 
-/* ─── Metric Cards ───────────────────────────────────────────────────────── */
 .metrics-grid {
   display: flex;
   gap: 0.6rem;
@@ -343,7 +322,6 @@ h1 {
   font-weight: 600;
 }
 
-/* ─── Stat Images Row ────────────────────────────────────────────────────── */
 .hero-images-container {
   display: flex;
   justify-content: space-between;
@@ -383,81 +361,71 @@ h1 {
 
 .stat-image-caption i { color: var(--accent); font-size: 0.78rem; }
 
-/* ─── Paper Cards ────────────────────────────────────────────────────────── */
-.paper-card {
-  margin-bottom: 1.3rem;
-  border: 1px solid var(--border);
-  border-left: 4px solid transparent;
-  border-radius: 10px;
-  padding: 1.2rem 1.5rem;
-  background: var(--bg-block);
-  transition: box-shadow var(--t-base) var(--ease-out),
-              transform   var(--t-base) var(--ease-out),
-              border-left-color var(--t-fast) ease;
+.paper-item {
+  display: flex;
+  gap: 0.8rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.paper-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+.paper-item:last-child { border-bottom: none; }
+
+.paper-number-col {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  min-width: 2.4rem;
+  padding-top: 2px;
 }
 
-.journal-card    { border-left-color: var(--accent); }
-.conference-card { border-left-color: #4f88f0; }
+.paper-number {
+  color: var(--gray);
+  font-size: 0.80rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.paper-year {
+  color: var(--gray);
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.paper-body { flex: 1; min-width: 0; }
 
 .author-self { color: var(--accent); font-weight: 700; }
 
-.paper-meta-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
-
-/* ─── Badges ─────────────────────────────────────────────────────────────── */
-.badge {
-  font-size: 0.65rem;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.badge-journal { background: #dcfce7; color: #14532d; }
-.badge-conf    { background: #dbeafe; color: #1e3a8a; }
-
-.paper-year {
-  font-size: 0.8rem;
-  color: var(--gray);
-  font-weight: 500;
-}
-
 .paper-title {
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   font-weight: 600;
   line-height: 1.45;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   color: var(--text);
 }
 
 .authors {
-  font-size: 0.83rem;
+  font-size: 0.82rem;
   color: var(--gray);
-  margin-bottom: 2px;
-  line-height: 1.5;
+  margin-bottom: 3px;
+  line-height: 1.45;
 }
 
-.venue {
-  font-size: 0.8rem;
+.paper-venue-line {
+  font-size: 0.80rem;
   color: var(--gray);
   font-style: italic;
-  margin-top: 3px;
+  margin-top: 2px;
+  margin-bottom: 0.6rem;
 }
 
 .paper-actions {
-  margin-top: 0.85rem;
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -476,10 +444,10 @@ h1 {
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  transition: opacity var(--t-fast) ease, transform var(--t-fast) ease;
+  transition: opacity var(--t-fast) ease;
 }
 
-.btn-doi:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-doi:hover { opacity: 0.85; }
 
 .btn-cite {
   font-size: 0.76rem;
@@ -494,15 +462,13 @@ h1 {
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  transition: color       var(--t-fast) ease,
-              border-color var(--t-fast) ease,
-              background   var(--t-fast) ease;
+  transition: color var(--t-fast) ease,
+              border-color var(--t-fast) ease;
 }
 
 .btn-cite:hover {
   color: var(--accent);
   border-color: var(--accent);
-  background: rgba(29, 78, 216, 0.04);
 }
 
 .bibtex-box {
@@ -520,7 +486,6 @@ h1 {
   color: var(--gray);
 }
 
-/* ─── Timeline ───────────────────────────────────────────────────────────── */
 .timeline-container {
   position: relative;
   padding-left: 30px;
@@ -601,7 +566,6 @@ h1 {
 
 .result-text { color: var(--accent); font-weight: 600; font-size: 0.9rem; }
 
-/* ─── Skills ─────────────────────────────────────────────────────────────── */
 .skills-group-label {
   font-size: 0.70rem;
   font-weight: 700;
@@ -631,15 +595,13 @@ h1 {
   color: var(--accent);
   transition: background var(--t-fast) ease,
               color       var(--t-fast) ease,
-              border-color var(--t-fast) ease,
-              transform    var(--t-fast) var(--ease-spring);
+              border-color var(--t-fast) ease;
 }
 
 .skill-tag:hover {
   background: var(--accent);
   color: white;
   border-color: var(--accent);
-  transform: translateY(-1px);
 }
 
 .skill-tag-dev { color: var(--gray); }
@@ -650,7 +612,6 @@ h1 {
   border-color: var(--gray);
 }
 
-/* ─── Certifications ─────────────────────────────────────────────────────── */
 .cert-item {
   margin-bottom: 11px;
   font-size: 0.93rem;
@@ -663,7 +624,6 @@ h1 {
 
 .cert-item i { color: var(--accent); font-size: 0.78rem; margin-top: 4px; flex-shrink: 0; }
 
-/* ─── Contact ────────────────────────────────────────────────────────────── */
 .contact-details { font-size: 0.93rem; line-height: 2.1; }
 
 .contact-details i { color: var(--accent); margin-right: 10px; width: 20px; }
@@ -671,7 +631,6 @@ h1 {
 .email-link { color: inherit; text-decoration: none; }
 .email-link:hover { color: var(--accent); text-decoration: underline; }
 
-/* ─── Footer ─────────────────────────────────────────────────────────────── */
 footer {
   margin-top: 5rem;
   color: #9dafc8;
@@ -680,7 +639,6 @@ footer {
   letter-spacing: 0.02em;
 }
 
-/* ─── Back-to-top Button ─────────────────────────────────────────────────── */
 #back-to-top {
   position: fixed;
   bottom: 2rem;
@@ -714,7 +672,6 @@ footer {
 
 #back-to-top:hover { background: #1a46c0; }
 
-/* ─── Scroll Reveal ──────────────────────────────────────────────────────── */
 .reveal {
   opacity: 0;
   transform: translateY(14px);
@@ -734,7 +691,6 @@ footer {
 .reveal[data-d="5"] { transition-delay: 300ms; }
 .reveal[data-d="6"] { transition-delay: 360ms; }
 
-/* ─── Gallery ────────────────────────────────────────────────────────────── */
 .gallery-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -758,7 +714,6 @@ footer {
 
 .gallery-item img { width: 100%; height: auto; display: block; object-fit: contain; }
 
-/* ─── Masonry Gallery ────────────────────────────────────────────────────── */
 .masonry-grid { columns: 3; column-gap: 16px; }
 
 .masonry-item {
@@ -800,7 +755,6 @@ footer {
 
 .masonry-item:hover::after { opacity: 1; }
 
-/* ─── Lightbox ───────────────────────────────────────────────────────────── */
 .lightbox {
   display: none;
   position: fixed;
@@ -876,7 +830,6 @@ footer {
 
 .lightbox-close:hover { background: rgba(255, 255, 255, 0.22); }
 
-/* ─── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 800px) {
   body { padding: 15px 10px; }
 
@@ -938,7 +891,6 @@ footer {
   .masonry-grid { columns: 1; }
 }
 
-/* ─── Reduced Motion ─────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .main-block { animation: none; }
 
@@ -956,7 +908,6 @@ footer {
   }
 }
 
-/* ─── Dark Mode ──────────────────────────────────────────────────────────── */
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-page:    #0b1120;
@@ -987,7 +938,6 @@ footer {
   .btn-doi        { background: #1d4ed8; }
   .metric-item    { background: #152035; border-color: #1f2d42; }
 
-  .paper-card:hover   { box-shadow: 0 4px 20px rgba(96, 165, 250, 0.12); }
   .academic-summary:hover { background: #1a2740; }
   .profile-photo  { border-color: #1f2d42; }
   .timeline-date  { background: rgba(96, 165, 250, 0.10); }

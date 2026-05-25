@@ -64,7 +64,7 @@
   <body>
     <main class="main-block">
 
-      <!-- ── Sidebar ─────────────────────────────────────────────────────── -->
+      
       <aside class="sidebar">
         <nav>
           <div class="nav-group">
@@ -83,10 +83,10 @@
         </nav>
       </aside>
 
-      <!-- ── Main Content ────────────────────────────────────────────────── -->
+      
       <div class="content">
 
-        <!-- Hero -->
+        
         <header id="about" class="hero">
           <div class="profile-card reveal" data-d="1">
             <img
@@ -159,7 +159,7 @@
 
         <hr class="divider" />
 
-        <!-- Stat Images -->
+        
         <div class="hero-images-container reveal">
           <div class="stat-image-wrap">
             <p class="stat-image-caption"><i class="fas fa-chart-pie"></i> Research Interest Distribution</p>
@@ -181,13 +181,13 @@
           </div>
         </div>
 
-        <!-- Experience -->
+        
         <section id="experience">
           <h2 class="section-title">Experience</h2>
           <div id="experience-list"></div>
         </section>
 
-        <!-- Publications -->
+        
         <section id="journals">
           <h2 class="section-title">Journal Articles</h2>
           <div id="journal-list"></div>
@@ -198,13 +198,13 @@
           <div id="conference-list"></div>
         </section>
 
-        <!-- Education -->
+        
         <section id="education">
           <h2 class="section-title">Education</h2>
           <div id="education-list"></div>
         </section>
 
-        <!-- Skills -->
+        
         <section id="skills">
           <h2 class="section-title">Technical Skills</h2>
           <p class="skills-group-label">Research &amp; AI</p>
@@ -213,7 +213,7 @@
           <div id="skills-dev"></div>
         </section>
 
-        <!-- Certifications -->
+        
         <section id="certs">
           <h2 class="section-title">Certifications &amp; Activities</h2>
           <div id="cert-list"></div>
@@ -221,7 +221,7 @@
 
         <hr class="divider" />
 
-        <!-- Contact -->
+        
         <section id="contact">
           <h2 class="section-title">Contact Information</h2>
           <div class="contact-details">
@@ -246,16 +246,16 @@
 
     <script src="data.js"></script>
     <script>
-    /* ── Helpers ──────────────────────────────────────────────────────────── */
+    
 
-    /** Toggle BibTeX display */
+    
     function toggleBib(id) {
       const el = document.getElementById(id);
       el.style.display = el.style.display === 'block' ? 'none' : 'block';
     }
 
-    /** Animated counter using rAF */
-    function animateCounter(el, target, duration = 900) {
+    
+    function animateCounter(el, target, duration = 2000) {
       if (target === 0) { el.textContent = '0'; return; }
       const start     = performance.now();
       const easeOut   = t => 1 - Math.pow(1 - t, 3);
@@ -267,13 +267,13 @@
       requestAnimationFrame(step);
     }
 
-    /** Parse one BibTeX field value */
+    
     function parseBibField(bibtex, fieldName) {
       const re = new RegExp(`\\b${fieldName}\\s*=\\s*\\{([^}]+)\\}`, 'i');
       return (bibtex.match(re)?.[1] || '').trim();
     }
 
-    /** Highlight "Saad Ahmed" / "Ahmed, Saad" in author string */
+    
     function formatAuthors(raw) {
       return raw.split(' and ').map(a => {
         const t = a.trim();
@@ -284,14 +284,13 @@
       }).join(', ');
     }
 
-    /** Build one paper card HTML */
+    
     function buildPaperCard(p, idx) {
-      const isJournal = /^\s*@article/i.test(p.bibtex);
-      const title     = parseBibField(p.bibtex, 'title')  || 'Untitled';
-      const authors   = parseBibField(p.bibtex, 'author') || 'Unknown Authors';
-      const venue     = (p.bibtex.match(/(?:journal|booktitle)\s*=\s*\{([^}]+)\}/i)?.[1] || '').trim();
-      const year      = parseBibField(p.bibtex, 'year');
-      const doi       = parseBibField(p.bibtex, 'doi');
+      const title   = parseBibField(p.bibtex, 'title')  || 'Untitled';
+      const authors = parseBibField(p.bibtex, 'author') || 'Unknown Authors';
+      const venue   = (p.bibtex.match(/(?:journal|booktitle)\s*=\s*\{([^}]+)\}/i)?.[1] || '').trim();
+      const year    = parseBibField(p.bibtex, 'year');
+      const doi     = parseBibField(p.bibtex, 'doi');
 
       const doiBtn = doi
         ? `<a href="https://doi.org/${doi}" class="btn-doi" target="_blank" rel="noopener noreferrer">
@@ -300,29 +299,29 @@
         : '';
 
       return `
-        <div class="paper-card ${isJournal ? 'journal-card' : 'conference-card'} reveal">
-          <div class="paper-meta-top">
-            <span class="badge ${isJournal ? 'badge-journal' : 'badge-conf'}">
-              ${isJournal ? 'Journal' : 'Conference'}
-            </span>
+        <div class="paper-item reveal">
+          <div class="paper-number-col">
+            <span class="paper-number">[${idx + 1}]</span>
             <span class="paper-year">${year}</span>
           </div>
-          <h3 class="paper-title">${title}</h3>
-          <p class="authors">${formatAuthors(authors)}</p>
-          <p class="venue">${venue}</p>
-          <div class="paper-actions">
-            ${doiBtn}
-            <button class="btn-cite" onclick="toggleBib('bib-${idx}')">
-              <i class="fas fa-quote-right"></i> BibTeX
-            </button>
+          <div class="paper-body">
+            <p class="paper-title">${title}</p>
+            <p class="authors">${formatAuthors(authors)}</p>
+            <p class="paper-venue-line">${venue}</p>
+            <div class="paper-actions">
+              ${doiBtn}
+              <button class="btn-cite" onclick="toggleBib('bib-${idx}')">
+                <i class="fas fa-quote-right"></i> BibTeX
+              </button>
+            </div>
+            <pre id="bib-${idx}" class="bibtex-box">${p.bibtex.trim()}</pre>
           </div>
-          <pre id="bib-${idx}" class="bibtex-box">${p.bibtex.trim()}</pre>
         </div>`;
     }
 
-    /* ── Render ───────────────────────────────────────────────────────────── */
+    
     function renderContent() {
-      /* Metrics */
+      
       const papersEl    = document.getElementById('total-papers');
       const citeEl      = document.getElementById('total-citations');
       const hEl         = document.getElementById('h-index');
@@ -335,7 +334,7 @@
         i10El.textContent  = scholarStats.i10Index;
       }
 
-      /* Papers — sorted newest first */
+      
       const jList = document.getElementById('journal-list');
       const cList = document.getElementById('conference-list');
 
@@ -345,13 +344,15 @@
         return yb - ya;
       });
 
-      sorted.forEach((p, i) => {
-        const card      = buildPaperCard(p, i);
+      let jIdx = 0, cIdx = 0;
+      sorted.forEach(p => {
         const isJournal = /^\s*@article/i.test(p.bibtex);
+        const card = buildPaperCard(p, isJournal ? jIdx : cIdx);
         (isJournal ? jList : cList).insertAdjacentHTML('beforeend', card);
+        if (isJournal) jIdx++; else cIdx++;
       });
 
-      /* Experience */
+      
       const expList = document.getElementById('experience-list');
       expList.className = 'timeline-container';
       (academicInfo?.experience || []).forEach(e => {
@@ -366,7 +367,7 @@
           </div>`);
       });
 
-      /* Education */
+      
       const eduList = document.getElementById('education-list');
       eduList.className = 'timeline-container';
       (academicInfo?.education || []).forEach(ed => {
@@ -381,7 +382,7 @@
           </div>`);
       });
 
-      /* Skills (split into two groups) */
+      
       const researchSkills = [
         'Python', 'C/C++', 'MATLAB',
         'Deep Learning (Keras, TensorFlow, PyTorch)',
@@ -399,18 +400,18 @@
         dList.insertAdjacentHTML('beforeend', `<span class="skill-tag skill-tag-dev">${s}</span>`);
       });
 
-      /* Certifications */
+      
       const certList = document.getElementById('cert-list');
       (academicInfo?.certifications || []).forEach(c => {
         certList.insertAdjacentHTML('beforeend',
           `<p class="cert-item"><i class="fas fa-certificate"></i> ${c}</p>`);
       });
 
-      /* Activate scroll-reveal (runs after DOM is fully built) */
+      
       initReveal();
     }
 
-    /* ── Scroll Reveal ────────────────────────────────────────────────────── */
+    
     function initReveal() {
       const els = document.querySelectorAll('.reveal');
       let metricsAnimated = false;
@@ -420,7 +421,7 @@
           if (!entry.isIntersecting) return;
           entry.target.classList.add('visible');
 
-          /* Trigger counter animation once metrics grid is visible */
+          
           if (!metricsAnimated && entry.target.id === 'metrics') {
             metricsAnimated = true;
             if (typeof scholarStats !== 'undefined') {
@@ -440,7 +441,7 @@
       els.forEach(el => io.observe(el));
     }
 
-    /* ── Active Nav Highlight ─────────────────────────────────────────────── */
+    
     function initNavHighlight() {
       const sectionIds = ['about','experience','journals','conferences','education','skills','certs','contact'];
       const navLinks   = document.querySelectorAll('.sidebar nav a[href^="#"]');
@@ -463,7 +464,7 @@
       });
     }
 
-    /* ── Back-to-top ──────────────────────────────────────────────────────── */
+    
     function initBackToTop() {
       const btn = document.getElementById('back-to-top');
       btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -472,7 +473,7 @@
       }, { passive: true });
     }
 
-    /* ── Boot ─────────────────────────────────────────────────────────────── */
+    
     window.addEventListener('DOMContentLoaded', () => {
       renderContent();
       initNavHighlight();
