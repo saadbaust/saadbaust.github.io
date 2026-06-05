@@ -91,12 +91,18 @@ const academicInfo = {
         }
     ],
 
-    skills: [
-        "Python", "C/C++", "PHP", "JavaScript",
-        "Deep Learning (Keras, TensorFlow, PyTorch)",
-        "Pandas", "Scikit-learn", "Matplotlib", "Numpy",
-        "MySQL", "Firebase", "MATLAB", "LaTeX", "GitHub", "WordPress"
-    ],
+    // Skills split into two groups.
+    // Edit these arrays to keep the site in sync — index.html reads directly from here.
+    skills: {
+        research: [
+            "Python", "C/C++", "MATLAB",
+            "Deep Learning (Keras, TensorFlow, PyTorch)",
+            "Pandas", "Scikit-learn", "Matplotlib", "NumPy", "LaTeX", "GitHub"
+        ],
+        dev: [
+            "PHP", "JavaScript", "MySQL", "Firebase", "WordPress"
+        ]
+    },
 
     certifications: [
         "Reviewer, 2025 IEEE International Conference on Quantum Photonics, AI and Networkings",

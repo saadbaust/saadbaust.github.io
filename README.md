@@ -40,7 +40,7 @@ Open `index.html` in any text editor (Notepad, VS Code, etc.) and find the follo
 - **Your job title and institution** — just below your name
 - **Your "About me" paragraph** — inside the `academic-summary` box
 - **Your CV link** — replace the Google Drive link with your own
-- **Your social media links** — GitHub, LinkedIn, Google Scholar, ResearchGate, YouTube
+- **Your social media links** — GitHub, LinkedIn, Google Scholar, ResearchGate, ORCID, IEEE Xplore, YouTube
 - **Your contact details** — phone number and email address
 - **Your website URL** — search for `saadbaust.github.io` and replace with your own URL throughout the file
 
@@ -56,7 +56,21 @@ This is the main file to edit. Open it and update four things:
 
 ### Step 5 — Add gallery photos (optional)
 
-Open `gallery.html` and find the `galleryImages` list near the bottom. Add your image file paths and descriptions there. Put your images in the `images/` folder first.
+Photos live in two folders — `images/events/` and `images/memories/` — and the gallery is split into matching **Events** and **Memories** sections.
+
+To add a photo, drop the image file into the right folder, then open `gallery.html` and add one block inside the correct section's `<div class="masonry-grid">`:
+
+```html
+<figure class="masonry-item">
+  <div class="masonry-thumb"><img src="images/events/your-photo.webp" alt="Short description for accessibility" loading="lazy" /></div>
+  <figcaption class="masonry-caption">Caption shown under the photo</figcaption>
+</figure>
+```
+
+- The `alt` text is for search engines and screen readers — keep it descriptive.
+- The `<figcaption>` is the visible caption (and it also shows in the lightbox).
+- If a filename contains spaces, write them as `%20` in the `src` (e.g. `bauste%20(1).webp`).
+- After adding photos, bump the count number in that section's `<span class="gallery-cat-count">` heading so it stays accurate.
 
 ### Step 6 — Update the SEO files
 

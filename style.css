@@ -212,13 +212,13 @@ h1 {
   box-shadow: var(--shadow-md);
 }
 
+/* FIX #5: Removed font-style: italic — bio is a statement, not a pulled quote */
 .academic-summary p {
   font-size: 0.97rem;
   line-height: 1.78;
   color: var(--text);
   text-align: justify;
   margin: 0;
-  font-style: italic;
   font-weight: 400;
 }
 
@@ -282,6 +282,17 @@ h1 {
 .social-icons a.linkedin:hover { color: #0077b5; }
 .social-icons a.github:hover   { color: #1a1a2e; }
 .social-icons a.youtube:hover  { color: #ff0000; }
+
+/* IEEE has no Font Awesome glyph — use a compact wordmark, same gray-to-brand hover */
+.social-icons a.ieee {
+  font-size: 0.80rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.social-icons a.ieee:hover { color: #00629b; }
 
 .metrics-grid {
   display: flex;
@@ -506,6 +517,7 @@ h1 {
   margin: 20px 0;
 }
 
+/* FIX #6: Solid border line — gradient was decorative, not functional */
 .timeline-container::before {
   content: '';
   position: absolute;
@@ -513,7 +525,7 @@ h1 {
   top: 5px;
   bottom: 5px;
   width: 2px;
-  background: linear-gradient(to bottom, var(--accent), var(--border));
+  background: var(--border);
   border-radius: 2px;
 }
 
@@ -713,6 +725,33 @@ footer {
 
 .masonry-grid { columns: 3; column-gap: 16px; }
 
+/* Gallery categories */
+.gallery-section { margin-bottom: 2.75rem; }
+.gallery-section:last-of-type { margin-bottom: 0; }
+
+.gallery-cat-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.gallery-cat-title i { color: var(--accent); font-size: 0.92rem; }
+
+.gallery-cat-count {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--gray);
+  background: var(--light-bg);
+  border: 1px solid var(--border);
+  padding: 1px 9px;
+  border-radius: 12px;
+  letter-spacing: 0.02em;
+}
+
 .masonry-item {
   break-inside: avoid;
   margin-bottom: 16px;
@@ -720,8 +759,7 @@ footer {
   overflow: hidden;
   border: 1px solid var(--border);
   cursor: pointer;
-  position: relative;
-  background: var(--light-bg);
+  background: var(--bg-block);
   transition: box-shadow var(--t-base) var(--ease-out),
               transform  var(--t-base) var(--ease-out);
 }
@@ -731,9 +769,15 @@ footer {
   transform: translateY(-3px);
 }
 
-.masonry-item img { width: 100%; height: auto; display: block; object-fit: cover; }
+.masonry-thumb {
+  position: relative;
+  overflow: hidden;
+  background: var(--light-bg);
+}
 
-.masonry-item::after {
+.masonry-thumb img { width: 100%; height: auto; display: block; object-fit: cover; }
+
+.masonry-thumb::after {
   content: "\f00e";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
@@ -750,7 +794,17 @@ footer {
   transition: opacity var(--t-base) ease;
 }
 
-.masonry-item:hover::after { opacity: 1; }
+.masonry-item:hover .masonry-thumb::after { opacity: 1; }
+
+.masonry-caption {
+  padding: 9px 12px 11px;
+  font-size: 0.80rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+  line-height: 1.35;
+  border-top: 1px solid var(--border);
+}
 
 .lightbox {
   display: none;
@@ -775,10 +829,20 @@ footer {
   user-select: none;
 }
 
+.lightbox-caption {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 16px;
+  text-align: center;
+  max-width: 90vw;
+  letter-spacing: 0.01em;
+}
+
 .lightbox-counter {
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.82rem;
-  margin-top: 14px;
+  margin-top: 8px;
   font-weight: 500;
   letter-spacing: 0.08em;
 }
