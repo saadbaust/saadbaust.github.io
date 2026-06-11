@@ -134,7 +134,7 @@
                 <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&hl"  class="icon scholar"      title="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i></a>
                 <a href="https://github.com/saadbaust"                               class="icon github"       title="GitHub"        target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                 <a href="https://www.researchgate.net/profile/Saad-Ahmed-96"         class="icon researchgate" title="ResearchGate"  target="_blank" rel="noopener noreferrer"><i class="fab fa-researchgate"></i></a>
-                <a href="https://ieeexplore.ieee.org/author/526065849930602"          class="icon ieee" title="IEEE Xplore" aria-label="IEEE Xplore author profile" target="_blank" rel="noopener noreferrer"><span class="ieee-mark">IEEE</span></a>
+                <a href="https://ieeexplore.ieee.org/author/526065849930602"         class="icon ieee"         title="IEEE Xplore" aria-label="IEEE Xplore author profile" target="_blank" rel="noopener noreferrer"><span class="ieee-mark">IEEE</span></a>
                 <a href="https://orcid.org/0009-0005-5614-3427"                      class="icon orcid"        title="ORCID"         target="_blank" rel="noopener noreferrer"><i class="fab fa-orcid"></i></a>
                 <a href="https://youtube.com/@saadbaust"                             class="icon youtube"      title="YouTube"       target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
               </div>
@@ -142,7 +142,6 @@
           </div>
         </header>
 
-        <!-- FIX #5: Removed quotation marks and italic — this is a statement, not a pulled quote -->
         <div class="academic-summary">
           <p>
             I am a Lecturer at the Department of CSE, Bangladesh Army
@@ -268,14 +267,19 @@
       }).join(', ');
     }
 
-    function buildPaperCard(p, idx) {
+    // FIX: Added 'type' parameter (e.g. 'j' for journal, 'c' for conference).
+    // Previously, both lists used idx starting from 0, so bib-0 and bib-1 existed
+    // twice — once in journals and once in conferences. toggleBib() always found
+    // the journal element first, so the conference BibTeX buttons did nothing.
+    // Using bib-j-0 / bib-c-0 makes every ID on the page unique.
+    function buildPaperCard(p, idx, type) {
+      const bibId   = `bib-${type}-${idx}`;
       const title   = parseBibField(p.bibtex, 'title')  || 'Untitled';
       const authors = parseBibField(p.bibtex, 'author') || 'Unknown Authors';
       const venue   = (p.bibtex.match(/(?:journal|booktitle)\s*=\s*\{([^}]+)\}/i)?.[1] || '').trim();
       const year    = parseBibField(p.bibtex, 'year');
       const doi     = parseBibField(p.bibtex, 'doi');
 
-      // FIX #9: Year appended to venue line so citation reads naturally in the body
       const venueLine = [venue, year].filter(Boolean).join(', ');
 
       const doiBtn = doi
@@ -296,11 +300,11 @@
             <p class="paper-venue-line">${venueLine}</p>
             <div class="paper-actions">
               ${doiBtn}
-              <button class="btn-cite" onclick="toggleBib('bib-${idx}')">
+              <button class="btn-cite" onclick="toggleBib('${bibId}')">
                 <i class="fas fa-quote-right"></i> BibTeX
               </button>
             </div>
-            <pre id="bib-${idx}" class="bibtex-box">${p.bibtex.trim()}</pre>
+            <pre id="${bibId}" class="bibtex-box">${p.bibtex.trim()}</pre>
           </div>
         </div>`;
     }
@@ -329,7 +333,8 @@
       let jIdx = 0, cIdx = 0;
       sorted.forEach(p => {
         const isJournal = /^\s*@article/i.test(p.bibtex);
-        const card = buildPaperCard(p, isJournal ? jIdx : cIdx);
+        // FIX: pass type so IDs are bib-j-N for journals and bib-c-N for conferences
+        const card = buildPaperCard(p, isJournal ? jIdx : cIdx, isJournal ? 'j' : 'c');
         (isJournal ? jList : cList).insertAdjacentHTML('beforeend', card);
         if (isJournal) jIdx++; else cIdx++;
       });
@@ -362,7 +367,6 @@
           </div>`);
       });
 
-      // FIX #1: Skills now read from academicInfo.skills in data.js — edit there, not here
       const researchSkills = academicInfo?.skills?.research || [];
       const devSkills      = academicInfo?.skills?.dev      || [];
 
@@ -402,7 +406,6 @@
       io.observe(metricsEl);
     }
 
-    // FIX #10: Section IDs derived dynamically — no hardcoded list to maintain
     function initNavHighlight() {
       const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
       const sections = document.querySelectorAll('section[id], header[id]');
