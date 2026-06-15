@@ -11,12 +11,14 @@ Personal academic portfolio website for **Saad Ahmed**, Lecturer at the Departme
 | File | What it does |
 |---|---|
 | `index.html` | Main portfolio page (home) |
-| `gallery.html` | Photo gallery page |
+| `gallery.html` | Photo gallery page — **hidden from search engines** |
 | `style.css` | All visual styling for both pages |
 | `data.js` | Your publications, experience, education, skills — edit this to update content |
-| `sitemap.xml` | Helps search engines find your pages |
-| `robots.txt` | Tells search engines what to crawl |
+| `publications.bib` | Standalone BibTeX backup of all publications — not loaded by the site, useful for submitting to reference managers or sharing with collaborators |
+| `sitemap.xml` | Tells search engines which pages to index (only the home page) |
+| `robots.txt` | Blocks search engines from crawling the gallery and gallery images |
 | `images/` | Folder for your photos and stat images |
+| `images/s-logo.png` | Site favicon — the small icon shown in browser tabs |
 
 ---
 
@@ -28,9 +30,11 @@ This template is designed so that **you only need to edit one file** to update a
 
 Download or clone this repository to your computer. You'll see the files listed in the table above.
 
-### Step 2 — Replace the profile photo
+### Step 2 — Replace the profile photo and favicon
 
-Go into the `images/` folder and replace `formal.png` with your own photo. Keep the filename the same, or remember to update it in `index.html` if you use a different name. A square or portrait photo works best.
+**Profile photo:** Go into the `images/` folder and replace `saadahmed.png` with your own photo. Keep the filename the same, or remember to update it in `index.html` if you use a different name. A square or portrait photo works best.
+
+**Favicon:** Replace `images/s-logo.png` with your own logo or initials icon. Keep the filename the same, or update the `<link rel="icon">` tag in both `index.html` and `gallery.html` if you use a different name. A square image of at least 64×64 px works best.
 
 ### Step 3 — Update your personal info in `index.html`
 
@@ -50,7 +54,9 @@ This is the main file to edit. Open it and update four things:
 
 **Google Scholar stats** — update your citation count, h-index, and i10-index. You can find these on your Google Scholar profile page.
 
-**Publications** — add or remove entries in the `myPapers` list. Each paper uses BibTeX format, which you can copy directly from Google Scholar or IEEE Xplore by clicking "Cite" on any paper. The site automatically separates journals and conferences for you.
+**Publications** — add or remove entries in the `myPapers` list. Each paper uses BibTeX format, which you can copy directly from Google Scholar or IEEE Xplore by clicking "Cite" on any paper. The site automatically separates journals (`@article`) and conferences (`@INPROCEEDINGS`) for you.
+
+To keep a clean backup of your papers outside the site, paste the same BibTeX into `publications.bib` as well. That file is not loaded by the website but is handy for submitting to reference managers like Zotero or Mendeley.
 
 **Experience, education, skills, certifications** — all of these are in the `academicInfo` section. Just edit the text to match your own background. You can add or remove items by copying the pattern you see.
 
@@ -67,16 +73,23 @@ To add a photo, drop the image file into the right folder, then open `gallery.ht
 </figure>
 ```
 
-- The `alt` text is for search engines and screen readers — keep it descriptive.
+- The `alt` text is for screen readers — keep it descriptive.
 - The `<figcaption>` is the visible caption (and it also shows in the lightbox).
 - If a filename contains spaces, write them as `%20` in the `src` (e.g. `bauste%20(1).webp`).
 - After adding photos, bump the count number in that section's `<span class="gallery-cat-count">` heading so it stays accurate.
 
 ### Step 6 — Update the SEO files
 
-Open `sitemap.xml` and `robots.txt` and replace `saadbaust.github.io` with your own website URL. Also update the `lastmod` date in the sitemap whenever you make changes.
+Open `sitemap.xml` and `robots.txt` and replace `saadbaust.github.io` with your own website URL. Also update the `lastmod` date in `sitemap.xml` whenever you make content changes.
 
-In `index.html` and `gallery.html`, search for `saadbaust.github.io` at the top of the file (in the meta tags) and replace those with your own URL too.
+In `index.html`, search for `saadbaust.github.io` in the meta tags at the top and replace those with your own URL.
+
+Note: **the gallery page is intentionally excluded from search engines.** This is controlled in three places and they must all stay consistent:
+- `robots.txt` — `Disallow: /gallery.html` (and image folders blocked for Googlebot-Image)
+- `gallery.html` — `<meta name="robots" content="noindex, nofollow, noimageindex">`
+- `sitemap.xml` — `gallery.html` is not listed (only indexable pages belong in a sitemap)
+
+If you ever want to make the gallery publicly discoverable, you would need to reverse all three of these.
 
 ### Step 7 — Publish it
 
@@ -92,7 +105,7 @@ The easiest free way to host this is **GitHub Pages**:
 
 ## Keeping It Updated
 
-Whenever you publish a new paper, just open `data.js`, paste in the BibTeX, and push the changes. The site updates automatically. Same for adding a new job or updating your citation count — it all lives in `data.js`.
+Whenever you publish a new paper, open `data.js`, paste in the BibTeX into the `myPapers` array, and push the changes. Optionally paste it into `publications.bib` too for your own records. The site updates automatically. Same for adding a new job or updating your citation count — it all lives in `data.js`.
 
 ---
 
