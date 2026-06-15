@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
+Disallow: /gallery.html
+
+# Prevent Googlebot-Image from indexing gallery photos
+User-agent: Googlebot-Image
+Disallow: /images/events/
+Disallow: /images/memories/
 
 Sitemap: https://saadbaust.github.io/sitemap.xml

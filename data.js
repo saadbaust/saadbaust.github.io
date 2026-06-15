@@ -62,7 +62,43 @@ const myPapers = [
   year={2025},
   pages={2187-2192},
   doi={10.1109/ICCIT68739.2025.11490516}}`
-    }
+    },
+    {
+        bibtex: `@INPROCEEDINGS{11545857,
+  author={Ahmed, Saad and Sultana, Razia and Rahman, Qazi Masrafi and Ali, Aroshi and Syfullah, Khalid},
+  booktitle={2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence \& Networking (QPAIN)}, 
+  title={Lightweight and Interpretable Deep Learning for Automated Waste Classification}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Modeling;Convolutional neural networks;Accuracy;Training;Labeling;Plastics;Architecture;Computer architecture;Waste materials;Deep learning;Waste Classification;Deep Learning;Convolutional Neural Networks (CNN);MobileNetV2;Model Interpretability;LIME},
+  doi={10.1109/QPAIN69676.2026.11545857}}`
+    },
+    {
+        bibtex: `@INPROCEEDINGS{11545839,
+  author={Ahmed, Saad and Sultana, Razia and Ali, Aroshi and Mandal, Md. Abdullah and Reza, Nadim},
+  booktitle={2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence \& Networking (QPAIN)}, 
+  title={A Large-Scale Multi-Crop Leaf Disease Dataset and Benchmarking of Deep Learning Models with Explainable Predictions}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={Modeling;Diseases;Crops;Industrial plants;Plants (biology);Training;Plant diseases;Accuracy;Signal detection;Printing;Plant disease;Classification;Deep learning;Convolutional neural networks;Multi-crop dataset;Explainable AI;LIME;DenseNet121;Xception;EfficientNetB0},
+  doi={10.1109/QPAIN69676.2026.11545839}}`
+    },
+    {
+        bibtex: `@INPROCEEDINGS{11546609,
+  author={Tonmoy, Abdullah Al Galib and Tamim, Tanjimul Islam and Monir, Moniruzzaman and Hasan, Jahid and Ahmed, Saad},
+  booktitle={2026 IEEE 2nd International Conference on Quantum Photonics, Artificial Intelligence \& Networking (QPAIN)}, 
+  title={An IoT-Based Qr-Code-Enabled Smart Medicine Box for Reducing Prescription Errors and Improving Medication Adherence}, 
+  year={2026},
+  volume={},
+  number={},
+  pages={1-6},
+  keywords={QR codes;Timing;Medical services;Internet of Things;Scheduling;Schedules;Clouds;Printing;Real-time systems;Synchronization;Sensor Networks for IoT;Smart Medicine Box;Biomedical Monitoring;Real-Time Embedded Systems;Medication Adherence},
+  doi={10.1109/QPAIN69676.2026.11546609}}`
+    },
 ];
 
 // Professional data.
