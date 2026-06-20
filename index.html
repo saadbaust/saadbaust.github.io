@@ -235,20 +235,17 @@
 
     <script src="data.js"></script>
     <script>
-    // ─── BibTeX loader ───────────────────────────────────────────────────────────
-    // Fetches publications.bib and splits it into individual entry strings.
-    // Each entry is returned as { bibtex: "raw entry string" }, exactly matching
-    // the shape that buildPaperCard() already expects — no other code needs to change.
+    // ─── Publications loader (now reads data/publications.json) ──────────────────
+    // Pages CMS edits data/publications.json. Each entry is { bibtex: "raw entry string" },
+    // exactly matching the shape buildPaperCard() already expects — no other code changes.
     async function loadBibFile() {
       try {
-        const res = await fetch('publications.bib');
+        const res = await fetch('data/publications.json');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const text = await res.text();
-        // Split on a newline immediately followed by '@' (each entry starts with @)
-        const entries = text.trim().split(/\n(?=@)/).filter(Boolean);
-        return entries.map(s => ({ bibtex: s.trim() }));
+        const { entries } = await res.json();
+        return entries;
       } catch (e) {
-        console.error('Could not load publications.bib:', e);
+        console.error('Could not load data/publications.json:', e);
         return [];
       }
     }
@@ -323,9 +320,9 @@
         </div>`;
     }
 
-    // ─── Main render (async — awaits the .bib fetch) ──────────────────────────
+    // ─── Main render (async — awaits the publications fetch) ──────────────────
     async function renderContent() {
-      // Load papers from publications.bib at runtime
+      // Load papers from data/publications.json at runtime
       const myPapers = await loadBibFile();
 
       const papersEl = document.getElementById('total-papers');

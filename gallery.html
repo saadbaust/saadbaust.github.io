@@ -53,7 +53,6 @@
 
       <div class="content">
 
-        <!-- FIX #3: Removed dead 'reveal' class — initReveal() is index.html only -->
         <header class="hero">
           <div class="hero-info">
             <h1>Gallery</h1>
@@ -64,154 +63,26 @@
 
         <hr class="divider" />
 
+        <!-- Both sections below are populated at runtime from data/gallery.json
+             by renderGallery() in the script block. Pages CMS edits that JSON
+             file directly (and uploads images into images/events/ or
+             images/memories/), so adding a photo never requires touching
+             this HTML or doing a git push by hand. -->
+
         <section class="gallery-section">
           <h2 class="gallery-cat-title">
             <i class="fas fa-calendar-day"></i> Events
-            <span class="gallery-cat-count">13</span>
+            <span class="gallery-cat-count" id="events-count">0</span>
           </h2>
-          <div class="masonry-grid">
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/basut-raising-day.webp" alt="Saad Ahmed at the BAUST Raising Day ceremony" loading="lazy" /></div>
-              <figcaption class="masonry-caption">BAUST Raising Day</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/project-showcase.webp" alt="Saad Ahmed at a student project showcase at BAUST" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Project Showcase</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/uiu-coding-contest.webp" alt="Saad Ahmed at the UIU inter-university coding contest" loading="lazy" /></div>
-              <figcaption class="masonry-caption">UIU Coding Contest</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/uiu-robotics.webp" alt="Saad Ahmed attending the UIU robotics competition" loading="lazy" /></div>
-              <figcaption class="masonry-caption">UIU Robotics Competition</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/marathon.webp" alt="Saad Ahmed at a BAUST marathon event" loading="lazy" /></div>
-              <figcaption class="masonry-caption">BAUST Marathon</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/marathon-2.webp" alt="Saad Ahmed during a BAUST marathon event" loading="lazy" /></div>
-              <figcaption class="masonry-caption">BAUST Marathon</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/pitha-uthsob-12.webp" alt="Saad Ahmed participating in Pitha Utsob, a traditional rice-cake festival at BAUST" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Pitha Utsob</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/Math-Olympiad.webp" alt="Saad Ahmed at the National Undergraduate Mathematics Olympiad" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Math Olympiad</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/Publication-acknowledgement.webp" alt="Saad Ahmed receiving a publication acknowledgement at a monthly meeting" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Publication Acknowledgement</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/World-Robotics-Olympiad-BD.webp" alt="Saad Ahmed at the World Robotics Olympiad Bangladesh" loading="lazy" /></div>
-              <figcaption class="masonry-caption">World Robotics Olympiad BD</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/World-Robotics-Olympiad-BD-3.webp" alt="Saad Ahmed at the World Robotics Olympiad Bangladesh" loading="lazy" /></div>
-              <figcaption class="masonry-caption">World Robotics Olympiad BD</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/World-Robotics-Olympiad-BD-Judge.webp" alt="Saad Ahmed serving as a judge at the World Robotics Olympiad Bangladesh" loading="lazy" /></div>
-              <figcaption class="masonry-caption">World Robotics Olympiad &middot; Judge</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/events/World-Robotics-Olympiad-BD-as-Judge.webp" alt="Saad Ahmed serving as a judge at the World Robotics Olympiad Bangladesh" loading="lazy" /></div>
-              <figcaption class="masonry-caption">World Robotics Olympiad &middot; Judge</figcaption>
-            </figure>
-          </div>
+          <div class="masonry-grid" id="events-grid"></div>
         </section>
 
         <section class="gallery-section">
           <h2 class="gallery-cat-title">
             <i class="fas fa-images"></i> Memories
-            <span class="gallery-cat-count">16</span>
+            <span class="gallery-cat-count" id="memories-count">0</span>
           </h2>
-          <div class="masonry-grid">
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/Batch-20B-last-class.webp" alt="Saad Ahmed with Batch 20B students at BAUST CSE" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Batch 20B</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/advising-batch-15.webp" alt="Saad Ahmed advising Batch 15 students at BAUST CSE" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Advising &middot; Batch 15</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/Batch-15-Last-Class.webp" alt="Saad Ahmed during the last class with Batch 15 at BAUST CSE" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Batch 15 &middot; Last Class</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/Batch-15-Last-Photo.webp" alt="Saad Ahmed in the last group photo with Batch 15 at BAUST CSE" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Batch 15 &middot; Last Photo</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/batch-19.webp" alt="Saad Ahmed with Batch 19 students at BAUST CSE" loading="lazy" /></div>
-              <figcaption class="masonry-caption">With Batch 19</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/ragday-13-14.webp" alt="Saad Ahmed at Rag Day with Batch 13 and 14 of BAUST CSE" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Rag Day &middot; Batch 13 &amp; 14</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/baust-day.webp" alt="Saad Ahmed at the BAUST Day celebration" loading="lazy" /></div>
-              <figcaption class="masonry-caption">BAUST Day</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/baust-night.webp" alt="Saad Ahmed at a BAUST campus night event" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Campus Night</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/sylhet-1.webp" alt="Saad Ahmed at Sylhet Solo Tour" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Sylhet Solo Tour</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/sylhet-2.webp" alt="Saad Ahmed at Sylhet Solo Tour" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Sylhet Solo Tour</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/sylhet-3.webp" alt="Saad Ahmed at Sylhet Solo Tour" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Sylhet Solo Tour</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/sajek.webp" alt="Saad Ahmed at Sajek Valley during a faculty trip" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Sajek Valley</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/brother.webp" alt="Saad Ahmed with colleagues at BAUST" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Brotherhood</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/bauste%20(1).webp" alt="Saad Ahmed — campus life at BAUST (1)" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Campus Life</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/bauste%20(5).webp" alt="Saad Ahmed — campus life at BAUST (2)" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Campus Life</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/bauste%20(6).webp" alt="Saad Ahmed — campus life at BAUST (3)" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Campus Life</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/bauste%20(7).webp" alt="Saad Ahmed — campus life at BAUST (4)" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Campus Life</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/bauste%20(8).webp" alt="Saad Ahmed — campus life at BAUST (5)" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Campus Life</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/bauste%20(9).webp" alt="Saad Ahmed — campus life at BAUST (6)" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Campus Life</figcaption>
-            </figure>
-            <figure class="masonry-item">
-              <div class="masonry-thumb"><img src="images/memories/bauste%20(10).webp" alt="Saad Ahmed — campus life at BAUST (7)" loading="lazy" /></div>
-              <figcaption class="masonry-caption">Campus Life</figcaption>
-            </figure>
-          </div>
+          <div class="masonry-grid" id="memories-grid"></div>
         </section>
 
         <footer>
@@ -234,61 +105,100 @@
     </button>
 
     <script>
-    const lightbox  = document.getElementById('lightbox');
-    const lbImg     = document.getElementById('lb-img');
-    const lbCaption = document.getElementById('lb-caption');
-    const lbCounter = document.getElementById('lb-counter');
-
-    const items     = document.querySelectorAll('.masonry-item');
-    const srcs      = Array.from(items).map(item => ({
-      src:     item.querySelector('img').src,
-      alt:     item.querySelector('img').alt,
-      caption: item.querySelector('.masonry-caption')?.textContent.trim() || ''
-    }));
-    let current = 0;
-
-    function updateLightbox() {
-      lbImg.src               = srcs[current].src;
-      lbImg.alt               = srcs[current].alt;
-      lbCaption.textContent   = srcs[current].caption;
-      lbCounter.textContent   = `${current + 1} / ${srcs.length}`;
+    // ─── Load gallery data ───────────────────────────────────────────────
+    // gallery.json shape (managed by Pages CMS):
+    // { "events": [{image, alt, caption}, ...], "memories": [{image, alt, caption}, ...] }
+    async function loadGalleryData() {
+      try {
+        const res = await fetch('data/gallery.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } catch (e) {
+        console.error('Could not load data/gallery.json:', e);
+        return { events: [], memories: [] };
+      }
     }
 
-    function openLightbox(idx) {
-      current = idx;
-      updateLightbox();
-      lightbox.classList.add('open');
-      document.body.style.overflow = 'hidden';
+    function renderSection(gridId, countId, items) {
+      const grid = document.getElementById(gridId);
+      document.getElementById(countId).textContent = items.length;
+      items.forEach(item => {
+        grid.insertAdjacentHTML('beforeend', `
+          <figure class="masonry-item">
+            <div class="masonry-thumb"><img src="${item.image}" alt="${item.alt}" loading="lazy" /></div>
+            <figcaption class="masonry-caption">${item.caption}</figcaption>
+          </figure>`);
+      });
     }
 
-    function closeLightbox() {
-      lightbox.classList.remove('open');
-      document.body.style.overflow = '';
+    // ─── Lightbox (unchanged behavior, just built from rendered items) ──
+    function initLightbox() {
+      const lightbox  = document.getElementById('lightbox');
+      const lbImg     = document.getElementById('lb-img');
+      const lbCaption = document.getElementById('lb-caption');
+      const lbCounter = document.getElementById('lb-counter');
+
+      const items = document.querySelectorAll('.masonry-item');
+      const srcs  = Array.from(items).map(item => ({
+        src:     item.querySelector('img').src,
+        alt:     item.querySelector('img').alt,
+        caption: item.querySelector('.masonry-caption')?.textContent.trim() || ''
+      }));
+      let current = 0;
+
+      function updateLightbox() {
+        lbImg.src             = srcs[current].src;
+        lbImg.alt             = srcs[current].alt;
+        lbCaption.textContent = srcs[current].caption;
+        lbCounter.textContent = `${current + 1} / ${srcs.length}`;
+      }
+
+      function openLightbox(idx) {
+        current = idx;
+        updateLightbox();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      function prevPhoto() { current = (current - 1 + srcs.length) % srcs.length; updateLightbox(); }
+      function nextPhoto() { current = (current + 1)               % srcs.length; updateLightbox(); }
+
+      items.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+
+      document.getElementById('lb-close').addEventListener('click', closeLightbox);
+      document.getElementById('lb-prev').addEventListener('click', prevPhoto);
+      document.getElementById('lb-next').addEventListener('click', nextPhoto);
+
+      lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+
+      document.addEventListener('keydown', e => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'ArrowLeft')  prevPhoto();
+        if (e.key === 'ArrowRight') nextPhoto();
+        if (e.key === 'Escape')     closeLightbox();
+      });
     }
 
-    function prevPhoto() { current = (current - 1 + srcs.length) % srcs.length; updateLightbox(); }
-    function nextPhoto() { current = (current + 1)               % srcs.length; updateLightbox(); }
+    function initBackToTop() {
+      const btn = document.getElementById('back-to-top');
+      btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > 300);
+      }, { passive: true });
+    }
 
-    items.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
-
-    document.getElementById('lb-close').addEventListener('click', closeLightbox);
-    document.getElementById('lb-prev').addEventListener('click', prevPhoto);
-    document.getElementById('lb-next').addEventListener('click', nextPhoto);
-
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-
-    document.addEventListener('keydown', e => {
-      if (!lightbox.classList.contains('open')) return;
-      if (e.key === 'ArrowLeft')  prevPhoto();
-      if (e.key === 'ArrowRight') nextPhoto();
-      if (e.key === 'Escape')     closeLightbox();
+    window.addEventListener('DOMContentLoaded', async () => {
+      const data = await loadGalleryData();
+      renderSection('events-grid',    'events-count',    data.events    || []);
+      renderSection('memories-grid',  'memories-count',  data.memories  || []);
+      initLightbox();      // must run AFTER the grids are populated
+      initBackToTop();
     });
-
-    const btn = document.getElementById('back-to-top');
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    window.addEventListener('scroll', () => {
-      btn.classList.toggle('visible', window.scrollY > 300);
-    }, { passive: true });
     </script>
   </body>
 </html>
