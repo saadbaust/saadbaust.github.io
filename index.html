@@ -91,7 +91,6 @@
           <div class="profile-card">
             <img
               src="images/saadahmed.png"
-              id="profile-photo-img"
               alt="Saad Ahmed — Lecturer at Department of CSE, BAUST"
               class="profile-photo"
               width="170" height="170"
@@ -167,8 +166,7 @@
           <div class="stat-image-wrap">
             <p class="stat-image-caption"><i class="fas fa-chart-pie"></i> Research Interest Distribution</p>
             <img
-              src="images/research-interest.png"
-              id="img-research-interest"
+              src="images/Research Interest Distribution.png"
               alt="Pie chart showing Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning"
               class="hero-promo-img"
               loading="lazy"
@@ -177,8 +175,7 @@
           <div class="stat-image-wrap">
             <p class="stat-image-caption"><i class="fas fa-chart-line"></i> Citation History</p>
             <img
-              src="images/citation-history.png"
-              id="img-citation-history"
+              src="images/Citation History.png"
               alt="Bar chart showing Saad Ahmed's Google Scholar citation history over the years"
               class="hero-promo-img"
               loading="lazy"
@@ -275,7 +272,6 @@
       if (!site) return;
       const p  = site.profile || {};
       const c  = site.contact || {};
-      const im = site.photos  || {};
 
       setText('hero-name',       p.name);
       setText('hero-subtitle',   p.subtitle);
@@ -284,10 +280,6 @@
       setText('research-focus',  p.researchFocus);
       setText('about-text',      p.about);
       setAttr('cv-link', 'href', p.cvLink);
-
-      setAttr('profile-photo-img',     'src', im.profilePhoto);
-      setAttr('img-research-interest', 'src', im.researchInterest);
-      setAttr('img-citation-history',  'src', im.citationHistory);
 
       setText('contact-phone', c.phone);
       const emailEl = document.getElementById('contact-email');

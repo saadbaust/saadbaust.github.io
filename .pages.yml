@@ -15,15 +15,6 @@
 # ───────────────────────────────────────────────────────────────────────────
 
 media:
-  # General site images (profile photo, the two hero charts, etc.)
-  - name: site-images
-    label: "Site Images"
-    input: images
-    output: /images
-    categories: [image]
-    extensions: [jpg, jpeg, png, webp, gif, svg]
-    rename: false
-
   - name: events-images
     label: "Event Photos"
     input: images/events
@@ -67,27 +58,6 @@ content:
           - { name: citations, label: "Citations", type: number }
           - { name: hIndex,    label: "h-index",   type: number }
           - { name: i10Index,  label: "i10-index", type: number }
-
-      - name: photos
-        label: "Profile Photo & Hero Charts"
-        type: object
-        description: "To avoid duplicate files piling up: open Media → Site Images, DELETE the old file first, then upload the new one (ideally with the same name). The picker below stays clean that way."
-        fields:
-          - name: profilePhoto
-            label: "Profile Photo (the round photo at the top)"
-            type: image
-            options:
-              media: site-images
-          - name: researchInterest
-            label: "Research Interest Distribution chart"
-            type: image
-            options:
-              media: site-images
-          - name: citationHistory
-            label: "Citation History chart"
-            type: image
-            options:
-              media: site-images
 
       - name: contact
         label: "Contact"
