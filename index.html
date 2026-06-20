@@ -7,7 +7,9 @@
     <meta name="description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher specializing in Image Processing, Computer Vision, and Deep Learning." />
     <meta name="keywords" content="Saad Ahmed, Saad Ahmed BAUST, Saad Ahmed researcher, BAUST CSE, Bangladesh Army University of Science and Technology, Lecturer CSE, Computer Vision, Deep Learning, Image Processing" />
     <meta name="author" content="Saad Ahmed" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <!-- SEO: max-snippet/-1 and max-video-preview/-1 added alongside max-image-preview
+         so Google isn't artificially capped on text-snippet or video-preview length. -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="google-site-verification" content="pctMm_Owh-_QShAJJ7RtRTMfEa1V7vJIi4-xyTDNKeA" />
     <link rel="canonical" href="https://saadbaust.github.io/" />
     <meta property="og:type"        content="profile" />
@@ -16,41 +18,94 @@
     <meta property="og:url"         content="https://saadbaust.github.io/" />
     <meta property="og:image"       content="https://saadbaust.github.io/images/saadahmed.png" />
     <meta property="og:image:alt"   content="Saad Ahmed — Lecturer at BAUST, Researcher in Image Processing and Computer Vision" />
+    <meta property="og:image:type"  content="image/png" />
+    <meta property="og:image:width" content="170" />
+    <meta property="og:image:height" content="170" />
     <meta property="og:site_name"   content="Saad Ahmed | BAUST" />
     <meta property="og:locale"      content="en_US" />
     <meta name="twitter:card"        content="summary_large_image" />
     <meta name="twitter:title"       content="Saad Ahmed | Lecturer &amp; Researcher | BAUST" />
     <meta name="twitter:description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning." />
     <meta name="twitter:image"       content="https://saadbaust.github.io/images/saadahmed.png" />
+    <meta name="twitter:image:alt"   content="Saad Ahmed — Lecturer at BAUST, Researcher in Image Processing and Computer Vision" />
+    <!-- SEO: structured data as a single linked @graph (WebSite + ProfilePage + ImageObject
+         + Person) instead of a lone Person object. Linking entities via @id is the modern,
+         recommended pattern — it lets Google understand the page and the person as distinct
+         but connected entities, rather than guessing the relationship.
+         NOTE: like before, this block is static — if name/job/contact/education details
+         change, update this by hand AND keep "dateModified" below in sync with the
+         <lastmod> date in sitemap.xml. Per-publication structured data is generated and
+         injected dynamically at runtime instead (see injectPublicationsStructuredData()
+         in the script below), since publications load from publications.bib at runtime. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Saad Ahmed",
-      "url": "https://saadbaust.github.io/",
-      "image": ["https://saadbaust.github.io/images/saadahmed.png"],
-      "jobTitle": "Lecturer",
-      "email": "saadahmed@baust.edu.bd",
-      "telephone": "+8801724407189",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Bangladesh Army University of Science and Technology (BAUST)",
-        "url": "https://baust.edu.bd"
-      },
-      "alumniOf": {
-        "@type": "Organization",
-        "name": "Rajshahi University of Engineering & Technology (RUET)"
-      },
-      "sameAs": [
-        "https://github.com/saadbaust",
-        "https://linkedin.com/in/saadbaust",
-        "https://scholar.google.com/citations?user=QFARjNcAAAAJ",
-        "https://www.researchgate.net/profile/Saad-Ahmed-96",
-        "https://youtube.com/@saadbaust",
-        "https://orcid.org/0009-0005-5614-3427",
-        "https://ieeexplore.ieee.org/author/526065849930602"
-      ],
-      "knowsAbout": ["Image Processing", "Computer Vision", "Deep Learning", "Machine Learning"]
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://saadbaust.github.io/#website",
+          "url": "https://saadbaust.github.io/",
+          "name": "Saad Ahmed | BAUST",
+          "inLanguage": "en",
+          "publisher": { "@id": "https://saadbaust.github.io/#person" }
+        },
+        {
+          "@type": "ImageObject",
+          "@id": "https://saadbaust.github.io/#profile-image",
+          "url": "https://saadbaust.github.io/images/saadahmed.png",
+          "contentUrl": "https://saadbaust.github.io/images/saadahmed.png",
+          "width": 170,
+          "height": 170,
+          "caption": "Saad Ahmed — Lecturer at Department of CSE, BAUST"
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://saadbaust.github.io/#webpage",
+          "url": "https://saadbaust.github.io/",
+          "name": "Saad Ahmed | Lecturer & Researcher | BAUST",
+          "description": "Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher specializing in Image Processing, Computer Vision, and Deep Learning.",
+          "inLanguage": "en",
+          "isPartOf": { "@id": "https://saadbaust.github.io/#website" },
+          "primaryImageOfPage": { "@id": "https://saadbaust.github.io/#profile-image" },
+          "mainEntity": { "@id": "https://saadbaust.github.io/#person" },
+          "dateModified": "2026-06-20"
+        },
+        {
+          "@type": "Person",
+          "@id": "https://saadbaust.github.io/#person",
+          "name": "Saad Ahmed",
+          "url": "https://saadbaust.github.io/",
+          "image": { "@id": "https://saadbaust.github.io/#profile-image" },
+          "jobTitle": "Lecturer",
+          "email": "saadahmed@baust.edu.bd",
+          "telephone": "+8801724407189",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Bangladesh Army University of Science and Technology (BAUST)",
+            "url": "https://baust.edu.bd"
+          },
+          "alumniOf": [
+            {
+              "@type": "Organization",
+              "name": "Rajshahi University of Engineering & Technology (RUET)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Bangladesh Army University of Science and Technology (BAUST)"
+            }
+          ],
+          "sameAs": [
+            "https://github.com/saadbaust",
+            "https://linkedin.com/in/saadbaust",
+            "https://scholar.google.com/citations?user=QFARjNcAAAAJ",
+            "https://www.researchgate.net/profile/Saad-Ahmed-96",
+            "https://youtube.com/@saadbaust",
+            "https://orcid.org/0009-0005-5614-3427",
+            "https://ieeexplore.ieee.org/author/526065849930602"
+          ],
+          "knowsAbout": ["Image Processing", "Computer Vision", "Deep Learning", "Machine Learning"]
+        }
+      ]
     }
     </script>
     <link rel="icon" type="image/png" href="images/s-logo.png" />
@@ -295,9 +350,14 @@
     // the shape that buildPaperCard() already expects — no other code needs to change.
     // publications.bib is now edited as ONE raw file via Pages CMS (Content → Publications),
     // so this just reads the file straight off the repo, same as before.
+    //
+    // FIX: now uses { cache: 'no-store' } to match loadSiteData(). Previously this
+    // fetch had no cache option, so a browser (or the GitHub Pages edge) could keep
+    // serving a stale publications.bib after a CMS save even though data.json always
+    // updated immediately — the two fetches behaved inconsistently.
     async function loadBibFile() {
       try {
-        const res = await fetch('publications.bib');
+        const res = await fetch('publications.bib', { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const text = await res.text();
         // Split on a newline immediately followed by '@' (each entry starts with @)
@@ -327,14 +387,53 @@
       requestAnimationFrame(step);
     }
 
+    // FIX: parseBibField previously used a single regex `\{([^}]+)\}`, which stops
+    // at the FIRST closing brace. Standard BibTeX often wraps acronyms in their own
+    // braces to protect capitalization, e.g.  title = {An {IoT}-Based Smart Box}
+    // — the old regex would parse that title as just "An". This version finds the
+    // opening brace after "field =" and then walks the string counting brace depth,
+    // so it correctly captures the FULL field even with nested braces inside it.
     function parseBibField(bibtex, fieldName) {
-      const re = new RegExp(`\\b${fieldName}\\s*=\\s*\\{([^}]+)\\}`, 'i');
-      return (bibtex.match(re)?.[1] || '').trim();
+      const startRe = new RegExp(`\\b${fieldName}\\s*=\\s*`, 'i');
+      const m = bibtex.match(startRe);
+      if (!m) return '';
+
+      const openIdx = m.index + m[0].length;
+      if (bibtex[openIdx] !== '{') return '';
+
+      let depth = 0;
+      let i = openIdx;
+      for (; i < bibtex.length; i++) {
+        if (bibtex[i] === '{') depth++;
+        else if (bibtex[i] === '}') {
+          depth--;
+          if (depth === 0) { i++; break; }
+        }
+      }
+
+      return bibtex.slice(openIdx + 1, i - 1).trim();
+    }
+
+    // SEO/display fix: BibTeX text often contains LaTeX escapes — e.g. venues with
+    // "\&" (to escape & in LaTeX), or leftover {brace} pairs used to protect
+    // acronym capitalization in titles (see parseBibField's depth-counting above,
+    // which now captures the full field INCLUDING those inner braces). Clean
+    // both before showing text to users or putting it in structured data, so
+    // a title like "An {IoT}-Based Smart Box" displays as "An IoT-Based Smart
+    // Box" instead of leaking literal braces/backslashes into the page or
+    // into the JSON-LD that search engines read.
+    function unescapeBibText(str) {
+      return str
+        .replace(/\\&/g, '&')
+        .replace(/\\%/g, '%')
+        .replace(/\\_/g, '_')
+        .replace(/[{}]/g, '')
+        .trim();
     }
 
     function formatAuthors(raw) {
       return raw.split(' and ').map(a => {
-        const t = a.trim();
+        const t = unescapeBibText(a.trim());
         const l = t.toLowerCase();
         return (l.includes('saad ahmed') || l.includes('ahmed, saad'))
           ? `<strong class="author-self">${t}</strong>`
@@ -344,9 +443,12 @@
 
     function buildPaperCard(p, idx, type) {
       const bibId   = `bib-${type}-${idx}`;
-      const title   = parseBibField(p.bibtex, 'title')  || 'Untitled';
+      const title   = unescapeBibText(parseBibField(p.bibtex, 'title')  || 'Untitled');
       const authors = parseBibField(p.bibtex, 'author') || 'Unknown Authors';
-      const venue   = (p.bibtex.match(/(?:journal|booktitle)\s*=\s*\{([^}]+)\}/i)?.[1] || '').trim();
+      // FIX: venue now goes through the same brace-aware parseBibField instead of
+      // its own separate first-closing-brace regex, so it's protected from the
+      // same nested-brace truncation bug (e.g. a booktitle containing "{IEEE}").
+      const venue   = unescapeBibText(parseBibField(p.bibtex, 'journal') || parseBibField(p.bibtex, 'booktitle'));
       const year    = parseBibField(p.bibtex, 'year');
       const doi     = parseBibField(p.bibtex, 'doi');
 
@@ -457,7 +559,54 @@
           `<p class="cert-item"><i class="fas fa-certificate"></i> ${c}</p>`);
       });
 
+      injectPublicationsStructuredData(sorted);
       initReveal(myPapers, stats);
+    }
+
+    // SEO: publications come from publications.bib at runtime, so they can't be
+    // baked into the static <head> JSON-LD — it's generated here instead, once
+    // papers are parsed, and appended as its own <script type="application/ld+json">
+    // in <head>. Google's indexer executes page JavaScript before reading
+    // structured data, so a script tag added at runtime like this is read the
+    // same way a static one would be. Each entry becomes a ScholarlyArticle with
+    // its own @id (DOI-based when available) and links back to the Person via
+    // "author" matching the existing Person's name/sameAs — this gives Google
+    // Scholar/Search a clean, accurate picture of each paper as well as the
+    // researcher who wrote it.
+    function injectPublicationsStructuredData(papers) {
+      if (!papers.length) return;
+
+      const articles = papers.map((p, i) => {
+        const title   = unescapeBibText(parseBibField(p.bibtex, 'title') || '');
+        const venue   = unescapeBibText(parseBibField(p.bibtex, 'journal') || parseBibField(p.bibtex, 'booktitle'));
+        const year    = parseBibField(p.bibtex, 'year');
+        const doi     = parseBibField(p.bibtex, 'doi');
+        const authors = (parseBibField(p.bibtex, 'author') || '')
+          .split(' and ')
+          .map(a => unescapeBibText(a.trim()))
+          .filter(Boolean)
+          .map(name => ({ '@type': 'Person', name }));
+
+        return {
+          '@type': 'ScholarlyArticle',
+          '@id': doi ? `https://doi.org/${doi}` : `https://saadbaust.github.io/#pub-${i}`,
+          headline: title || undefined,
+          name: title || undefined,
+          datePublished: year || undefined,
+          author: authors.length ? authors : undefined,
+          isPartOf: venue ? { '@type': 'CreativeWork', name: venue } : undefined,
+          sameAs: doi ? `https://doi.org/${doi}` : undefined,
+          url: doi ? `https://doi.org/${doi}` : undefined,
+        };
+      });
+
+      const ld = { '@context': 'https://schema.org', '@graph': articles };
+
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.id = 'publications-structured-data';
+      script.textContent = JSON.stringify(ld);
+      document.head.appendChild(script);
     }
 
     function initReveal(myPapers, scholarStats) {

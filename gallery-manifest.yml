@@ -1,0 +1,42 @@
+name: Update gallery manifest
+
+# Keeps images/gallery-manifest.json in sync with whatever is actually inside
+# images/events/ and images/memories/, so gallery.html never has to call the
+# GitHub API at view time (that API is capped at 60 requests/hour per IP —
+# easy to exhaust if several people view the gallery from one network).
+#
+# Runs automatically whenever those folders change (e.g. a Pages CMS upload
+# or delete), and can also be triggered manually from the Actions tab.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "images/events/**"
+      - "images/memories/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generate gallery-manifest.json
+        run: node .github/scripts/generate-gallery-manifest.js
+
+      - name: Commit manifest if it changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add images/gallery-manifest.json
+          if git diff --staged --quiet; then
+            echo "Manifest unchanged, nothing to commit."
+          else
+            git commit -m "chore: update gallery manifest [skip ci]"
+            git push
+          fi

@@ -1,4 +1,12 @@
 # Allow everything except the gallery, which is intentionally private.
+#
+# SEO note: data.json and publications.bib are NOT blocked here, and that's
+# intentional, not an oversight. Google's crawler renders the page's
+# JavaScript before indexing content, which means it has to be able to fetch
+# both files to see your real name, bio, experience, and publications (since
+# all of that loads at runtime, not from static HTML). If you ever add a
+# Disallow line for either file, Googlebot's renderer will fail to fetch it
+# and large parts of the home page will effectively go un-indexed.
 User-agent: *
 Allow: /
 Disallow: /gallery.html
