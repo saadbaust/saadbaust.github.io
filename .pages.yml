@@ -68,18 +68,23 @@ content:
           - { name: hIndex,    label: "h-index",   type: number }
           - { name: i10Index,  label: "i10-index", type: number }
 
-      - name: statImages
-        label: "Hero Chart Images"
+      - name: photos
+        label: "Profile Photo & Hero Charts"
         type: object
-        description: "The two images shown near the top of the home page. Upload a new file to replace either one."
+        description: "To avoid duplicate files piling up: open Media → Site Images, DELETE the old file first, then upload the new one (ideally with the same name). The picker below stays clean that way."
         fields:
+          - name: profilePhoto
+            label: "Profile Photo (the round photo at the top)"
+            type: image
+            options:
+              media: site-images
           - name: researchInterest
-            label: "Research Interest Distribution image"
+            label: "Research Interest Distribution chart"
             type: image
             options:
               media: site-images
           - name: citationHistory
-            label: "Citation History image"
+            label: "Citation History chart"
             type: image
             options:
               media: site-images

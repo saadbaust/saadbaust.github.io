@@ -13,9 +13,10 @@
     "hIndex": 3,
     "i10Index": 0
   },
-  "statImages": {
-    "researchInterest": "/images/Research Interest Distribution.png",
-    "citationHistory": "/images/Citation History.png"
+  "photos": {
+    "profilePhoto": "/images/saadahmed.png",
+    "researchInterest": "/images/research-interest.png",
+    "citationHistory": "/images/citation-history.png"
   },
   "contact": {
     "phone": "+8801724407189",

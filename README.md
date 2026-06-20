@@ -27,6 +27,8 @@ This site is **content-managed**. You almost never need to touch code — you lo
 
 > **Note:** the old `data.js` file is gone. Its content now lives in `data.json` so it can be edited through the CMS with proper forms. If you have a `data.js` left over, delete it.
 
+> **One-time setup for chart previews:** rename your two chart images so they have **no spaces** — `images/Research Interest Distribution.png` → `images/research-interest.png`, and `images/Citation History.png` → `images/citation-history.png`. Spaces in filenames stop the CMS from showing an image preview (your `saadahmed.png` previews fine precisely because it has no spaces). The site already points at the new names.
+
 ---
 
 ## Editing Your Site Through the CMS
@@ -38,7 +40,7 @@ A single screen with grouped sections:
 
 - **Profile & Intro** — name, title line, institution, the badge under your photo, research-focus line, the "About me" paragraph, and your CV link.
 - **Google Scholar Stats** — citations, h-index, i10-index. (Your **Papers** count is calculated automatically from your publications, so there's nothing to type for it.)
-- **Hero Chart Images** — the two charts near the top of the page. Click an image field and upload a new file to replace either one.
+- **Profile Photo & Hero Charts** — the round profile photo plus the two charts near the top of the page. Click a field and upload a new file to replace it. **To avoid duplicate files piling up in `images/`:** open **Media → Site Images**, delete the old file first, then upload the new one (ideally with the same name so it overwrites cleanly). Pages CMS can't *force* delete-before-upload, but this habit keeps the folder tidy.
 - **Contact** — phone number and email address.
 - **Experience** — add, remove, or reorder positions with the **+** / drag controls.
 - **Education** — same, for degrees.
