@@ -1,8 +1,10 @@
+# Allow everything except the gallery, which is intentionally private.
 User-agent: *
 Allow: /
 Disallow: /gallery.html
 
-# Prevent Googlebot-Image from indexing gallery photos
+# Belt-and-braces: also tell Google's image crawler to skip gallery photos.
+# (The home-page hero charts under /images/ stay crawlable on purpose.)
 User-agent: Googlebot-Image
 Disallow: /images/events/
 Disallow: /images/memories/

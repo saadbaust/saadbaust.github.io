@@ -1,0 +1,72 @@
+{
+  "profile": {
+    "name": "Saad Ahmed",
+    "subtitle": "Lecturer, Dept of CSE",
+    "institution": "Bangladesh Army University of Science and Technology (BAUST)",
+    "profileChip": "Lecturer · BAUST",
+    "researchFocus": "Image Processing, Computer Vision, & Deep Learning.",
+    "about": "I am a Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST). My research interests focus on Image Processing, Computer Vision, and Deep Learning, with a dedication to developing intelligent systems that solve real-world problems and contribute to the global advancement of technology.",
+    "cvLink": "https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing"
+  },
+  "stats": {
+    "citations": 15,
+    "hIndex": 3,
+    "i10Index": 0
+  },
+  "statImages": {
+    "researchInterest": "/images/Research Interest Distribution.png",
+    "citationHistory": "/images/Citation History.png"
+  },
+  "contact": {
+    "phone": "+8801724407189",
+    "email": "saadahmed@baust.edu.bd"
+  },
+  "experience": [
+    {
+      "role": "Lecturer",
+      "org": "Dept. of CSE, Bangladesh Army University of Science and Technology (BAUST)",
+      "period": "July 2024 – Present",
+      "desc": "Developing and delivering lectures for undergraduate students, advising on academic planning, conducting Computer Science research, and organizing academic events."
+    }
+  ],
+  "education": [
+    {
+      "degree": "M.Sc. Engineering in Computer Science and Engineering",
+      "inst": "Rajshahi University of Engineering & Technology (RUET)",
+      "year": "March 2025 – Present",
+      "result": "Ongoing"
+    },
+    {
+      "degree": "B.Sc. Engineering in Computer Science and Engineering",
+      "inst": "BAUST",
+      "year": "July 2020 – July 2024",
+      "result": "CGPA: 3.96 / 4.00"
+    }
+  ],
+  "skills": {
+    "research": [
+      "Python",
+      "C/C++",
+      "MATLAB",
+      "Deep Learning (Keras, TensorFlow, PyTorch)",
+      "Pandas",
+      "Scikit-learn",
+      "Matplotlib",
+      "NumPy",
+      "LaTeX",
+      "GitHub"
+    ],
+    "dev": [
+      "PHP",
+      "JavaScript",
+      "MySQL",
+      "Firebase",
+      "WordPress"
+    ]
+  },
+  "certifications": [
+    "Reviewer, 2025 IEEE International Conference on Quantum Photonics, AI and Networkings",
+    "Faculty Training Program, BAUST",
+    "Sustainable Energy Challenge, Bikiron"
+  ]
+}

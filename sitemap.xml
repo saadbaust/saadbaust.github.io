@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Only indexable pages belong here. gallery.html is intentionally omitted
+       so it stays out of search engines (see robots.txt + its noindex tag). -->
   <url>
     <loc>https://saadbaust.github.io/</loc>
-    <lastmod>2026-06-16</lastmod>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

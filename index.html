@@ -95,13 +95,13 @@
               class="profile-photo"
               width="170" height="170"
             />
-            <span class="profile-chip">Lecturer · BAUST</span>
+            <span class="profile-chip" id="profile-chip">Lecturer · BAUST</span>
           </div>
 
           <div class="hero-info">
-            <h1>Saad Ahmed</h1>
-            <p class="subtitle">Lecturer, Dept of CSE</p>
-            <p class="institution">Bangladesh Army University of Science and Technology (BAUST)</p>
+            <h1 id="hero-name">Saad Ahmed</h1>
+            <p class="subtitle" id="hero-subtitle">Lecturer, Dept of CSE</p>
+            <p class="institution" id="hero-institution">Bangladesh Army University of Science and Technology (BAUST)</p>
 
             <div class="metrics-grid" id="metrics">
               <div class="metric-item">
@@ -123,13 +123,14 @@
             </div>
 
             <div class="research-interests">
-              <p><strong>Research Focus:</strong> Image Processing, Computer Vision, &amp; Deep Learning.</p>
+              <p><strong>Research Focus:</strong> <span id="research-focus">Image Processing, Computer Vision, &amp; Deep Learning.</span></p>
             </div>
 
             <div class="hero-actions">
               <a
                 href="https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing"
                 class="resume-btn"
+                id="cv-link"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -149,7 +150,7 @@
         </header>
 
         <div class="academic-summary">
-          <p>
+          <p id="about-text">
             I am a Lecturer at the Department of CSE, Bangladesh Army
             University of Science and Technology (BAUST). My research
             interests focus on Image Processing, Computer Vision, and Deep
@@ -166,6 +167,7 @@
             <p class="stat-image-caption"><i class="fas fa-chart-pie"></i> Research Interest Distribution</p>
             <img
               src="images/Research Interest Distribution.png"
+              id="img-research-interest"
               alt="Pie chart showing Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning"
               class="hero-promo-img"
               loading="lazy"
@@ -175,6 +177,7 @@
             <p class="stat-image-caption"><i class="fas fa-chart-line"></i> Citation History</p>
             <img
               src="images/Citation History.png"
+              id="img-citation-history"
               alt="Bar chart showing Saad Ahmed's Google Scholar citation history over the years"
               class="hero-promo-img"
               loading="lazy"
@@ -222,9 +225,9 @@
           <div class="contact-details">
             <p><i class="fas fa-user-tie"></i> <strong>Saad Ahmed</strong></p>
             <p><i class="fas fa-building"></i> Lecturer, Dept of CSE, BAUST</p>
-            <p><i class="fas fa-phone"></i> +8801724407189</p>
+            <p><i class="fas fa-phone"></i> <span id="contact-phone">+8801724407189</span></p>
             <p><i class="fas fa-envelope"></i>
-              <a href="mailto:saadahmed@baust.edu.bd" class="email-link">saadahmed@baust.edu.bd</a>
+              <a href="mailto:saadahmed@baust.edu.bd" class="email-link" id="contact-email">saadahmed@baust.edu.bd</a>
             </p>
           </div>
         </section>
@@ -239,8 +242,59 @@
       <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="data.js"></script>
     <script>
+    // ─── Site data loader ────────────────────────────────────────────────────────
+    // All editable text/numbers/images now live in data.json, which is managed
+    // through Pages CMS (Content → "Basic Info"). The site fetches it at runtime,
+    // exactly like publications.bib. If the fetch ever fails, the static fallback
+    // text already in the HTML stays on screen, so the page never looks broken.
+    async function loadSiteData() {
+      try {
+        const res = await fetch('data.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return await res.json();
+      } catch (e) {
+        console.error('Could not load data.json:', e);
+        return null;
+      }
+    }
+
+    // Small helpers to safely set text / attributes only when both the element
+    // and the value exist (keeps the HTML fallback if a value is missing).
+    function setText(id, value) {
+      const el = document.getElementById(id);
+      if (el && value != null && value !== '') el.textContent = value;
+    }
+    function setAttr(id, attr, value) {
+      const el = document.getElementById(id);
+      if (el && value != null && value !== '') el.setAttribute(attr, value);
+    }
+
+    function injectSiteData(site) {
+      if (!site) return;
+      const p = site.profile  || {};
+      const c = site.contact  || {};
+      const im = site.statImages || {};
+
+      setText('hero-name',       p.name);
+      setText('hero-subtitle',   p.subtitle);
+      setText('hero-institution',p.institution);
+      setText('profile-chip',    p.profileChip);
+      setText('research-focus',  p.researchFocus);
+      setText('about-text',      p.about);
+      setAttr('cv-link', 'href', p.cvLink);
+
+      setAttr('img-research-interest', 'src', im.researchInterest);
+      setAttr('img-citation-history',  'src', im.citationHistory);
+
+      setText('contact-phone', c.phone);
+      const emailEl = document.getElementById('contact-email');
+      if (emailEl && c.email) {
+        emailEl.textContent = c.email;
+        emailEl.setAttribute('href', 'mailto:' + c.email);
+      }
+    }
+
     // ─── BibTeX loader ───────────────────────────────────────────────────────────
     // Fetches publications.bib and splits it into individual entry strings.
     // Each entry is returned as { bibtex: "raw entry string" }, exactly matching
@@ -331,20 +385,25 @@
         </div>`;
     }
 
-    // ─── Main render (async — awaits the publications fetch) ──────────────────
+    // ─── Main render (async — awaits both fetches) ────────────────────────────
     async function renderContent() {
-      // Load papers from data/publications.json at runtime
-      const myPapers = await loadBibFile();
+      // Load everything at runtime: papers from publications.bib, the rest from data.json
+      const [myPapers, site] = await Promise.all([loadBibFile(), loadSiteData()]);
+
+      // Fill in name, intro, CV link, contact, hero images, etc.
+      injectSiteData(site);
+
+      const stats = (site && site.stats) || { citations: 0, hIndex: 0, i10Index: 0 };
 
       const papersEl = document.getElementById('total-papers');
       const citeEl   = document.getElementById('total-citations');
       const hEl      = document.getElementById('h-index');
       const i10El    = document.getElementById('i10-index');
 
-      papersEl.textContent   = myPapers.length;
-      citeEl.textContent     = scholarStats.citations;
-      hEl.textContent        = scholarStats.hIndex;
-      i10El.textContent      = scholarStats.i10Index;
+      papersEl.textContent   = myPapers.length;   // Papers count is auto-derived
+      citeEl.textContent     = stats.citations;
+      hEl.textContent        = stats.hIndex;
+      i10El.textContent      = stats.i10Index;
 
       const jList  = document.getElementById('journal-list');
       const cList  = document.getElementById('conference-list');
@@ -364,7 +423,7 @@
 
       const expList = document.getElementById('experience-list');
       expList.className = 'timeline-container';
-      (academicInfo?.experience || []).forEach(e => {
+      (site?.experience || []).forEach(e => {
         expList.insertAdjacentHTML('beforeend', `
           <div class="timeline-item">
             <div class="timeline-header">
@@ -378,7 +437,7 @@
 
       const eduList = document.getElementById('education-list');
       eduList.className = 'timeline-container';
-      (academicInfo?.education || []).forEach(ed => {
+      (site?.education || []).forEach(ed => {
         eduList.insertAdjacentHTML('beforeend', `
           <div class="timeline-item">
             <div class="timeline-header">
@@ -390,8 +449,8 @@
           </div>`);
       });
 
-      const researchSkills = academicInfo?.skills?.research || [];
-      const devSkills      = academicInfo?.skills?.dev      || [];
+      const researchSkills = site?.skills?.research || [];
+      const devSkills      = site?.skills?.dev      || [];
 
       const rList = document.getElementById('skills-research');
       const dList = document.getElementById('skills-dev');
@@ -399,12 +458,12 @@
       devSkills.forEach(s => dList.insertAdjacentHTML('beforeend', `<span class="skill-tag skill-tag-dev">${s}</span>`));
 
       const certList = document.getElementById('cert-list');
-      (academicInfo?.certifications || []).forEach(c => {
+      (site?.certifications || []).forEach(c => {
         certList.insertAdjacentHTML('beforeend',
           `<p class="cert-item"><i class="fas fa-certificate"></i> ${c}</p>`);
       });
 
-      initReveal(myPapers, scholarStats);
+      initReveal(myPapers, stats);
     }
 
     function initReveal(myPapers, scholarStats) {

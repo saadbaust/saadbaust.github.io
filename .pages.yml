@@ -1,4 +1,29 @@
+# ───────────────────────────────────────────────────────────────────────────
+# Pages CMS configuration  —  https://pagescms.org
+#
+# This single file decides what you can edit when you log into the CMS at
+#   https://app.pagescms.org/saadbaust/saadbaust.github.io
+#
+# After logging in you'll see three things in the left sidebar:
+#   1. Basic Info   → name, intro, stats, CV link, hero images, experience,
+#                     education, skills, certifications, phone & email
+#   2. Publications → your full BibTeX (paste the whole .bib in one box)
+#   3. Media        → Site Images / Event Photos / Memory Photos
+#
+# Nothing else needs editing by hand. Save in the CMS → it commits to GitHub →
+# the live site updates automatically within a minute.
+# ───────────────────────────────────────────────────────────────────────────
+
 media:
+  # General site images (profile photo, the two hero charts, etc.)
+  - name: site-images
+    label: "Site Images"
+    input: images
+    output: /images
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, gif, svg]
+    rename: false
+
   - name: events-images
     label: "Event Photos"
     input: images/events
@@ -14,19 +39,106 @@ media:
     rename: false
 
 content:
-  # ── Publications ──────────────────────────────────────────────────────
-  # One single raw-text/code editor for the WHOLE publications.bib file.
-  # No per-paper forms, no separate "Item #1, #2..." entries — just paste
-  # your entire multi-entry .bib export here in one go and Save, exactly
-  # like opening the .bib file in a text editor.
+  # ── Basic Info ──────────────────────────────────────────────────────────
+  # One screen that controls everything on the home page except the papers.
+  - name: basic-info
+    label: "Basic Info"
+    type: file
+    path: data.json
+    description: "Everything on the home page (except publications) is edited here. Save to publish."
+    fields:
+      - name: profile
+        label: "Profile & Intro"
+        type: object
+        fields:
+          - { name: name,        label: "Full name",                     type: string }
+          - { name: subtitle,    label: "Title / role line",             type: string }
+          - { name: institution, label: "Institution",                   type: string }
+          - { name: profileChip, label: "Badge text under photo",        type: string }
+          - { name: researchFocus, label: "Research focus line",         type: string }
+          - { name: about,       label: "Intro paragraph (About me)",    type: text }
+          - { name: cvLink,      label: "CV link (full URL)",            type: string, description: "Paste the share link to your CV / résumé PDF." }
+
+      - name: stats
+        label: "Google Scholar Stats"
+        type: object
+        description: "Your 'Papers' number is counted automatically from Publications — no need to set it here."
+        fields:
+          - { name: citations, label: "Citations", type: number }
+          - { name: hIndex,    label: "h-index",   type: number }
+          - { name: i10Index,  label: "i10-index", type: number }
+
+      - name: statImages
+        label: "Hero Chart Images"
+        type: object
+        description: "The two images shown near the top of the home page. Upload a new file to replace either one."
+        fields:
+          - name: researchInterest
+            label: "Research Interest Distribution image"
+            type: image
+            options:
+              media: site-images
+          - name: citationHistory
+            label: "Citation History image"
+            type: image
+            options:
+              media: site-images
+
+      - name: contact
+        label: "Contact"
+        type: object
+        fields:
+          - { name: phone, label: "Phone number", type: string }
+          - { name: email, label: "Email address", type: string }
+
+      - name: experience
+        label: "Experience"
+        type: object
+        list: true
+        description: "Add, remove or reorder positions. Newest first looks best."
+        fields:
+          - { name: role,   label: "Role / position", type: string }
+          - { name: org,    label: "Organization",    type: string }
+          - { name: period, label: "Period (e.g. July 2024 – Present)", type: string }
+          - { name: desc,   label: "Description",      type: text }
+
+      - name: education
+        label: "Education"
+        type: object
+        list: true
+        description: "Add, remove or reorder degrees."
+        fields:
+          - { name: degree, label: "Degree", type: string }
+          - { name: inst,   label: "Institution", type: string }
+          - { name: year,   label: "Period / year", type: string }
+          - { name: result, label: "Result (e.g. CGPA: 3.96 / 4.00, or Ongoing)", type: string }
+
+      - name: skills
+        label: "Technical Skills"
+        type: object
+        fields:
+          - { name: research, label: "Research & AI", type: string, list: true }
+          - { name: dev,      label: "Development & Tools", type: string, list: true }
+
+      - name: certifications
+        label: "Certifications & Activities"
+        type: string
+        list: true
+        description: "One item per entry. Use the + button to add more."
+
+  # ── Publications ────────────────────────────────────────────────────────
+  # The whole publications.bib file in one editor. The site reads this file
+  # directly, splits it into entries, and sorts journals vs conferences.
   - name: publications
-    label: "Publications"
+    label: "Publications (BibTeX)"
     type: file
     path: publications.bib
     format: code
-
-# No "Gallery" content entry on purpose: photos are managed entirely
-# through Media → Event Photos / Memory Photos below. Upload a file there
-# and it appears on the site automatically — gallery.html lists whatever
-# is actually in images/events/ and images/memories/ at runtime and turns
-# each filename into its caption/alt text. No extra data file to edit.
+    description: >-
+      Paste your COMPLETE BibTeX here — the entire contents of your .bib file,
+      all entries together in one go, exactly like opening the .bib file in a
+      text editor. Each entry must start with @ (for example @article{...} for
+      journals or @INPROCEEDINGS{...} for conferences). The site sorts journals
+      and conferences for you and counts the total as your "Papers" number.
+      Tip: on Google Scholar or IEEE Xplore, click Cite → BibTeX to copy an
+      entry, then paste it in below. To remove a paper, delete its block.
