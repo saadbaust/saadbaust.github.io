@@ -48,6 +48,12 @@
             <a href="index.html#skills">Skills</a>
             <a href="index.html#contact">Contact</a>
           </div>
+          <div class="nav-group">
+            <small class="nav-label">Admin</small>
+            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-lock"></i> CMS Login
+            </a>
+          </div>
         </nav>
       </aside>
 
@@ -63,16 +69,18 @@
 
         <hr class="divider" />
 
-        <!-- Both sections below are populated at runtime from data/gallery.json
-             by renderGallery() in the script block. Pages CMS edits that JSON
-             file directly (and uploads images into images/events/ or
-             images/memories/), so adding a photo never requires touching
-             this HTML or doing a git push by hand. -->
+        <!-- Both grids below are populated at runtime by listing whatever files
+             actually exist in images/events/ and images/memories/ via the GitHub
+             API — see loadGalleryData() in the script block. Upload or delete a
+             photo through Pages CMS -> Media, and it appears or disappears here
+             automatically. The caption/alt text is generated from the filename,
+             so name your file the way you want it captioned, e.g.
+             "Sajek Valley.webp" or "sajek-valley.webp" both show as "Sajek Valley". -->
 
         <section class="gallery-section">
           <h2 class="gallery-cat-title">
             <i class="fas fa-calendar-day"></i> Events
-            <span class="gallery-cat-count" id="events-count">0</span>
+            <span class="gallery-cat-count" id="events-count">…</span>
           </h2>
           <div class="masonry-grid" id="events-grid"></div>
         </section>
@@ -80,7 +88,7 @@
         <section class="gallery-section">
           <h2 class="gallery-cat-title">
             <i class="fas fa-images"></i> Memories
-            <span class="gallery-cat-count" id="memories-count">0</span>
+            <span class="gallery-cat-count" id="memories-count">…</span>
           </h2>
           <div class="masonry-grid" id="memories-grid"></div>
         </section>
@@ -105,23 +113,58 @@
     </button>
 
     <script>
-    // ─── Load gallery data ───────────────────────────────────────────────
-    // gallery.json shape (managed by Pages CMS):
-    // { "events": [{image, alt, caption}, ...], "memories": [{image, alt, caption}, ...] }
-    async function loadGalleryData() {
+    // ─── Config ────────────────────────────────────────────────────────────────
+    const REPO_OWNER  = 'saadbaust';
+    const REPO_NAME    = 'saadbaust.github.io';
+    const REPO_BRANCH  = 'main';
+    const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+
+    // ─── Filename → caption/alt text ────────────────────────────────────────────
+    // "sajek-valley.webp"           -> "Sajek Valley"
+    // "World-Robotics-Olympiad-BD"  -> "World Robotics Olympiad BD"  (acronyms preserved)
+    function humanizeFilename(filename) {
+      const base = filename.replace(/\.[^/.]+$/, '');           // strip extension
+      const words = base.replace(/[-_]+/g, ' ').trim().split(/\s+/);
+      const cased = words.map(w => {
+        if (w.length > 1 && w === w.toUpperCase()) return w;     // keep e.g. "BD", "BAUST" as-is
+        return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase();
+      });
+      return cased.join(' ');
+    }
+
+    // ─── Ask GitHub what's actually in a folder right now ─────────────────────
+    // Returns an array of {image, alt, caption} on success, or null on failure
+    // (network error or hitting GitHub's public, unauthenticated rate limit).
+    async function fetchFolderImages(folderPath) {
       try {
-        const res = await fetch('data/gallery.json');
+        const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${folderPath}?ref=${REPO_BRANCH}`;
+        const res = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return await res.json();
+        const files = await res.json();
+        return files
+          .filter(f => f.type === 'file' && IMAGE_EXTENSIONS.includes((f.name.split('.').pop() || '').toLowerCase()))
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map(f => {
+            const caption = humanizeFilename(f.name);
+            return { image: f.download_url, alt: caption, caption };
+          });
       } catch (e) {
-        console.error('Could not load data/gallery.json:', e);
-        return { events: [], memories: [] };
+        console.error(`Could not list ${folderPath}:`, e);
+        return null;
       }
     }
 
     function renderSection(gridId, countId, items) {
-      const grid = document.getElementById(gridId);
-      document.getElementById(countId).textContent = items.length;
+      const grid  = document.getElementById(gridId);
+      const count = document.getElementById(countId);
+
+      if (items === null) {
+        count.textContent = '–';
+        grid.innerHTML = '<p style="color:var(--gray);font-size:0.85rem;padding:8px 0;">Couldn\u2019t load photos right now — please refresh in a minute.</p>';
+        return;
+      }
+
+      count.textContent = items.length;
       items.forEach(item => {
         grid.insertAdjacentHTML('beforeend', `
           <figure class="masonry-item">
@@ -193,9 +236,12 @@
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
-      const data = await loadGalleryData();
-      renderSection('events-grid',    'events-count',    data.events    || []);
-      renderSection('memories-grid',  'memories-count',  data.memories  || []);
+      const [events, memories] = await Promise.all([
+        fetchFolderImages('images/events'),
+        fetchFolderImages('images/memories'),
+      ]);
+      renderSection('events-grid',   'events-count',   events);
+      renderSection('memories-grid', 'memories-count', memories);
       initLightbox();      // must run AFTER the grids are populated
       initBackToTop();
     });

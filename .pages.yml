@@ -15,82 +15,18 @@ media:
 
 content:
   # ── Publications ──────────────────────────────────────────────────────
-  # Edits data/publications.json. The site already knows how to parse a raw
-  # BibTeX string into a paper card (title/author/venue/year/DOI), so the
-  # only field we need per entry is the BibTeX text itself — paste it
-  # straight from Google Scholar's or IEEE Xplore's "Cite" button, exactly
-  # like before, just through a UI instead of a text editor + git push.
+  # One single raw-text/code editor for the WHOLE publications.bib file.
+  # No per-paper forms, no separate "Item #1, #2..." entries — just paste
+  # your entire multi-entry .bib export here in one go and Save, exactly
+  # like opening the .bib file in a text editor.
   - name: publications
     label: "Publications"
     type: file
-    path: data/publications.json
-    fields:
-      - name: entries
-        label: "Papers"
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-        fields:
-          - name: bibtex
-            label: "BibTeX entry"
-            type: text
-            description: >
-              Paste the FULL BibTeX citation, including the @article{...} or
-              @INPROCEEDINGS{...} wrapper line. Copy this directly from
-              Google Scholar ("Cite" → BibTeX) or IEEE Xplore ("Cite this" →
-              BibTeX). The site auto-detects journal vs. conference from the
-              @article / @INPROCEEDINGS tag and sorts by the year= field.
+    path: publications.bib
+    format: code
 
-  # ── Gallery ───────────────────────────────────────────────────────────
-  # Edits data/gallery.json. Two photo lists — Events and Memories — each
-  # rendered into gallery.html at runtime. Uploading an image here drops the
-  # file straight into images/events/ or images/memories/ in the repo.
-  - name: gallery
-    label: "Gallery"
-    type: file
-    path: data/gallery.json
-    fields:
-      - name: events
-        label: "Events"
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{fields.caption}"
-        fields:
-          - name: image
-            label: "Photo"
-            type: image
-            options:
-              media: events-images
-          - name: alt
-            label: "Alt text"
-            type: string
-            description: "Describes the photo for screen readers and SEO."
-          - name: caption
-            label: "Caption"
-            type: string
-            description: "Shown under the photo and in the lightbox."
-
-      - name: memories
-        label: "Memories"
-        type: object
-        list:
-          collapsible:
-            collapsed: true
-            summary: "{fields.caption}"
-        fields:
-          - name: image
-            label: "Photo"
-            type: image
-            options:
-              media: memories-images
-          - name: alt
-            label: "Alt text"
-            type: string
-            description: "Describes the photo for screen readers and SEO."
-          - name: caption
-            label: "Caption"
-            type: string
-            description: "Shown under the photo and in the lightbox."
+# No "Gallery" content entry on purpose: photos are managed entirely
+# through Media → Event Photos / Memory Photos below. Upload a file there
+# and it appears on the site automatically — gallery.html lists whatever
+# is actually in images/events/ and images/memories/ at runtime and turns
+# each filename into its caption/alt text. No extra data file to edit.

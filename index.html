@@ -76,6 +76,12 @@
             <a href="#skills">Skills</a>
             <a href="#contact">Contact</a>
           </div>
+          <div class="nav-group">
+            <small class="nav-label">Admin</small>
+            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer">
+              <i class="fas fa-lock"></i> CMS Login
+            </a>
+          </div>
         </nav>
       </aside>
 
@@ -235,17 +241,22 @@
 
     <script src="data.js"></script>
     <script>
-    // ─── Publications loader (now reads data/publications.json) ──────────────────
-    // Pages CMS edits data/publications.json. Each entry is { bibtex: "raw entry string" },
-    // exactly matching the shape buildPaperCard() already expects — no other code changes.
+    // ─── BibTeX loader ───────────────────────────────────────────────────────────
+    // Fetches publications.bib and splits it into individual entry strings.
+    // Each entry is returned as { bibtex: "raw entry string" }, exactly matching
+    // the shape that buildPaperCard() already expects — no other code needs to change.
+    // publications.bib is now edited as ONE raw file via Pages CMS (Content → Publications),
+    // so this just reads the file straight off the repo, same as before.
     async function loadBibFile() {
       try {
-        const res = await fetch('data/publications.json');
+        const res = await fetch('publications.bib');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const { entries } = await res.json();
-        return entries;
+        const text = await res.text();
+        // Split on a newline immediately followed by '@' (each entry starts with @)
+        const entries = text.trim().split(/\n(?=@)/).filter(Boolean);
+        return entries.map(s => ({ bibtex: s.trim() }));
       } catch (e) {
-        console.error('Could not load data/publications.json:', e);
+        console.error('Could not load publications.bib:', e);
         return [];
       }
     }
