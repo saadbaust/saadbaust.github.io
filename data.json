@@ -69,22 +69,21 @@
     {
       "title": "Your Research Project Title",
       "period": "2024 – Present",
-      "desc": "Short description of the project — its goal, methods, and outcomes. Edit, add more, or delete this in the CMS (Basic Info → Research Projects).",
-      "link": ""
+      "desc": "Short description of the project — its goal, methods, and outcomes. Edit, add more, or delete this in the CMS (Basic Info → Research Projects)."
     }
   ],
   "teaching": [
     {
-      "code": "CSE XXXX",
-      "course": "Your Course Title",
-      "semester": "Spring 2025"
+      "code": "CSE 2101",
+      "course": "Digital Logic Design ",
+      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer2026"
     }
   ],
   "sections": {
     "about": true,
     "charts": true,
     "experience": true,
-    "research": true,
+    "research": false,
     "journals": true,
     "conferences": true,
     "teaching": true,
