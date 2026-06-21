@@ -42,7 +42,7 @@ Go to **[app.pagescms.org/saadbaust/saadbaust.github.io](https://app.pagescms.or
 A single screen with grouped sections:
 
 - **Profile & Intro** — name, title line, institution, the badge under your photo, research-focus line, the "About me" paragraph, and your CV link.
-- **Google Scholar Stats** — citations, h-index, i10-index. (Your **Papers** count is calculated automatically from your publications, so there's nothing to type for it.)
+- **Citation Stats** — citations, h-index, i10-index, plus a **Stats source** dropdown. Leave it on **Manual** to use the numbers you type, or switch to **Auto** to pull Citations and h-index live from your Semantic Scholar profile (set your Semantic Scholar Author ID once). i10-index is always manual, because Semantic Scholar's API doesn't expose it. If Semantic Scholar can't be reached, the page automatically falls back to the manual numbers, so it never shows a blank stat. (Your **Papers** count is calculated automatically from your publications, so there's nothing to type for it.)
 - **Profile Photo & Hero Charts** — the round profile photo plus the two charts near the top of the page. Click a field and upload a new file to replace it. **To avoid duplicate files piling up in `images/`:** open **Media → Site Images**, delete the old file first, then upload the new one (ideally with the same name so it overwrites cleanly). Pages CMS can't *force* delete-before-upload, but this habit keeps the folder tidy.
 - **Contact** — phone number and email address.
 - **Experience** — add, remove, or reorder positions with the **+** / drag controls.

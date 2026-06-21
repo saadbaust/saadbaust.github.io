@@ -28,7 +28,7 @@
   box-sizing: border-box;
 }
 
-html { scroll-behavior: auto; }
+html { scroll-behavior: smooth; }
 
 body {
   font-family: "Inter", sans-serif;
@@ -935,6 +935,8 @@ footer {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
   .main-block { animation: none; }
 
   *,
