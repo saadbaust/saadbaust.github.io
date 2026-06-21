@@ -49,6 +49,9 @@ A single screen with grouped sections:
 - **Education** — same, for degrees.
 - **Technical Skills** — two lists (Research & AI, Development & Tools). Add a skill with **+**.
 - **Certifications & Activities** — one item per entry.
+- **Research Projects** — add/remove/reorder projects (title, period/status, description, optional link). Leaving it empty hides the section automatically.
+- **Teaching** — add/remove/reorder courses, shown as a table with Course Code, Course Title, and Semester. Leaving it empty hides the section automatically.
+- **Section Visibility** — a switch for each home-page section (About, Hero charts, Experience, Research Projects, Publications, Conferences, Teaching, Education, Skills, Certifications, Contact). Turn one off to hide that section from the live site; your content stays saved, it's just hidden, and the matching sidebar link disappears too.
 
 Edit anything, click **Save**, done.
 

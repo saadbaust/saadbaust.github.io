@@ -127,6 +127,8 @@
             <a href="#experience">Experience</a>
             <a href="#journals">Publications</a>
             <a href="#conferences">Conferences</a>
+            <a href="#research">Research Projects</a>
+            <a href="#teaching">Teaching</a>
             <a href="#education">Education</a>
             <a href="#skills">Skills</a>
             <a href="#contact">Contact</a>
@@ -192,20 +194,20 @@
                 <i class="fas fa-file-pdf"></i> View CV
               </a>
               <div class="social-icons">
-                <a href="https://linkedin.com/in/saadbaust"                          class="icon linkedin"     title="LinkedIn"      target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
-                <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&hl=en"  class="icon scholar"      title="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i></a>
-                <a href="https://orcid.org/0009-0005-5614-3427"                      class="icon orcid"        title="ORCID"         target="_blank" rel="noopener noreferrer"><i class="fab fa-orcid"></i></a>
-                <a href="https://www.researchgate.net/profile/Saad-Ahmed-96"         class="icon researchgate" title="ResearchGate"  target="_blank" rel="noopener noreferrer"><i class="fab fa-researchgate"></i></a>
-                <a href="https://ieeexplore.ieee.org/author/526065849930602"         class="icon ieee"         title="IEEE Xplore" aria-label="IEEE Xplore author profile" target="_blank" rel="noopener noreferrer"><span class="ieee-mark">IEEE</span></a>
-                <a href="https://www.semanticscholar.org/author/Saad-Ahmed/2336915789" class="icon semantic-scholar" title="Semantic Scholar" aria-label="Semantic Scholar author profile" target="_blank" rel="noopener noreferrer"><span class="ss-mark">S2</span></a>
-                <a href="https://github.com/saadbaust"                               class="icon github"       title="GitHub"        target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
-                <a href="https://youtube.com/@saadbaust"                             class="icon youtube"      title="YouTube"       target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                <a href="https://linkedin.com/in/saadbaust"                          class="icon linkedin"     title="LinkedIn"      target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i><span class="social-label">LinkedIn</span></a>
+                <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&hl=en"  class="icon scholar"      title="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i><span class="social-label">Google Scholar</span></a>
+                <a href="https://orcid.org/0009-0005-5614-3427"                      class="icon orcid"        title="ORCID"         target="_blank" rel="noopener noreferrer"><i class="fab fa-orcid"></i><span class="social-label">ORCID</span></a>
+                <a href="https://www.researchgate.net/profile/Saad-Ahmed-96"         class="icon researchgate" title="ResearchGate"  target="_blank" rel="noopener noreferrer"><i class="fab fa-researchgate"></i><span class="social-label">ResearchGate</span></a>
+                <a href="https://ieeexplore.ieee.org/author/526065849930602"         class="icon ieee"         title="IEEE Xplore" aria-label="IEEE Xplore author profile" target="_blank" rel="noopener noreferrer"><span class="ieee-mark">IEEE</span><span class="social-label">Xplore</span></a>
+                <a href="https://www.semanticscholar.org/author/Saad-Ahmed/2336915789" class="icon semantic-scholar" title="Semantic Scholar" aria-label="Semantic Scholar author profile" target="_blank" rel="noopener noreferrer"><span class="ss-mark">S2</span><span class="social-label">Semantic Scholar</span></a>
+                <a href="https://github.com/saadbaust"                               class="icon github"       title="GitHub"        target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i><span class="social-label">GitHub</span></a>
+                <a href="https://youtube.com/@saadbaust"                             class="icon youtube"      title="YouTube"       target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i><span class="social-label">YouTube</span></a>
               </div>
             </div>
           </div>
         </header>
 
-        <div class="academic-summary">
+        <div class="academic-summary" id="about-section">
           <p id="about-text">
             I am a Lecturer at the Department of CSE, Bangladesh Army
             University of Science and Technology (BAUST). My research
@@ -216,9 +218,9 @@
           </p>
         </div>
 
-        <hr class="divider" />
+        <hr class="divider" id="divider-charts" />
 
-        <div class="hero-images-container">
+        <div class="hero-images-container" id="charts-section">
           <div class="stat-image-wrap">
             <p class="stat-image-caption"><i class="fas fa-chart-pie"></i> Research Interest Distribution</p>
             <img
@@ -254,6 +256,16 @@
           <div id="conference-list"></div>
         </section>
 
+        <section id="research">
+          <h2 class="section-title">Research Projects</h2>
+          <div id="research-list"></div>
+        </section>
+
+        <section id="teaching">
+          <h2 class="section-title">Teaching</h2>
+          <div id="teaching-list"></div>
+        </section>
+
         <section id="education">
           <h2 class="section-title">Education</h2>
           <div id="education-list"></div>
@@ -272,7 +284,7 @@
           <div id="cert-list"></div>
         </section>
 
-        <hr class="divider" />
+        <hr class="divider" id="divider-contact" />
 
         <section id="contact">
           <h2 class="section-title">Contact Information</h2>
@@ -526,6 +538,50 @@
       });
       showLoadErrorIfNeeded(expList, !site, 'Content failed to load — please refresh the page.');
 
+      // Research Projects (editable via CMS → Basic Info → Research Projects)
+      const projList = document.getElementById('research-list');
+      projList.className = 'project-grid';
+      (site?.research || []).forEach(r => {
+        const meta = r.period || r.status || '';
+        const linkBtn = r.link
+          ? `<div class="paper-actions" style="margin-top:10px;">
+               <a href="${r.link}" class="btn-doi" target="_blank" rel="noopener noreferrer">
+                 <i class="fas fa-external-link-alt"></i> View project
+               </a>
+             </div>`
+          : '';
+        projList.insertAdjacentHTML('beforeend', `
+          <div class="project-card">
+            <div class="project-card-header">
+              <span class="project-title">${r.title || ''}</span>
+              ${meta ? `<span class="project-period">${meta}</span>` : ''}
+            </div>
+            ${r.desc ? `<p class="project-desc">${r.desc}</p>` : ''}
+            ${linkBtn}
+          </div>`);
+      });
+
+      // Teaching (editable via CMS → Basic Info → Teaching) — rendered as a table
+      const teachList = document.getElementById('teaching-list');
+      const teaching = site?.teaching || [];
+      if (teaching.length) {
+        const rows = teaching.map(t => `
+            <tr>
+              <td class="course-code">${t.code || ''}</td>
+              <td>${t.course || ''}</td>
+              <td>${t.semester || ''}</td>
+            </tr>`).join('');
+        teachList.innerHTML = `
+          <div class="table-wrap">
+            <table class="teaching-table">
+              <thead>
+                <tr><th>Course Code</th><th>Course Title</th><th>Semester</th></tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          </div>`;
+      }
+
       const eduList = document.getElementById('education-list');
       eduList.className = 'timeline-container';
       (site?.education || []).forEach(ed => {
@@ -559,7 +615,49 @@
       showLoadErrorIfNeeded(certList, !site, 'Content failed to load — please refresh the page.');
 
       injectPublicationsStructuredData(sorted);
+      applySectionVisibility(site);
       initReveal(myPapers, stats);
+    }
+
+    // Shows/hides home-page sections based on data.json → sections (each a boolean,
+    // editable in the CMS). A section defaults to visible unless explicitly set to
+    // false. Teaching and Research Projects also auto-hide when they have no entries,
+    // so an empty section never shows. When a section is hidden, its matching sidebar
+    // nav link (and any adjacent divider) is hidden too.
+    function applySectionVisibility(site) {
+      const vis = (site && site.sections) || {};
+      const map = {
+        about:          'about-section',
+        charts:         'charts-section',
+        experience:     'experience',
+        research:       'research',
+        journals:       'journals',
+        conferences:    'conferences',
+        teaching:       'teaching',
+        education:      'education',
+        skills:         'skills',
+        certifications: 'certs',
+        contact:        'contact',
+      };
+
+      const hasContent = {
+        research: (site?.research  || []).length > 0,
+        teaching: (site?.teaching  || []).length > 0,
+      };
+
+      Object.entries(map).forEach(([key, id]) => {
+        let show = vis[key] !== false;                 // default visible
+        if (key in hasContent && !hasContent[key]) show = false; // auto-hide if empty
+        const el = document.getElementById(id);
+        if (el) el.hidden = !show;
+        document.querySelectorAll(`.sidebar nav a[href$="#${id}"]`)
+          .forEach(a => { a.hidden = !show; });
+      });
+
+      const dCharts = document.getElementById('divider-charts');
+      if (dCharts) dCharts.hidden = (vis.charts === false);
+      const dContact = document.getElementById('divider-contact');
+      if (dContact) dContact.hidden = (vis.contact === false);
     }
 
     // SEO: publications come from publications.bib at runtime, so they can't be

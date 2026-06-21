@@ -64,5 +64,33 @@
     "Reviewer, 2025 IEEE International Conference on Quantum Photonics, AI and Networking",
     "Faculty Training Program, BAUST",
     "Sustainable Energy Challenge, Bikiron"
-  ]
+  ],
+  "research": [
+    {
+      "title": "Your Research Project Title",
+      "period": "2024 – Present",
+      "desc": "Short description of the project — its goal, methods, and outcomes. Edit, add more, or delete this in the CMS (Basic Info → Research Projects).",
+      "link": ""
+    }
+  ],
+  "teaching": [
+    {
+      "code": "CSE XXXX",
+      "course": "Your Course Title",
+      "semester": "Spring 2025"
+    }
+  ],
+  "sections": {
+    "about": true,
+    "charts": true,
+    "experience": true,
+    "research": true,
+    "journals": true,
+    "conferences": true,
+    "teaching": true,
+    "education": true,
+    "skills": true,
+    "certifications": true,
+    "contact": true
+  }
 }

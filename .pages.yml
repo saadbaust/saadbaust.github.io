@@ -101,6 +101,44 @@ content:
         list: true
         description: "One item per entry. Use the + button to add more."
 
+      - name: research
+        label: "Research Projects"
+        type: object
+        list: true
+        description: "Your research projects. Add, remove or reorder. If you leave this empty, the Research Projects section is hidden automatically."
+        fields:
+          - { name: title,  label: "Project title", type: string }
+          - { name: period, label: "Period / status (e.g. 2024 – Present, Ongoing)", type: string }
+          - { name: desc,   label: "Description", type: text }
+          - { name: link,   label: "Link (optional, full URL)", type: string, description: "Optional — paper, repo, or demo. Leave blank for no button." }
+
+      - name: teaching
+        label: "Teaching"
+        type: object
+        list: true
+        description: "Courses you teach, shown as a table (Course Code · Course Title · Semester). Add, remove or reorder. Leaving it empty hides the section automatically."
+        fields:
+          - { name: code,     label: "Course code (e.g. CSE 4203)", type: string }
+          - { name: course,   label: "Course title", type: string }
+          - { name: semester, label: "Semester (e.g. Spring 2025)", type: string }
+
+      - name: sections
+        label: "Section Visibility"
+        type: object
+        description: "Show or hide any home-page section. Switch one OFF to hide that section from the live site — your content stays saved, it's just hidden. (Teaching and Research Projects also hide automatically when they have no entries.)"
+        fields:
+          - { name: about,          label: "About / intro paragraph",            type: boolean, default: true }
+          - { name: charts,         label: "Hero charts (interest + citations)", type: boolean, default: true }
+          - { name: experience,     label: "Experience",                         type: boolean, default: true }
+          - { name: research,       label: "Research Projects",                  type: boolean, default: true }
+          - { name: journals,       label: "Journal Articles",                   type: boolean, default: true }
+          - { name: conferences,    label: "Conference Proceedings",             type: boolean, default: true }
+          - { name: teaching,       label: "Teaching",                           type: boolean, default: true }
+          - { name: education,      label: "Education",                          type: boolean, default: true }
+          - { name: skills,         label: "Technical Skills",                   type: boolean, default: true }
+          - { name: certifications, label: "Certifications & Activities",        type: boolean, default: true }
+          - { name: contact,        label: "Contact",                            type: boolean, default: true }
+
   # ── Publications ────────────────────────────────────────────────────────
   # The whole publications.bib file in one editor. The site reads this file
   # directly, splits it into entries, and sorts journals vs conferences.
