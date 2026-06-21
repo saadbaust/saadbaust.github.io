@@ -103,7 +103,7 @@
     "about": true,
     "charts": true,
     "experience": true,
-    "research": false,
+    "research": true,
     "journals": true,
     "conferences": true,
     "teaching": true,
