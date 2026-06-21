@@ -26,7 +26,7 @@ This site is **content-managed**. You almost never need to touch code — you lo
 | `.github/scripts/generate-gallery-manifest.js` | The script that Action runs. |
 | `.gitattributes` | Git line-ending normalization. Leave as is. |
 | `images/` | Your photos, profile picture, favicon, and the two hero charts. |
-| `images/s-logo.png` | Site favicon — the small icon shown in browser tabs. |
+| `images/s-logo.png` | **No longer used as favicon.** The site now uses an inline SVG data URI (`SA` initials in a blue rounded box) so no image file is needed. You can delete this file. |
 
 > **Note:** the old `data.js` file is gone. Its content now lives in `data.json` so it can be edited through the CMS with proper forms. If you have a `data.js` left over, delete it.
 
@@ -49,7 +49,7 @@ A single screen with grouped sections:
 - **Education** — same, for degrees.
 - **Technical Skills** — two lists (Research & AI, Development & Tools). Add a skill with **+**.
 - **Certifications & Activities** — one item per entry.
-- **Research Projects** — add/remove/reorder projects (title, period/status, description, optional link). Leaving it empty hides the section automatically.
+- **Research Projects** — add/remove/reorder projects (title, period/status, funding info, description, optional link). Leaving it empty hides the section automatically. Projects now display in the same numbered list style as publications.
 - **Teaching** — add/remove/reorder courses, shown as a table with Course Code, Course Title, and Semester. Leaving it empty hides the section automatically.
 - **Section Visibility** — a switch for each home-page section (About, Hero charts, Experience, Research Projects, Publications, Conferences, Teaching, Education, Skills, Certifications, Contact). Turn one off to hide that section from the live site; your content stays saved, it's just hidden, and the matching sidebar link disappears too.
 

@@ -128,7 +128,7 @@
     </script>
 
 
-    <link rel="icon" type="image/png" href="images/s-logo.png" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d4ed8'/%3E%3Ctext x='16' y='22' font-family='Inter%2C Arial%2C sans-serif' font-size='13' font-weight='700' text-anchor='middle' fill='white'%3ESA%3C/text%3E%3C/svg%3E" />
 
     <!-- Preconnect to the font / CDN origins so their TLS handshake overlaps
          with HTML parsing instead of starting only when the stylesheet is hit. -->
@@ -511,21 +511,39 @@
   }
 
   function buildResearch(list) {
-    return (list || []).map(r => {
-      const meta = r.period || r.status || '';
+    return (list || []).map((r, idx) => {
+      // Split "2025 – 2026" into stacked lines: 2025 / – / 2026
+      let periodHtml = '';
+      if (r.period) {
+        const parts = r.period.split(/\s*[–\-]\s*/);
+        if (parts.length >= 2) {
+          periodHtml = '<span class="paper-year research-year-stacked">' +
+            escapeHtml(parts[0].trim()) + '<br>–<br>' + escapeHtml(parts[1].trim()) +
+          '</span>';
+        } else {
+          periodHtml = '<span class="paper-year">' + escapeHtml(r.period) + '</span>';
+        }
+      }
+      const funding = r.funding
+        ? '<p class="research-funding-line"><span class="research-funding">' + escapeHtml(r.funding) + '</span></p>'
+        : '';
       const linkBtn = r.link
-        ? '<div class="paper-actions" style="margin-top:10px;">' +
+        ? '<div class="paper-actions" style="margin-top:8px;">' +
             '<a href="' + escapeAttr(r.link) + '" class="btn-doi" target="_blank" rel="noopener noreferrer">' +
               '<i class="fas fa-external-link-alt"></i> View project</a>' +
           '</div>'
         : '';
-      return '<div class="project-card">' +
-          '<div class="project-card-header">' +
-            '<span class="project-title">' + escapeHtml(r.title || '') + '</span>' +
-            (meta ? '<span class="project-period">' + escapeHtml(meta) + '</span>' : '') +
+      return '<div class="paper-item">' +
+          '<div class="paper-number-col">' +
+            '<span class="paper-number">[' + (idx + 1) + ']</span>' +
+            periodHtml +
           '</div>' +
-          (r.desc ? '<p class="project-desc">' + escapeHtml(r.desc) + '</p>' : '') +
-          linkBtn +
+          '<div class="paper-body">' +
+            '<p class="paper-title">' + escapeHtml(r.title || '') + '</p>' +
+            funding +
+            (r.desc ? '<p class="authors">' + escapeHtml(r.desc) + '</p>' : '') +
+            linkBtn +
+          '</div>' +
         '</div>';
     }).join('');
   }
@@ -703,16 +721,17 @@
       // data.json-driven sections
       const expEl = document.getElementById('experience-list');
       if (expEl) expEl.className = 'timeline-container';
+      const eduEl = document.getElementById('education-list');
+      if (eduEl) eduEl.className = 'timeline-container';
       fillRegion(expEl, SR.buildExperience(site?.experience), haveSite,
                  'Content failed to load — please refresh the page.');
 
       const projEl = document.getElementById('research-list');
-      if (projEl) projEl.className = 'project-grid';
       fillRegion(projEl, SR.buildResearch(site?.research), haveSite, null);
 
       fillRegion(document.getElementById('teaching-list'), SR.buildTeaching(site?.teaching), haveSite, null);
 
-      fillRegion(document.getElementById('education-list'), SR.buildEducation(site?.education), haveSite,
+      fillRegion(eduEl, SR.buildEducation(site?.education), haveSite,
                  'Content failed to load — please refresh the page.');
 
       fillRegion(document.getElementById('skills-research'), SR.buildSkills(site?.skills?.research, false), haveSite,

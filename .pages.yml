@@ -107,10 +107,11 @@ content:
         list: true
         description: "Your research projects. Add, remove or reorder. If you leave this empty, the Research Projects section is hidden automatically."
         fields:
-          - { name: title,  label: "Project title", type: string }
-          - { name: period, label: "Period / status (e.g. 2024 – Present, Ongoing)", type: string }
-          - { name: desc,   label: "Description", type: text }
-          - { name: link,   label: "Link (optional, full URL)", type: string, description: "Optional — paper, repo, or demo. Leave blank for no button." }
+          - { name: title,   label: "Project title", type: string }
+          - { name: period,  label: "Period / status (e.g. 2024 – Present, Ongoing)", type: string }
+          - { name: funding, label: "Funding info (e.g. Funded by BAC, Self-funded)", type: string, description: "Optional — shown below the title. Leave blank if no funding to display." }
+          - { name: desc,    label: "Description", type: text }
+          - { name: link,    label: "Link (optional, full URL)", type: string, description: "Optional — paper, repo, or demo. Leave blank for no button." }
 
       - name: teaching
         label: "Teaching"

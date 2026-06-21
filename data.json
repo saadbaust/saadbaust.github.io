@@ -67,30 +67,31 @@
   ],
   "research": [
     {
-      "title": "AI-Powered Automated Exam Evaluation and OBE-Based University Assessment System ",
+      "title": "AI-Powered Automated Exam Evaluation and OBE-Based University Assessment System",
       "period": "2025 – 2026",
-      "desc": "AI-Powered Automated Exam Evaluation and OBE-Based University Assessment System "
+      "funding": "Funded by BAUST Research Cell",
+      "desc": "AI-Powered Automated Exam Evaluation and OBE-Based University Assessment System"
     }
   ],
   "teaching": [
     {
       "code": "CSE 2101",
-      "course": "Digital Logic Design ",
-      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer2026"
+      "course": "Digital Logic Design",
+      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
     },
     {
       "code": "CSE 2102",
       "course": "Digital Logic Design Sessional",
-      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer2026"
+      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
     },
     {
       "code": "CSE 4246",
       "course": "Digital Image Processing Sessional",
-      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer2026"
+      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
     },
     {
       "code": "CSE 4103",
-      "course": "Computer Graphcis",
+      "course": "Computer Graphics",
       "semester": "Winter 2025"
     },
     {
