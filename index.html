@@ -7,8 +7,6 @@
     <meta name="description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher specializing in Image Processing, Computer Vision, and Deep Learning." />
     <meta name="keywords" content="Saad Ahmed, Saad Ahmed BAUST, Saad Ahmed researcher, BAUST CSE, Bangladesh Army University of Science and Technology, Lecturer CSE, Computer Vision, Deep Learning, Image Processing" />
     <meta name="author" content="Saad Ahmed" />
-    <!-- SEO: max-snippet/-1 and max-video-preview/-1 added alongside max-image-preview
-         so Google isn't artificially capped on text-snippet or video-preview length. -->
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="google-site-verification" content="pctMm_Owh-_QShAJJ7RtRTMfEa1V7vJIi4-xyTDNKeA" />
     <link rel="canonical" href="https://saadbaust.github.io/" />
@@ -68,7 +66,7 @@
           "isPartOf": { "@id": "https://saadbaust.github.io/#website" },
           "primaryImageOfPage": { "@id": "https://saadbaust.github.io/#profile-image" },
           "mainEntity": { "@id": "https://saadbaust.github.io/#person" },
-          "dateModified": "2026-06-20"
+          "dateModified": "2026-06-21"
         },
         {
           "@type": "Person",
@@ -98,6 +96,7 @@
             "https://github.com/saadbaust",
             "https://linkedin.com/in/saadbaust",
             "https://scholar.google.com/citations?user=QFARjNcAAAAJ",
+            "https://www.semanticscholar.org/author/Saad-Ahmed/2336915789",
             "https://www.researchgate.net/profile/Saad-Ahmed-96",
             "https://youtube.com/@saadbaust",
             "https://orcid.org/0009-0005-5614-3427",
@@ -127,6 +126,7 @@
             <small class="nav-label">Sections</small>
             <a href="#experience">Experience</a>
             <a href="#journals">Publications</a>
+            <a href="#conferences">Conferences</a>
             <a href="#education">Education</a>
             <a href="#skills">Skills</a>
             <a href="#contact">Contact</a>
@@ -182,7 +182,7 @@
             </div>
 
             <div class="hero-actions">
-              <a
+              
                 href="https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing"
                 class="resume-btn"
                 id="cv-link"
@@ -194,6 +194,7 @@
               <div class="social-icons">
                 <a href="https://linkedin.com/in/saadbaust"                          class="icon linkedin"     title="LinkedIn"      target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i></a>
                 <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&hl"  class="icon scholar"      title="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i></a>
+                <a href="https://www.semanticscholar.org/author/Saad-Ahmed/2336915789" class="icon semantic-scholar" title="Semantic Scholar" aria-label="Semantic Scholar author profile" target="_blank" rel="noopener noreferrer"><span class="ss-mark">S2</span></a>
                 <a href="https://github.com/saadbaust"                               class="icon github"       title="GitHub"        target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
                 <a href="https://www.researchgate.net/profile/Saad-Ahmed-96"         class="icon researchgate" title="ResearchGate"  target="_blank" rel="noopener noreferrer"><i class="fab fa-researchgate"></i></a>
                 <a href="https://ieeexplore.ieee.org/author/526065849930602"         class="icon ieee"         title="IEEE Xplore" aria-label="IEEE Xplore author profile" target="_blank" rel="noopener noreferrer"><span class="ieee-mark">IEEE</span></a>
@@ -348,13 +349,6 @@
     // Fetches publications.bib and splits it into individual entry strings.
     // Each entry is returned as { bibtex: "raw entry string" }, exactly matching
     // the shape that buildPaperCard() already expects — no other code needs to change.
-    // publications.bib is now edited as ONE raw file via Pages CMS (Content → Publications),
-    // so this just reads the file straight off the repo, same as before.
-    //
-    // FIX: now uses { cache: 'no-store' } to match loadSiteData(). Previously this
-    // fetch had no cache option, so a browser (or the GitHub Pages edge) could keep
-    // serving a stale publications.bib after a CMS save even though data.json always
-    // updated immediately — the two fetches behaved inconsistently.
     async function loadBibFile() {
       try {
         const res = await fetch('publications.bib', { cache: 'no-store' });
@@ -375,8 +369,27 @@
       el.style.display = el.style.display === 'block' ? 'none' : 'block';
     }
 
+    // Shows a small inline notice if a section ended up empty because its data
+    // source failed to fetch (site === null, or publications.bib returned
+    // nothing) — instead of silently rendering a blank section with no
+    // explanation as to why.
+    function showLoadErrorIfNeeded(container, failed, message) {
+      if (failed && container && !container.children.length) {
+        container.insertAdjacentHTML('beforeend',
+          `<p style="color:var(--gray);font-size:0.85rem;">${message}</p>`);
+      }
+    }
+
+    // FIX: animateCounter now respects prefers-reduced-motion (it previously
+    // ignored the CSS media query entirely and always ran the rAF animation),
+    // and the counters are no longer pre-set to their final values in
+    // renderContent() before this runs — that pre-set caused a visible flash
+    // where the right numbers appeared, then jumped back to 0 and re-counted
+    // up once IntersectionObserver fired (which happens almost immediately
+    // since the metrics sit in the hero, above the fold).
     function animateCounter(el, target, duration = 2000) {
-      if (target === 0) { el.textContent = '0'; return; }
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (target === 0 || prefersReducedMotion) { el.textContent = target; return; }
       const start   = performance.now();
       const easeOut = t => 1 - Math.pow(1 - t, 3);
       function step(now) {
@@ -387,12 +400,9 @@
       requestAnimationFrame(step);
     }
 
-    // FIX: parseBibField previously used a single regex `\{([^}]+)\}`, which stops
-    // at the FIRST closing brace. Standard BibTeX often wraps acronyms in their own
-    // braces to protect capitalization, e.g.  title = {An {IoT}-Based Smart Box}
-    // — the old regex would parse that title as just "An". This version finds the
-    // opening brace after "field =" and then walks the string counting brace depth,
-    // so it correctly captures the FULL field even with nested braces inside it.
+    // parseBibField walks brace depth (rather than stopping at the first closing
+    // brace) so it correctly captures fields with nested braces, e.g.
+    // title = {An {IoT}-Based Smart Box}.
     function parseBibField(bibtex, fieldName) {
       const startRe = new RegExp(`\\b${fieldName}\\s*=\\s*`, 'i');
       const m = bibtex.match(startRe);
@@ -414,14 +424,8 @@
       return bibtex.slice(openIdx + 1, i - 1).trim();
     }
 
-    // SEO/display fix: BibTeX text often contains LaTeX escapes — e.g. venues with
-    // "\&" (to escape & in LaTeX), or leftover {brace} pairs used to protect
-    // acronym capitalization in titles (see parseBibField's depth-counting above,
-    // which now captures the full field INCLUDING those inner braces). Clean
-    // both before showing text to users or putting it in structured data, so
-    // a title like "An {IoT}-Based Smart Box" displays as "An IoT-Based Smart
-    // Box" instead of leaking literal braces/backslashes into the page or
-    // into the JSON-LD that search engines read.
+    // Cleans LaTeX escapes (\&, leftover {brace} pairs used to protect acronym
+    // capitalization) out of BibTeX text before it reaches the page or JSON-LD.
     function unescapeBibText(str) {
       return str
         .replace(/\\&/g, '&')
@@ -445,9 +449,6 @@
       const bibId   = `bib-${type}-${idx}`;
       const title   = unescapeBibText(parseBibField(p.bibtex, 'title')  || 'Untitled');
       const authors = parseBibField(p.bibtex, 'author') || 'Unknown Authors';
-      // FIX: venue now goes through the same brace-aware parseBibField instead of
-      // its own separate first-closing-brace regex, so it's protected from the
-      // same nested-brace truncation bug (e.g. a booktitle containing "{IEEE}").
       const venue   = unescapeBibText(parseBibField(p.bibtex, 'journal') || parseBibField(p.bibtex, 'booktitle'));
       const year    = parseBibField(p.bibtex, 'year');
       const doi     = parseBibField(p.bibtex, 'doi');
@@ -491,16 +492,6 @@
 
       const stats = (site && site.stats) || { citations: 0, hIndex: 0, i10Index: 0 };
 
-      const papersEl = document.getElementById('total-papers');
-      const citeEl   = document.getElementById('total-citations');
-      const hEl      = document.getElementById('h-index');
-      const i10El    = document.getElementById('i10-index');
-
-      papersEl.textContent   = myPapers.length;   // Papers count is auto-derived
-      citeEl.textContent     = stats.citations;
-      hEl.textContent        = stats.hIndex;
-      i10El.textContent      = stats.i10Index;
-
       const jList  = document.getElementById('journal-list');
       const cList  = document.getElementById('conference-list');
       const sorted = [...myPapers].sort((a, b) => {
@@ -516,6 +507,9 @@
         (isJournal ? jList : cList).insertAdjacentHTML('beforeend', card);
         if (isJournal) jIdx++; else cIdx++;
       });
+      const pubsFailed = sorted.length === 0;
+      showLoadErrorIfNeeded(jList, pubsFailed, 'No publications to display right now — please check back soon.');
+      showLoadErrorIfNeeded(cList, pubsFailed, 'No publications to display right now — please check back soon.');
 
       const expList = document.getElementById('experience-list');
       expList.className = 'timeline-container';
@@ -530,6 +524,7 @@
             <p class="timeline-desc">${e.desc}</p>
           </div>`);
       });
+      showLoadErrorIfNeeded(expList, !site, 'Content failed to load — please refresh the page.');
 
       const eduList = document.getElementById('education-list');
       eduList.className = 'timeline-container';
@@ -544,6 +539,7 @@
             <p class="timeline-desc result-text">${ed.result}</p>
           </div>`);
       });
+      showLoadErrorIfNeeded(eduList, !site, 'Content failed to load — please refresh the page.');
 
       const researchSkills = site?.skills?.research || [];
       const devSkills      = site?.skills?.dev      || [];
@@ -552,12 +548,15 @@
       const dList = document.getElementById('skills-dev');
       researchSkills.forEach(s => rList.insertAdjacentHTML('beforeend', `<span class="skill-tag">${s}</span>`));
       devSkills.forEach(s => dList.insertAdjacentHTML('beforeend', `<span class="skill-tag skill-tag-dev">${s}</span>`));
+      showLoadErrorIfNeeded(rList, !site, 'Content failed to load — please refresh the page.');
+      showLoadErrorIfNeeded(dList, !site, 'Content failed to load — please refresh the page.');
 
       const certList = document.getElementById('cert-list');
       (site?.certifications || []).forEach(c => {
         certList.insertAdjacentHTML('beforeend',
           `<p class="cert-item"><i class="fas fa-certificate"></i> ${c}</p>`);
       });
+      showLoadErrorIfNeeded(certList, !site, 'Content failed to load — please refresh the page.');
 
       injectPublicationsStructuredData(sorted);
       initReveal(myPapers, stats);
@@ -566,13 +565,8 @@
     // SEO: publications come from publications.bib at runtime, so they can't be
     // baked into the static <head> JSON-LD — it's generated here instead, once
     // papers are parsed, and appended as its own <script type="application/ld+json">
-    // in <head>. Google's indexer executes page JavaScript before reading
-    // structured data, so a script tag added at runtime like this is read the
-    // same way a static one would be. Each entry becomes a ScholarlyArticle with
-    // its own @id (DOI-based when available) and links back to the Person via
-    // "author" matching the existing Person's name/sameAs — this gives Google
-    // Scholar/Search a clean, accurate picture of each paper as well as the
-    // researcher who wrote it.
+    // in <head>. Each entry becomes a ScholarlyArticle with its own @id (DOI-based
+    // when available) and links back to the Person via "author".
     function injectPublicationsStructuredData(papers) {
       if (!papers.length) return;
 

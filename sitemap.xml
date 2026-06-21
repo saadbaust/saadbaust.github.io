@@ -3,18 +3,10 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- Only indexable pages belong here. gallery.html is intentionally omitted
-       so it stays out of search engines (see robots.txt + its noindex tag).
-
-       SEO: image:image entries added below for the three photos that live on
-       the indexable home page (profile photo + the two hero charts). This
-       gives Google Image Search an explicit list of crawlable images tied to
-       this URL, instead of relying purely on discovery via the rendered page.
-       Filenames with spaces are percent-encoded (%20) since this must be a
-       valid URL inside the XML, even though the actual files on disk keep
-       their human-readable names with spaces. -->
+       so it stays out of search engines (see robots.txt + its noindex tag). -->
   <url>
     <loc>https://saadbaust.github.io/</loc>
-    <lastmod>2026-06-20</lastmod>
+    <lastmod>2026-06-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>

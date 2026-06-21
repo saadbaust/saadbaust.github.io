@@ -3,7 +3,6 @@
   --bg-block:   #ffffff;
   --text:       #0d1b2e;
   --accent:     #1d4ed8;
-  --accent-mid: #2563eb;
   --gray:       #5a6a80;
   --border:     #dde4ee;
   --light-bg:   #f6f8fc;
@@ -212,7 +211,6 @@ h1 {
   box-shadow: var(--shadow-md);
 }
 
-/* FIX #5: Removed font-style: italic — bio is a statement, not a pulled quote */
 .academic-summary p {
   font-size: 0.97rem;
   line-height: 1.78;
@@ -293,6 +291,17 @@ h1 {
   line-height: 1;
 }
 .social-icons a.ieee:hover { color: #00629b; }
+
+/* Semantic Scholar also has no Font Awesome glyph — same compact wordmark treatment */
+.social-icons a.semantic-scholar {
+  font-size: 0.80rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+.social-icons a.semantic-scholar:hover { color: #1857b6; }
 
 .metrics-grid {
   display: flex;
@@ -517,7 +526,6 @@ h1 {
   margin: 20px 0;
 }
 
-/* FIX #6: Solid border line — gradient was decorative, not functional */
 .timeline-container::before {
   content: '';
   position: absolute;
@@ -697,31 +705,6 @@ footer {
 }
 
 #back-to-top:hover { background: #1a46c0; }
-
-
-
-.gallery-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  align-items: start;
-}
-
-.gallery-item {
-  background: var(--light-bg);
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  transition: transform var(--t-base) var(--ease-spring),
-              box-shadow var(--t-base) ease;
-}
-
-.gallery-item:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-}
-
-.gallery-item img { width: 100%; height: auto; display: block; object-fit: contain; }
 
 .masonry-grid { columns: 3; column-gap: 16px; }
 
@@ -948,7 +931,6 @@ footer {
 }
 
 @media (max-width: 600px) {
-  .gallery-container { grid-template-columns: 1fr; }
   .masonry-grid { columns: 1; }
 }
 
@@ -969,7 +951,6 @@ footer {
     --bg-block:   #111827;
     --text:       #e8edf5;
     --accent:     #60a5fa;
-    --accent-mid: #3b82f6;
     --gray:       #8899b4;
     --border:     #1f2d42;
     --light-bg:   #152035;
@@ -986,9 +967,6 @@ footer {
   .timeline-desc  { color: #8899b4; }
 
   .bibtex-box     { background: #0b1120; color: #7a90aa; }
-
-  .badge-journal  { background: rgba(20, 83, 45, 0.4);  color: #86efac; }
-  .badge-conf     { background: rgba(30, 58, 138, 0.4); color: #93c5fd; }
 
   .btn-doi        { background: #1d4ed8; }
   .metric-item    { background: #152035; border-color: #1f2d42; }
