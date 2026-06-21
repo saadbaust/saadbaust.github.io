@@ -13,7 +13,7 @@ This site is **content-managed**. You almost never need to touch code — you lo
 
 | File | What it does |
 |---|---|
-| `index.html` | Main portfolio page (home). Reads content from `data.json` and `publications.bib` at runtime, and injects per-publication structured data at runtime too (see SEO section below). |
+| `index.html` | Main portfolio page (home). Reads `data.json` and `publications.bib` in the browser and renders every section (profile, experience, publications, education, skills, teaching, certifications), plus per-publication structured data, at load time. Rendering helpers are inlined in the page — no separate JS file. |
 | `gallery.html` | Photo gallery page — **hidden from search engines**. Lists whatever is in `images/events/` and `images/memories/`, primarily from `images/gallery-manifest.json`. |
 | `style.css` | All visual styling for both pages. |
 | `data.json` | **All editable home-page content** — profile, intro, stats, CV link, hero images, experience, education, skills, certifications, phone, email. Managed via the CMS "Basic Info" screen. |
@@ -30,7 +30,7 @@ This site is **content-managed**. You almost never need to touch code — you lo
 
 > **Note:** the old `data.js` file is gone. Its content now lives in `data.json` so it can be edited through the CMS with proper forms. If you have a `data.js` left over, delete it.
 
-> **One-time setup for chart previews:** rename your two chart images so they have **no spaces** — `images/Research Interest Distribution.png` → `images/research-interest.png`, and `images/Citation History.png` → `images/citation-history.png`. Spaces in filenames stop the CMS from showing an image preview (your `saadahmed.png` previews fine precisely because it has no spaces). The site already points at the new names. If you do this, also update the two `image:loc` URLs in `sitemap.xml` to match the new filenames (no more `%20` encoding needed).
+> **Hero chart images.** The two charts near the top of the home page load from `images/Research Interest Distribution.png` and `images/Citation History.png` (the original filenames). If you ever replace them, keep those exact names — or, if you rename them to remove the spaces, update the `src` in `index.html` and the two `image:loc`/`image` URLs in `sitemap.xml` and the JSON-LD to match.
 
 ---
 
@@ -84,7 +84,7 @@ Several pieces work together to keep the home page indexable and well-described,
 
 - **Meta tags** (`index.html`) — description, Open Graph, and Twitter Card tags (with image dimensions) for clean link previews on social platforms; `robots` meta includes `max-image-preview:large`, `max-snippet:-1`, and `max-video-preview:-1` so Google isn't capped on preview length.
 - **Structured data, static** (`index.html` `<head>`) — a single linked `@graph` of `WebSite` + `ProfilePage` + `ImageObject` + `Person`, connected via `@id` references rather than one standalone object. This is static HTML, so **update it by hand** if your name, job title, contact info, or alma mater changes, and keep its `dateModified` in sync with `<lastmod>` in `sitemap.xml`.
-- **Structured data, dynamic** (`index.html` script) — once `publications.bib` loads at runtime, `injectPublicationsStructuredData()` builds a `ScholarlyArticle` entry per paper (title, authors, venue, DOI) and appends it as its own `<script type="application/ld+json">` tag. Google's crawler executes page JavaScript before reading structured data, so this is picked up the same way a static block would be — you never have to maintain it by hand; it's regenerated from `publications.bib` on every load.
+- **Structured data, dynamic** (`index.html` script) — once `publications.bib` loads, `injectPublicationsStructuredData()` builds a `ScholarlyArticle` entry per paper (title, authors, venue, DOI) and appends it as its own `<script type="application/ld+json">` tag. Google executes page JavaScript before reading structured data, so it's picked up like a static block — you never maintain it by hand.
 - **Text cleanup** (`index.html` script) — `unescapeBibText()` strips LaTeX escapes (`\&`, leftover `{}` used to protect acronym capitalization) from titles/authors/venues before they reach the page or the structured data, so search engines and readers never see raw BibTeX syntax.
 - **`sitemap.xml`** — lists the home page plus an image sitemap (`image:image` entries) for the profile photo and the two hero charts, so Google Image Search has an explicit list of crawlable images tied to that URL.
 - **`robots.txt`** — allows everything except the gallery, and deliberately leaves `data.json`/`publications.bib` crawlable, since Googlebot's renderer needs to fetch them to index the dynamically-loaded name, bio, experience, and publications.
@@ -110,7 +110,7 @@ After any significant content change, update the `<lastmod>` date in `sitemap.xm
 5. **Update the CMS link** in `.pages.yml` comments and in the sidebar "CMS Login" link in both HTML files to your own repo path.
 6. **Publish on GitHub Pages:** create a repo named `yourusername.github.io`, upload the files, then Settings → Pages → set the source to the `main` branch.
 7. **Connect Pages CMS:** sign in at [pagescms.org](https://pagescms.org), authorize your repo, and you're editing through forms.
-8. **Enable Actions:** under Settings → Actions → General → Workflow permissions, choose "Read and write permissions" so the gallery manifest workflow can commit its output.
+8. **Enable Actions:** under Settings → Actions → General → Workflow permissions, choose "Read and write permissions" so the gallery-manifest workflow can commit its output.
 
 > The page meta tags and the static structured-data (`JSON-LD`) block in `index.html` — name, job title, email, social links used for SEO — are static. Update them by hand if those details ever change. The per-publication structured data is dynamic and regenerates itself from `publications.bib`.
 

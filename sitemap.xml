@@ -3,23 +3,26 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- Only indexable pages belong here. gallery.html is intentionally omitted
-       so it stays out of search engines (see robots.txt + its noindex tag). -->
+       so it stays out of search engines (see robots.txt + its noindex tag).
+       Keep <lastmod> in sync with "dateModified" in index.html's JSON-LD.
+       Image filenames are URL-encoded (%20 = space) to match the real files. -->
   <url>
     <loc>https://saadbaust.github.io/</loc>
     <lastmod>2026-06-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
     <image:image>
       <image:loc>https://saadbaust.github.io/images/saadahmed.png</image:loc>
-      <image:title>Saad Ahmed — Lecturer at BAUST</image:title>
+      <image:title>Saad Ahmed — Lecturer at the Department of CSE, BAUST</image:title>
+      <image:caption>Profile photo of Saad Ahmed, Lecturer and Researcher at BAUST.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://saadbaust.github.io/images/Research%20Interest%20Distribution.png</image:loc>
       <image:title>Research Interest Distribution — Saad Ahmed</image:title>
+      <image:caption>Saad Ahmed's research interests across Image Processing, Computer Vision, and Deep Learning.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://saadbaust.github.io/images/Citation%20History.png</image:loc>
       <image:title>Citation History — Saad Ahmed</image:title>
+      <image:caption>Saad Ahmed's Google Scholar citation history over the years.</image:caption>
     </image:image>
   </url>
 
