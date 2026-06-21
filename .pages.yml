@@ -51,23 +51,13 @@ content:
           - { name: cvLink,      label: "CV link (full URL)",            type: string, description: "Paste the share link to your CV / résumé PDF." }
 
       - name: stats
-        label: "Citation Stats"
+        label: "Google Scholar Stats"
         type: object
-        description: "Choose how Citations and h-index are filled: type them in by hand, or pull them automatically from your Semantic Scholar profile. i10-index is always manual (Semantic Scholar doesn't provide it). Your 'Papers' number is counted automatically from Publications either way."
+        description: "Your 'Papers' number is counted automatically from Publications — no need to set it here."
         fields:
-          - name: source
-            label: "Stats source"
-            type: select
-            description: "Manual = use the numbers you type below. Auto = fetch Citations and h-index from Semantic Scholar on each page load (the numbers below are still used as a fallback if Semantic Scholar can't be reached)."
-            default: manual
-            options:
-              values:
-                - { value: manual,          label: "Manual — use the numbers below" }
-                - { value: semanticscholar, label: "Auto — fetch from Semantic Scholar" }
-          - { name: semanticScholarId, label: "Semantic Scholar Author ID", type: string, description: "Only used in Auto mode. The number at the end of your Semantic Scholar profile URL, e.g. for .../author/Saad-Ahmed/2336915789 the ID is 2336915789." }
-          - { name: citations, label: "Citations (manual / fallback)", type: number }
-          - { name: hIndex,    label: "h-index (manual / fallback)",   type: number }
-          - { name: i10Index,  label: "i10-index (always manual)",     type: number }
+          - { name: citations, label: "Citations", type: number }
+          - { name: hIndex,    label: "h-index",   type: number }
+          - { name: i10Index,  label: "i10-index", type: number }
 
       - name: contact
         label: "Contact"
