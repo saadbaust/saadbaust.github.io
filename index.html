@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth [scrollbar-gutter:stable]">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -153,127 +153,40 @@
             fontFamily: {
               sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
             },
+            boxShadow: {
+              card: '0 1px 2px rgba(2,6,23,.04), 0 16px 40px -22px rgba(2,6,23,.16)',
+              carddark: '0 1px 2px rgba(0,0,0,.4), 0 20px 48px -26px rgba(0,0,0,.6)',
+            },
+            keyframes: {
+              glowDrift: {
+                '0%, 100%': { transform: 'translate3d(0,0,0) scale(1)', opacity: '.8' },
+                '50%':      { transform: 'translate3d(-34px,28px,0) scale(1.16)', opacity: '1' },
+              },
+            },
+            animation: { glowDrift: 'glowDrift 9s ease-in-out infinite' },
           },
         },
       };
     </script>
 
     <style>
-      html { scroll-behavior: smooth; scrollbar-gutter: stable; }
-      section, header[id] { scroll-margin-top: 84px; }
-      @media (max-width: 1023px) {
-        section, header[id] { scroll-margin-top: 64px; }
-      }
+      /* Only rules that have NO Tailwind-utility equivalent remain here.
+         Everything else is now expressed with Tailwind classes / config. */
+
+      /* Custom scrollbar — no Tailwind utilities for ::-webkit-scrollbar */
       ::-webkit-scrollbar { width: 8px; height: 8px; }
       ::-webkit-scrollbar-track { background: transparent; }
       ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
       .dark ::-webkit-scrollbar-thumb { background: #334155; }
       ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+      /* JS-toggled active states (sidebar nav + publication filter) */
       .sidebar-link.active { background-color: #4f46e5 !important; color: #fff !important; box-shadow: 0 4px 12px rgba(79,70,229,.18); }
       .dark .sidebar-link.active { background-color: #6366f1 !important; color: #fff !important; box-shadow: 0 4px 14px rgba(99,102,241,.28); }
-
-      /* ── Elegant refinements ──────────────────────────────────────────────
-         A quieter surface, a serif display face for identity + section
-         headings, and one unified indigo accent. Targeted with id/element
-         specificity so they sit cleanly on top of the Tailwind utilities. */
-      body.font-sans {
-        background: linear-gradient(180deg, #f8f9fd 0%, #edf0f7 100%);
-        background-attachment: fixed;
-      }
-      .dark body.font-sans { background: #0b0f19; }
-
-      /* Main cards: softer hairline border + a single layered shadow */
-      #main .rounded-2xl.border {
-        border-radius: 1.25rem;
-        border-color: #ebedf3;
-        box-shadow: 0 1px 2px rgba(2,6,23,.04), 0 16px 40px -22px rgba(2,6,23,.16);
-      }
-      .dark #main .rounded-2xl.border {
-        border-color: #222d44;
-        box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 20px 48px -26px rgba(0,0,0,.6);
-      }
-
-      /* Serif display for the name + every section heading */
-      #hero-name {
-        font-weight: 600;
-        font-size: clamp(2.1rem, 4.4vw, 2.7rem);
-        letter-spacing: -0.022em;
-        line-height: 1.04;
-      }
-      h2.section-title {
-        font-weight: 600;
-        font-size: 1.4rem;
-        line-height: 1.15;
-        letter-spacing: -0.015em;
-        color: #0f172a;
-      }
-      .dark h2.section-title { color: #f8fafc; }
-
-      /* ── Dramatic ambient glow + frosted-glass hero ──────────────────────
-         A fixed, animated light source sits in the top-right of the page,
-         behind all content. The hero card is translucent with a backdrop
-         blur, so the glow reads as if it's shining through frosted glass. */
-      .glow-field {
-        position: fixed;
-        top: -280px;
-        right: -150px;
-        width: 700px;
-        height: 700px;
-        z-index: -10;
-        pointer-events: none;
-        border-radius: 9999px;
-        filter: blur(90px);
-        opacity: 0.3;
-        background:
-          radial-gradient(circle at 32% 34%, rgba(99,102,241,.70), transparent 60%),
-          radial-gradient(circle at 68% 56%, rgba(168,85,247,.50), transparent 60%),
-          radial-gradient(circle at 52% 80%, rgba(56,189,248,.34), transparent 62%);
-        animation: glowDrift 9s ease-in-out infinite;
-        will-change: transform, opacity;
-      }
-      .dark .glow-field {
-        opacity: 0.5;
-        filter: blur(96px);
-        background:
-          radial-gradient(circle at 32% 34%, rgba(99,102,241,.72), transparent 60%),
-          radial-gradient(circle at 68% 56%, rgba(168,85,247,.62), transparent 60%),
-          radial-gradient(circle at 52% 80%, rgba(56,189,248,.42), transparent 62%);
-      }
-      @keyframes glowDrift {
-        0%, 100% { transform: translate3d(0, 0, 0) scale(1);      opacity: .80; }
-        50%      { transform: translate3d(-34px, 28px, 0) scale(1.16); opacity: 1; }
-      }
-
-      /* Hero = frosted glass, so the glow behind it shows through */
-      #main #about {
-        background: rgba(255, 255, 255, 1.0);
-        -webkit-backdrop-filter: blur(20px) saturate(155%);
-        backdrop-filter: blur(20px) saturate(155%);
-        border-color: rgba(255, 255, 255, .55);
-      }
-      .dark #main #about {
-        background: rgba(17, 23, 40, .52);
-        border-color: rgba(129, 140, 248, .18);
-      }
-
-      /* Timeline (Experience / Education) — rail + hollow dot that fills & glows on hover */
-      .timeline-container { position: relative; padding-left: 30px; margin: 4px 0; }
-      .timeline-container::before {
-        content: ''; position: absolute; left: 4px; top: 6px; bottom: 6px;
-        width: 2px; background: #c7d2fe; border-radius: 2px;
-      }
-      .dark .timeline-container::before { background: #312e81; }
-      .timeline-item { position: relative; margin-bottom: 28px; }
-      .timeline-item:last-child { margin-bottom: 0; }
-      .timeline-item::after {
-        content: ''; position: absolute; left: -31px; top: 6px;
-        width: 12px; height: 12px; border-radius: 50%;
-        background: #fff; border: 2px solid #4f46e5; box-sizing: border-box;
-      }
-      .dark .timeline-item::after { background: #151b2c; border-color: #6366f1; }
-
       .pub-filter.active { background-color: #4f46e5 !important; color: #fff !important; box-shadow: 0 1px 3px rgba(79,70,229,.25); }
       .dark .pub-filter.active { background-color: #6366f1 !important; color: #fff !important; }
+
+      /* Accessibility: honour reduced-motion globally */
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
         *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
@@ -281,9 +194,9 @@
     </style>
   </head>
 
-  <body class="bg-slate-50 dark:bg-darkbg text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-300">
+  <body class="bg-[linear-gradient(180deg,#f8f9fd_0%,#edf0f7_100%)] bg-fixed dark:bg-darkbg dark:bg-none text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-300">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[1000] focus:bg-indigo-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
-    <div aria-hidden="true" class="glow-field"></div>
+    <div aria-hidden="true" class="fixed -top-[280px] -right-[150px] w-[700px] h-[700px] -z-10 pointer-events-none rounded-full blur-[90px] dark:blur-[96px] opacity-30 dark:opacity-50 animate-glowDrift [will-change:transform,opacity] bg-[radial-gradient(circle_at_32%_34%,rgba(99,102,241,.70),transparent_60%),radial-gradient(circle_at_68%_56%,rgba(168,85,247,.50),transparent_60%),radial-gradient(circle_at_52%_80%,rgba(56,189,248,.34),transparent_62%)] dark:bg-[radial-gradient(circle_at_32%_34%,rgba(99,102,241,.72),transparent_60%),radial-gradient(circle_at_68%_56%,rgba(168,85,247,.62),transparent_60%),radial-gradient(circle_at_52%_80%,rgba(56,189,248,.42),transparent_62%)]"></div>
 
     <!-- Mobile top bar -->
     <header class="lg:hidden bg-white/90 dark:bg-darkcard/90 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-4 py-3 flex items-center justify-between shadow-sm">
@@ -353,14 +266,14 @@
       <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-8 overflow-x-hidden">
 
         <!-- About / Hero (photo + identity merged) -->
-        <header id="about" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm relative overflow-hidden">
+        <header id="about" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-[#111728]/[0.52] backdrop-blur-[20px] backdrop-saturate-[1.55] rounded-[1.25rem] border border-white/[0.55] dark:border-[#818cf8]/[0.18] shadow-card dark:shadow-carddark p-6 md:p-8 relative overflow-hidden">
 
           <div class="relative flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-7 text-center sm:text-left">
             <div class="relative w-36 h-36 sm:w-40 sm:h-40 flex-shrink-0 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-sm">
               <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" width="170" height="170" class="w-full h-full object-cover rounded-xl" />
             </div>
             <div class="min-w-0">
-              <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight"><span id="hero-name">Saad Ahmed</span></h1>
+              <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight"><span id="hero-name" class="text-[clamp(2.1rem,4.4vw,2.7rem)] font-semibold tracking-[-0.022em] leading-[1.04]">Saad Ahmed</span></h1>
               <p id="hero-subtitle" class="text-sm sm:text-base text-indigo-600 dark:text-indigo-300 font-semibold mt-2">Lecturer, Department of CSE</p>
               <p id="hero-institution" class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-normal">Bangladesh Army University of Science and Technology (BAUST), Saidpur.</p>
               <div class="research-interests inline-block mt-3 p-1 rounded-md bg-indigo-800/[0.08] dark:bg-indigo-400/[0.06]">
@@ -446,8 +359,8 @@
           </div>
         </header>
 
-        <section id="charts-section">
-        <div class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-sm overflow-hidden p-6">
+        <section id="charts-section" class="scroll-mt-16 lg:scroll-mt-[84px]">
+        <div class="bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder shadow-card dark:shadow-carddark overflow-hidden p-6">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
             
             <div class="flex flex-col">
@@ -475,35 +388,35 @@
       </section>
 
         <!-- Experience -->
-        <section id="experience" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
+        <section id="experience" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25Zm7.5 0v.09a49.488 49.488 0 0 0-6 0v-.09a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5Z"/><path d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923a49.19 49.19 0 0 1-12.954 0C4.047 21.128 3 19.852 3 18.4Z"/></svg>
             </div>
-            <h2 class="section-title text-lg font-semibold text-slate-500 dark:text-white">Experience</h2>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Experience</h2>
           </div>
-          <div id="experience-list" class="timeline-container"></div>
+          <div id="experience-list" class="relative pl-[30px] my-1 before:content-[''] before:absolute before:left-1 before:top-1.5 before:bottom-1.5 before:w-0.5 before:bg-indigo-200 dark:before:bg-indigo-900 before:rounded-sm"></div>
         </section>
 
         <!-- Research Projects -->
-        <section id="research" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
+        <section id="research" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 0 1 .75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 0 1 9.75 22.5a.75.75 0 0 1-.75-.75v-4.131A15.838 15.838 0 0 1 6.382 15H2.25a.75.75 0 0 1-.75-.75 6.75 6.75 0 0 1 7.815-6.666ZM15 6.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" clip-rule="evenodd"/><path d="M5.26 17.242a.75.75 0 1 0-.897-1.203 5.243 5.243 0 0 0-2.05 5.022.75.75 0 0 0 .625.627 5.243 5.243 0 0 0 5.022-2.051.75.75 0 1 0-1.202-.897 3.744 3.744 0 0 1-3.008 1.51c0-1.23.592-2.323 1.51-3.008Z"/></svg>
             </div>
-            <h2 class="section-title text-xl font-semibold text-slate-500 dark:text-white">Research Projects</h2>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Research Projects</h2>
           </div>
           <div id="research-list"></div>
         </section>
 
         <!-- Research Publications (Journals + Conferences, with filters + search) -->
-        <section id="journals" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
+        <section id="journals" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div class="flex items-center gap-3">
               <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd"/><path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"/></svg>
               </div>
-              <h2 class="section-title text-lg font-semibold text-slate-500 dark:text-white">Research Publications</h2>
+              <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Research Publications</h2>
             </div>
             <div class="relative w-full md:w-64">
               <input id="search-pub" type="text" placeholder="Search publications..." aria-label="Search publications"
@@ -531,34 +444,34 @@
         </section>
 
         <!-- Teaching -->
-        <section id="teaching" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
+        <section id="teaching" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z"/></svg>
             </div>
-            <h2 class="section-title text-lg font-semibold text-slate-500 dark:text-white">Teaching</h2>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Teaching</h2>
           </div>
           <div id="teaching-list"></div>
         </section>
 
         <!-- Education -->
-        <section id="education" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
+        <section id="education" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002a50.978 50.978 0 0 0-.34.18.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z"/><path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.285a.75.75 0 0 1-.46.71 47.878 47.878 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.877 47.877 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286A48.4 48.4 0 0 1 6 13.18v1.27a1.5 1.5 0 0 0-.14 2.508 2.25 2.25 0 0 0 2.12 0v-1.27Z"/></svg>
             </div>
-            <h2 class="section-title text-lg font-semibold text-slate-500 dark:text-white">Education</h2>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Education</h2>
           </div>
-          <div id="education-list" class="timeline-container"></div>
+          <div id="education-list" class="relative pl-[30px] my-1 before:content-[''] before:absolute before:left-1 before:top-1.5 before:bottom-1.5 before:w-0.5 before:bg-indigo-200 dark:before:bg-indigo-900 before:rounded-sm"></div>
         </section>
 
         <!-- Skills -->
-        <section id="skills" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
+        <section id="skills" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 7.5h-9v9h9v-9Z"/><path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21a.75.75 0 0 1 0 1.5h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3a.75.75 0 0 1 0-1.5h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd"/></svg>
             </div>
-            <h2 class="section-title text-lg font-semibold text-slate-500 dark:text-white">Technical Skills</h2>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Technical Skills</h2>
           </div>
           <p class="skills-group-label text-[0.7rem] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Research &amp; AI</p>
           <div id="skills-research" class="flex flex-wrap gap-2 mb-5"></div>
@@ -567,23 +480,23 @@
         </section>
 
         <!-- Certifications -->
-        <section id="certs" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
+        <section id="certs" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.166 2.621v.858c-1.035.148-2.059.33-3.071.543a.75.75 0 0 0-.584.859 6.753 6.753 0 0 0 6.138 5.6 6.73 6.73 0 0 0 2.743 1.346A6.707 6.707 0 0 1 9.279 15H8.54c-1.036 0-1.875.84-1.875 1.875V19.5h-.75a2.25 2.25 0 0 0-2.25 2.25c0 .414.336.75.75.75h15.75a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-2.25-2.25h-.75v-2.625c0-1.036-.84-1.875-1.875-1.875h-.739a6.706 6.706 0 0 1-1.112-3.173 6.73 6.73 0 0 0 2.743-1.347 6.753 6.753 0 0 0 6.139-5.6.75.75 0 0 0-.585-.858 47.077 47.077 0 0 0-3.07-.543V2.62a.75.75 0 0 0-.658-.744 49.22 49.22 0 0 0-6.093-.377c-2.063 0-4.096.128-6.093.377a.75.75 0 0 0-.657.744Z" clip-rule="evenodd"/></svg>
             </div>
-            <h2 class="section-title text-lg font-semibold text-slate-500 dark:text-white">Certifications &amp; Activities</h2>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Certifications &amp; Activities</h2>
           </div>
           <div id="cert-list" class="space-y-3"></div>
         </section>
 
         <!-- Contact -->
-        <section id="contact" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
+        <section id="contact" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
             </div>
-            <h2 class="section-title text-lg font-semibold text-slate-500 dark:text-white">Contact Information</h2>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Contact Information</h2>
           </div>
           <div class="contact-details space-y-3 text-sm">
             <p class="flex items-center gap-3 text-slate-500 dark:text-slate-300">
@@ -605,7 +518,7 @@
           </div>
         </section>
 
-        <footer class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 text-center shadow-sm">
+        <footer class="bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 text-center shadow-card dark:shadow-carddark">
           <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
         </footer>
       </main>
@@ -714,7 +627,7 @@
   // + glows on hover (animation handled by .timeline-item CSS).
   function timelineItem(titleText, badgeText, orgText, bottomHtml) {
     return '' +
-      '<div class="timeline-item">' +
+      '<div class="relative mb-7 last:mb-0 after:content-[\'\'] after:absolute after:-left-[31px] after:top-1.5 after:w-3 after:h-3 after:rounded-full after:bg-white dark:after:bg-darkcard after:border-2 after:border-indigo-600 dark:after:border-indigo-500 after:box-border">' +
         '<div class="timeline-header flex flex-wrap items-start justify-between gap-2 mb-1">' +
           '<span class="timeline-title font-semibold text-[1.02rem] text-slate-800 dark:text-white leading-snug">' + titleText + '</span>' +
           '<span class="timeline-date text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full whitespace-nowrap">' + badgeText + '</span>' +
