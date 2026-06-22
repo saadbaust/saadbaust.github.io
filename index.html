@@ -196,15 +196,9 @@
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[1000] focus:bg-indigo-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
 
     <!-- Mobile top bar -->
-    <header class="lg:hidden bg-white/90 dark:bg-darkcard/90 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-4 py-2.5 flex items-center justify-between shadow-sm">
+    <header class="lg:hidden bg-white/90 dark:bg-darkcard/90 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-4 py-3 flex items-center justify-between shadow-sm">
       <div class="flex items-center gap-2.5">
-        <div class="w-8 h-8 flex-shrink-0 rounded-lg overflow-hidden border border-indigo-100 dark:border-indigo-900">
-          <img src="images/saadahmed.png" alt="Saad Ahmed" class="w-full h-full object-cover" />
-        </div>
-        <div class="leading-tight">
-          <p class="font-bold text-sm text-slate-900 dark:text-white tracking-tight leading-none">Saad Ahmed</p>
-          <p class="text-[0.65rem] text-indigo-600 dark:text-indigo-300 font-semibold mt-0.5 leading-none">Lecturer, Dept of CSE · BAUST</p>
-        </div>
+        <span class="font-bold text-slate-900 dark:text-white tracking-tight">Saad Ahmed</span>
       </div>
       <div class="flex items-center gap-2">
         <button id="theme-toggle-mobile" class="p-2.5 rounded-lg text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle theme">
@@ -280,6 +274,19 @@
 
       <!-- Main content -->
       <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-6 overflow-x-hidden">
+
+        <!-- Mobile-only profile card — mirrors the desktop sidebar card -->
+        <div class="lg:hidden bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-md text-center relative overflow-hidden">
+          <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+          <div class="p-5">
+            <div class="relative w-28 h-28 mx-auto mb-4 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-[0_4px_20px_rgba(29,78,216,0.14)]">
+              <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" class="w-full h-full object-cover rounded-xl" />
+            </div>
+            <p class="font-extrabold text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Saad Ahmed</p>
+            <p class="text-sm text-indigo-600 dark:text-indigo-300 font-semibold mt-1.5">Lecturer, Dept of CSE</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-normal">Bangladesh Army University of Science and Technology (BAUST)</p>
+          </div>
+        </div>
 
         <!-- About / Hero -->
         <header id="about" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
