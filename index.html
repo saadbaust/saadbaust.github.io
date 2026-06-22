@@ -209,24 +209,6 @@
       }
       .dark h2.section-title { color: #f8fafc; }
 
-      /* Section icon chips: a faint ring to make them feel considered */
-      #main .bg-indigo-50.rounded-xl { box-shadow: inset 0 0 0 1px rgba(79,70,229,.12); }
-      .dark #main .bg-indigo-50\/50.rounded-xl,
-      .dark #main [class*="bg-indigo-950"].rounded-xl { box-shadow: inset 0 0 0 1px rgba(129,140,248,.16); }
-
-      /* Hero metric tiles: larger serif numerals, soft tinted surface */
-      #metrics > div {
-        border-radius: 14px;
-        background: linear-gradient(180deg, #ffffff 0%, #f4f6fc 100%);
-        border-color: #ebedf3;
-      }
-      .dark #metrics > div { background: #101729; border-color: #222d44; }
-      #metrics > div > span:first-child {
-        font-size: 1.8rem;
-        line-height: 1;
-        letter-spacing: -0.01em;
-      }
-
       /* ── Dramatic ambient glow + frosted-glass hero ──────────────────────
          A fixed, animated light source sits in the top-right of the page,
          behind all content. The hero card is translucent with a backdrop
@@ -241,7 +223,7 @@
         pointer-events: none;
         border-radius: 9999px;
         filter: blur(90px);
-        opacity: .9;
+        opacity: 0.3;
         background:
           radial-gradient(circle at 32% 34%, rgba(99,102,241,.70), transparent 60%),
           radial-gradient(circle at 68% 56%, rgba(168,85,247,.50), transparent 60%),
@@ -250,7 +232,7 @@
         will-change: transform, opacity;
       }
       .dark .glow-field {
-        opacity: 1;
+        opacity: 0.5;
         filter: blur(96px);
         background:
           radial-gradient(circle at 32% 34%, rgba(99,102,241,.72), transparent 60%),
@@ -264,7 +246,7 @@
 
       /* Hero = frosted glass, so the glow behind it shows through */
       #main #about {
-        background: rgba(255, 255, 255, .80);
+        background: rgba(255, 255, 255, 1.0);
         -webkit-backdrop-filter: blur(20px) saturate(155%);
         backdrop-filter: blur(20px) saturate(155%);
         border-color: rgba(255, 255, 255, .55);
