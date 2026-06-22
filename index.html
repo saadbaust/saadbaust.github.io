@@ -21,6 +21,9 @@
     <meta property="og:image:height" content="170" />
     <meta property="og:site_name"   content="Saad Ahmed | BAUST" />
     <meta property="og:locale"      content="en_US" />
+    <meta property="profile:first_name" content="Saad" />
+    <meta property="profile:last_name"  content="Ahmed" />
+    <meta property="profile:username"   content="saadbaust" />
     <meta name="twitter:card"        content="summary" />
     <meta name="twitter:title"       content="Saad Ahmed | Lecturer &amp; Researcher | BAUST" />
     <meta name="twitter:description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning." />
@@ -314,19 +317,19 @@
 
           <div id="metrics" class="flex flex-wrap gap-2.5 mt-4 mb-3">
             <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
-              <span id="total-citations" data-count="0" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span id="total-citations" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
               <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Citations</span>
             </div>
             <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
-              <span id="total-papers" data-count="0" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span id="total-papers" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
               <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Papers</span>
             </div>
             <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
-              <span id="h-index" data-count="0" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span id="h-index" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
               <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">h-index</span>
             </div>
             <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
-              <span id="i10-index" data-count="0" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span id="i10-index" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
               <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">i10-index</span>
             </div>
           </div>
@@ -381,8 +384,6 @@
             </div>
           </div>
         </header>
-
-        <hr class="divider hidden" id="divider-charts" />
 
         <!-- Charts -->
         <section id="charts-section" class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -457,12 +458,7 @@
           </div>
 
           <div id="publications-list"></div>
-          <!-- Kept for back-compat with any external links / CMS toggles; not rendered into. -->
-          <div id="journal-list" class="hidden"></div>
-          <div id="conference-list" class="hidden"></div>
         </section>
-        <!-- Conferences nav anchor (publications are merged into one section above). -->
-        <span id="conferences" class="block -mt-6"></span>
 
         <!-- Teaching -->
         <section id="teaching" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
@@ -510,8 +506,6 @@
           </div>
           <div id="cert-list" class="space-y-3"></div>
         </section>
-
-        <hr class="divider hidden" id="divider-contact" />
 
         <!-- Contact -->
         <section id="contact" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
@@ -639,18 +633,8 @@
       '</div>';
   }
 
-  function buildPublications(sortedPapers) {
-    let jIdx = 0, cIdx = 0;
-    let journals = '', conferences = '';
-    sortedPapers.forEach(p => {
-      if (isJournal(p)) { journals += buildPaperCard(p, jIdx); jIdx++; }
-      else              { conferences += buildPaperCard(p, cIdx); cIdx++; }
-    });
-    return { journals, conferences };
-  }
-
-  // Timeline item (Experience / Education) — original design: hollow dot on the
-  // rail that fills + glows on hover (animation handled by .timeline-item CSS).
+  // Timeline item (Experience / Education) — hollow dot on the rail that fills
+  // + glows on hover (animation handled by .timeline-item CSS).
   function timelineItem(titleText, badgeText, orgText, bottomHtml) {
     return '' +
       '<div class="timeline-item">' +
@@ -777,7 +761,7 @@
 
   const SR = {
     escapeHtml, escapeAttr, parseBibField, unescapeBibText, formatAuthors,
-    isJournal, sortPapers, buildPaperCard, buildPublications, buildExperience,
+    isJournal, sortPapers, buildPaperCard, buildExperience,
     buildEducation, buildSkills, buildCerts, buildResearch, buildTeaching,
     buildPublicationsLd
   };
@@ -814,24 +798,6 @@
       if (el && value != null && value !== '') el.textContent = value;
     }
 
-    // Count-up animation from 0 to the target number (like the original site).
-    function animateCount(id, value) {
-      const el = document.getElementById(id);
-      const target = parseInt(value, 10);
-      if (!el || isNaN(target)) { setText(id, value); return; }
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduce || target === 0) { el.textContent = target; return; }
-      const duration = 1100;
-      const start = performance.now();
-      function tick(now) {
-        const p = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - p, 3);   // easeOutCubic
-        el.textContent = Math.round(eased * target);
-        if (p < 1) requestAnimationFrame(tick);
-        else el.textContent = target;
-      }
-      requestAnimationFrame(tick);
-    }
     function setAttr(id, attr, value) {
       const el = document.getElementById(id);
       if (el && value != null && value !== '') el.setAttribute(attr, value);
@@ -859,10 +825,14 @@
       setAttr('cv-link', 'href',  p.cvLink);
 
       setText('contact-phone', c.phone);
-      const emailEl = document.getElementById('contact-email');
-      if (emailEl && c.email) {
-        emailEl.textContent = c.email;
-        emailEl.setAttribute('href', 'mailto:' + c.email);
+      if (c.email) {
+        const emailEl = document.getElementById('contact-email');
+        if (emailEl) {
+          emailEl.textContent = c.email;
+          emailEl.setAttribute('href', 'mailto:' + c.email);
+        }
+        // Keep the hero "Email Me" button in sync with the CMS email too.
+        setAttr('email-link', 'href', 'mailto:' + c.email);
       }
     }
 
