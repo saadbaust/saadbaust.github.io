@@ -227,6 +227,53 @@
         letter-spacing: -0.01em;
       }
 
+      /* ── Dramatic ambient glow + frosted-glass hero ──────────────────────
+         A fixed, animated light source sits in the top-right of the page,
+         behind all content. The hero card is translucent with a backdrop
+         blur, so the glow reads as if it's shining through frosted glass. */
+      .glow-field {
+        position: fixed;
+        top: -280px;
+        right: -150px;
+        width: 700px;
+        height: 700px;
+        z-index: -10;
+        pointer-events: none;
+        border-radius: 9999px;
+        filter: blur(90px);
+        opacity: .9;
+        background:
+          radial-gradient(circle at 32% 34%, rgba(99,102,241,.70), transparent 60%),
+          radial-gradient(circle at 68% 56%, rgba(168,85,247,.50), transparent 60%),
+          radial-gradient(circle at 52% 80%, rgba(56,189,248,.34), transparent 62%);
+        animation: glowDrift 9s ease-in-out infinite;
+        will-change: transform, opacity;
+      }
+      .dark .glow-field {
+        opacity: 1;
+        filter: blur(96px);
+        background:
+          radial-gradient(circle at 32% 34%, rgba(99,102,241,.72), transparent 60%),
+          radial-gradient(circle at 68% 56%, rgba(168,85,247,.62), transparent 60%),
+          radial-gradient(circle at 52% 80%, rgba(56,189,248,.42), transparent 62%);
+      }
+      @keyframes glowDrift {
+        0%, 100% { transform: translate3d(0, 0, 0) scale(1);      opacity: .80; }
+        50%      { transform: translate3d(-34px, 28px, 0) scale(1.16); opacity: 1; }
+      }
+
+      /* Hero = frosted glass, so the glow behind it shows through */
+      #main #about {
+        background: rgba(255, 255, 255, .80);
+        -webkit-backdrop-filter: blur(20px) saturate(155%);
+        backdrop-filter: blur(20px) saturate(155%);
+        border-color: rgba(255, 255, 255, .55);
+      }
+      .dark #main #about {
+        background: rgba(17, 23, 40, .52);
+        border-color: rgba(129, 140, 248, .18);
+      }
+
       /* Timeline (Experience / Education) — rail + hollow dot that fills & glows on hover */
       .timeline-container { position: relative; padding-left: 30px; margin: 4px 0; }
       .timeline-container::before {
@@ -254,6 +301,7 @@
 
   <body class="bg-slate-50 dark:bg-darkbg text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-300">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[1000] focus:bg-indigo-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
+    <div aria-hidden="true" class="glow-field"></div>
 
     <!-- Mobile top bar -->
     <header class="lg:hidden bg-white/90 dark:bg-darkcard/90 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-4 py-3 flex items-center justify-between shadow-sm">
@@ -323,9 +371,7 @@
       <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-8 overflow-x-hidden">
 
         <!-- About / Hero (photo + identity merged) -->
-        <header id="about" class="isolate bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm relative overflow-hidden">
-          <div aria-hidden="true" class="pointer-events-none absolute -top-28 -right-24 w-80 h-80 -z-10 rounded-full bg-gradient-to-br from-indigo-400/25 via-indigo-500/10 to-transparent blur-3xl"></div>
-          <div aria-hidden="true" class="pointer-events-none absolute top-0 left-0 right-0 h-px -z-10 bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent"></div>
+        <header id="about" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm relative overflow-hidden">
 
           <div class="relative flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-7 text-center sm:text-left">
             <div class="relative w-36 h-36 sm:w-40 sm:h-40 flex-shrink-0 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-sm">
@@ -582,6 +628,13 @@
         </footer>
       </main>
     </div>
+
+    <!-- Floating theme toggle (desktop) -->
+    <button id="theme-toggle-desktop" title="Toggle theme (Alt+T)" aria-label="Toggle light/dark theme"
+            class="hidden lg:flex items-center justify-center fixed top-6 right-6 z-30 p-3.5 rounded-full bg-white dark:bg-darkcard border border-slate-200 dark:border-darkborder text-slate-500 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm transition-colors">
+      <svg class="hidden dark:block w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/></svg>
+      <svg class="block dark:hidden w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd"/></svg>
+    </button>
 
     <button id="back-to-top" title="Back to top" aria-label="Scroll back to top"
             class="fixed bottom-6 right-6 p-3.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer transform translate-y-20 opacity-0 transition-all duration-300 z-30 shadow-[0_4px_14px_rgba(79,70,229,0.35)]">
