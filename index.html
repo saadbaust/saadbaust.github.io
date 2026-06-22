@@ -26,15 +26,9 @@
     <meta name="twitter:description" content="Official portfolio of Saad Ahmed, Lecturer at BAUST. Researcher in Image Processing, Computer Vision, and Deep Learning." />
     <meta name="twitter:image"       content="https://saadbaust.github.io/images/saadahmed.png" />
     <meta name="twitter:image:alt"   content="Saad Ahmed — Lecturer at BAUST, Researcher in Image Processing and Computer Vision" />
+
     <!-- SEO: structured data as a single linked @graph (WebSite + ProfilePage + ImageObject
-         + Person) instead of a lone Person object. Linking entities via @id is the modern,
-         recommended pattern — it lets Google understand the page and the person as distinct
-         but connected entities, rather than guessing the relationship.
-         NOTE: like before, this block is static — if name/job/contact/education details
-         change, update this by hand AND keep "dateModified" below in sync with the
-         <lastmod> date in sitemap.xml. Per-publication structured data is generated and
-         injected dynamically at runtime instead (see injectPublicationsStructuredData()
-         in the script below), since publications load from publications.bib at runtime. -->
+         + Person) — unchanged from the original. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -85,7 +79,7 @@
             { "@id": "https://saadbaust.github.io/#chart-citation-history" }
           ],
           "mainEntity": { "@id": "https://saadbaust.github.io/#person" },
-          "dateModified": "2026-06-21"
+          "dateModified": "2026-06-22"
         },
         {
           "@type": "Person",
@@ -127,300 +121,467 @@
     }
     </script>
 
-
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d4ed8'/%3E%3Ctext x='16' y='22' font-family='Inter%2C Arial%2C sans-serif' font-size='13' font-weight='700' text-anchor='middle' fill='white'%3ESA%3C/text%3E%3C/svg%3E" />
 
-    <!-- Preconnect to the font / CDN origins so their TLS handshake overlaps
-         with HTML parsing instead of starting only when the stylesheet is hit. -->
+    <!-- Apply saved/system theme before paint to avoid a flash of the wrong theme. -->
+    <script>
+      (function () {
+        var t = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', t === 'dark');
+      })();
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <!-- Critical, local styles stay render-blocking (they own the layout). -->
-    <link rel="stylesheet" href="style.css" />
+    <!-- Tailwind CSS (CDN) — replaces style.css entirely. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: { 50: '#f5f7ff', 100: '#ebf0ff', 200: '#d6e0ff', 400: '#7c9cff', 500: '#4f46e5', 600: '#4338ca', 700: '#3730a3', 900: '#1e1b4b' },
+              darkbg: '#0b0f19', darkcard: '#151b2c', darkborder: '#222d44',
+            },
+            fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] },
+          },
+        },
+      };
+    </script>
 
-    <!-- Fonts + Font Awesome are non-critical, so load them WITHOUT blocking
-         first paint: fetch as a stylesheet, then apply on load. The <noscript>
-         copies are the no-JS fallback. font-display:swap is already requested
-         in the Google Fonts URL, so text is visible immediately either way. -->
-    <link rel="preload" as="style"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-          onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="preload" as="style"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    </noscript>
+    <style>
+      html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+      section, header[id] { scroll-margin-top: 84px; }
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+      .dark ::-webkit-scrollbar-thumb { background: #334155; }
+      ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+      .sidebar-link.active { background-color: #4f46e5 !important; color: #fff !important; box-shadow: 0 4px 12px rgba(79,70,229,.18); }
+      .dark .sidebar-link.active { background-color: #6366f1 !important; color: #fff !important; box-shadow: 0 4px 14px rgba(99,102,241,.28); }
 
+      /* Timeline (Experience / Education) — rail + hollow dot that fills & glows on hover */
+      .timeline-container { position: relative; padding-left: 30px; margin: 4px 0; }
+      .timeline-container::before {
+        content: ''; position: absolute; left: 4px; top: 6px; bottom: 6px;
+        width: 2px; background: #c7d2fe; border-radius: 2px;
+      }
+      .dark .timeline-container::before { background: #312e81; }
+      .timeline-item { position: relative; margin-bottom: 28px; }
+      .timeline-item:last-child { margin-bottom: 0; }
+      .timeline-item::after {
+        content: ''; position: absolute; left: -31px; top: 6px;
+        width: 12px; height: 12px; border-radius: 50%;
+        background: #fff; border: 2px solid #4f46e5; box-sizing: border-box;
+      }
+      .dark .timeline-item::after { background: #151b2c; border-color: #6366f1; }
+
+      .pub-filter.active { background-color: #4f46e5 !important; color: #fff !important; box-shadow: 0 1px 3px rgba(79,70,229,.25); }
+      .dark .pub-filter.active { background-color: #6366f1 !important; color: #fff !important; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      }
+    </style>
   </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <main class="main-block">
 
-      <aside class="sidebar">
-        <nav>
-          <div class="nav-group">
-            <small class="nav-label">Main</small>
-            <a href="index.html" class="active" aria-current="page">Home</a>
-            <a href="gallery.html">Gallery</a>
+  <body class="bg-slate-50 dark:bg-darkbg text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-300">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[1000] focus:bg-indigo-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
+
+    <!-- Mobile top bar -->
+    <header class="lg:hidden bg-white/90 dark:bg-darkcard/90 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-4 py-3 flex items-center justify-between shadow-sm">
+      <div class="flex items-center gap-2.5">
+        <span class="font-bold text-slate-900 dark:text-white tracking-tight">Saad Ahmed</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="theme-toggle-mobile" class="p-2.5 rounded-lg text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle theme">
+          <svg class="hidden dark:block w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/></svg>
+          <svg class="block dark:hidden w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd"/></svg>
+        </button>
+        <button id="mobile-menu-btn" class="p-2.5 rounded-lg text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle navigation menu">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
+
+    <div class="flex-grow flex w-full max-w-7xl mx-auto px-0 md:px-4 lg:px-6 gap-6">
+      <!-- Sidebar -->
+      <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 lg:static lg:block w-[280px] bg-white dark:bg-darkcard border-r border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col h-screen lg:h-auto overflow-hidden lg:overflow-visible">
+        <div class="space-y-6 overflow-y-auto pr-1 flex-1 min-h-0">
+          <div class="bg-white dark:bg-darkcard rounded-2xl p-5 border border-slate-200 dark:border-darkborder shadow-md text-center relative overflow-hidden">
+            <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+            <div class="relative w-32 h-32 mx-auto mb-4 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-[0_4px_20px_rgba(29,78,216,0.14)]">
+              <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" width="170" height="170" class="w-full h-full object-cover rounded-xl" />
+            </div>
+            <p class="font-extrabold text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Saad Ahmed</p>
+            <p class="text-sm text-indigo-600 dark:text-indigo-300 font-semibold mt-1.5">Lecturer, Dept of CSE</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-normal">Bangladesh Army University of Science and Technology (BAUST)</p>
           </div>
-          <div class="nav-group">
-            <small class="nav-label">Sections</small>
-            <a href="#experience">Experience</a>
-            <a href="#journals">Publications</a>
-            <a href="#conferences">Conferences</a>
-            <a href="#research">Research Projects</a>
-            <a href="#teaching">Teaching</a>
-            <a href="#education">Education</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
-          </div>
-          <div class="nav-group">
-            <small class="nav-label">Admin</small>
-            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-lock"></i> CMS Login
+
+          <nav class="space-y-1.5">
+            <p class="px-4 pt-1 pb-1 text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Main</p>
+            <a href="index.html" class="sidebar-link active flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Home
+            </a>
+            <a href="gallery.html" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Gallery
+            </a>
+
+            <p class="px-4 pt-4 pb-1 text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Home Sections</p>
+            <a href="#experience" data-nav="experience" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Experience
+            </a>
+            <a href="#journals" data-nav="journals" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Publications
+            </a>
+            <a href="#research" data-nav="research" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Research Projects
+            </a>
+            <a href="#teaching" data-nav="teaching" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Teaching
+            </a>
+            <a href="#education" data-nav="education" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Education
+            </a>
+            <a href="#skills" data-nav="skills" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Skills
+            </a>
+            <a href="#contact" data-nav="contact" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Contact
+            </a>
+          </nav>
+
+          <div class="pt-4 border-t border-slate-200 dark:border-darkborder mt-2 space-y-2">
+            <button id="theme-toggle-desktop" class="w-full flex items-center justify-between px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors" aria-label="Toggle light/dark theme">
+              <span>Theme Toggle</span>
+              <span class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Alt+T</span>
+            </button>
+            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer" class="w-full flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              CMS Login
             </a>
           </div>
-        </nav>
+        </div>
       </aside>
 
-      <div class="content" id="main">
+      <!-- Main content -->
+      <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-6 overflow-x-hidden">
 
-        <header id="about" class="hero">
-          <div class="profile-card">
-            <img
-              src="images/saadahmed.png"
-              alt="Saad Ahmed — Lecturer at Department of CSE, BAUST"
-              class="profile-photo"
-              width="170" height="170"
-            />
-            <span class="profile-chip" id="profile-chip">Lecturer · BAUST</span>
+        <!-- About / Hero -->
+        <header id="about" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+
+          <div class="flex flex-wrap items-center gap-2 mb-4">
+            <span id="profile-chip" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300">
+              Lecturer · BAUST
+            </span>
           </div>
 
-          <div class="hero-info">
-            <h1 id="hero-name">Saad Ahmed</h1>
-            <p class="subtitle" id="hero-subtitle">Lecturer, Dept of CSE</p>
-            <p class="institution" id="hero-institution">Bangladesh Army University of Science and Technology (BAUST)</p>
+          <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
+            Hi, I'm <span class="text-indigo-600 dark:text-indigo-400" id="hero-name">Saad Ahmed</span>
+          </h1>
 
-            <div class="metrics-grid" id="metrics">
-              <div class="metric-item">
-                <span class="metric-value" id="total-citations">0</span>
-                <span class="metric-label">Citations</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value" id="total-papers">0</span>
-                <span class="metric-label">Papers</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value" id="h-index">0</span>
-                <span class="metric-label">h-index</span>
-              </div>
-              <div class="metric-item">
-                <span class="metric-value" id="i10-index">0</span>
-                <span class="metric-label">i10-index</span>
-              </div>
+          <div class="research-interests inline-block mt-3 px-3 py-2 rounded-md bg-indigo-500/[0.05] dark:bg-indigo-400/[0.06]">
+            <p class="text-[0.88rem] text-slate-500 dark:text-slate-400">
+              <strong class="font-semibold">Research Focus:</strong>
+              <span id="research-focus">Image Processing, Computer Vision, &amp; Deep Learning.</span>
+            </p>
+          </div>
+
+          <div class="academic-summary" id="about-section">
+            <p id="about-text" class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mt-4 text-justify">I am a Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST). My research interests focus on Image Processing, Computer Vision, and Deep Learning, with a dedication to developing intelligent systems that solve real-world problems and contribute to the global advancement of technology.</p>
+          </div>
+
+          <div id="metrics" class="flex flex-wrap gap-2.5 mt-4 mb-3">
+            <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
+              <span id="total-citations" data-count="0" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Citations</span>
             </div>
-
-            <div class="research-interests">
-              <p><strong>Research Focus:</strong> <span id="research-focus">Image Processing, Computer Vision, &amp; Deep Learning.</span></p>
+            <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
+              <span id="total-papers" data-count="0" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Papers</span>
             </div>
+            <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
+              <span id="h-index" data-count="0" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">h-index</span>
+            </div>
+            <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
+              <span id="i10-index" data-count="0" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">i10-index</span>
+            </div>
+          </div>
 
-            <div class="hero-actions">
-              <a
-                href="https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing"
-                class="resume-btn"
-                id="cv-link"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <i class="fas fa-file-pdf"></i> View CV
+          <div class="hero-actions flex flex-wrap items-center gap-3 mt-5 pt-5 border-t border-slate-200 dark:border-darkborder">
+            <a id="cv-link" href="https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+               class="resume-btn inline-flex items-center gap-2 bg-[#1d4ed8] hover:bg-[#1a46c0] text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-[0_2px_8px_rgba(29,78,216,0.25)] transition-colors">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" clip-rule="evenodd"/><path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"/></svg>
+              View CV
+            </a>
+            <a id="email-link" href="mailto:saadahmed@baust.edu.bd"
+               class="email-btn inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-500 text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-[0_2px_8px_rgba(15,23,42,0.18)] transition-colors">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
+              Email Me
+            </a>
+          </div>
+
+          <div class="mt-5 pt-5 border-t border-slate-200 dark:border-darkborder">
+            <div class="social-icons flex flex-wrap gap-2.5">
+              <a href="https://linkedin.com/in/saadbaust" class="icon linkedin inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#0A66C2] dark:hover:bg-[#1c2a45] dark:hover:text-[#60a5fa]" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h24v24H0z" fill="none"/><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
+                <span class="social-label">LinkedIn</span>
               </a>
-              <div class="social-icons">
-                <a href="https://linkedin.com/in/saadbaust"                          class="icon linkedin"     title="LinkedIn"      target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i><span class="social-label">LinkedIn</span></a>
-                <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&amp;hl=en"  class="icon scholar"      title="Google Scholar" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i><span class="social-label">Google Scholar</span></a>
-                <a href="https://orcid.org/0009-0005-5614-3427"                      class="icon orcid"        title="ORCID"         target="_blank" rel="noopener noreferrer"><i class="fab fa-orcid"></i><span class="social-label">ORCID</span></a>
-                <a href="https://www.researchgate.net/profile/Saad-Ahmed-96"         class="icon researchgate" title="ResearchGate"  target="_blank" rel="noopener noreferrer"><i class="fab fa-researchgate"></i><span class="social-label">ResearchGate</span></a>
-                <a href="https://ieeexplore.ieee.org/author/526065849930602"         class="icon ieee"         title="IEEE Xplore" aria-label="IEEE Xplore author profile" target="_blank" rel="noopener noreferrer"><span class="ieee-mark">IEEE</span><span class="social-label">Xplore</span></a>
-                <a href="https://www.semanticscholar.org/author/Saad-Ahmed/2336915789" class="icon semantic-scholar" title="Semantic Scholar" aria-label="Semantic Scholar author profile" target="_blank" rel="noopener noreferrer"><span class="ss-mark">S2</span><span class="social-label">Semantic Scholar</span></a>
-                <a href="https://github.com/saadbaust"                               class="icon github"       title="GitHub"        target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i><span class="social-label">GitHub</span></a>
-                <a href="https://youtube.com/@saadbaust"                             class="icon youtube"      title="YouTube"       target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i><span class="social-label">YouTube</span></a>
-              </div>
+              <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&amp;hl=en" class="icon scholar inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#4285F4] dark:hover:bg-[#1c2a45] dark:hover:text-[#8ab4f8]" title="Google Scholar" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[18px] h-[18px]" viewBox="0 0 48 48" aria-hidden="true"><path d="M0 0h48v48H0z" fill="none"/><path fill="currentColor" d="M21.82 4.134a6.73 6.73 0 0 1 4.36 0c1.982.677 5.648 2.003 10.997 4.231c3.85 1.605 6.581 2.847 8.42 3.728c1.199.574 1.887 1.705 1.887 2.907s-.688 2.333-1.888 2.907c-1.838.88-4.569 2.123-8.419 3.728c-5.349 2.228-9.015 3.554-10.997 4.23a6.73 6.73 0 0 1-4.36 0c-1.982-.676-5.648-2.002-10.997-4.23A228 228 0 0 1 6.5 19.784v15.972A4.502 4.502 0 0 1 5 44.5a4.5 4.5 0 0 1-1.5-8.744v-17.33q-.594-.277-1.096-.519C1.204 17.333.516 16.202.516 15s.688-2.333 1.888-2.907c1.838-.881 4.569-2.123 8.42-3.728c5.348-2.228 9.014-3.554 10.997-4.23"/><path fill="currentColor" d="M20.852 28.198A177 177 0 0 1 9.5 23.878v.289c0 3.142.161 5.154.329 6.4c.199 1.476 1.059 2.773 2.417 3.484C14.213 35.08 18.017 36.5 24 36.5s9.787-1.42 11.754-2.45c1.358-.71 2.219-2.007 2.417-3.483c.168-1.246.329-3.258.329-6.4v-.29a177 177 0 0 1-11.352 4.32a9.73 9.73 0 0 1-6.296 0"/></svg>
+                <span class="social-label">Google Scholar</span>
+              </a>
+              <a href="https://orcid.org/0009-0005-5614-3427" class="icon orcid inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#A6CE39] dark:hover:bg-[#1c2a45] dark:hover:text-[#A6CE39]" title="ORCID" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[18px] h-[18px]" viewBox="0 0 32 32" aria-hidden="true"><path d="M0 0h32v32H0z" fill="none"/><path fill="currentColor" d="M16 0C7.161 0 0 7.161 0 16s7.161 16 16 16s16-7.161 16-16S24.839 0 16 0M9.823 5.839c.704 0 1.265.573 1.265 1.26s-.561 1.265-1.265 1.265a1.27 1.27 0 0 1-1.26-1.265c0-.697.563-1.26 1.26-1.26m-.959 4.046h1.923v13.391H8.864zm4.751 0h5.197c4.948 0 7.125 3.541 7.125 6.703c0 3.439-2.687 6.699-7.099 6.699h-5.224zm1.921 1.74v9.927h3.063c4.365 0 5.365-3.312 5.365-4.964c0-2.687-1.713-4.963-5.464-4.963z"/></svg>
+                <span class="social-label">ORCID</span>
+              </a>
+              <a href="https://www.researchgate.net/profile/Saad-Ahmed-96" class="icon researchgate inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#00CCBB] dark:hover:bg-[#1c2a45] dark:hover:text-[#00CCBB]" title="ResearchGate" target="_blank" rel="noopener noreferrer">
+                <svg class="h-[18px] w-auto" viewBox="0 0 448 512" aria-hidden="true"><path d="M0 0h448v512H0z" fill="none"/><path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm277.201 64c5.627 0 10.731.651 15.258 1.98c4.476 1.318 8.49 3.135 12.031 5.461c3.491 2.302 6.511 5.013 9.004 8.082a44 44 0 0 1 6.227 9.899c.626 1.125.449 2.02-.55 2.646l-13.9 5.715c-1.177.628-2.006.308-2.66-.933c-3.119-5.78-5.78-9.577-10.152-12.338c-4.425-2.75-8.518-4.055-15.258-4.055c-7.327 0-10.601 1.457-15.191 4.744c-4.553 3.223-7.89 7.276-9.86 13.451c-.395 1.114-.754 2.496-1.175 4.12c-.346 1.65-.627 3.67-.805 6.035c-.18 2.366-.347 5.295-.5 8.748c-.102 3.453-.152 7.646-.152 12.506c0 4.884.05 9.078.152 12.53c.153 3.44.32 6.37.5 8.735c.178 2.391.46 4.4.805 6.063c.421 1.598.78 2.977 1.175 4.103c1.97 6.15 4.783 9.514 8.926 12.213c4.092 2.737 8.798 4.707 16.125 4.707c6.51 0 12.469-1.855 16.356-4.682c3.85-2.825 7.046-6.559 8.478-11.662c.627-2.148 1.433-4.822 1.983-8.095c.498-3.274.5-6.738.5-11.52c0-.755-.424-1.14-1.127-1.14h-22.264c-1.253 0-1.867-.613-1.867-1.866v-12.761c0-1.267.614-1.881 1.867-1.881h40.857c1.28 0 1.881.614 1.881 1.88v10.907c0 5.78 0 11.14-.601 16.101c-.576 4.962-1.355 9.257-2.34 12.389c-3.12 9.81-8.07 16.793-15.653 21.996c-7.609 5.243-17.417 8.068-28.07 8.068c-10.946 0-20.165-2.516-27.683-7.517c-7.532-5.064-12.918-12.496-16.204-22.432a43 43 0 0 1-1.482-5.83c-.384-2.007-.73-4.348-1.037-7.047c-.32-2.723-.524-5.919-.65-9.691c-.129-3.746-.18-8.325-.18-13.568c0-5.27.052-9.782.18-13.541c.127-3.773.33-7.01.65-9.708c.306-2.685.653-5.037 1.037-7.044c.37-2.02.857-3.94 1.484-5.819c3.286-9.936 8.67-17.404 16.202-22.418C305.036 98.518 314.255 96 325.2 96m-151.674 77.813c43.569 0 76.803 19.858 76.803 62.646c0 29.028-22.916 58.083-53.861 65.32c18.733 33.249 41.252 62.662 58.08 80.973c9.898 10.703 23.646 20.268 37.392 20.268v9.912c-4.192 1.93-11.06 3.068-17.545 3.068c-22.16 0-39.718-8.773-51.2-22.545c-12.585-14.502-34.746-45.845-58.046-87.469c-12.25 0-20.268 0-29.437-.767v63.785c0 23.696 5.372 28.671 15.678 30.168l19.873 2.709v11.05c-9.553-.37-31.714-1.126-48.9-1.126c-17.968 0-35.923.756-46.23 1.127V401.88l14.503-2.71c9.974-1.891 15.652-6.47 15.652-30.167V218.506c0-23.708-5.678-28.261-15.652-30.18l-14.502-2.66V174.58c9.526.37 24.821.37 40.129.37c16.776 0 34.744-1.137 57.263-1.137m-6.867 17.185c-10.32 0-22.136 0-30.947.768v95.845c8.811.83 14.515 1.176 27.508 1.176c34.015 0 54.629-20.243 54.629-50.422c0-30.536-19.08-47.367-51.19-47.367"/></svg>
+                <span class="social-label">ResearchGate</span>
+              </a>
+              <a href="https://ieeexplore.ieee.org/author/526065849930602" class="icon ieee inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#00629B] dark:hover:bg-[#1c2a45] dark:hover:text-[#60a5fa]" title="IEEE Xplore" aria-label="IEEE Xplore author profile" target="_blank" rel="noopener noreferrer">
+                <svg class="h-[12px] w-auto" viewBox="0 0 512 150" aria-hidden="true"><path d="M0 0h512v150H0z" fill="none"/><path fill="currentColor" d="M170.746 19.748h31.325v113.084h-31.325zm47.762 113.084V19.748h86.142v21.925h-54.818v23.334h50.429v21.929h-50.429v23.961h54.818v21.935zm103.692 0V19.748h86.12v21.925h-54.803v23.334h50.412v21.929h-50.412v23.961h54.803v21.935zm103.66 0V19.748h86.141v21.925h-54.798v23.334h50.416v21.929h-50.416v23.961H512v21.935zM71.458 87.637c-.414 7.985-.516 15.375-1.107 23.38c3.16.287 6.727.563 10.097.072L79.44 88.774l-.177-1.062c-2.566.1-4.995.203-7.806-.075M51.72 65.214c-3.893 1.951-9.62 4.9-8.988 10.239c.834 2.915 3.99 4.799 6.488 5.997c13.805 6.083 32.132 6.29 46.707 1.75c3.598-1.387 8.429-3.398 9.09-7.807c-.039-3.642-3.895-5.935-6.665-7.33v-.173c.966-.381 2.077-.725 3.077-.83v-.097c-4.881-.875-9.595-2.152-14.323-3.402c.91 2.075 1.568 4.263 2.327 6.42c1.42-.455 2.877-.8 4.41-1.01c2.493.971 6.064 2.36 6.418 5.477c.277 2.916-2.914 4.336-4.929 5.52c-10.691 3.89-22.72 4.27-33.87 1.312c-3.08-.97-7.524-2.216-7.906-6.138c2.186-5.162 7.84-6.237 12.562-7.49c-2.427-1.564-4.895-2.948-7.247-4.688c-2.54.14-4.86 1.252-7.151 2.25m23.62-31.149l-1.384 4.443l-6.94 19.879c1.738.177 3.89 0 5.596.177v.164l-1.015 22.486l.175.236c2.22.218 4.992.329 7.255-.057v-.354l-.906-21.81l.136-.738l6.106-.104c-3.045-8.047-6-16.175-8.844-24.322zm-3.225-9.988c5.106-3.478 9.687 1.385 13.643 4.164c15.296 12.312 29.73 26.405 40.73 42.32c1.385 2.053 2.012 5.242.769 7.566c-2.851 4.756-6.699 9.097-10.346 13.505v.241c-9.094 9.68-18.698 19.632-29.076 27.83c-5.065 3.082-9.714 9.813-16.238 5.643c-14.855-10.855-29.07-24.351-41.12-38.826c-2.043-3.182-5.233-5.79-6.654-9.4c-1.983-4.887 2.389-8.394 4.89-12.075C41 49.892 56.26 35.033 72.116 24.077M84.918 9.605l-5.654-8.013C78.57 1.17 77.707.47 76.94.265c-1.667-.723-3.465.152-4.826 1.184l-10.23 13.325C45.47 35.102 26.04 54.083 4.843 68.633C3.168 69.942.677 71.22.158 73.378c-.556 1.94.455 3.542 1.66 4.75c16.974 11.691 33.202 25.571 47.647 41.4c2.564 2.694 4.643 5.373 7.151 7.902c4.225 5.622 9.188 11.289 13.072 17.32c1.218 1.273 1.427 3.366 3.331 3.986c1.491.516 3.332.866 4.754 0l1.414-1.42c17.563-24.88 39.838-47.226 64.725-65.266c2.49-2.225 7.249-3.052 7.317-7.181c-.177-1.905-1.286-3.782-2.922-4.822l-.407-.067c-12.807-8.712-24.74-18.565-35.982-29.743L99.495 27.26c-5.033-5.58-9.924-11.76-14.577-17.655M70.28 21.019c4.993-3.886 11.276-.659 15.477 2.916c4.4 3.363 8.983 7.174 13.006 11.068l.731.42c11.14 10.336 21.485 21.823 29.984 33.967c1.378 2.113 2.596 4.508 1.826 7.313c-2.834 7.085-8.593 12.732-13.628 18.92c-10.894 11.725-22.386 23.071-35.25 32.123c-2.602 1.84-6.113 3.54-9.23 2.08c-9.47-4.957-17.455-13.077-25.743-20.475c-9.612-8.913-19.259-19.29-26.544-30.146c-1.083-1.523-1.388-3.402-1.356-5.411c.936-3.747 3.504-6.831 5.933-9.99c8.608-10.97 19.152-21.376 29.8-30.882c.246-.243.7-.762 1.086-1.009c4.573-3.954 9.116-7.454 13.908-10.894"/></svg>
+                <span class="social-label">Xplore</span>
+              </a>
+              <a href="https://www.semanticscholar.org/author/Saad-Ahmed/2336915789" class="icon semantic-scholar inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#52B788] dark:hover:bg-[#1c2a45] dark:hover:text-[#52B788]" title="Semantic Scholar" aria-label="Semantic Scholar author profile" target="_blank" rel="noopener noreferrer">
+                <svg class="h-[18px] w-auto" viewBox="0 0 448 512" aria-hidden="true"><path d="M0 0h448v512H0z" fill="none"/><path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm71.564 107.355H303.41c11.722 26.248 16.474 54.123 20.918 82.07l-2.447.7c-.588-1.635-1.282-3.238-1.748-4.908c-3.367-12.035-6.76-24.063-9.983-36.137c-1.159-4.344-3.892-6.507-7.802-8.635c-5.743-3.123-11.17-7.148-15.93-11.64c-3.037-2.865-5.635-4.614-9.943-4.569c-28.685.304-57.372.334-86.055.598c-1.912.019-4.278.724-5.63 1.977c-5.22 4.828-10.111 10.01-16.544 16.488c16.967 41.316 25.497 86.349 21.834 134.222c-8.146-5.215-14.452-9.343-14.826-20.271c-1.874-54.62-18.724-104.014-53.924-146.52c-.792-.956-1.185-2.243-1.766-3.375m-17.03 21.028c4.084-.003 8.168.024 12.25.144c1.62.047 3.885 1.078 4.695 2.375c24.41 39.22 43.44 80.41 45.906 127.537c.011.187-.182.383-.88 1.752c-14.587-49.866-40.905-92.087-74.755-129.93c.177-.613.35-1.228.527-1.843c4.085 0 8.171-.033 12.256-.035m-7.12 33.312c.994-.019 2.168 1.295 3 2.221c19.257 21.42 36.734 44.052 47.506 71.12c2.05 5.147 3.453 10.554 5.154 15.841c-22.312-35.113-53.362-61.368-87.074-88.148c11.67-.425 21.542-.85 31.414-1.034m287.12 18.97a4.4 4.4 0 0 1 1.466.134c-73.305 42.572-143.24 89.187-194.533 159.846l-59.438-94.526l.72-.92c1.64 1.321 36.529 29.297 52.198 42.13c4.365 3.574 7.663 3.51 12.203-.177c53.28-43.28 112.733-76.04 175.86-102.457c3.37-1.41 6.866-2.528 10.312-3.754a4.8 4.8 0 0 1 1.211-.277"/></svg>
+                <span class="social-label">Semantic Scholar</span>
+              </a>
+              <a href="https://github.com/saadbaust" class="icon github inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-slate-900 dark:hover:bg-[#1c2a45] dark:hover:text-white" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[18px] h-[18px]" viewBox="-2 -2 24 24" aria-hidden="true"><path d="M-2 -2h24v24H-2z" fill="none"/><path fill="currentColor" d="M18.88 1.099Q17.78-.001 16.233 0H3.746Q2.198 0 1.099 1.099Q-.001 2.199 0 3.746v12.487q0 1.548 1.099 2.647q1.1 1.1 2.647 1.099H6.66q.285 0 .429-.02a.5.5 0 0 0 .286-.169q.143-.15.143-.435l-.007-.885q-.006-.846-.006-1.34l-.3.052q-.285.052-.721.046a5.6 5.6 0 0 1-.904-.091a2 2 0 0 1-.872-.39a1.65 1.65 0 0 1-.572-.8l-.13-.3a3.3 3.3 0 0 0-.41-.663q-.28-.364-.566-.494l-.09-.065a1 1 0 0 1-.17-.156a.7.7 0 0 1-.117-.182q-.039-.092.065-.15q.104-.06.378-.059l.26.04q.26.051.643.311a2.1 2.1 0 0 1 .631.677q.3.532.722.813q.423.28.852.28t.742-.065a2.6 2.6 0 0 0 .585-.196q.117-.871.637-1.34a9 9 0 0 1-1.333-.234a5.3 5.3 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872q-.416-.52-.683-1.365q-.266-.846-.266-1.952q0-1.573 1.027-2.68q-.48-1.183.091-2.652q.378-.118 1.119.175t1.086.5q.345.21.553.352a9.2 9.2 0 0 1 2.497-.338q1.288 0 2.498.338l.494-.312a7 7 0 0 1 1.197-.572q.689-.26 1.054-.143q.585 1.47.103 2.653q1.028 1.105 1.028 2.68q0 1.106-.267 1.957q-.266.852-.689 1.366a3.7 3.7 0 0 1-1.053.865q-.63.351-1.223.507a9 9 0 0 1-1.333.235q.675.585.676 1.846v3.11q0 .22.065.357a.36.36 0 0 0 .208.189q.143.052.254.064q.111.014.318.013h2.914q1.548 0 2.647-1.099t1.099-2.647V3.746q0-1.548-1.1-2.647z"/></svg>
+                <span class="social-label">GitHub</span>
+              </a>
+              <a href="https://youtube.com/@saadbaust" class="icon youtube inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#FF0000] dark:hover:bg-[#1c2a45] dark:hover:text-[#FF0000]" title="YouTube" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h24v24H0z" fill="none"/><path fill="currentColor" d="M23 9.71a8.5 8.5 0 0 0-.91-4.13a2.92 2.92 0 0 0-1.72-1A78 78 0 0 0 12 4.27a79 79 0 0 0-8.34.3a2.87 2.87 0 0 0-1.46.74c-.9.83-1 2.25-1.1 3.45a48 48 0 0 0 0 6.48a9.6 9.6 0 0 0 .3 2a3.14 3.14 0 0 0 .71 1.36a2.86 2.86 0 0 0 1.49.78a45 45 0 0 0 6.5.33c3.5.05 6.57 0 10.2-.28a2.9 2.9 0 0 0 1.53-.78a2.5 2.5 0 0 0 .61-1a10.6 10.6 0 0 0 .52-3.4c.04-.56.04-3.94.04-4.54M9.74 14.85V8.66l5.92 3.11c-1.66.92-3.85 1.96-5.92 3.08"/></svg>
+                <span class="social-label">YouTube</span>
+              </a>
             </div>
           </div>
         </header>
 
-        <div class="academic-summary" id="about-section">
-          <p id="about-text">I am a Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST). My research interests focus on Image Processing, Computer Vision, and Deep Learning, with a dedication to developing intelligent systems that solve real-world problems and contribute to the global advancement of technology.</p>
-        </div>
+        <hr class="divider hidden" id="divider-charts" />
 
-        <hr class="divider" id="divider-charts" />
-
-        <div class="hero-images-container" id="charts-section">
-          <div class="stat-image-wrap">
-            <p class="stat-image-caption"><i class="fas fa-chart-pie"></i> Research Interest Distribution</p>
-            <img
-              src="images/Research Interest Distribution.png"
-              alt="Pie chart showing Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning"
-              class="hero-promo-img"
-              loading="lazy"
-            />
+        <!-- Charts -->
+        <section id="charts-section" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-md overflow-hidden">
+            <p class="stat-image-caption text-[0.76rem] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5 px-6 pt-5 pb-3">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-indigo-500" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M2.25 13.5a8.25 8.25 0 0 1 8.25-8.25.75.75 0 0 1 .75.75v6.75H18a.75.75 0 0 1 .75.75 8.25 8.25 0 0 1-16.5 0Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.75 3a.75.75 0 0 1 .75-.75 8.25 8.25 0 0 1 8.25 8.25.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V3Z" clip-rule="evenodd"/></svg>
+              Research Interest Distribution
+            </p>
+            <img src="images/Research Interest Distribution.png" alt="Pie chart showing Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning" class="w-full h-[280px] object-cover" loading="lazy" />
           </div>
-          <div class="stat-image-wrap">
-            <p class="stat-image-caption"><i class="fas fa-chart-line"></i> Citation History</p>
-            <img
-              src="images/Citation History.png"
-              alt="Bar chart showing Saad Ahmed's Google Scholar citation history over the years"
-              class="hero-promo-img"
-              loading="lazy"
-            />
+          <div class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-md overflow-hidden">
+            <p class="stat-image-caption text-[0.76rem] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5 px-6 pt-5 pb-3">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-indigo-500" fill="currentColor" aria-hidden="true"><path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z"/></svg>
+              Citation History
+            </p>
+            <img src="images/Citation History.png" alt="Bar chart showing Saad Ahmed's Google Scholar citation history over the years" class="w-full h-[280px] object-cover" loading="lazy" />
           </div>
-        </div>
-
-        <section id="experience">
-          <h2 class="section-title">Experience</h2>
-          <div id="experience-list"></div>
         </section>
 
-        <section id="journals">
-          <h2 class="section-title">Journal Articles</h2>
-          <div id="journal-list"></div>
+        <!-- Experience -->
+        <section id="experience" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25Zm7.5 0v.09a49.488 49.488 0 0 0-6 0v-.09a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5Z"/><path d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923a49.19 49.19 0 0 1-12.954 0C4.047 21.128 3 19.852 3 18.4Z"/></svg>
+            </div>
+            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Experience</h2>
+          </div>
+          <div id="experience-list" class="timeline-container"></div>
         </section>
 
-        <section id="conferences">
-          <h2 class="section-title">Conference Proceedings</h2>
-          <div id="conference-list"></div>
-        </section>
-
-        <section id="research">
-          <h2 class="section-title">Research Projects</h2>
+        <!-- Research Projects -->
+        <section id="research" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 0 1 .75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 0 1 9.75 22.5a.75.75 0 0 1-.75-.75v-4.131A15.838 15.838 0 0 1 6.382 15H2.25a.75.75 0 0 1-.75-.75 6.75 6.75 0 0 1 7.815-6.666ZM15 6.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" clip-rule="evenodd"/><path d="M5.26 17.242a.75.75 0 1 0-.897-1.203 5.243 5.243 0 0 0-2.05 5.022.75.75 0 0 0 .625.627 5.243 5.243 0 0 0 5.022-2.051.75.75 0 1 0-1.202-.897 3.744 3.744 0 0 1-3.008 1.51c0-1.23.592-2.323 1.51-3.008Z"/></svg>
+            </div>
+            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Research Projects</h2>
+          </div>
           <div id="research-list"></div>
         </section>
 
-        <section id="teaching">
-          <h2 class="section-title">Teaching</h2>
+        <!-- Research Publications (Journals + Conferences, with filters + search) -->
+        <section id="journals" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div class="flex items-center gap-3">
+              <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd"/><path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"/></svg>
+              </div>
+              <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Research Publications</h2>
+            </div>
+            <div class="relative w-full md:w-64">
+              <input id="search-pub" type="text" placeholder="Search publications..." aria-label="Search publications"
+                     class="w-full text-xs font-medium pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-darkborder rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all text-slate-700 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500" />
+              <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd"/></svg>
+            </div>
+          </div>
+
+          <!-- Filters: type tabs + year dropdown -->
+          <div class="flex flex-wrap items-center gap-3 mb-6">
+            <div class="flex flex-wrap gap-1 bg-slate-50 dark:bg-slate-800/40 p-1 rounded-xl w-fit border border-slate-200 dark:border-darkborder">
+              <button data-filter="all" class="pub-filter active px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all">All</button>
+              <button data-filter="journal" class="pub-filter px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all">Journals</button>
+              <button data-filter="conference" class="pub-filter px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all">Conferences</button>
+            </div>
+            <div class="relative">
+              <select id="year-filter" aria-label="Filter by year"
+                      class="appearance-none text-xs font-semibold pl-3 pr-8 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-darkborder rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all text-slate-600 dark:text-slate-200 cursor-pointer">
+                <option value="all">All years</option>
+              </select>
+              <svg class="w-4 h-4 text-slate-400 absolute right-2.5 top-2 pointer-events-none" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.53 16.28a.75.75 0 0 1-1.06 0l-7.5-7.5a.75.75 0 0 1 1.06-1.06L12 14.69l6.97-6.97a.75.75 0 1 1 1.06 1.06l-7.5 7.5Z" clip-rule="evenodd"/></svg>
+            </div>
+          </div>
+
+          <div id="publications-list"></div>
+          <!-- Kept for back-compat with any external links / CMS toggles; not rendered into. -->
+          <div id="journal-list" class="hidden"></div>
+          <div id="conference-list" class="hidden"></div>
+        </section>
+        <!-- Conferences nav anchor (publications are merged into one section above). -->
+        <span id="conferences" class="block -mt-6"></span>
+
+        <!-- Teaching -->
+        <section id="teaching" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z"/></svg>
+            </div>
+            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Teaching</h2>
+          </div>
           <div id="teaching-list"></div>
         </section>
 
-        <section id="education">
-          <h2 class="section-title">Education</h2>
-          <div id="education-list"></div>
+        <!-- Education -->
+        <section id="education" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002a50.978 50.978 0 0 0-.34.18.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z"/><path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.285a.75.75 0 0 1-.46.71 47.878 47.878 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.877 47.877 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286A48.4 48.4 0 0 1 6 13.18v1.27a1.5 1.5 0 0 0-.14 2.508 2.25 2.25 0 0 0 2.12 0v-1.27Z"/></svg>
+            </div>
+            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Education</h2>
+          </div>
+          <div id="education-list" class="timeline-container"></div>
         </section>
 
-        <section id="skills">
-          <h2 class="section-title">Technical Skills</h2>
-          <p class="skills-group-label">Research &amp; AI</p>
-          <div id="skills-research"></div>
-          <p class="skills-group-label" style="margin-top:1rem;">Development &amp; Tools</p>
-          <div id="skills-dev"></div>
+        <!-- Skills -->
+        <section id="skills" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 7.5h-9v9h9v-9Z"/><path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21a.75.75 0 0 1 0 1.5h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3a.75.75 0 0 1 0-1.5h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd"/></svg>
+            </div>
+            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Technical Skills</h2>
+          </div>
+          <p class="skills-group-label text-[0.7rem] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Research &amp; AI</p>
+          <div id="skills-research" class="flex flex-wrap gap-2 mb-5"></div>
+          <p class="skills-group-label text-[0.7rem] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Development &amp; Tools</p>
+          <div id="skills-dev" class="flex flex-wrap gap-2"></div>
         </section>
 
-        <section id="certs">
-          <h2 class="section-title">Certifications &amp; Activities</h2>
-          <div id="cert-list"></div>
+        <!-- Certifications -->
+        <section id="certs" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.166 2.621v.858c-1.035.148-2.059.33-3.071.543a.75.75 0 0 0-.584.859 6.753 6.753 0 0 0 6.138 5.6 6.73 6.73 0 0 0 2.743 1.346A6.707 6.707 0 0 1 9.279 15H8.54c-1.036 0-1.875.84-1.875 1.875V19.5h-.75a2.25 2.25 0 0 0-2.25 2.25c0 .414.336.75.75.75h15.75a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-2.25-2.25h-.75v-2.625c0-1.036-.84-1.875-1.875-1.875h-.739a6.706 6.706 0 0 1-1.112-3.173 6.73 6.73 0 0 0 2.743-1.347 6.753 6.753 0 0 0 6.139-5.6.75.75 0 0 0-.585-.858 47.077 47.077 0 0 0-3.07-.543V2.62a.75.75 0 0 0-.658-.744 49.22 49.22 0 0 0-6.093-.377c-2.063 0-4.096.128-6.093.377a.75.75 0 0 0-.657.744Z" clip-rule="evenodd"/></svg>
+            </div>
+            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Certifications &amp; Activities</h2>
+          </div>
+          <div id="cert-list" class="space-y-3"></div>
         </section>
 
-        <hr class="divider" id="divider-contact" />
+        <hr class="divider hidden" id="divider-contact" />
 
-        <section id="contact">
-          <h2 class="section-title">Contact Information</h2>
-          <div class="contact-details">
-            <p><i class="fas fa-user-tie"></i> <strong>Saad Ahmed</strong></p>
-            <p><i class="fas fa-building"></i> Lecturer, Dept of CSE, BAUST</p>
-            <p><i class="fas fa-phone"></i> <span id="contact-phone">+8801724407189</span></p>
-            <p><i class="fas fa-envelope"></i>
-              <a href="mailto:saadahmed@baust.edu.bd" class="email-link" id="contact-email">saadahmed@baust.edu.bd</a>
+        <!-- Contact -->
+        <section id="contact" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
+            </div>
+            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Contact Information</h2>
+          </div>
+          <div class="contact-details space-y-3 text-sm">
+            <p class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+              <svg class="w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd"/></svg>
+              <strong>Saad Ahmed</strong>
+            </p>
+            <p class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+              <svg class="w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M4.5 2.25a.75.75 0 0 0-.75.75v18a.75.75 0 0 0 .75.75h15a.75.75 0 0 0 .75-.75V9.456a.75.75 0 0 0-.31-.606l-5.25-3.81a.75.75 0 0 0-.88 0L8.81 8.85a.75.75 0 0 0-.31.606V21H4.5V3h7.5a.75.75 0 0 0 0-1.5H4.5Zm5.25 7.5a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm0 3a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm0 3a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm3.75-6a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h.75a.75.75 0 0 0 0-1.5h-.75Zm-.75 3.75a.75.75 0 0 1 .75-.75h.75a.75.75 0 0 1 0 1.5h-.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>
+              Lecturer, Dept of CSE, BAUST
+            </p>
+            <p class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+              <svg class="w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 0 1-.91 2.09l-1.293.97a1.062 1.062 0 0 0-.31 1.347 12.035 12.035 0 0 0 5.485 5.485c.493.26 1.07.085 1.347-.31l.97-1.293a1.875 1.875 0 0 1 2.09-.91l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 0 1-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5Z" clip-rule="evenodd"/></svg>
+              <span id="contact-phone">+8801724407189</span>
+            </p>
+            <p class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
+              <svg class="w-4 h-4 text-indigo-500 dark:text-indigo-400 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
+              <a href="mailto:saadahmed@baust.edu.bd" class="email-link hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" id="contact-email">saadahmed@baust.edu.bd</a>
             </p>
           </div>
         </section>
 
-        <footer>
-          <p>&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
+        <footer class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 text-center shadow-md">
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
         </footer>
-      </div>
-    </main>
+      </main>
+    </div>
 
-    <button id="back-to-top" title="Back to top" aria-label="Scroll back to top">
-      <i class="fas fa-arrow-up"></i>
+    <button id="back-to-top" title="Back to top" aria-label="Scroll back to top"
+            class="fixed bottom-6 right-6 p-3.5 rounded-full bg-[#1d4ed8] hover:bg-[#1a46c0] text-white cursor-pointer transform translate-y-20 opacity-0 transition-all duration-300 z-30 shadow-[0_4px_14px_rgba(29,78,216,0.35)]">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
 
     <script>
     // ─── Shared render helpers (escaping, BibTeX parsing, section builders) ──────
-    // Inlined here so the site is fully self-contained — no separate JS file.
-/* ===========================================================================
-   Render helpers (SR.*) — pure functions that return HTML strings.
-   Content is built from data.json / publications.bib at runtime. Every value
-   from those files is passed through escapeHtml() before it reaches the page,
-   so a stray "<" in pasted BibTeX can never become live HTML.
-   =========================================================================== */
+    // Content/logic identical to the original site — only the generated markup's
+    // CSS classes changed (now Tailwind utility classes instead of style.css).
 (function (root) {
   'use strict';
 
-  // ── Escaping ──────────────────────────────────────────────────────────────
   function escapeHtml(value) {
     if (value == null) return '';
     return String(value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
+  function escapeAttr(value) { return escapeHtml(value); }
 
-  // Only used inside href="..." / src="..." values built from user data.
-  function escapeAttr(value) {
-    return escapeHtml(value);
-  }
-
-  // ── BibTeX parsing ────────────────────────────────────────────────────────
-  // Walks brace depth (rather than stopping at the first closing brace) so it
-  // correctly captures fields with nested braces, e.g.
-  //   title = {An {IoT}-Based Smart Box}.
   function parseBibField(bibtex, fieldName) {
     const startRe = new RegExp('\\b' + fieldName + '\\s*=\\s*', 'i');
     const m = bibtex.match(startRe);
     if (!m) return '';
-
     const openIdx = m.index + m[0].length;
     if (bibtex[openIdx] !== '{') return '';
-
-    let depth = 0;
-    let i = openIdx;
+    let depth = 0, i = openIdx;
     for (; i < bibtex.length; i++) {
       if (bibtex[i] === '{') depth++;
-      else if (bibtex[i] === '}') {
-        depth--;
-        if (depth === 0) { i++; break; }
-      }
+      else if (bibtex[i] === '}') { depth--; if (depth === 0) { i++; break; } }
     }
     return bibtex.slice(openIdx + 1, i - 1).trim();
   }
 
-  // Cleans LaTeX escapes (\&, leftover {brace} pairs used to protect acronym
-  // capitalization) out of BibTeX text before it reaches the page or JSON-LD.
   function unescapeBibText(str) {
     return String(str || '')
-      .replace(/\\&/g, '&')
-      .replace(/\\%/g, '%')
-      .replace(/\\_/g, '_')
-      .replace(/[{}]/g, '')
-      .trim();
+      .replace(/\\&/g, '&').replace(/\\%/g, '%').replace(/\\_/g, '_')
+      .replace(/[{}]/g, '').trim();
   }
 
-  // ── Authors (bolds "Saad Ahmed") ──────────────────────────────────────────
   function formatAuthors(raw) {
     return String(raw || '').split(' and ').map(a => {
       const clean = unescapeBibText(a.trim());
       const safe = escapeHtml(clean);
       const l = clean.toLowerCase();
       return (l.includes('saad ahmed') || l.includes('ahmed, saad'))
-        ? '<strong class="author-self">' + safe + '</strong>'
+        ? '<strong class="author-self text-indigo-600 dark:text-indigo-400 font-bold">' + safe + '</strong>'
         : safe;
     }).join(', ');
   }
 
-  // ── Papers ────────────────────────────────────────────────────────────────
   function isJournal(p) { return /^\s*@article/i.test(p.bibtex); }
 
   function sortPapers(papers) {
@@ -431,6 +592,8 @@
     });
   }
 
+  // Numbered paper list item — Google Scholar-style layout:
+  // [N] and year stacked in a narrow left column; title, authors, venue in the right column.
   function buildPaperCard(p, idx) {
     const title   = unescapeBibText(parseBibField(p.bibtex, 'title') || 'Untitled');
     const authors = parseBibField(p.bibtex, 'author') || 'Unknown Authors';
@@ -438,28 +601,28 @@
     const year    = parseBibField(p.bibtex, 'year');
     const doi     = parseBibField(p.bibtex, 'doi');
 
-    const venueLine = [venue, year].filter(Boolean).join(', ');
-
-    // Title links to the DOI when one exists, otherwise it's plain text.
     const titleHtml = doi
-      ? '<a class="paper-title paper-title-link" href="https://doi.org/' + escapeAttr(doi) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(title) + '</a>'
-      : '<p class="paper-title">' + escapeHtml(title) + '</p>';
+      ? '<a class="paper-title paper-title-link block text-[0.95rem] font-bold leading-snug text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline transition-colors mb-1" href="https://doi.org/' + escapeAttr(doi) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(title) + '</a>'
+      : '<p class="paper-title text-[0.95rem] font-bold leading-snug text-slate-900 dark:text-white mb-1">' + escapeHtml(title) + '</p>';
 
     return '' +
-      '<div class="paper-item">' +
-        '<div class="paper-number-col">' +
-          '<span class="paper-number">[' + (idx + 1) + ']</span>' +
-          '<span class="paper-year">' + escapeHtml(year) + '</span>' +
-        '</div>' +
-        '<div class="paper-body">' +
-          titleHtml +
-          '<p class="authors">' + formatAuthors(authors) + '</p>' +
-          '<p class="paper-venue-line">' + escapeHtml(venueLine) + '</p>' +
+      '<div class="paper-item py-4 border-b border-slate-200 dark:border-darkborder last:border-b-0">' +
+        '<div class="flex items-start gap-4">' +
+          // Left column: index + year stacked
+          '<div class="flex-shrink-0 w-10 flex flex-col items-center pt-0.5">' +
+            '<span class="paper-number text-[0.8rem] font-semibold text-slate-400 dark:text-slate-500 tabular-nums leading-tight">[' + (idx + 1) + ']</span>' +
+            (year ? '<span class="paper-year text-[0.8rem] font-semibold text-slate-500 dark:text-slate-400 tabular-nums leading-tight mt-0.5">' + escapeHtml(year) + '</span>' : '') +
+          '</div>' +
+          // Right column: title, authors, venue
+          '<div class="min-w-0 flex-1">' +
+            titleHtml +
+            '<p class="authors text-[0.82rem] text-slate-600 dark:text-slate-400 leading-relaxed mb-0.5">' + formatAuthors(authors) + '</p>' +
+            (venue ? '<p class="paper-venue-line text-[0.8rem] italic text-slate-500 dark:text-slate-400">' + escapeHtml(venue) + '</p>' : '') +
+          '</div>' +
         '</div>' +
       '</div>';
   }
 
-  // Splits sorted papers into journal vs conference markup.
   function buildPublications(sortedPapers) {
     let jIdx = 0, cIdx = 0;
     let journals = '', conferences = '';
@@ -470,103 +633,107 @@
     return { journals, conferences };
   }
 
-  // ── Section builders ──────────────────────────────────────────────────────
+  // Timeline item (Experience / Education) — original design: hollow dot on the
+  // rail that fills + glows on hover (animation handled by .timeline-item CSS).
+  function timelineItem(titleText, badgeText, orgText, bottomHtml) {
+    return '' +
+      '<div class="timeline-item">' +
+        '<div class="timeline-header flex flex-wrap items-start justify-between gap-2 mb-1">' +
+          '<span class="timeline-title font-semibold text-[1.02rem] text-slate-900 dark:text-white leading-snug">' + titleText + '</span>' +
+          '<span class="timeline-date text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full whitespace-nowrap">' + badgeText + '</span>' +
+        '</div>' +
+        '<div class="timeline-org text-[0.91rem] text-slate-600 dark:text-slate-300 font-medium mb-1">' + orgText + '</div>' +
+        bottomHtml +
+      '</div>';
+  }
+
   function buildExperience(list) {
     return (list || []).map(e =>
-      '<div class="timeline-item">' +
-        '<div class="timeline-header">' +
-          '<span class="timeline-title">' + escapeHtml(e.role) + '</span>' +
-          '<span class="timeline-date">' + escapeHtml(e.period) + '</span>' +
-        '</div>' +
-        '<div class="timeline-org">' + escapeHtml(e.org) + '</div>' +
-        '<p class="timeline-desc">' + escapeHtml(e.desc) + '</p>' +
-      '</div>'
+      timelineItem(
+        escapeHtml(e.role), escapeHtml(e.period), escapeHtml(e.org),
+        '<p class="timeline-desc text-[0.88rem] text-slate-600 dark:text-slate-400 leading-relaxed">' + escapeHtml(e.desc) + '</p>'
+      )
     ).join('');
   }
 
   function buildEducation(list) {
     return (list || []).map(ed =>
-      '<div class="timeline-item">' +
-        '<div class="timeline-header">' +
-          '<span class="timeline-title">' + escapeHtml(ed.degree) + '</span>' +
-          '<span class="timeline-date">' + escapeHtml(ed.year) + '</span>' +
-        '</div>' +
-        '<div class="timeline-org">' + escapeHtml(ed.inst) + '</div>' +
-        '<p class="timeline-desc result-text">' + escapeHtml(ed.result) + '</p>' +
-      '</div>'
+      timelineItem(
+        escapeHtml(ed.degree), escapeHtml(ed.year), escapeHtml(ed.inst),
+        '<p class="timeline-desc result-text text-[0.9rem] font-semibold text-indigo-600 dark:text-indigo-400">' + escapeHtml(ed.result) + '</p>'
+      )
     ).join('');
   }
 
   function buildSkills(list, devClass) {
-    const cls = devClass ? ' skill-tag-dev' : '';
+    const color = devClass
+      ? 'text-slate-600 dark:text-slate-300 hover:bg-slate-600 hover:border-slate-600 hover:text-white'
+      : 'text-indigo-700 dark:text-indigo-300 hover:bg-indigo-600 hover:border-indigo-600 hover:text-white';
     return (list || []).map(s =>
-      '<span class="skill-tag' + cls + '">' + escapeHtml(s) + '</span>'
+      '<span class="skill-tag' + (devClass ? ' skill-tag-dev' : '') + ' text-[0.8rem] font-semibold px-3.5 py-[5px] bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-darkborder rounded-full transition-all cursor-default ' + color + '">' + escapeHtml(s) + '</span>'
     ).join('');
   }
 
   function buildCerts(list) {
     return (list || []).map(c =>
-      '<p class="cert-item"><i class="fas fa-certificate"></i> ' + escapeHtml(c) + '</p>'
+      '<p class="cert-item flex items-start gap-3 text-[0.93rem] text-slate-700 dark:text-slate-300 leading-relaxed">' +
+        '<svg class="w-4 h-4 text-indigo-500 dark:text-indigo-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.166 2.621v.858c-1.035.148-2.059.33-3.071.543a.75.75 0 0 0-.584.859 6.753 6.753 0 0 0 6.138 5.6 6.73 6.73 0 0 0 2.743 1.346A6.707 6.707 0 0 1 9.279 15H8.54c-1.036 0-1.875.84-1.875 1.875V19.5h-.75a2.25 2.25 0 0 0-2.25 2.25c0 .414.336.75.75.75h15.75a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-2.25-2.25h-.75v-2.625c0-1.036-.84-1.875-1.875-1.875h-.739a6.706 6.706 0 0 1-1.112-3.173 6.73 6.73 0 0 0 2.743-1.347 6.753 6.753 0 0 0 6.139-5.6.75.75 0 0 0-.585-.858 47.077 47.077 0 0 0-3.07-.543V2.62a.75.75 0 0 0-.658-.744 49.22 49.22 0 0 0-6.093-.377c-2.063 0-4.096.128-6.093.377a.75.75 0 0 0-.657.744Z" clip-rule="evenodd"/></svg>' +
+        '<span>' + escapeHtml(c) + '</span>' +
+      '</p>'
     ).join('');
   }
 
+  // Research projects — title left, period badge right, funding + desc below.
   function buildResearch(list) {
     return (list || []).map((r, idx) => {
-      // Split "2025 – 2026" into stacked lines: 2025 / – / 2026
-      let periodHtml = '';
-      if (r.period) {
-        const parts = r.period.split(/\s*[–\-]\s*/);
-        if (parts.length >= 2) {
-          periodHtml = '<span class="paper-year research-year-stacked">' +
-            escapeHtml(parts[0].trim()) + '<br>–<br>' + escapeHtml(parts[1].trim()) +
-          '</span>';
-        } else {
-          periodHtml = '<span class="paper-year">' + escapeHtml(r.period) + '</span>';
-        }
-      }
+      const periodBadge = r.period
+        ? '<span class="flex-shrink-0 text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full whitespace-nowrap">' + escapeHtml(r.period) + '</span>'
+        : '';
       const funding = r.funding
-        ? '<p class="research-funding-line"><span class="research-funding">' + escapeHtml(r.funding) + '</span></p>'
+        ? '<p class="mt-1 text-[0.8rem] italic font-semibold text-indigo-600 dark:text-indigo-400">' + escapeHtml(r.funding) + '</p>'
+        : '';
+      const desc = r.desc
+        ? '<p class="mt-1 text-[0.85rem] text-slate-600 dark:text-slate-400 leading-relaxed">' + escapeHtml(r.desc) + '</p>'
         : '';
       const linkBtn = r.link
-        ? '<div class="paper-actions" style="margin-top:8px;">' +
-            '<a href="' + escapeAttr(r.link) + '" class="btn-doi" target="_blank" rel="noopener noreferrer">' +
-              '<i class="fas fa-external-link-alt"></i> View project</a>' +
-          '</div>'
+        ? '<div class="mt-2"><a href="' + escapeAttr(r.link) + '" class="inline-flex items-center gap-1.5 bg-[#1d4ed8] hover:bg-[#1a46c0] text-white text-[0.76rem] font-semibold px-3 py-1.5 rounded-md transition-colors" target="_blank" rel="noopener noreferrer">' +
+            '<svg class="w-3 h-3 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M15.75 2.25H21a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V4.81L8.03 17.03a.75.75 0 0 1-1.06-1.06L19.19 3.75h-3.44a.75.75 0 0 1 0-1.5Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M5.25 6.75a1.5 1.5 0 0 0-1.5 1.5v10.5a1.5 1.5 0 0 0 1.5 1.5h10.5a1.5 1.5 0 0 0 1.5-1.5V10.5a.75.75 0 0 1 1.5 0v8.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V8.25a3 3 0 0 1 3-3h8.25a.75.75 0 0 1 0 1.5H5.25Z" clip-rule="evenodd"/></svg> View project</a></div>'
         : '';
-      return '<div class="paper-item">' +
-          '<div class="paper-number-col">' +
-            '<span class="paper-number">[' + (idx + 1) + ']</span>' +
-            periodHtml +
+      return '<div class="py-3.5 border-b border-slate-100 dark:border-darkborder last:border-b-0">' +
+          '<div class="flex items-start justify-between gap-3">' +
+            '<div class="flex items-start gap-2.5 min-w-0">' +
+              '<span class="flex-shrink-0 text-[0.8rem] font-semibold text-slate-400 dark:text-slate-500 tabular-nums mt-0.5">[' + (idx + 1) + ']</span>' +
+              '<p class="text-[0.95rem] font-semibold leading-snug text-slate-900 dark:text-white">' + escapeHtml(r.title || '') + '</p>' +
+            '</div>' +
+            periodBadge +
           '</div>' +
-          '<div class="paper-body">' +
-            '<p class="paper-title">' + escapeHtml(r.title || '') + '</p>' +
-            funding +
-            (r.desc ? '<p class="authors">' + escapeHtml(r.desc) + '</p>' : '') +
-            linkBtn +
-          '</div>' +
+          '<div class="pl-[1.6rem]">' + funding + desc + linkBtn + '</div>' +
         '</div>';
     }).join('');
   }
 
+  // Teaching table — original Course Code / Title / Semester table.
   function buildTeaching(list) {
     if (!list || !list.length) return '';
     const rows = list.map(t =>
-      '<tr>' +
-        '<td class="course-code">' + escapeHtml(t.code || '') + '</td>' +
-        '<td>' + escapeHtml(t.course || '') + '</td>' +
-        '<td>' + escapeHtml(t.semester || '') + '</td>' +
+      '<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">' +
+        '<td class="course-code px-3.5 py-3 border-b border-slate-100 dark:border-darkborder align-top font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums whitespace-nowrap">' + escapeHtml(t.code || '') + '</td>' +
+        '<td class="px-3.5 py-3 border-b border-slate-100 dark:border-darkborder align-top text-slate-800 dark:text-slate-200">' + escapeHtml(t.course || '') + '</td>' +
+        '<td class="px-3.5 py-3 border-b border-slate-100 dark:border-darkborder align-top text-slate-600 dark:text-slate-400">' + escapeHtml(t.semester || '') + '</td>' +
       '</tr>'
     ).join('');
-    return '<div class="table-wrap">' +
-        '<table class="teaching-table">' +
-          '<thead><tr><th>Course Code</th><th>Course Title</th><th>Semester</th></tr></thead>' +
+    return '<div class="table-wrap overflow-x-auto">' +
+        '<table class="teaching-table w-full border-collapse text-[0.9rem]">' +
+          '<thead><tr>' +
+            '<th class="text-left text-[0.68rem] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold px-3.5 py-2.5 border-b-2 border-slate-200 dark:border-darkborder whitespace-nowrap">Course Code</th>' +
+            '<th class="text-left text-[0.68rem] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold px-3.5 py-2.5 border-b-2 border-slate-200 dark:border-darkborder">Course Title</th>' +
+            '<th class="text-left text-[0.68rem] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold px-3.5 py-2.5 border-b-2 border-slate-200 dark:border-darkborder">Semester</th>' +
+          '</tr></thead>' +
           '<tbody>' + rows + '</tbody>' +
         '</table>' +
       '</div>';
   }
 
-  // ── Publications structured data (ScholarlyArticle @graph) ────────────────
-  // Returns a plain object; the caller serializes it into a JSON-LD <script>.
   function buildPublicationsLd(sortedPapers, siteOrigin) {
     const origin = siteOrigin || 'https://saadbaust.github.io';
     const articles = sortedPapers.map((p, i) => {
@@ -575,11 +742,8 @@
       const year    = parseBibField(p.bibtex, 'year');
       const doi     = parseBibField(p.bibtex, 'doi');
       const authors = (parseBibField(p.bibtex, 'author') || '')
-        .split(' and ')
-        .map(a => unescapeBibText(a.trim()))
-        .filter(Boolean)
+        .split(' and ').map(a => unescapeBibText(a.trim())).filter(Boolean)
         .map(name => ({ '@type': 'Person', name: name }));
-
       return {
         '@type': 'ScholarlyArticle',
         '@id': doi ? 'https://doi.org/' + doi : origin + '/#pub-' + i,
@@ -595,39 +759,17 @@
     return { '@context': 'https://schema.org', '@graph': articles };
   }
 
-  // ── Export to both worlds ─────────────────────────────────────────────────
   const SR = {
-    escapeHtml: escapeHtml,
-    escapeAttr: escapeAttr,
-    parseBibField: parseBibField,
-    unescapeBibText: unescapeBibText,
-    formatAuthors: formatAuthors,
-    isJournal: isJournal,
-    sortPapers: sortPapers,
-    buildPaperCard: buildPaperCard,
-    buildPublications: buildPublications,
-    buildExperience: buildExperience,
-    buildEducation: buildEducation,
-    buildSkills: buildSkills,
-    buildCerts: buildCerts,
-    buildResearch: buildResearch,
-    buildTeaching: buildTeaching,
-    buildPublicationsLd: buildPublicationsLd
+    escapeHtml, escapeAttr, parseBibField, unescapeBibText, formatAuthors,
+    isJournal, sortPapers, buildPaperCard, buildPublications, buildExperience,
+    buildEducation, buildSkills, buildCerts, buildResearch, buildTeaching,
+    buildPublicationsLd
   };
-
   if (typeof module !== 'undefined' && module.exports) module.exports = SR;
   else root.SR = SR;
 })(typeof window !== 'undefined' ? window : this);
 
     // ─── Rendering ───────────────────────────────────────────────────────────────
-    // Content is rendered client-side from data.json and publications.bib: the
-    // SR.* helpers above build the HTML, the code below fetches the data and fills
-    // each section. If a fetch fails, that section shows a brief notice instead of
-    // staying silently blank. Every value from those files is HTML-escaped first.
-
-    // Revalidating cache ('no-cache') replaces the old 'no-store': the browser may
-    // reuse its cached copy after a cheap 304 Not Modified, but never serves stale
-    // content, since GitHub Pages returns ETags for these files.
     async function fetchJson(url) {
       try {
         const res = await fetch(url, { cache: 'no-cache' });
@@ -647,29 +789,44 @@
 
     async function loadBibFile() {
       const text = await fetchText('publications.bib');
-      if (text == null) return null;                 // null = fetch failed (keep prerender)
+      if (text == null) return null;
       return text.trim().split(/\n(?=@)/).filter(Boolean).map(s => ({ bibtex: s.trim() }));
     }
 
-    // Small helpers to safely set text/attributes only when both the element and
-    // the value exist (keeps the pre-rendered value if the new one is missing).
     function setText(id, value) {
       const el = document.getElementById(id);
       if (el && value != null && value !== '') el.textContent = value;
+    }
+
+    // Count-up animation from 0 to the target number (like the original site).
+    function animateCount(id, value) {
+      const el = document.getElementById(id);
+      const target = parseInt(value, 10);
+      if (!el || isNaN(target)) { setText(id, value); return; }
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || target === 0) { el.textContent = target; return; }
+      const duration = 1100;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);   // easeOutCubic
+        el.textContent = Math.round(eased * target);
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(tick);
     }
     function setAttr(id, attr, value) {
       const el = document.getElementById(id);
       if (el && value != null && value !== '') el.setAttribute(attr, value);
     }
 
-    // Replace a region only when we actually have data; otherwise keep whatever
-    // was pre-rendered, and surface an error only if the region is truly empty.
     function fillRegion(el, html, hasData, failMsg) {
       if (!el) return;
       if (hasData) { el.innerHTML = html; return; }
       const empty = el.textContent.trim() === '' && el.children.length === 0;
       if (empty && failMsg) {
-        el.innerHTML = '<p style="color:var(--gray);font-size:0.85rem;">' + failMsg + '</p>';
+        el.innerHTML = '<p class="text-slate-500 dark:text-slate-400 text-[0.85rem]">' + failMsg + '</p>';
       }
     }
 
@@ -693,7 +850,6 @@
       }
     }
 
-    // ─── Main render ─────────────────────────────────────────────────────────────
     async function renderContent() {
       const [papers, site] = await Promise.all([loadBibFile(), loadSiteData()]);
       const haveSite   = !!site;
@@ -703,35 +859,36 @@
 
       const stats = (site && site.stats) || { citations: 0, hIndex: 0, i10Index: 0 };
 
-      // Publications
       const sorted = havePapers ? SR.sortPapers(papers) : [];
+      // Publication type visibility from CMS "journals"/"conferences" toggles.
+      const secVis = (site && site.sections) || {};
+      pubTypeVisibility.journal    = secVis.journals    !== false;
+      pubTypeVisibility.conference = secVis.conferences !== false;
+      if (pubFilter === 'journal'    && !pubTypeVisibility.journal)    pubFilter = 'all';
+      if (pubFilter === 'conference' && !pubTypeVisibility.conference) pubFilter = 'all';
+      syncPubFilterTabs();
+
       if (havePapers) {
-        const pubs = SR.buildPublications(sorted);
-        fillRegion(document.getElementById('journal-list'),     pubs.journals,    true);
-        fillRegion(document.getElementById('conference-list'),  pubs.conferences, true);
+        sortedPapers = sorted;
+        populateYearFilter();
+        renderPublications();
         injectPublicationsStructuredData(sorted);
       } else {
-        const failed = papers === null;   // null = fetch error; [] = genuinely empty
-        fillRegion(document.getElementById('journal-list'),    '', false,
-          failed ? 'No publications to display right now — please check back soon.' : null);
-        fillRegion(document.getElementById('conference-list'), '', false,
-          failed ? 'No publications to display right now — please check back soon.' : null);
+        const failed = papers === null;
+        document.getElementById('publications-list').innerHTML =
+          '<p class="text-slate-500 dark:text-slate-400 text-[0.85rem]">' +
+          (failed ? 'No publications to display right now — please check back soon.' : 'No publications yet.') +
+          '</p>';
       }
 
-      // data.json-driven sections
-      const expEl = document.getElementById('experience-list');
-      if (expEl) expEl.className = 'timeline-container';
-      const eduEl = document.getElementById('education-list');
-      if (eduEl) eduEl.className = 'timeline-container';
-      fillRegion(expEl, SR.buildExperience(site?.experience), haveSite,
+      fillRegion(document.getElementById('experience-list'), SR.buildExperience(site?.experience), haveSite,
                  'Content failed to load — please refresh the page.');
 
-      const projEl = document.getElementById('research-list');
-      fillRegion(projEl, SR.buildResearch(site?.research), haveSite, null);
+      fillRegion(document.getElementById('research-list'), SR.buildResearch(site?.research), haveSite, null);
 
       fillRegion(document.getElementById('teaching-list'), SR.buildTeaching(site?.teaching), haveSite, null);
 
-      fillRegion(eduEl, SR.buildEducation(site?.education), haveSite,
+      fillRegion(document.getElementById('education-list'), SR.buildEducation(site?.education), haveSite,
                  'Content failed to load — please refresh the page.');
 
       fillRegion(document.getElementById('skills-research'), SR.buildSkills(site?.skills?.research, false), haveSite,
@@ -742,26 +899,106 @@
       fillRegion(document.getElementById('cert-list'), SR.buildCerts(site?.certifications), haveSite,
                  'Content failed to load — please refresh the page.');
 
-      // Stat numbers (shown directly, no count-up animation).
       setText('total-citations', stats.citations);
       setText('h-index',         stats.hIndex);
       setText('i10-index',       stats.i10Index);
       if (havePapers) setText('total-papers', sorted.length);
+      else            setText('total-papers', (stats.papers != null ? stats.papers : 0));
 
       applySectionVisibility(site);
     }
 
-    // Show/hide home-page sections from data.json → sections (booleans, editable in
-    // the CMS). Default visible unless explicitly false. Teaching/Research also
-    // auto-hide when empty — but ONLY when site data actually loaded, so a failed
-    // fetch never hides pre-rendered content. Hidden sections hide their nav link too.
+    // ─── Publications state + filtering (merged journals/conferences) ─────────────
+    let sortedPapers = [];
+    let pubFilter = 'all';     // all | journal | conference
+    let pubYear   = 'all';
+    let pubQuery  = '';
+    let pubTypeVisibility = { journal: true, conference: true };
+
+    function syncPubFilterTabs() {
+      const jb = document.querySelector('.pub-filter[data-filter="journal"]');
+      const cb = document.querySelector('.pub-filter[data-filter="conference"]');
+      if (jb) jb.hidden = !pubTypeVisibility.journal;
+      if (cb) cb.hidden = !pubTypeVisibility.conference;
+      document.querySelectorAll('.pub-filter').forEach(b =>
+        b.classList.toggle('active', b.getAttribute('data-filter') === pubFilter));
+    }
+
+    function paperMeta(p) {
+      return {
+        title:  SR.unescapeBibText(SR.parseBibField(p.bibtex, 'title')),
+        author: SR.unescapeBibText(SR.parseBibField(p.bibtex, 'author')),
+        venue:  SR.unescapeBibText(SR.parseBibField(p.bibtex, 'journal') || SR.parseBibField(p.bibtex, 'booktitle')),
+        year:   SR.parseBibField(p.bibtex, 'year'),
+        isJournal: SR.isJournal(p),
+      };
+    }
+
+    function renderPublications() {
+      const container = document.getElementById('publications-list');
+      if (!container) return;
+      const filtered = sortedPapers.filter(p => {
+        const m = paperMeta(p);
+        const typeVisible = m.isJournal ? pubTypeVisibility.journal : pubTypeVisibility.conference;
+        const typeOk = pubFilter === 'all' ||
+          (pubFilter === 'journal' && m.isJournal) ||
+          (pubFilter === 'conference' && !m.isJournal);
+        const yearOk = pubYear === 'all' || m.year === pubYear;
+        const q = pubQuery;
+        const qOk = !q ||
+          m.title.toLowerCase().includes(q) ||
+          m.author.toLowerCase().includes(q) ||
+          m.venue.toLowerCase().includes(q) ||
+          (m.year && String(m.year).toLowerCase().includes(q));
+        return typeVisible && typeOk && yearOk && qOk;
+      });
+      if (!filtered.length) {
+        container.innerHTML =
+          '<div class="text-center py-12 text-slate-400 dark:text-slate-500 border-2 border-dashed border-slate-200 dark:border-darkborder rounded-2xl">' +
+            '<p class="text-sm font-semibold">No publications match these filters.</p>' +
+          '</div>';
+        return;
+      }
+      container.innerHTML = filtered.map((p, i) => SR.buildPaperCard(p, i)).join('');
+    }
+
+    function populateYearFilter() {
+      const sel = document.getElementById('year-filter');
+      if (!sel) return;
+      sel.querySelectorAll('option:not([value="all"])').forEach(o => o.remove());
+      const years = Array.from(new Set(
+        sortedPapers.map(p => SR.parseBibField(p.bibtex, 'year')).filter(Boolean)
+      )).sort((a, b) => +b - +a);
+      years.forEach(y => {
+        const o = document.createElement('option');
+        o.value = y; o.textContent = y;
+        sel.appendChild(o);
+      });
+    }
+
+    function initPubFilters() {
+      document.querySelectorAll('.pub-filter').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          pubFilter = e.currentTarget.getAttribute('data-filter');
+          document.querySelectorAll('.pub-filter').forEach(b => b.classList.remove('active'));
+          e.currentTarget.classList.add('active');
+          renderPublications();
+        });
+      });
+      document.getElementById('year-filter')?.addEventListener('change', (e) => {
+        pubYear = e.target.value; renderPublications();
+      });
+      document.getElementById('search-pub')?.addEventListener('input', (e) => {
+        pubQuery = e.target.value.toLowerCase().trim(); renderPublications();
+      });
+    }
+
     function applySectionVisibility(site) {
       const vis = (site && site.sections) || {};
       const map = {
         about: 'about-section', charts: 'charts-section', experience: 'experience',
-        research: 'research', journals: 'journals', conferences: 'conferences',
-        teaching: 'teaching', education: 'education', skills: 'skills',
-        certifications: 'certs', contact: 'contact',
+        research: 'research', teaching: 'teaching', education: 'education',
+        skills: 'skills', certifications: 'certs', contact: 'contact',
       };
       const hasContent = {
         research: (site?.research || []).length > 0,
@@ -772,17 +1009,17 @@
         if (site && key in hasContent && !hasContent[key]) show = false;
         const el = document.getElementById(id);
         if (el) el.hidden = !show;
-        document.querySelectorAll('.sidebar nav a[href$="#' + id + '"]')
+        document.querySelectorAll('.sidebar-link[data-nav="' + id + '"]')
           .forEach(a => { a.hidden = !show; });
       });
-      const dCharts = document.getElementById('divider-charts');
-      if (dCharts) dCharts.hidden = (vis.charts === false);
-      const dContact = document.getElementById('divider-contact');
-      if (dContact) dContact.hidden = (vis.contact === false);
+      // Journals + Conferences both map onto the single Publications section.
+      const pubVisible = !(vis.journals === false && vis.conferences === false);
+      const pubEl = document.getElementById('journals');
+      if (pubEl) pubEl.hidden = !pubVisible;
+      document.querySelectorAll('.sidebar-link[data-nav="journals"], .sidebar-link[data-nav="conferences"]')
+        .forEach(a => { a.hidden = !pubVisible; });
     }
 
-    // Refresh the per-publication JSON-LD already present in <head> (pre-rendered
-    // at build time). textContent is not parsed as HTML, so this is injection-safe.
     function injectPublicationsStructuredData(sorted) {
       if (!sorted.length) return;
       const ld = SR.buildPublicationsLd(sorted, 'https://saadbaust.github.io');
@@ -797,8 +1034,8 @@
     }
 
     function initNavHighlight() {
-      const navLinks = document.querySelectorAll('.sidebar nav a[href^="#"]');
-      const sections = document.querySelectorAll('section[id], header[id]');
+      const navLinks = document.querySelectorAll('.sidebar-link[href^="#"]');
+      const sections = document.querySelectorAll('main section[id], main header[id]');
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
@@ -818,14 +1055,48 @@
       if (!btn) return;
       btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
       window.addEventListener('scroll', () => {
-        btn.classList.toggle('visible', window.scrollY > 300);
+        const visible = window.scrollY > 300;
+        btn.classList.toggle('opacity-0', !visible);
+        btn.classList.toggle('translate-y-20', !visible);
       }, { passive: true });
     }
 
+    // ─── Theme toggle ────────────────────────────────────────────────────────────
+    function setTheme(dark) {
+      document.documentElement.classList.toggle('dark', dark);
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    }
+    function initThemeToggle() {
+      const toggle = () => setTheme(!document.documentElement.classList.contains('dark'));
+      document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggle);
+      document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggle);
+      document.addEventListener('keydown', (e) => {
+        if (e.altKey && (e.key === 't' || e.key === 'T')) toggle();
+      });
+    }
+
+    // ─── Mobile menu ─────────────────────────────────────────────────────────────
+    function initMobileMenu() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('mobile-menu-overlay');
+      const btn = document.getElementById('mobile-menu-btn');
+      if (!sidebar || !overlay || !btn) return;
+      const setOpen = (open) => {
+        sidebar.classList.toggle('-translate-x-full', !open);
+        overlay.classList.toggle('hidden', !open);
+      };
+      btn.addEventListener('click', () => setOpen(sidebar.classList.contains('-translate-x-full')));
+      overlay.addEventListener('click', () => setOpen(false));
+      sidebar.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', () => setOpen(false)));
+    }
+
     window.addEventListener('DOMContentLoaded', async () => {
+      initPubFilters();
       await renderContent();
       initNavHighlight();
       initBackToTop();
+      initThemeToggle();
+      initMobileMenu();
     });
     </script>
   </body>

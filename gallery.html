@@ -31,65 +31,160 @@
 
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d4ed8'/%3E%3Ctext x='16' y='22' font-family='Inter%2C Arial%2C sans-serif' font-size='13' font-weight='700' text-anchor='middle' fill='white'%3ESA%3C/text%3E%3C/svg%3E" />
 
+    <!-- Apply saved/system theme before paint to avoid a flash of the wrong theme. -->
+    <script>
+      (function () {
+        var t = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', t === 'dark');
+      })();
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              brand: { 50: '#f5f7ff', 100: '#ebf0ff', 200: '#d6e0ff', 400: '#7c9cff', 500: '#4f46e5', 600: '#4338ca', 700: '#3730a3', 900: '#1e1b4b' },
+              darkbg: '#0b0f19', darkcard: '#151b2c', darkborder: '#222d44',
+            },
+            fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'] },
+          },
+        },
+      };
+    </script>
 
-    <link rel="preload" as="style"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-          onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="preload" as="style"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    </noscript>
+    <style>
+      html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+      .dark ::-webkit-scrollbar-thumb { background: #334155; }
+      ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+      .sidebar-link.active { background-color: #4f46e5 !important; color: #fff !important; box-shadow: 0 4px 12px rgba(79,70,229,.18); }
+      .dark .sidebar-link.active { background-color: #6366f1 !important; color: #fff !important; box-shadow: 0 4px 14px rgba(99,102,241,.28); }
+
+      /* Masonry layout for the gallery grids */
+      .masonry-grid { column-count: 1; column-gap: 1rem; }
+      @media (min-width: 640px)  { .masonry-grid { column-count: 2; } }
+      @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+      .masonry-item { break-inside: avoid; margin-bottom: 1rem; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      }
+    </style>
   </head>
-  <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <main class="main-block">
+  <body class="bg-slate-50 dark:bg-darkbg text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-300">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[1000] focus:bg-indigo-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
 
-      <aside class="sidebar">
-        <nav>
-          <div class="nav-group">
-            <small class="nav-label">Main</small>
-            <a href="index.html">Home</a>
-            <a href="gallery.html" class="active" aria-current="page">Gallery</a>
+    <!-- Mobile top bar -->
+    <header class="lg:hidden bg-white/90 dark:bg-darkcard/90 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-4 py-3 flex items-center justify-between shadow-sm">
+      <div class="flex items-center gap-2.5">
+        <span class="font-bold text-slate-900 dark:text-white tracking-tight">Saad Ahmed</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="theme-toggle-mobile" class="p-2.5 rounded-lg text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle theme">
+          <svg class="hidden dark:block w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/></svg>
+          <svg class="block dark:hidden w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd"/></svg>
+        </button>
+        <button id="mobile-menu-btn" class="p-2.5 rounded-lg text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle navigation menu">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
+
+    <div class="flex-grow flex w-full max-w-7xl mx-auto px-0 md:px-4 lg:px-6 gap-6">
+      <!-- Sidebar -->
+      <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 lg:static lg:block w-[280px] bg-white dark:bg-darkcard border-r border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col h-screen lg:h-auto overflow-hidden lg:overflow-visible">
+        <div class="space-y-6 overflow-y-auto pr-1 flex-1 min-h-0">
+          <div class="bg-white dark:bg-darkcard rounded-2xl p-5 border border-slate-200 dark:border-darkborder shadow-md text-center relative overflow-hidden">
+            <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
+            <div class="relative w-32 h-32 mx-auto mb-4 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-[0_4px_20px_rgba(29,78,216,0.14)]">
+              <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" width="170" height="170" class="w-full h-full object-cover rounded-xl" />
+            </div>
+            <p class="font-extrabold text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Saad Ahmed</p>
+            <p class="text-sm text-indigo-600 dark:text-indigo-300 font-semibold mt-1.5">Lecturer, Dept of CSE</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-normal">Bangladesh Army University of Science and Technology (BAUST)</p>
           </div>
-          <div class="nav-group">
-            <small class="nav-label">Home Sections</small>
-            <a href="index.html#experience">Experience</a>
-            <a href="index.html#journals">Publications</a>
-            <a href="index.html#conferences">Conferences</a>
-            <a href="index.html#research">Research Projects</a>
-            <a href="index.html#teaching">Teaching</a>
-            <a href="index.html#education">Education</a>
-            <a href="index.html#skills">Skills</a>
-            <a href="index.html#contact">Contact</a>
-          </div>
-          <div class="nav-group">
-            <small class="nav-label">Admin</small>
-            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer">
-              <i class="fas fa-lock"></i> CMS Login
+
+          <nav class="space-y-1.5">
+            <p class="px-4 pt-1 pb-1 text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Main</p>
+            <a href="index.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M11.47 3.84a.75.75 0 0 1 1.06 0l8.69 8.69a.75.75 0 1 0 1.06-1.061l-8.689-8.69a2.25 2.25 0 0 0-3.182 0l-8.69 8.69a.75.75 0 1 0 1.061 1.06l8.69-8.689Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 0 1-.75-.75v-4.5a.75.75 0 0 0-.75-.75h-3a.75.75 0 0 0-.75.75V21a.75.75 0 0 1-.75.75H5.625a1.875 1.875 0 0 1-1.875-1.875v-6.198a2.29 2.29 0 0 0 .091-.086L12 5.432Z" clip-rule="evenodd"/></svg>
+              Home
+            </a>
+            <a href="gallery.html" data-nav="events-section" class="sidebar-link flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200 active">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd"/></svg>
+              Gallery
+            </a>
+
+            <p class="px-4 pt-4 pb-1 text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Home Sections</p>
+            <a href="index.html#experience" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25Z"/><path d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923a49.19 49.19 0 0 1-12.954 0C4.047 21.128 3 19.852 3 18.4Z"/></svg>
+              Experience
+            </a>
+            <a href="index.html#journals" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" clip-rule="evenodd"/></svg>
+              Publications
+            </a>
+            <a href="index.html#research" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 0 1 .75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 0 1 9.75 22.5a.75.75 0 0 1-.75-.75v-4.131A15.838 15.838 0 0 1 6.382 15H2.25a.75.75 0 0 1-.75-.75 6.75 6.75 0 0 1 7.815-6.666ZM15 6.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" clip-rule="evenodd"/></svg>
+              Research Projects
+            </a>
+            <a href="index.html#teaching" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z"/></svg>
+              Teaching
+            </a>
+            <a href="index.html#education" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z"/></svg>
+              Education
+            </a>
+            <a href="index.html#skills" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 7.5h-9v9h9v-9Z"/><path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21a.75.75 0 0 1 0 1.5h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3a.75.75 0 0 1 0-1.5h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd"/></svg>
+              Skills
+            </a>
+            <a href="index.html#contact" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
+              Contact
+            </a>
+          </nav>
+
+          <div class="pt-4 border-t border-slate-200 dark:border-darkborder mt-2 space-y-2">
+            <button id="theme-toggle-desktop" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all" aria-label="Toggle light/dark theme">
+              <span class="flex items-center gap-3">
+                <svg class="hidden dark:block w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/></svg>
+                <svg class="block dark:hidden w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd"/></svg>
+                Theme Toggle
+              </span>
+              <span class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Alt+T</span>
+            </button>
+            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer" class="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd"/></svg>
+              CMS Login
             </a>
           </div>
-        </nav>
+        </div>
       </aside>
 
-      <div class="content" id="main">
+      <!-- Main content -->
+      <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-6 overflow-x-hidden">
 
-        <header class="hero">
-          <div class="hero-info">
-            <h1>Gallery</h1>
-            <p class="subtitle">Saad Ahmed</p>
-            <p class="institution">Bangladesh Army University of Science and Technology (BAUST)</p>
-          </div>
+        <header class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
+          <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">Gallery</h1>
+          <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1.5">Saad Ahmed</p>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Bangladesh Army University of Science and Technology (BAUST)</p>
         </header>
-
-        <hr class="divider" />
 
         <!-- Both grids below are populated at runtime, primarily from
              images/gallery-manifest.json (generated by a GitHub Action whenever
@@ -103,39 +198,57 @@
              captioned, e.g. "Sajek Valley.webp" or "sajek-valley.webp" both show
              as "Sajek Valley". -->
 
-        <section class="gallery-section">
-          <h2 class="gallery-cat-title">
-            <i class="fas fa-calendar-day"></i> Events
-            <span class="gallery-cat-count" id="events-count">…</span>
-          </h2>
+        <section class="gallery-section bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd"/></svg>
+            </div>
+            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              Events
+              <span class="gallery-cat-count text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full" id="events-count">…</span>
+            </h2>
+          </div>
           <div class="masonry-grid" id="events-grid"></div>
         </section>
 
-        <section class="gallery-section">
-          <h2 class="gallery-cat-title">
-            <i class="fas fa-images"></i> Memories
-            <span class="gallery-cat-count" id="memories-count">…</span>
-          </h2>
+        <section class="gallery-section bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd"/></svg>
+            </div>
+            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              Memories
+              <span class="gallery-cat-count text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full" id="memories-count">…</span>
+            </h2>
+          </div>
           <div class="masonry-grid" id="memories-grid"></div>
         </section>
 
-        <footer>
-          <p>&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
+        <footer class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 text-center shadow-md">
+          <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
         </footer>
-      </div>
-    </main>
-
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-      <button class="lightbox-close" id="lb-close" aria-label="Close"><i class="fas fa-times"></i></button>
-      <button class="lightbox-btn lightbox-prev" id="lb-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
-      <img class="lightbox-img" id="lb-img" src="" alt="Expanded gallery photo" />
-      <p class="lightbox-caption" id="lb-caption"></p>
-      <span class="lightbox-counter" id="lb-counter"></span>
-      <button class="lightbox-btn lightbox-next" id="lb-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+      </main>
     </div>
 
-    <button id="back-to-top" aria-label="Scroll back to top">
-      <i class="fas fa-arrow-up"></i>
+    <!-- Lightbox -->
+    <div class="lightbox fixed inset-0 z-[100] bg-slate-950/95 hidden items-center justify-center flex-col p-4" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="lightbox-close absolute top-4 right-4 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" id="lb-close" aria-label="Close">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd"/></svg>
+      </button>
+      <button class="lightbox-btn lightbox-prev absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" id="lb-prev" aria-label="Previous image">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M15.79 4.21a.75.75 0 0 1 0 1.06L9.06 12l6.73 6.73a.75.75 0 1 1-1.06 1.06l-7.26-7.26a.75.75 0 0 1 0-1.06l7.26-7.26a.75.75 0 0 1 1.06 0Z" clip-rule="evenodd"/></svg>
+      </button>
+      <img class="lightbox-img max-h-[78vh] max-w-full object-contain rounded-lg shadow-2xl" id="lb-img" src="" alt="Expanded gallery photo" />
+      <p class="lightbox-caption text-slate-100 text-sm font-medium mt-4 text-center" id="lb-caption"></p>
+      <span class="lightbox-counter text-slate-400 text-xs mt-1" id="lb-counter"></span>
+      <button class="lightbox-btn lightbox-next absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" id="lb-next" aria-label="Next image">
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M8.21 4.21a.75.75 0 0 0 0 1.06L14.94 12l-6.73 6.73a.75.75 0 1 0 1.06 1.06l7.26-7.26a.75.75 0 0 0 0-1.06L9.27 4.21a.75.75 0 0 0-1.06 0Z" clip-rule="evenodd"/></svg>
+      </button>
+    </div>
+
+    <button id="back-to-top" aria-label="Scroll back to top"
+            class="fixed bottom-6 right-6 p-3.5 rounded-full bg-[#1d4ed8] hover:bg-[#1a46c0] text-white cursor-pointer transform translate-y-20 opacity-0 transition-all duration-300 z-30 shadow-[0_8px_24px_rgba(29,78,216,0.45)] hover:shadow-[0_10px_28px_rgba(29,78,216,0.6)]">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
 
     <script>
@@ -145,9 +258,6 @@
     const REPO_BRANCH  = 'main';
     const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 
-    // ─── Filename → caption/alt text ────────────────────────────────────────────
-    // "sajek-valley.webp"          -> "Sajek Valley"
-    // "World-Robotics-Olympiad-BD" -> "World Robotics Olympiad BD"  (acronyms kept)
     function humanizeFilename(filename) {
       const base = filename.replace(/\.[^/.]+$/, '');
       const words = base.replace(/[-_]+/g, ' ').trim().split(/\s+/);
@@ -157,14 +267,12 @@
       });
       return cased.join(' ');
     }
-    // Escape any value before it goes into markup (filenames are user-controlled).
     function esc(s) {
       return String(s == null ? '' : s)
         .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
 
-    // ─── PRIMARY SOURCE: static manifest, generated by a GitHub Action ─────────
     async function loadGalleryManifest() {
       try {
         const res = await fetch('images/gallery-manifest.json', { cache: 'no-cache' });
@@ -180,7 +288,6 @@
       }
     }
 
-    // Manifest entries are plain relative paths, e.g. "images/events/photo.webp"
     function manifestPathsToItems(paths) {
       return paths.map(p => {
         const filename = p.split('/').pop();
@@ -189,7 +296,6 @@
       });
     }
 
-    // ─── FALLBACK ONLY: ask GitHub what's in a folder right now ────────────────
     async function fetchFolderImages(folderPath) {
       try {
         const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${folderPath}?ref=${REPO_BRANCH}`;
@@ -215,21 +321,22 @@
 
       if (items === null) {
         count.textContent = '–';
-        grid.innerHTML = '<p style="color:var(--gray);font-size:0.85rem;padding:8px 0;">Couldn\u2019t load photos right now — please refresh in a minute.</p>';
+        grid.innerHTML = '<p class="text-slate-500 dark:text-slate-400 text-[0.85rem] py-2">Couldn\u2019t load photos right now — please refresh in a minute.</p>';
         return;
       }
 
       count.textContent = items.length;
       items.forEach(item => {
         grid.insertAdjacentHTML('beforeend', `
-          <figure class="masonry-item">
-            <div class="masonry-thumb"><img src="${esc(item.image)}" alt="${esc(item.alt)}" loading="lazy" /></div>
-            <figcaption class="masonry-caption">${esc(item.caption)}</figcaption>
+          <figure class="masonry-item group cursor-pointer rounded-xl overflow-hidden border border-slate-200 dark:border-darkborder bg-slate-50 dark:bg-[#101729] shadow-sm hover:shadow-lg transition-shadow">
+            <div class="masonry-thumb overflow-hidden">
+              <img src="${esc(item.image)}" alt="${esc(item.alt)}" loading="lazy" class="w-full h-auto block transition-transform duration-300 group-hover:scale-105" />
+            </div>
+            <figcaption class="masonry-caption px-3 py-2 text-xs font-medium text-slate-600 dark:text-slate-300">${esc(item.caption)}</figcaption>
           </figure>`);
       });
     }
 
-    // ─── Lightbox (unchanged behavior, just built from rendered items) ──
     function initLightbox() {
       const lightbox  = document.getElementById('lightbox');
       const lbImg     = document.getElementById('lb-img');
@@ -254,12 +361,14 @@
       function openLightbox(idx) {
         current = idx;
         updateLightbox();
-        lightbox.classList.add('open');
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
         document.body.style.overflow = 'hidden';
       }
 
       function closeLightbox() {
-        lightbox.classList.remove('open');
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
         document.body.style.overflow = '';
       }
 
@@ -275,7 +384,7 @@
       lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 
       document.addEventListener('keydown', e => {
-        if (!lightbox.classList.contains('open')) return;
+        if (lightbox.classList.contains('hidden')) return;
         if (e.key === 'ArrowLeft')  prevPhoto();
         if (e.key === 'ArrowRight') nextPhoto();
         if (e.key === 'Escape')     closeLightbox();
@@ -286,8 +395,39 @@
       const btn = document.getElementById('back-to-top');
       btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
       window.addEventListener('scroll', () => {
-        btn.classList.toggle('visible', window.scrollY > 300);
+        const visible = window.scrollY > 300;
+        btn.classList.toggle('opacity-0', !visible);
+        btn.classList.toggle('translate-y-20', !visible);
       }, { passive: true });
+    }
+
+    // ─── Theme toggle ────────────────────────────────────────────────────────────
+    function setTheme(dark) {
+      document.documentElement.classList.toggle('dark', dark);
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    }
+    function initThemeToggle() {
+      const toggle = () => setTheme(!document.documentElement.classList.contains('dark'));
+      document.getElementById('theme-toggle-desktop')?.addEventListener('click', toggle);
+      document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggle);
+      document.addEventListener('keydown', (e) => {
+        if (e.altKey && (e.key === 't' || e.key === 'T')) toggle();
+      });
+    }
+
+    // ─── Mobile menu ─────────────────────────────────────────────────────────────
+    function initMobileMenu() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('mobile-menu-overlay');
+      const btn = document.getElementById('mobile-menu-btn');
+      if (!sidebar || !overlay || !btn) return;
+      const setOpen = (open) => {
+        sidebar.classList.toggle('-translate-x-full', !open);
+        overlay.classList.toggle('hidden', !open);
+      };
+      btn.addEventListener('click', () => setOpen(sidebar.classList.contains('-translate-x-full')));
+      overlay.addEventListener('click', () => setOpen(false));
+      sidebar.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', () => setOpen(false)));
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
@@ -308,6 +448,8 @@
       renderSection('memories-grid', 'memories-count', memories);
       initLightbox();      // must run AFTER the grids are populated
       initBackToTop();
+      initThemeToggle();
+      initMobileMenu();
     });
     </script>
   </body>
