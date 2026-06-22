@@ -3,7 +3,6 @@
     "name": "Saad Ahmed",
     "subtitle": "Lecturer, Department of CSE",
     "institution": "Bangladesh Army University of Science and Technology (BAUST), Saidpur.",
-    "profileChip": "Lecturer · BAUST",
     "researchFocus": "Image Processing, Computer Vision, & Deep Learning.",
     "about": "I am a Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST). My research interests focus on Image Processing, Computer Vision, and Deep Learning, with a dedication to developing intelligent systems that solve real-world problems and contribute to the global advancement of technology.",
     "cvLink": "https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing"
@@ -102,7 +101,6 @@
   ],
   "sections": {
     "about": true,
-    "charts": true,
     "experience": true,
     "research": false,
     "journals": true,

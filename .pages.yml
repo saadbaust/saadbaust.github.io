@@ -5,10 +5,10 @@
 #   https://app.pagescms.org/saadbaust/saadbaust.github.io
 #
 # After logging in you'll see three things in the left sidebar:
-#   1. Basic Info   → name, intro, stats, CV link, hero images, experience,
-#                     education, skills, certifications, phone & email
+#   1. Basic Info   → name, intro, stats, CV link, experience, education,
+#                     skills, certifications, phone & email
 #   2. Publications → your full BibTeX (paste the whole .bib in one box)
-#   3. Media        → Site Images / Event Photos / Memory Photos
+#   3. Media        → Event Photos / Memory Photos
 #
 # Nothing else needs editing by hand. Save in the CMS → it commits to GitHub →
 # the live site updates automatically within a minute.
@@ -45,7 +45,6 @@ content:
           - { name: name,        label: "Full name",                     type: string }
           - { name: subtitle,    label: "Title / role line",             type: string }
           - { name: institution, label: "Institution",                   type: string }
-          - { name: profileChip, label: "Badge text under photo",        type: string }
           - { name: researchFocus, label: "Research focus line",         type: string }
           - { name: about,       label: "Intro paragraph (About me)",    type: text }
           - { name: cvLink,      label: "CV link (full URL)",            type: string, description: "Paste the share link to your CV / résumé PDF." }
@@ -129,7 +128,6 @@ content:
         description: "Show or hide any home-page section. Switch one OFF to hide that section from the live site — your content stays saved, it's just hidden. (Teaching and Research Projects also hide automatically when they have no entries.)"
         fields:
           - { name: about,          label: "About / intro paragraph",            type: boolean, default: true }
-          - { name: charts,         label: "Hero charts (interest + citations)", type: boolean, default: true }
           - { name: experience,     label: "Experience",                         type: boolean, default: true }
           - { name: research,       label: "Research Projects",                  type: boolean, default: true }
           - { name: journals,       label: "Journal Articles",                   type: boolean, default: true }

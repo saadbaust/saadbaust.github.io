@@ -30,8 +30,8 @@
     <meta name="twitter:image"       content="https://saadbaust.github.io/images/saadahmed.png" />
     <meta name="twitter:image:alt"   content="Saad Ahmed — Lecturer at BAUST, Researcher in Image Processing and Computer Vision" />
 
-    <!-- SEO: structured data as a single linked @graph (WebSite + ProfilePage + ImageObject
-         + Person) — unchanged from the original. -->
+    <!-- SEO: structured data as a single linked @graph
+         (WebSite + ProfilePage + ImageObject + Person). -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -54,20 +54,6 @@
           "caption": "Saad Ahmed — Lecturer at Department of CSE, BAUST"
         },
         {
-          "@type": "ImageObject",
-          "@id": "https://saadbaust.github.io/#chart-research-interest",
-          "url": "https://saadbaust.github.io/images/Research%20Interest%20Distribution.png",
-          "contentUrl": "https://saadbaust.github.io/images/Research%20Interest%20Distribution.png",
-          "caption": "Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning"
-        },
-        {
-          "@type": "ImageObject",
-          "@id": "https://saadbaust.github.io/#chart-citation-history",
-          "url": "https://saadbaust.github.io/images/Citation%20History.png",
-          "contentUrl": "https://saadbaust.github.io/images/Citation%20History.png",
-          "caption": "Saad Ahmed's Google Scholar citation history over the years"
-        },
-        {
           "@type": "ProfilePage",
           "@id": "https://saadbaust.github.io/#webpage",
           "url": "https://saadbaust.github.io/",
@@ -76,11 +62,7 @@
           "inLanguage": "en",
           "isPartOf": { "@id": "https://saadbaust.github.io/#website" },
           "primaryImageOfPage": { "@id": "https://saadbaust.github.io/#profile-image" },
-          "image": [
-            { "@id": "https://saadbaust.github.io/#profile-image" },
-            { "@id": "https://saadbaust.github.io/#chart-research-interest" },
-            { "@id": "https://saadbaust.github.io/#chart-citation-history" }
-          ],
+          "image": { "@id": "https://saadbaust.github.io/#profile-image" },
           "mainEntity": { "@id": "https://saadbaust.github.io/#person" },
           "dateModified": "2026-06-22"
         },
@@ -124,7 +106,7 @@
     }
     </script>
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234f46e5'/%3E%3Ctext x='16' y='22' font-family='Inter%2C Arial%2C sans-serif' font-size='13' font-weight='700' text-anchor='middle' fill='white'%3ESA%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" type="image/png" href="images/logo.png" />
 
     <!-- Apply saved/system theme before paint to avoid a flash of the wrong theme. -->
     <script>
@@ -786,7 +768,6 @@
       setText('hero-name',        p.name);
       setText('hero-subtitle',    p.subtitle);
       setText('hero-institution', p.institution);
-      setText('profile-chip',     p.profileChip);
       setText('research-focus',   p.researchFocus);
       setText('about-text',       p.about);
       setAttr('cv-link', 'href',  p.cvLink);
@@ -949,7 +930,7 @@
     function applySectionVisibility(site) {
       const vis = (site && site.sections) || {};
       const map = {
-        about: 'about-section', charts: 'charts-section', experience: 'experience',
+        about: 'about-section', experience: 'experience',
         research: 'research', teaching: 'teaching', education: 'education',
         skills: 'skills', certifications: 'certs', contact: 'contact',
       };

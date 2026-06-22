@@ -12,7 +12,7 @@ Allow: /
 Disallow: /gallery.html
 
 # Belt-and-braces: also tell Google's image crawler to skip gallery photos.
-# (The home-page hero charts under /images/ stay crawlable on purpose.)
+# (The profile photo under /images/ stays crawlable on purpose.)
 User-agent: Googlebot-Image
 Disallow: /images/events/
 Disallow: /images/memories/
