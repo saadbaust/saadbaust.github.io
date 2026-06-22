@@ -157,13 +157,6 @@
               card: '0 1px 2px rgba(2,6,23,.04), 0 16px 40px -22px rgba(2,6,23,.16)',
               carddark: '0 1px 2px rgba(0,0,0,.4), 0 20px 48px -26px rgba(0,0,0,.6)',
             },
-            keyframes: {
-              glowDrift: {
-                '0%, 100%': { transform: 'translate3d(0,0,0) scale(1)', opacity: '.8' },
-                '50%':      { transform: 'translate3d(-34px,28px,0) scale(1.16)', opacity: '1' },
-              },
-            },
-            animation: { glowDrift: 'glowDrift 9s ease-in-out infinite' },
           },
         },
       };
@@ -230,6 +223,9 @@
             </a>
 
             <p class="px-4 pt-4 pb-1 text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Home Sections</p>
+            <a href="#about-section" data-nav="about-section" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              About Me
+            </a>
             <a href="#experience" data-nav="experience" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
               Experience
             </a>
@@ -263,33 +259,132 @@
       </aside>
 
       <!-- Main content -->
-      <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-8 overflow-x-hidden">
+      <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-5 overflow-x-hidden">
 
-        <!-- About / Hero (photo + identity merged) -->
-        <header id="about" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-[#111728]/[0.52] backdrop-blur-[20px] backdrop-saturate-[1.55] rounded-[1.25rem] border border-white/[0.55] dark:border-[#818cf8]/[0.18] shadow-card dark:shadow-carddark p-6 md:p-8 relative overflow-hidden">
+        <!-- Hero (photo + identity + metrics + links) -->
+        <header id="hero" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-[#111728]/[0.52] backdrop-blur-[20px] backdrop-saturate-[1.55] rounded-[1.25rem] border border-white/[0.55] dark:border-[#818cf8]/[0.18] shadow-sm dark:shadow-smdark p-6 md:p-8 relative overflow-hidden">
 
           <div class="relative flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-7 text-center sm:text-left">
             <div class="relative w-36 h-36 sm:w-40 sm:h-40 flex-shrink-0 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-sm">
               <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" width="170" height="170" class="w-full h-full object-cover rounded-xl" />
             </div>
+
             <div class="min-w-0">
               <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight"><span id="hero-name" class="text-[clamp(2.1rem,4.4vw,2.7rem)] font-semibold tracking-[-0.022em] leading-[1.04]">Saad Ahmed</span></h1>
               <p id="hero-subtitle" class="text-sm sm:text-base text-indigo-600 dark:text-indigo-300 font-semibold mt-2">Lecturer, Department of CSE</p>
               <p id="hero-institution" class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-normal">Bangladesh Army University of Science and Technology (BAUST), Saidpur.</p>
-              <div class="research-interests inline-block mt-3 p-1 rounded-md bg-indigo-800/[0.08] dark:bg-indigo-400/[0.06]">
-                <p class="text-[0.8rem] text-slate-500 dark:text-slate-400">
-                  <strong class="font-bold">Research Interests:</strong>
-                  <span id="research-focus">Image Processing, Computer Vision, &amp; Deep Learning.</span>
-                </p>
+              <div class="hero-actions flex flex-wrap justify-center sm:justify-start items-center gap-3 mt-5 pt-5 border-t border-slate-200 dark:border-darkborder">
+                <a id="cv-link" href="https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+                  class="resume-btn inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-sm shadow-indigo-600/20 transition-colors">
+                  <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" clip-rule="evenodd"/><path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"/></svg>
+                  View CV
+                </a>
+                <a id="email-link" href="mailto:saadahmed@baust.edu.bd"
+                  class="email-btn inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-500 text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-sm transition-colors">
+                  <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
+                  Email Me
+                </a>
               </div>
             </div>
+            
           </div>
-
-          <div class="academic-summary" id="about-section">
-            <p id="about-text" class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed my-5 p-1 text-justify">I am a Lecturer in the Department of Computer Science and Engineering at the Bangladesh Army University of Science and Technology (BAUST), and an MSc student in CSE. My research is in computer vision and deep learning, where I build and evaluate image-processing models for visual recognition and analysis. I am most interested in methods that stay accurate and robust on real-world data rather than only on benchmarks, and in keeping that work reproducible and practical to deploy. I am actively publishing in this area and am looking for PhD opportunities to take it further.</p>
+          <!-- Social Icons -->
+           <div class="mt-5 pt-5 border-t border-slate-200 dark:border-darkborder">
+            <div class="social-icons flex flex-wrap gap-2.5">
+              <a href="https://linkedin.com/in/saadbaust" class="icon linkedin inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#0A66C2] dark:hover:bg-[#1c2a45] dark:hover:text-[#60a5fa]" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[20px] h-[20px]" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h24v24H0z" fill="none"/><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
+                <span class="social-label">LinkedIn</span>
+              </a>
+              <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&amp;hl=en" class="icon scholar inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#4285F4] dark:hover:bg-[#1c2a45] dark:hover:text-[#8ab4f8]" title="Google Scholar" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[20px] h-[20px]" viewBox="0 0 48 48" aria-hidden="true"><path d="M0 0h48v48H0z" fill="none"/><path fill="currentColor" d="M21.82 4.134a6.73 6.73 0 0 1 4.36 0c1.982.677 5.648 2.003 10.997 4.231c3.85 1.605 6.581 2.847 8.42 3.728c1.199.574 1.887 1.705 1.887 2.907s-.688 2.333-1.888 2.907c-1.838.88-4.569 2.123-8.419 3.728c-5.349 2.228-9.015 3.554-10.997 4.23a6.73 6.73 0 0 1-4.36 0c-1.982-.676-5.648-2.002-10.997-4.23A228 228 0 0 1 6.5 19.784v15.972A4.502 4.502 0 0 1 5 44.5a4.5 4.5 0 0 1-1.5-8.744v-17.33q-.594-.277-1.096-.519C1.204 17.333.516 16.202.516 15s.688-2.333 1.888-2.907c1.838-.881 4.569-2.123 8.42-3.728c5.348-2.228 9.014-3.554 10.997-4.23"/><path fill="currentColor" d="M20.852 28.198A177 177 0 0 1 9.5 23.878v.289c0 3.142.161 5.154.329 6.4c.199 1.476 1.059 2.773 2.417 3.484C14.213 35.08 18.017 36.5 24 36.5s9.787-1.42 11.754-2.45c1.358-.71 2.219-2.007 2.417-3.483c.168-1.246.329-3.258.329-6.4v-.29a177 177 0 0 1-11.352 4.32a9.73 9.73 0 0 1-6.296 0"/></svg>
+                <span class="social-label">Google Scholar</span>
+              </a>
+              <a href="https://orcid.org/0009-0005-5614-3427" class="icon orcid inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#A6CE39] dark:hover:bg-[#1c2a45] dark:hover:text-[#A6CE39]" title="ORCID" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[20px] h-[20px]" viewBox="0 0 32 32" aria-hidden="true"><path d="M0 0h32v32H0z" fill="none"/><path fill="currentColor" d="M16 0C7.161 0 0 7.161 0 16s7.161 16 16 16s16-7.161 16-16S24.839 0 16 0M9.823 5.839c.704 0 1.265.573 1.265 1.26s-.561 1.265-1.265 1.265a1.27 1.27 0 0 1-1.26-1.265c0-.697.563-1.26 1.26-1.26m-.959 4.046h1.923v13.391H8.864zm4.751 0h5.197c4.948 0 7.125 3.541 7.125 6.703c0 3.439-2.687 6.699-7.099 6.699h-5.224zm1.921 1.74v9.927h3.063c4.365 0 5.365-3.312 5.365-4.964c0-2.687-1.713-4.963-5.464-4.963z"/></svg>
+                <span class="social-label">ORCID</span>
+              </a>
+              <a href="https://www.researchgate.net/profile/Saad-Ahmed-96" class="icon researchgate inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#00CCBB] dark:hover:bg-[#1c2a45] dark:hover:text-[#00CCBB]" title="ResearchGate" target="_blank" rel="noopener noreferrer">
+                <svg class="h-[20px] w-auto" viewBox="0 0 448 512" aria-hidden="true"><path d="M0 0h448v512H0z" fill="none"/><path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm277.201 64c5.627 0 10.731.651 15.258 1.98c4.476 1.318 8.49 3.135 12.031 5.461c3.491 2.302 6.511 5.013 9.004 8.082a44 44 0 0 1 6.227 9.899c.626 1.125.449 2.02-.55 2.646l-13.9 5.715c-1.177.628-2.006.308-2.66-.933c-3.119-5.78-5.78-9.577-10.152-12.338c-4.425-2.75-8.518-4.055-15.258-4.055c-7.327 0-10.601 1.457-15.191 4.744c-4.553 3.223-7.89 7.276-9.86 13.451c-.395 1.114-.754 2.496-1.175 4.12c-.346 1.65-.627 3.67-.805 6.035c-.18 2.366-.347 5.295-.5 8.748c-.102 3.453-.152 7.646-.152 12.506c0 4.884.05 9.078.152 12.53c.153 3.44.32 6.37.5 8.735c.178 2.391.46 4.4.805 6.063c.421 1.598.78 2.977 1.175 4.103c1.97 6.15 4.783 9.514 8.926 12.213c4.092 2.737 8.798 4.707 16.125 4.707c6.51 0 12.469-1.855 16.356-4.682c3.85-2.825 7.046-6.559 8.478-11.662c.627-2.148 1.433-4.822 1.983-8.095c.498-3.274.5-6.738.5-11.52c0-.755-.424-1.14-1.127-1.14h-22.264c-1.253 0-1.867-.613-1.867-1.866v-12.761c0-1.267.614-1.881 1.867-1.881h40.857c1.28 0 1.881.614 1.881 1.88v10.907c0 5.78 0 11.14-.601 16.101c-.576 4.962-1.355 9.257-2.34 12.389c-3.12 9.81-8.07 16.793-15.653 21.996c-7.609 5.243-17.417 8.068-28.07 8.068c-10.946 0-20.165-2.516-27.683-7.517c-7.532-5.064-12.918-12.496-16.204-22.432a43 43 0 0 1-1.482-5.83c-.384-2.007-.73-4.348-1.037-7.047c-.32-2.723-.524-5.919-.65-9.691c-.129-3.746-.18-8.325-.18-13.568c0-5.27.052-9.782.18-13.541c.127-3.773.33-7.01.65-9.708c.306-2.685.653-5.037 1.037-7.044c.37-2.02.857-3.94 1.484-5.819c3.286-9.936 8.67-17.404 16.202-22.418C305.036 98.518 314.255 96 325.2 96m-151.674 77.813c43.569 0 76.803 19.858 76.803 62.646c0 29.028-22.916 58.083-53.861 65.32c18.733 33.249 41.252 62.662 58.08 80.973c9.898 10.703 23.646 20.268 37.392 20.268v9.912c-4.192 1.93-11.06 3.068-17.545 3.068c-22.16 0-39.718-8.773-51.2-22.545c-12.585-14.502-34.746-45.845-58.046-87.469c-12.25 0-20.268 0-29.437-.767v63.785c0 23.696 5.372 28.671 15.678 30.168l19.873 2.709v11.05c-9.553-.37-31.714-1.126-48.9-1.126c-17.968 0-35.923.756-46.23 1.127V401.88l14.503-2.71c9.974-1.891 15.652-6.47 15.652-30.167V218.506c0-23.708-5.678-28.261-15.652-30.18l-14.502-2.66V174.58c9.526.37 24.821.37 40.129.37c16.776 0 34.744-1.137 57.263-1.137m-6.867 17.185c-10.32 0-22.136 0-30.947.768v95.845c8.811.83 14.515 1.176 27.508 1.176c34.015 0 54.629-20.243 54.629-50.422c0-30.536-19.08-47.367-51.19-47.367"/></svg>
+                <span class="social-label">ResearchGate</span>
+              </a>
+              <a href="https://ieeexplore.ieee.org/author/526065849930602" class="icon ieee inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#00629B] dark:hover:bg-[#1c2a45] dark:hover:text-[#60a5fa]" title="IEEE Xplore" aria-label="IEEE Xplore author profile" target="_blank" rel="noopener noreferrer">
+                <svg class="h-[12px] w-auto" viewBox="0 0 512 150" aria-hidden="true"><path d="M0 0h512v150H0z" fill="none"/><path fill="currentColor" d="M170.746 19.748h31.325v113.084h-31.325zm47.762 113.084V19.748h86.142v21.925h-54.818v23.334h50.429v21.929h-50.429v23.961h54.818v21.935zm103.692 0V19.748h86.12v21.925h-54.803v23.334h50.412v21.929h-50.412v23.961h54.803v21.935zm103.66 0V19.748h86.141v21.925h-54.798v23.334h50.416v21.929h-50.416v23.961H512v21.935zM71.458 87.637c-.414 7.985-.516 15.375-1.107 23.38c3.16.287 6.727.563 10.097.072L79.44 88.774l-.177-1.062c-2.566.1-4.995.203-7.806-.075M51.72 65.214c-3.893 1.951-9.62 4.9-8.988 10.239c.834 2.915 3.99 4.799 6.488 5.997c13.805 6.083 32.132 6.29 46.707 1.75c3.598-1.387 8.429-3.398 9.09-7.807c-.039-3.642-3.895-5.935-6.665-7.33v-.173c.966-.381 2.077-.725 3.077-.83v-.097c-4.881-.875-9.595-2.152-14.323-3.402c.91 2.075 1.568 4.263 2.327 6.42c1.42-.455 2.877-.8 4.41-1.01c2.493.971 6.064 2.36 6.418 5.477c.277 2.916-2.914 4.336-4.929 5.52c-10.691 3.89-22.72 4.27-33.87 1.312c-3.08-.97-7.524-2.216-7.906-6.138c2.186-5.162 7.84-6.237 12.562-7.49c-2.427-1.564-4.895-2.948-7.247-4.688c-2.54.14-4.86 1.252-7.151 2.25m23.62-31.149l-1.384 4.443l-6.94 19.879c1.738.177 3.89 0 5.596.177v.164l-1.015 22.486l.175.236c2.22.218 4.992.329 7.255-.057v-.354l-.906-21.81l.136-.738l6.106-.104c-3.045-8.047-6-16.175-8.844-24.322zm-3.225-9.988c5.106-3.478 9.687 1.385 13.643 4.164c15.296 12.312 29.73 26.405 40.73 42.32c1.385 2.053 2.012 5.242.769 7.566c-2.851 4.756-6.699 9.097-10.346 13.505v.241c-9.094 9.68-18.698 19.632-29.076 27.83c-5.065 3.082-9.714 9.813-16.238 5.643c-14.855-10.855-29.07-24.351-41.12-38.826c-2.043-3.182-5.233-5.79-6.654-9.4c-1.983-4.887 2.389-8.394 4.89-12.075C41 49.892 56.26 35.033 72.116 24.077M84.918 9.605l-5.654-8.013C78.57 1.17 77.707.47 76.94.265c-1.667-.723-3.465.152-4.826 1.184l-10.23 13.325C45.47 35.102 26.04 54.083 4.843 68.633C3.168 69.942.677 71.22.158 73.378c-.556 1.94.455 3.542 1.66 4.75c16.974 11.691 33.202 25.571 47.647 41.4c2.564 2.694 4.643 5.373 7.151 7.902c4.225 5.622 9.188 11.289 13.072 17.32c1.218 1.273 1.427 3.366 3.331 3.986c1.491.516 3.332.866 4.754 0l1.414-1.42c17.563-24.88 39.838-47.226 64.725-65.266c2.49-2.225 7.249-3.052 7.317-7.181c-.177-1.905-1.286-3.782-2.922-4.822l-.407-.067c-12.807-8.712-24.74-18.565-35.982-29.743L99.495 27.26c-5.033-5.58-9.924-11.76-14.577-17.655M70.28 21.019c4.993-3.886 11.276-.659 15.477 2.916c4.4 3.363 8.983 7.174 13.006 11.068l.731.42c11.14 10.336 21.485 21.823 29.984 33.967c1.378 2.113 2.596 4.508 1.826 7.313c-2.834 7.085-8.593 12.732-13.628 18.92c-10.894 11.725-22.386 23.071-35.25 32.123c-2.602 1.84-6.113 3.54-9.23 2.08c-9.47-4.957-17.455-13.077-25.743-20.475c-9.612-8.913-19.259-19.29-26.544-30.146c-1.083-1.523-1.388-3.402-1.356-5.411c.936-3.747 3.504-6.831 5.933-9.99c8.608-10.97 19.152-21.376 29.8-30.882c.246-.243.7-.762 1.086-1.009c4.573-3.954 9.116-7.454 13.908-10.894"/></svg>
+                <span class="social-label">Xplore</span>
+              </a>
+              <a href="https://www.semanticscholar.org/author/Saad-Ahmed/2336915789" class="icon semantic-scholar inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#52B788] dark:hover:bg-[#1c2a45] dark:hover:text-[#52B788]" title="Semantic Scholar" aria-label="Semantic Scholar author profile" target="_blank" rel="noopener noreferrer">
+                <svg class="h-[23px] w-auto" viewBox="0 0 448 512" aria-hidden="true"><path d="M0 0h448v512H0z" fill="none"/><path fill="currentColor" d="M379.087 75.202c18.168 40.684 25.533 83.89 32.421 127.21q-1.896.538-3.794 1.082c-.91-2.534-1.984-5.021-2.707-7.61c-5.218-18.653-10.48-37.296-15.474-56.011c-1.797-6.733-6.035-10.084-12.096-13.381c-8.901-4.842-17.313-11.084-24.69-18.046c-4.707-4.44-8.735-7.149-15.413-7.078c-44.46.47-88.925.515-133.384.924c-2.963.03-6.63 1.124-8.728 3.065c-8.089 7.484-15.671 15.514-25.642 25.556c26.3 64.04 39.522 133.84 33.845 208.044c-12.626-8.084-22.4-14.48-22.981-31.418c-2.904-84.661-29.02-161.225-83.58-227.108c-1.228-1.482-1.838-3.476-2.738-5.23zM48.73 107.847c12.663 0 25.332-.2 37.984.172c2.51.072 6.022 1.668 7.277 3.68c37.836 60.79 67.334 124.635 71.155 197.682c.018.29-.282.594-1.362 2.716c-22.612-77.293-63.404-142.735-115.872-201.39l.819-2.86zM8 161.029c18.09-.658 33.39-1.318 48.692-1.602c1.541-.03 3.36 2.009 4.65 3.443c29.848 33.202 56.936 68.281 73.633 110.235c3.177 7.98 5.351 16.36 7.989 24.555C108.379 243.235 60.254 202.538 8 161.028Zm194.474 275.77c-31.481-50.066-61.803-98.29-92.128-146.513l1.112-1.428c2.542 2.047 56.622 45.412 80.91 65.302c6.766 5.541 11.878 5.441 18.915-.274c82.584-67.085 174.737-117.862 272.583-158.809c5.223-2.185 10.64-3.916 15.983-5.816c1.186-.42 2.44-.654 4.151-.222c-113.623 65.987-222.022 138.239-301.526 247.76" /></svg>
+                <span class="social-label">Semantic Scholar</span>
+              </a>
+              <a href="https://github.com/saadbaust" class="icon github inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-slate-900 dark:hover:bg-[#1c2a45] dark:hover:text-white" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[20px] h-[20px]" viewBox="-2 -2 24 24" aria-hidden="true"><path d="M-2 -2h24v24H-2z" fill="none"/><path fill="currentColor" d="M18.88 1.099Q17.78-.001 16.233 0H3.746Q2.198 0 1.099 1.099Q-.001 2.199 0 3.746v12.487q0 1.548 1.099 2.647q1.1 1.1 2.647 1.099H6.66q.285 0 .429-.02a.5.5 0 0 0 .286-.169q.143-.15.143-.435l-.007-.885q-.006-.846-.006-1.34l-.3.052q-.285.052-.721.046a5.6 5.6 0 0 1-.904-.091a2 2 0 0 1-.872-.39a1.65 1.65 0 0 1-.572-.8l-.13-.3a3.3 3.3 0 0 0-.41-.663q-.28-.364-.566-.494l-.09-.065a1 1 0 0 1-.17-.156a.7.7 0 0 1-.117-.182q-.039-.092.065-.15q.104-.06.378-.059l.26.04q.26.051.643.311a2.1 2.1 0 0 1 .631.677q.3.532.722.813q.423.28.852.28t.742-.065a2.6 2.6 0 0 0 .585-.196q.117-.871.637-1.34a9 9 0 0 1-1.333-.234a5.3 5.3 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872q-.416-.52-.683-1.365q-.266-.846-.266-1.952q0-1.573 1.027-2.68q-.48-1.183.091-2.652q.378-.118 1.119.175t1.086.5q.345.21.553.352a9.2 9.2 0 0 1 2.497-.338q1.288 0 2.498.338l.494-.312a7 7 0 0 1 1.197-.572q.689-.26 1.054-.143q.585 1.47.103 2.653q1.028 1.105 1.028 2.68q0 1.106-.267 1.957q-.266.852-.689 1.366a3.7 3.7 0 0 1-1.053.865q-.63.351-1.223.507a9 9 0 0 1-1.333.235q.675.585.676 1.846v3.11q0 .22.065.357a.36.36 0 0 0 .208.189q.143.052.254.064q.111.014.318.013h2.914q1.548 0 2.647-1.099t1.099-2.647V3.746q0-1.548-1.1-2.647z"/></svg>
+                <span class="social-label">GitHub</span>
+              </a>
+              <a href="https://youtube.com/@saadbaust" class="icon youtube inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#FF0000] dark:hover:bg-[#1c2a45] dark:hover:text-[#FF0000]" title="YouTube" target="_blank" rel="noopener noreferrer">
+                <svg class="w-[20px] h-[20px]" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h24v24H0z" fill="none"/><path fill="currentColor" d="M23 9.71a8.5 8.5 0 0 0-.91-4.13a2.92 2.92 0 0 0-1.72-1A78 78 0 0 0 12 4.27a79 79 0 0 0-8.34.3a2.87 2.87 0 0 0-1.46.74c-.9.83-1 2.25-1.1 3.45a48 48 0 0 0 0 6.48a9.6 9.6 0 0 0 .3 2a3.14 3.14 0 0 0 .71 1.36a2.86 2.86 0 0 0 1.49.78a45 45 0 0 0 6.5.33c3.5.05 6.57 0 10.2-.28a2.9 2.9 0 0 0 1.53-.78a2.5 2.5 0 0 0 .61-1a10.6 10.6 0 0 0 .52-3.4c.04-.56.04-3.94.04-4.54M9.74 14.85V8.66l5.92 3.11c-1.66.92-3.85 1.96-5.92 3.08"/></svg>
+                <span class="social-label">YouTube</span>
+              </a>
+            </div>
           </div>
+        </header>
 
-          <div id="metrics" class="flex flex-wrap justify-center gap-2.5 mt-4 mb-3">
+        <!-- About Me -->
+        <section id="about-section" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd"/></svg>
+            </div>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">About Me</h2>
+          </div>
+          <p id="about-text" class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed text-justify">I am a Lecturer in the Department of Computer Science and Engineering at the Bangladesh Army University of Science and Technology (BAUST), and an MSc student in CSE. My research is in computer vision and deep learning, where I build and evaluate image-processing models for visual recognition and analysis. I am most interested in methods that stay accurate and robust on real-world data rather than only on benchmarks, and in keeping that work reproducible and practical to deploy. I am actively publishing in this area and am looking for PhD opportunities to take it further.</p>
+          <div class="mt-2 pt-5 border-t border-slate-200 dark:border-darkborder">
+            <p class="text-[0.75rem] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Research Interests</p>
+            <div class="research-interests inline-block p-1 rounded-md bg-indigo-800/[0.08] dark:bg-indigo-400/[0.06]">
+              <p class="text-[0.85rem] text-slate-600 dark:text-slate-300">
+                <span id="research-focus">Image Processing, Computer Vision, &amp; Deep Learning.</span>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25Zm7.5 0v.09a49.488 49.488 0 0 0-6 0v-.09a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5Z"/><path d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923a49.19 49.19 0 0 1-12.954 0C4.047 21.128 3 19.852 3 18.4Z"/></svg>
+            </div>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Experience</h2>
+          </div>
+          <div id="experience-list" class="relative pl-[30px] my-1 before:content-[''] before:absolute before:left-1 before:top-1.5 before:bottom-1.5 before:w-0.5 before:bg-indigo-200 dark:before:bg-indigo-900 before:rounded-sm"></div>
+        </section>
+
+        <!-- Research Projects -->
+        <section id="research" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 0 1 .75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 0 1 9.75 22.5a.75.75 0 0 1-.75-.75v-4.131A15.838 15.838 0 0 1 6.382 15H2.25a.75.75 0 0 1-.75-.75 6.75 6.75 0 0 1 7.815-6.666ZM15 6.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" clip-rule="evenodd"/><path d="M5.26 17.242a.75.75 0 1 0-.897-1.203 5.243 5.243 0 0 0-2.05 5.022.75.75 0 0 0 .625.627 5.243 5.243 0 0 0 5.022-2.051.75.75 0 1 0-1.202-.897 3.744 3.744 0 0 1-3.008 1.51c0-1.23.592-2.323 1.51-3.008Z"/></svg>
+            </div>
+            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Research Projects</h2>
+          </div>
+          <div id="research-list"></div>
+        </section>
+
+        <!-- Research Publications (Journals + Conferences, with filters + search) -->
+        <section id="journals" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div class="flex items-center gap-3">
+              <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd"/><path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"/></svg>
+              </div>
+              <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Research Publications</h2>
+            </div>
+            
+            <div class="relative w-full md:w-64">
+              <input id="search-pub" type="text" placeholder="Search publications..." aria-label="Search publications"
+                     class="w-full text-xs font-medium pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-darkborder rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all text-slate-700 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500" />
+              <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd"/></svg>
+            </div>
+          </div>
+          <div id="metrics" class="flex flex-wrap justify-center gap-2.5 mb-6">
             <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
               <span id="total-citations" class="block text-[1.20rem] font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-2">0</span>
               <span class="block text-[0.68rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Citations</span>
@@ -307,124 +402,6 @@
               <span class="block text-[0.68rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">i10-index</span>
             </div>
           </div>
-
-          <div class="hero-actions flex flex-wrap justify-center items-center gap-3 mt-5 pt-5 border-t border-slate-200 dark:border-darkborder">
-            <a id="cv-link" href="https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing" target="_blank" rel="noopener noreferrer"
-               class="resume-btn inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-sm shadow-indigo-600/20 transition-colors">
-              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" clip-rule="evenodd"/><path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"/></svg>
-              View CV
-            </a>
-            <a id="email-link" href="mailto:saadahmed@baust.edu.bd"
-               class="email-btn inline-flex items-center gap-2 bg-slate-700 hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-500 text-white font-semibold text-sm px-5 py-2.5 rounded-lg shadow-sm transition-colors">
-              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
-              Email Me
-            </a>
-          </div>
-
-          <div class="mt-5 pt-5 border-t border-slate-200 dark:border-darkborder">
-            <div class="social-icons flex flex-wrap gap-2.5 justify-center">
-              <a href="https://linkedin.com/in/saadbaust" class="icon linkedin inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#0A66C2] dark:hover:bg-[#1c2a45] dark:hover:text-[#60a5fa]" title="LinkedIn" target="_blank" rel="noopener noreferrer">
-                <svg class="w-[23px] h-[23px]" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h24v24H0z" fill="none"/><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"/></svg>
-                <span class="social-label">LinkedIn</span>
-              </a>
-              <a href="https://scholar.google.com/citations?user=QFARjNcAAAAJ&amp;hl=en" class="icon scholar inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#4285F4] dark:hover:bg-[#1c2a45] dark:hover:text-[#8ab4f8]" title="Google Scholar" target="_blank" rel="noopener noreferrer">
-                <svg class="w-[23px] h-[23px]" viewBox="0 0 48 48" aria-hidden="true"><path d="M0 0h48v48H0z" fill="none"/><path fill="currentColor" d="M21.82 4.134a6.73 6.73 0 0 1 4.36 0c1.982.677 5.648 2.003 10.997 4.231c3.85 1.605 6.581 2.847 8.42 3.728c1.199.574 1.887 1.705 1.887 2.907s-.688 2.333-1.888 2.907c-1.838.88-4.569 2.123-8.419 3.728c-5.349 2.228-9.015 3.554-10.997 4.23a6.73 6.73 0 0 1-4.36 0c-1.982-.676-5.648-2.002-10.997-4.23A228 228 0 0 1 6.5 19.784v15.972A4.502 4.502 0 0 1 5 44.5a4.5 4.5 0 0 1-1.5-8.744v-17.33q-.594-.277-1.096-.519C1.204 17.333.516 16.202.516 15s.688-2.333 1.888-2.907c1.838-.881 4.569-2.123 8.42-3.728c5.348-2.228 9.014-3.554 10.997-4.23"/><path fill="currentColor" d="M20.852 28.198A177 177 0 0 1 9.5 23.878v.289c0 3.142.161 5.154.329 6.4c.199 1.476 1.059 2.773 2.417 3.484C14.213 35.08 18.017 36.5 24 36.5s9.787-1.42 11.754-2.45c1.358-.71 2.219-2.007 2.417-3.483c.168-1.246.329-3.258.329-6.4v-.29a177 177 0 0 1-11.352 4.32a9.73 9.73 0 0 1-6.296 0"/></svg>
-                <span class="social-label">Google Scholar</span>
-              </a>
-              <a href="https://orcid.org/0009-0005-5614-3427" class="icon orcid inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#A6CE39] dark:hover:bg-[#1c2a45] dark:hover:text-[#A6CE39]" title="ORCID" target="_blank" rel="noopener noreferrer">
-                <svg class="w-[23px] h-[23px]" viewBox="0 0 32 32" aria-hidden="true"><path d="M0 0h32v32H0z" fill="none"/><path fill="currentColor" d="M16 0C7.161 0 0 7.161 0 16s7.161 16 16 16s16-7.161 16-16S24.839 0 16 0M9.823 5.839c.704 0 1.265.573 1.265 1.26s-.561 1.265-1.265 1.265a1.27 1.27 0 0 1-1.26-1.265c0-.697.563-1.26 1.26-1.26m-.959 4.046h1.923v13.391H8.864zm4.751 0h5.197c4.948 0 7.125 3.541 7.125 6.703c0 3.439-2.687 6.699-7.099 6.699h-5.224zm1.921 1.74v9.927h3.063c4.365 0 5.365-3.312 5.365-4.964c0-2.687-1.713-4.963-5.464-4.963z"/></svg>
-                <span class="social-label">ORCID</span>
-              </a>
-              <a href="https://www.researchgate.net/profile/Saad-Ahmed-96" class="icon researchgate inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#00CCBB] dark:hover:bg-[#1c2a45] dark:hover:text-[#00CCBB]" title="ResearchGate" target="_blank" rel="noopener noreferrer">
-                <svg class="h-[23px] w-auto" viewBox="0 0 448 512" aria-hidden="true"><path d="M0 0h448v512H0z" fill="none"/><path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm277.201 64c5.627 0 10.731.651 15.258 1.98c4.476 1.318 8.49 3.135 12.031 5.461c3.491 2.302 6.511 5.013 9.004 8.082a44 44 0 0 1 6.227 9.899c.626 1.125.449 2.02-.55 2.646l-13.9 5.715c-1.177.628-2.006.308-2.66-.933c-3.119-5.78-5.78-9.577-10.152-12.338c-4.425-2.75-8.518-4.055-15.258-4.055c-7.327 0-10.601 1.457-15.191 4.744c-4.553 3.223-7.89 7.276-9.86 13.451c-.395 1.114-.754 2.496-1.175 4.12c-.346 1.65-.627 3.67-.805 6.035c-.18 2.366-.347 5.295-.5 8.748c-.102 3.453-.152 7.646-.152 12.506c0 4.884.05 9.078.152 12.53c.153 3.44.32 6.37.5 8.735c.178 2.391.46 4.4.805 6.063c.421 1.598.78 2.977 1.175 4.103c1.97 6.15 4.783 9.514 8.926 12.213c4.092 2.737 8.798 4.707 16.125 4.707c6.51 0 12.469-1.855 16.356-4.682c3.85-2.825 7.046-6.559 8.478-11.662c.627-2.148 1.433-4.822 1.983-8.095c.498-3.274.5-6.738.5-11.52c0-.755-.424-1.14-1.127-1.14h-22.264c-1.253 0-1.867-.613-1.867-1.866v-12.761c0-1.267.614-1.881 1.867-1.881h40.857c1.28 0 1.881.614 1.881 1.88v10.907c0 5.78 0 11.14-.601 16.101c-.576 4.962-1.355 9.257-2.34 12.389c-3.12 9.81-8.07 16.793-15.653 21.996c-7.609 5.243-17.417 8.068-28.07 8.068c-10.946 0-20.165-2.516-27.683-7.517c-7.532-5.064-12.918-12.496-16.204-22.432a43 43 0 0 1-1.482-5.83c-.384-2.007-.73-4.348-1.037-7.047c-.32-2.723-.524-5.919-.65-9.691c-.129-3.746-.18-8.325-.18-13.568c0-5.27.052-9.782.18-13.541c.127-3.773.33-7.01.65-9.708c.306-2.685.653-5.037 1.037-7.044c.37-2.02.857-3.94 1.484-5.819c3.286-9.936 8.67-17.404 16.202-22.418C305.036 98.518 314.255 96 325.2 96m-151.674 77.813c43.569 0 76.803 19.858 76.803 62.646c0 29.028-22.916 58.083-53.861 65.32c18.733 33.249 41.252 62.662 58.08 80.973c9.898 10.703 23.646 20.268 37.392 20.268v9.912c-4.192 1.93-11.06 3.068-17.545 3.068c-22.16 0-39.718-8.773-51.2-22.545c-12.585-14.502-34.746-45.845-58.046-87.469c-12.25 0-20.268 0-29.437-.767v63.785c0 23.696 5.372 28.671 15.678 30.168l19.873 2.709v11.05c-9.553-.37-31.714-1.126-48.9-1.126c-17.968 0-35.923.756-46.23 1.127V401.88l14.503-2.71c9.974-1.891 15.652-6.47 15.652-30.167V218.506c0-23.708-5.678-28.261-15.652-30.18l-14.502-2.66V174.58c9.526.37 24.821.37 40.129.37c16.776 0 34.744-1.137 57.263-1.137m-6.867 17.185c-10.32 0-22.136 0-30.947.768v95.845c8.811.83 14.515 1.176 27.508 1.176c34.015 0 54.629-20.243 54.629-50.422c0-30.536-19.08-47.367-51.19-47.367"/></svg>
-                <span class="social-label">ResearchGate</span>
-              </a>
-              <a href="https://ieeexplore.ieee.org/author/526065849930602" class="icon ieee inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#00629B] dark:hover:bg-[#1c2a45] dark:hover:text-[#60a5fa]" title="IEEE Xplore" aria-label="IEEE Xplore author profile" target="_blank" rel="noopener noreferrer">
-                <svg class="h-[12px] w-auto" viewBox="0 0 512 150" aria-hidden="true"><path d="M0 0h512v150H0z" fill="none"/><path fill="currentColor" d="M170.746 19.748h31.325v113.084h-31.325zm47.762 113.084V19.748h86.142v21.925h-54.818v23.334h50.429v21.929h-50.429v23.961h54.818v21.935zm103.692 0V19.748h86.12v21.925h-54.803v23.334h50.412v21.929h-50.412v23.961h54.803v21.935zm103.66 0V19.748h86.141v21.925h-54.798v23.334h50.416v21.929h-50.416v23.961H512v21.935zM71.458 87.637c-.414 7.985-.516 15.375-1.107 23.38c3.16.287 6.727.563 10.097.072L79.44 88.774l-.177-1.062c-2.566.1-4.995.203-7.806-.075M51.72 65.214c-3.893 1.951-9.62 4.9-8.988 10.239c.834 2.915 3.99 4.799 6.488 5.997c13.805 6.083 32.132 6.29 46.707 1.75c3.598-1.387 8.429-3.398 9.09-7.807c-.039-3.642-3.895-5.935-6.665-7.33v-.173c.966-.381 2.077-.725 3.077-.83v-.097c-4.881-.875-9.595-2.152-14.323-3.402c.91 2.075 1.568 4.263 2.327 6.42c1.42-.455 2.877-.8 4.41-1.01c2.493.971 6.064 2.36 6.418 5.477c.277 2.916-2.914 4.336-4.929 5.52c-10.691 3.89-22.72 4.27-33.87 1.312c-3.08-.97-7.524-2.216-7.906-6.138c2.186-5.162 7.84-6.237 12.562-7.49c-2.427-1.564-4.895-2.948-7.247-4.688c-2.54.14-4.86 1.252-7.151 2.25m23.62-31.149l-1.384 4.443l-6.94 19.879c1.738.177 3.89 0 5.596.177v.164l-1.015 22.486l.175.236c2.22.218 4.992.329 7.255-.057v-.354l-.906-21.81l.136-.738l6.106-.104c-3.045-8.047-6-16.175-8.844-24.322zm-3.225-9.988c5.106-3.478 9.687 1.385 13.643 4.164c15.296 12.312 29.73 26.405 40.73 42.32c1.385 2.053 2.012 5.242.769 7.566c-2.851 4.756-6.699 9.097-10.346 13.505v.241c-9.094 9.68-18.698 19.632-29.076 27.83c-5.065 3.082-9.714 9.813-16.238 5.643c-14.855-10.855-29.07-24.351-41.12-38.826c-2.043-3.182-5.233-5.79-6.654-9.4c-1.983-4.887 2.389-8.394 4.89-12.075C41 49.892 56.26 35.033 72.116 24.077M84.918 9.605l-5.654-8.013C78.57 1.17 77.707.47 76.94.265c-1.667-.723-3.465.152-4.826 1.184l-10.23 13.325C45.47 35.102 26.04 54.083 4.843 68.633C3.168 69.942.677 71.22.158 73.378c-.556 1.94.455 3.542 1.66 4.75c16.974 11.691 33.202 25.571 47.647 41.4c2.564 2.694 4.643 5.373 7.151 7.902c4.225 5.622 9.188 11.289 13.072 17.32c1.218 1.273 1.427 3.366 3.331 3.986c1.491.516 3.332.866 4.754 0l1.414-1.42c17.563-24.88 39.838-47.226 64.725-65.266c2.49-2.225 7.249-3.052 7.317-7.181c-.177-1.905-1.286-3.782-2.922-4.822l-.407-.067c-12.807-8.712-24.74-18.565-35.982-29.743L99.495 27.26c-5.033-5.58-9.924-11.76-14.577-17.655M70.28 21.019c4.993-3.886 11.276-.659 15.477 2.916c4.4 3.363 8.983 7.174 13.006 11.068l.731.42c11.14 10.336 21.485 21.823 29.984 33.967c1.378 2.113 2.596 4.508 1.826 7.313c-2.834 7.085-8.593 12.732-13.628 18.92c-10.894 11.725-22.386 23.071-35.25 32.123c-2.602 1.84-6.113 3.54-9.23 2.08c-9.47-4.957-17.455-13.077-25.743-20.475c-9.612-8.913-19.259-19.29-26.544-30.146c-1.083-1.523-1.388-3.402-1.356-5.411c.936-3.747 3.504-6.831 5.933-9.99c8.608-10.97 19.152-21.376 29.8-30.882c.246-.243.7-.762 1.086-1.009c4.573-3.954 9.116-7.454 13.908-10.894"/></svg>
-                <span class="social-label">Xplore</span>
-              </a>
-              <a href="https://www.semanticscholar.org/author/Saad-Ahmed/2336915789" class="icon semantic-scholar inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#52B788] dark:hover:bg-[#1c2a45] dark:hover:text-[#52B788]" title="Semantic Scholar" aria-label="Semantic Scholar author profile" target="_blank" rel="noopener noreferrer">
-                <svg class="h-[23px] w-auto" viewBox="0 0 448 512" aria-hidden="true"><path d="M0 0h448v512H0z" fill="none"/><path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm71.564 107.355H303.41c11.722 26.248 16.474 54.123 20.918 82.07l-2.447.7c-.588-1.635-1.282-3.238-1.748-4.908c-3.367-12.035-6.76-24.063-9.983-36.137c-1.159-4.344-3.892-6.507-7.802-8.635c-5.743-3.123-11.17-7.148-15.93-11.64c-3.037-2.865-5.635-4.614-9.943-4.569c-28.685.304-57.372.334-86.055.598c-1.912.019-4.278.724-5.63 1.977c-5.22 4.828-10.111 10.01-16.544 16.488c16.967 41.316 25.497 86.349 21.834 134.222c-8.146-5.215-14.452-9.343-14.826-20.271c-1.874-54.62-18.724-104.014-53.924-146.52c-.792-.956-1.185-2.243-1.766-3.375m-17.03 21.028c4.084-.003 8.168.024 12.25.144c1.62.047 3.885 1.078 4.695 2.375c24.41 39.22 43.44 80.41 45.906 127.537c.011.187-.182.383-.88 1.752c-14.587-49.866-40.905-92.087-74.755-129.93c.177-.613.35-1.228.527-1.843c4.085 0 8.171-.033 12.256-.035m-7.12 33.312c.994-.019 2.168 1.295 3 2.221c19.257 21.42 36.734 44.052 47.506 71.12c2.05 5.147 3.453 10.554 5.154 15.841c-22.312-35.113-53.362-61.368-87.074-88.148c11.67-.425 21.542-.85 31.414-1.034m287.12 18.97a4.4 4.4 0 0 1 1.466.134c-73.305 42.572-143.24 89.187-194.533 159.846l-59.438-94.526l.72-.92c1.64 1.321 36.529 29.297 52.198 42.13c4.365 3.574 7.663 3.51 12.203-.177c53.28-43.28 112.733-76.04 175.86-102.457c3.37-1.41 6.866-2.528 10.312-3.754a4.8 4.8 0 0 1 1.211-.277"/></svg>
-                <span class="social-label">Semantic Scholar</span>
-              </a>
-              <a href="https://github.com/saadbaust" class="icon github inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-slate-900 dark:hover:bg-[#1c2a45] dark:hover:text-white" title="GitHub" target="_blank" rel="noopener noreferrer">
-                <svg class="w-[23px] h-[23px]" viewBox="-2 -2 24 24" aria-hidden="true"><path d="M-2 -2h24v24H-2z" fill="none"/><path fill="currentColor" d="M18.88 1.099Q17.78-.001 16.233 0H3.746Q2.198 0 1.099 1.099Q-.001 2.199 0 3.746v12.487q0 1.548 1.099 2.647q1.1 1.1 2.647 1.099H6.66q.285 0 .429-.02a.5.5 0 0 0 .286-.169q.143-.15.143-.435l-.007-.885q-.006-.846-.006-1.34l-.3.052q-.285.052-.721.046a5.6 5.6 0 0 1-.904-.091a2 2 0 0 1-.872-.39a1.65 1.65 0 0 1-.572-.8l-.13-.3a3.3 3.3 0 0 0-.41-.663q-.28-.364-.566-.494l-.09-.065a1 1 0 0 1-.17-.156a.7.7 0 0 1-.117-.182q-.039-.092.065-.15q.104-.06.378-.059l.26.04q.26.051.643.311a2.1 2.1 0 0 1 .631.677q.3.532.722.813q.423.28.852.28t.742-.065a2.6 2.6 0 0 0 .585-.196q.117-.871.637-1.34a9 9 0 0 1-1.333-.234a5.3 5.3 0 0 1-1.223-.507a3.5 3.5 0 0 1-1.047-.872q-.416-.52-.683-1.365q-.266-.846-.266-1.952q0-1.573 1.027-2.68q-.48-1.183.091-2.652q.378-.118 1.119.175t1.086.5q.345.21.553.352a9.2 9.2 0 0 1 2.497-.338q1.288 0 2.498.338l.494-.312a7 7 0 0 1 1.197-.572q.689-.26 1.054-.143q.585 1.47.103 2.653q1.028 1.105 1.028 2.68q0 1.106-.267 1.957q-.266.852-.689 1.366a3.7 3.7 0 0 1-1.053.865q-.63.351-1.223.507a9 9 0 0 1-1.333.235q.675.585.676 1.846v3.11q0 .22.065.357a.36.36 0 0 0 .208.189q.143.052.254.064q.111.014.318.013h2.914q1.548 0 2.647-1.099t1.099-2.647V3.746q0-1.548-1.1-2.647z"/></svg>
-                <span class="social-label">GitHub</span>
-              </a>
-              <a href="https://youtube.com/@saadbaust" class="icon youtube inline-flex items-center gap-2 text-[0.82rem] font-semibold leading-none text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-slate-700 px-3.5 py-[7px] rounded-full transition-all hover:bg-white hover:text-[#FF0000] dark:hover:bg-[#1c2a45] dark:hover:text-[#FF0000]" title="YouTube" target="_blank" rel="noopener noreferrer">
-                <svg class="w-[23px] h-[23px]" viewBox="0 0 24 24" aria-hidden="true"><path d="M0 0h24v24H0z" fill="none"/><path fill="currentColor" d="M23 9.71a8.5 8.5 0 0 0-.91-4.13a2.92 2.92 0 0 0-1.72-1A78 78 0 0 0 12 4.27a79 79 0 0 0-8.34.3a2.87 2.87 0 0 0-1.46.74c-.9.83-1 2.25-1.1 3.45a48 48 0 0 0 0 6.48a9.6 9.6 0 0 0 .3 2a3.14 3.14 0 0 0 .71 1.36a2.86 2.86 0 0 0 1.49.78a45 45 0 0 0 6.5.33c3.5.05 6.57 0 10.2-.28a2.9 2.9 0 0 0 1.53-.78a2.5 2.5 0 0 0 .61-1a10.6 10.6 0 0 0 .52-3.4c.04-.56.04-3.94.04-4.54M9.74 14.85V8.66l5.92 3.11c-1.66.92-3.85 1.96-5.92 3.08"/></svg>
-                <span class="social-label">YouTube</span>
-              </a>
-            </div>
-          </div>
-        </header>
-
-        <section id="charts-section" class="scroll-mt-16 lg:scroll-mt-[84px]">
-        <div class="bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder shadow-card dark:shadow-carddark overflow-hidden p-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
-            
-            <div class="flex flex-col">
-              <p class="stat-image-caption text-[0.76rem] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5 pb-3 border-b border-slate-100 dark:border-slate-800/60 mb-4">
-                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-indigo-500" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M2.25 13.5a8.25 8.25 0 0 1 8.25-8.25.75.75 0 0 1 .75.75v6.75H18a.75.75 0 0 1 .75.75 8.25 8.25 0 0 1-16.5 0Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.75 3a.75.75 0 0 1 .75-.75 8.25 8.25 0 0 1 8.25 8.25.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V3Z" clip-rule="evenodd"/></svg>
-                Research Interest Distribution
-              </p>
-              <div class="flex items-center justify-center flex-1">
-                <img src="images/Research Interest Distribution.png" alt="Pie chart showing Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning" class="w-full h-auto max-h-[260px] object-contain" loading="lazy" />
-              </div>
-            </div>
-
-            <div class="flex flex-col border-t pt-6 md:border-t-0 md:pt-0 md:border-l md:pl-8 border-slate-100 dark:border-slate-800/60">
-              <p class="stat-image-caption text-[0.76rem] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5 pb-3 border-b border-slate-100 dark:border-slate-800/60 mb-4">
-                <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-indigo-500" fill="currentColor" aria-hidden="true"><path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z"/></svg>
-                Citation History
-              </p>
-              <div class="flex items-center justify-center flex-1">
-                <img src="images/Citation History.png" alt="Bar chart showing Saad Ahmed's Google Scholar citation history over the years" class="w-full h-auto max-h-[260px] object-contain" loading="lazy" />
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-        <!-- Experience -->
-        <section id="experience" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25Zm7.5 0v.09a49.488 49.488 0 0 0-6 0v-.09a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5Z"/><path d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923a49.19 49.19 0 0 1-12.954 0C4.047 21.128 3 19.852 3 18.4Z"/></svg>
-            </div>
-            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Experience</h2>
-          </div>
-          <div id="experience-list" class="relative pl-[30px] my-1 before:content-[''] before:absolute before:left-1 before:top-1.5 before:bottom-1.5 before:w-0.5 before:bg-indigo-200 dark:before:bg-indigo-900 before:rounded-sm"></div>
-        </section>
-
-        <!-- Research Projects -->
-        <section id="research" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 0 1 .75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 0 1 9.75 22.5a.75.75 0 0 1-.75-.75v-4.131A15.838 15.838 0 0 1 6.382 15H2.25a.75.75 0 0 1-.75-.75 6.75 6.75 0 0 1 7.815-6.666ZM15 6.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" clip-rule="evenodd"/><path d="M5.26 17.242a.75.75 0 1 0-.897-1.203 5.243 5.243 0 0 0-2.05 5.022.75.75 0 0 0 .625.627 5.243 5.243 0 0 0 5.022-2.051.75.75 0 1 0-1.202-.897 3.744 3.744 0 0 1-3.008 1.51c0-1.23.592-2.323 1.51-3.008Z"/></svg>
-            </div>
-            <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Research Projects</h2>
-          </div>
-          <div id="research-list"></div>
-        </section>
-
-        <!-- Research Publications (Journals + Conferences, with filters + search) -->
-        <section id="journals" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-            <div class="flex items-center gap-3">
-              <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd"/><path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"/></svg>
-              </div>
-              <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50">Research Publications</h2>
-            </div>
-            <div class="relative w-full md:w-64">
-              <input id="search-pub" type="text" placeholder="Search publications..." aria-label="Search publications"
-                     class="w-full text-xs font-medium pl-9 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-darkborder rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500/30 transition-all text-slate-700 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500" />
-              <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd"/></svg>
-            </div>
-          </div>
-
           <!-- Filters: type tabs + year dropdown -->
           <div class="flex flex-wrap items-center gap-3 mb-6">
             <div class="flex flex-wrap gap-1 bg-slate-50 dark:bg-slate-800/40 p-1.5 rounded-xl w-fit border border-slate-200 dark:border-darkborder">
@@ -444,7 +421,7 @@
         </section>
 
         <!-- Teaching -->
-        <section id="teaching" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
+        <section id="teaching" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z"/></svg>
@@ -455,7 +432,7 @@
         </section>
 
         <!-- Education -->
-        <section id="education" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
+        <section id="education" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002a50.978 50.978 0 0 0-.34.18.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z"/><path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.285a.75.75 0 0 1-.46.71 47.878 47.878 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.877 47.877 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286A48.4 48.4 0 0 1 6 13.18v1.27a1.5 1.5 0 0 0-.14 2.508 2.25 2.25 0 0 0 2.12 0v-1.27Z"/></svg>
@@ -466,7 +443,7 @@
         </section>
 
         <!-- Skills -->
-        <section id="skills" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
+        <section id="skills" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 7.5h-9v9h9v-9Z"/><path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21a.75.75 0 0 1 0 1.5h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3a.75.75 0 0 1 0-1.5h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd"/></svg>
@@ -480,7 +457,7 @@
         </section>
 
         <!-- Certifications -->
-        <section id="certs" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
+        <section id="certs" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.166 2.621v.858c-1.035.148-2.059.33-3.071.543a.75.75 0 0 0-.584.859 6.753 6.753 0 0 0 6.138 5.6 6.73 6.73 0 0 0 2.743 1.346A6.707 6.707 0 0 1 9.279 15H8.54c-1.036 0-1.875.84-1.875 1.875V19.5h-.75a2.25 2.25 0 0 0-2.25 2.25c0 .414.336.75.75.75h15.75a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-2.25-2.25h-.75v-2.625c0-1.036-.84-1.875-1.875-1.875h-.739a6.706 6.706 0 0 1-1.112-3.173 6.73 6.73 0 0 0 2.743-1.347 6.753 6.753 0 0 0 6.139-5.6.75.75 0 0 0-.585-.858 47.077 47.077 0 0 0-3.07-.543V2.62a.75.75 0 0 0-.658-.744 49.22 49.22 0 0 0-6.093-.377c-2.063 0-4.096.128-6.093.377a.75.75 0 0 0-.657.744Z" clip-rule="evenodd"/></svg>
@@ -491,7 +468,7 @@
         </section>
 
         <!-- Contact -->
-        <section id="contact" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
+        <section id="contact" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
@@ -518,7 +495,7 @@
           </div>
         </section>
 
-        <footer class="bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 text-center shadow-card dark:shadow-carddark">
+        <footer class="bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 text-center shadow-sm dark:shadow-smdark">
           <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
         </footer>
       </main>
@@ -665,9 +642,9 @@
   }
 
   function buildCerts(list) {
-    return (list || []).map(c =>
+    return (list || []).map((c, i) =>
       '<p class="cert-item flex items-start gap-3 text-[0.93rem] text-slate-700 dark:text-slate-300 leading-relaxed">' +
-        '<svg class="w-4 h-4 text-indigo-500 dark:text-indigo-400 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.166 2.621v.858c-1.035.148-2.059.33-3.071.543a.75.75 0 0 0-.584.859 6.753 6.753 0 0 0 6.138 5.6 6.73 6.73 0 0 0 2.743 1.346A6.707 6.707 0 0 1 9.279 15H8.54c-1.036 0-1.875.84-1.875 1.875V19.5h-.75a2.25 2.25 0 0 0-2.25 2.25c0 .414.336.75.75.75h15.75a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-2.25-2.25h-.75v-2.625c0-1.036-.84-1.875-1.875-1.875h-.739a6.706 6.706 0 0 1-1.112-3.173 6.73 6.73 0 0 0 2.743-1.347 6.753 6.753 0 0 0 6.139-5.6.75.75 0 0 0-.585-.858 47.077 47.077 0 0 0-3.07-.543V2.62a.75.75 0 0 0-.658-.744 49.22 49.22 0 0 0-6.093-.377c-2.063 0-4.096.128-6.093.377a.75.75 0 0 0-.657.744Z" clip-rule="evenodd"/></svg>' +
+        '<span class="flex-shrink-0 text-[0.8rem] font-semibold text-slate-400 dark:text-slate-500 tabular-nums mt-0.5 w-5 text-right">' + (i + 1) + '.</span>' +
         '<span>' + escapeHtml(c) + '</span>' +
       '</p>'
     ).join('');

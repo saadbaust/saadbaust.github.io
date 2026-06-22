@@ -61,13 +61,6 @@
               card: '0 1px 2px rgba(2,6,23,.04), 0 16px 40px -22px rgba(2,6,23,.16)',
               carddark: '0 1px 2px rgba(0,0,0,.4), 0 20px 48px -26px rgba(0,0,0,.6)',
             },
-            keyframes: {
-              glowDrift: {
-                '0%, 100%': { transform: 'translate3d(0,0,0) scale(1)', opacity: '.8' },
-                '50%':      { transform: 'translate3d(-34px,28px,0) scale(1.16)', opacity: '1' },
-              },
-            },
-            animation: { glowDrift: 'glowDrift 9s ease-in-out infinite' },
           },
         },
       };
@@ -97,7 +90,7 @@
   </head>
   <body class="bg-[linear-gradient(180deg,#f8f9fd_0%,#edf0f7_100%)] bg-fixed dark:bg-darkbg dark:bg-none text-slate-800 dark:text-slate-200 min-h-screen flex flex-col font-sans transition-colors duration-300">
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[1000] focus:bg-indigo-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
-    <div aria-hidden="true" class="fixed -top-[280px] -right-[150px] w-[700px] h-[700px] -z-10 pointer-events-none rounded-full blur-[90px] dark:blur-[96px] opacity-90 dark:opacity-100 animate-glowDrift [will-change:transform,opacity] bg-[radial-gradient(circle_at_32%_34%,rgba(99,102,241,.60),transparent_60%),radial-gradient(circle_at_68%_56%,rgba(168,85,247,.50),transparent_60%),radial-gradient(circle_at_52%_80%,rgba(56,189,248,.34),transparent_62%)] dark:bg-[radial-gradient(circle_at_32%_34%,rgba(99,102,241,.72),transparent_60%),radial-gradient(circle_at_68%_56%,rgba(168,85,247,.62),transparent_60%),radial-gradient(circle_at_52%_80%,rgba(56,189,248,.42),transparent_62%)]"></div>
+    <div aria-hidden="true" class="fixed -top-[280px] -right-[150px] w-[700px] h-[700px] -z-10 pointer-events-none rounded-full blur-[90px] dark:blur-[96px] opacity-30 dark:opacity-50 animate-glowDrift [will-change:transform,opacity] bg-[radial-gradient(circle_at_32%_34%,rgba(99,102,241,.70),transparent_60%),radial-gradient(circle_at_68%_56%,rgba(168,85,247,.50),transparent_60%),radial-gradient(circle_at_52%_80%,rgba(56,189,248,.34),transparent_62%)] dark:bg-[radial-gradient(circle_at_32%_34%,rgba(99,102,241,.72),transparent_60%),radial-gradient(circle_at_68%_56%,rgba(168,85,247,.62),transparent_60%),radial-gradient(circle_at_52%_80%,rgba(56,189,248,.42),transparent_62%)]"></div>
 
     <!-- Mobile top bar -->
     <header class="lg:hidden bg-white/90 dark:bg-darkcard/90 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-4 py-3 flex items-center justify-between shadow-sm">
@@ -172,8 +165,8 @@
       </aside>
 
       <!-- Main content -->
-      <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-8 overflow-x-hidden">
-        <header id="gallery-hero" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white/60 dark:bg-[#111728]/[0.52] backdrop-blur-[20px] backdrop-saturate-[1.55] rounded-[1.25rem] border border-white/[0.55] dark:border-[#818cf8]/[0.18] shadow-card dark:shadow-carddark p-6 md:p-8 relative overflow-hidden">
+      <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-5 overflow-x-hidden">
+        <header id="gallery-hero" class="scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-[#111728]/[0.52] backdrop-blur-[20px] backdrop-saturate-[1.55] rounded-[1.25rem] border border-white/[0.55] dark:border-[#818cf8]/[0.18] shadow-sm dark:shadow-smdark p-6 md:p-8 relative overflow-hidden">
           <h1 id="gallery-title" class="text-[clamp(2rem,4.4vw,2.6rem)] font-semibold tracking-[-0.022em] leading-[1.04] text-slate-900 dark:text-white">Gallery</h1>
           <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1.5">Saad Ahmed</p>
           <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Bangladesh Army University of Science and Technology (BAUST)</p>
@@ -191,9 +184,9 @@
              captioned, e.g. "Sajek Valley.webp" or "sajek-valley.webp" both show
              as "Sajek Valley". -->
 
-        <section id="events" class="gallery-section scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
+        <section id="events" class="gallery-section scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
           <div class="flex items-center gap-3 mb-6">
-            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl ring-1 ring-inset ring-indigo-600/[0.12] dark:ring-indigo-400/[0.16]">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd"/></svg>
             </div>
             <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50 flex items-center gap-2">
@@ -204,9 +197,9 @@
           <div class="columns-1 sm:columns-2 lg:columns-3 gap-4" id="events-grid"></div>
         </section>
 
-        <section id="memories" class="gallery-section scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-card dark:shadow-carddark">
+        <section id="memories" class="gallery-section scroll-mt-16 lg:scroll-mt-[84px] bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 md:p-8 shadow-sm dark:shadow-smdark">
           <div class="flex items-center gap-3 mb-6">
-            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl ring-1 ring-inset ring-indigo-600/[0.12] dark:ring-indigo-400/[0.16]">
+            <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd"/></svg>
             </div>
             <h2 class="section-title text-[1.4rem] font-semibold leading-[1.15] tracking-[-0.015em] text-slate-900 dark:text-slate-50 flex items-center gap-2">
@@ -217,7 +210,7 @@
           <div class="columns-1 sm:columns-2 lg:columns-3 gap-4" id="memories-grid"></div>
         </section>
 
-        <footer class="bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 text-center shadow-card dark:shadow-carddark">
+        <footer class="bg-white dark:bg-darkcard rounded-[1.25rem] border border-[#ebedf3] dark:border-darkborder p-6 text-center shadow-sm dark:shadow-smdark">
           <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
         </footer>
       </main>
@@ -246,7 +239,7 @@
       <svg class="block dark:hidden w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd"/></svg>
     </button>
 
-    <button id="back-to-top" aria-label="Scroll back to top"
+    <button id="back-to-top" title="Back to top" aria-label="Scroll back to top"
             class="fixed bottom-6 right-6 p-3.5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer transform translate-y-20 opacity-0 transition-all duration-300 z-30 shadow-[0_4px_14px_rgba(79,70,229,0.35)]">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
