@@ -107,20 +107,10 @@
 
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
 
-    <div class="flex-grow flex w-full max-w-7xl mx-auto px-0 md:px-4 lg:px-6 gap-6">
+    <div class="flex-grow flex w-full max-w-6xl mx-auto px-0 md:px-4 lg:px-6 gap-6">
       <!-- Sidebar -->
-      <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 lg:static lg:block w-[280px] bg-white dark:bg-darkcard border-r border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col h-screen lg:h-auto overflow-hidden lg:overflow-visible">
+      <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 lg:static lg:block w-[280px] lg:w-52 bg-white dark:bg-darkcard border-r border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col h-screen lg:h-auto overflow-hidden lg:overflow-visible">
         <div class="space-y-6 overflow-y-auto pr-1 flex-1 min-h-0">
-          <div class="bg-white dark:bg-darkcard rounded-2xl p-5 border border-slate-200 dark:border-darkborder shadow-md text-center relative overflow-hidden">
-            <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-            <div class="relative w-32 h-32 mx-auto mb-4 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-[0_4px_20px_rgba(29,78,216,0.14)]">
-              <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" width="170" height="170" class="w-full h-full object-cover rounded-xl" />
-            </div>
-            <p class="font-extrabold text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Saad Ahmed</p>
-            <p class="text-sm text-indigo-600 dark:text-indigo-300 font-semibold mt-1.5">Lecturer, Dept of CSE</p>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-normal">Bangladesh Army University of Science and Technology (BAUST)</p>
-          </div>
-
           <nav class="space-y-1.5">
             <p class="px-4 pt-1 pb-1 text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Main</p>
             <a href="index.html" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
@@ -152,14 +142,19 @@
             <a href="index.html#contact" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
               Contact
             </a>
+
+            <p class="px-4 pt-4 pb-1 text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Gallery Sections</p>
+            <a href="#events" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Events
+            </a>
+            <a href="#memories" class="sidebar-link flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              Memories
+            </a>
           </nav>
 
-          <div class="pt-4 border-t border-slate-200 dark:border-darkborder mt-2 space-y-2">
-            <button id="theme-toggle-desktop" class="w-full flex items-center justify-between px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors" aria-label="Toggle light/dark theme">
-              <span>Theme Toggle</span>
-              <span class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Alt+T</span>
-            </button>
-            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer" class="w-full flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+          <div class="pt-4 border-t border-slate-200 dark:border-darkborder mt-2">
+            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer" class="w-full flex items-center gap-2.5 px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd"/></svg>
               CMS Login
             </a>
           </div>
@@ -168,23 +163,8 @@
 
       <!-- Main content -->
       <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-6 overflow-x-hidden">
-
-        <!-- Mobile-only profile card — mirrors the desktop sidebar card -->
-        <div class="lg:hidden bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-md text-center relative overflow-hidden">
-          <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-          <div class="p-5">
-            <div class="relative w-28 h-28 mx-auto mb-4 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-[0_4px_20px_rgba(29,78,216,0.14)]">
-              <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" class="w-full h-full object-cover rounded-xl" />
-            </div>
-            <p class="font-extrabold text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Saad Ahmed</p>
-            <p class="text-sm text-indigo-600 dark:text-indigo-300 font-semibold mt-1.5">Lecturer, Dept of CSE</p>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-normal">Bangladesh Army University of Science and Technology (BAUST)</p>
-          </div>
-        </div>
-
-        <header class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
-          <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">Gallery</h1>
+        <header class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm relative overflow-hidden">       
+          <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight">Gallery</h1>
           <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1.5">Saad Ahmed</p>
           <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Bangladesh Army University of Science and Technology (BAUST)</p>
         </header>
@@ -201,12 +181,12 @@
              captioned, e.g. "Sajek Valley.webp" or "sajek-valley.webp" both show
              as "Sajek Valley". -->
 
-        <section class="gallery-section bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="events" class="gallery-section bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd"/></svg>
             </div>
-            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
               Events
               <span class="gallery-cat-count text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full" id="events-count">…</span>
             </h2>
@@ -214,12 +194,12 @@
           <div class="masonry-grid" id="events-grid"></div>
         </section>
 
-        <section class="gallery-section bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="memories" class="gallery-section bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd"/></svg>
             </div>
-            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+            <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white flex items-center gap-2">
               Memories
               <span class="gallery-cat-count text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/50 px-2.5 py-1 rounded-full" id="memories-count">…</span>
             </h2>
@@ -227,7 +207,7 @@
           <div class="masonry-grid" id="memories-grid"></div>
         </section>
 
-        <footer class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 text-center shadow-md">
+        <footer class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 text-center shadow-sm">
           <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
         </footer>
       </main>
@@ -249,8 +229,15 @@
       </button>
     </div>
 
+    <!-- Floating theme toggle (desktop) -->
+    <button id="theme-toggle-desktop" title="Toggle theme (Alt+T)" aria-label="Toggle light/dark theme"
+            class="hidden lg:flex items-center justify-center fixed top-6 right-6 z-30 p-3.5 rounded-full bg-white dark:bg-darkcard border border-slate-200 dark:border-darkborder text-slate-500 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm transition-colors">
+      <svg class="hidden dark:block w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/></svg>
+      <svg class="block dark:hidden w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd"/></svg>
+    </button>
+
     <button id="back-to-top" aria-label="Scroll back to top"
-            class="fixed bottom-6 right-6 p-3.5 rounded-full bg-[#1d4ed8] hover:bg-[#1a46c0] text-white cursor-pointer transform translate-y-20 opacity-0 transition-all duration-300 z-30 shadow-[0_8px_24px_rgba(29,78,216,0.45)] hover:shadow-[0_10px_28px_rgba(29,78,216,0.6)]">
+            class="fixed bottom-6 right-6 p-3.5 rounded-full bg-[#1d4ed8] hover:bg-[#1a46c0] text-white cursor-pointer transform translate-y-20 opacity-0 transition-all duration-300 z-30 shadow-[0_4px_14px_rgba(29,78,216,0.35)]">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
     </button>
 
@@ -331,9 +318,9 @@
       count.textContent = items.length;
       items.forEach(item => {
         grid.insertAdjacentHTML('beforeend', `
-          <figure class="masonry-item group cursor-pointer rounded-xl overflow-hidden border border-slate-200 dark:border-darkborder bg-slate-50 dark:bg-[#101729] shadow-sm hover:shadow-lg transition-shadow">
+          <figure class="masonry-item group cursor-pointer rounded-xl overflow-hidden border border-slate-200 dark:border-darkborder bg-slate-50 dark:bg-[#101729] shadow-sm hover:shadow-md transition-shadow">
             <div class="masonry-thumb overflow-hidden">
-              <img src="${esc(item.image)}" alt="${esc(item.alt)}" loading="lazy" class="w-full h-auto block transition-transform duration-300 group-hover:scale-105" />
+              <img src="${esc(item.image)}" alt="${esc(item.alt)}" loading="lazy" class="w-full h-auto block" />
             </div>
             <figcaption class="masonry-caption px-3 py-2 text-xs font-medium text-slate-600 dark:text-slate-300">${esc(item.caption)}</figcaption>
           </figure>`);

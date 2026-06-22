@@ -216,20 +216,10 @@
 
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
 
-    <div class="flex-grow flex w-full max-w-7xl mx-auto px-0 md:px-4 lg:px-6 gap-6">
+    <div class="flex-grow flex w-full max-w-6xl mx-auto px-0 md:px-4 lg:px-6 gap-6">
       <!-- Sidebar -->
-      <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 lg:static lg:block w-[280px] bg-white dark:bg-darkcard border-r border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col h-screen lg:h-auto overflow-hidden lg:overflow-visible">
+      <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 lg:static lg:block w-[280px] lg:w-52 bg-white dark:bg-darkcard border-r border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col h-screen lg:h-auto overflow-hidden lg:overflow-visible">
         <div class="space-y-6 overflow-y-auto pr-1 flex-1 min-h-0">
-          <div class="bg-white dark:bg-darkcard rounded-2xl p-5 border border-slate-200 dark:border-darkborder shadow-md text-center relative overflow-hidden">
-            <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-            <div class="relative w-32 h-32 mx-auto mb-4 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-[0_4px_20px_rgba(29,78,216,0.14)]">
-              <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" width="170" height="170" class="w-full h-full object-cover rounded-xl" />
-            </div>
-            <p class="font-extrabold text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Saad Ahmed</p>
-            <p class="text-sm text-indigo-600 dark:text-indigo-300 font-semibold mt-1.5">Lecturer, Dept of CSE</p>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-normal">Bangladesh Army University of Science and Technology (BAUST)</p>
-          </div>
-
           <nav class="space-y-1.5">
             <p class="px-4 pt-1 pb-1 text-[0.68rem] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Main</p>
             <a href="index.html" class="sidebar-link active flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
@@ -263,12 +253,9 @@
             </a>
           </nav>
 
-          <div class="pt-4 border-t border-slate-200 dark:border-darkborder mt-2 space-y-2">
-            <button id="theme-toggle-desktop" class="w-full flex items-center justify-between px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors" aria-label="Toggle light/dark theme">
-              <span>Theme Toggle</span>
-              <span class="text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold tracking-wider">Alt+T</span>
-            </button>
-            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer" class="w-full flex items-center px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+          <div class="pt-4 border-t border-slate-200 dark:border-darkborder mt-2">
+            <a href="https://app.pagescms.org/saadbaust/saadbaust.github.io" target="_blank" rel="noopener noreferrer" class="w-full flex items-center gap-2.5 px-4 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-medium text-sm transition-colors duration-150">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z" clip-rule="evenodd"/></svg>
               CMS Login
             </a>
           </div>
@@ -278,58 +265,45 @@
       <!-- Main content -->
       <main id="main" class="flex-grow w-full px-4 lg:px-0 py-6 space-y-6 overflow-x-hidden">
 
-        <!-- Mobile-only profile card — mirrors the desktop sidebar card -->
-        <div class="lg:hidden bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-md text-center relative overflow-hidden">
-          <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
-          <div class="p-5">
-            <div class="relative w-28 h-28 mx-auto mb-4 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-[0_4px_20px_rgba(29,78,216,0.14)]">
-              <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" class="w-full h-full object-cover rounded-xl" />
+        <!-- About / Hero (photo + identity merged) -->
+        <header id="about" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
+
+          <div class="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-7 text-center sm:text-left">
+            <div class="relative w-36 h-36 sm:w-40 sm:h-40 flex-shrink-0 rounded-2xl p-1 border-2 border-indigo-100 dark:border-indigo-900 bg-slate-50 dark:bg-slate-800/50 overflow-hidden shadow-[0_4px_20px_rgba(29,78,216,0.14)]">
+              <img src="images/saadahmed.png" alt="Saad Ahmed — Lecturer at Department of CSE, BAUST" width="170" height="170" class="w-full h-full object-cover rounded-xl" />
             </div>
-            <p class="font-extrabold text-xl text-slate-900 dark:text-white leading-tight tracking-tight">Saad Ahmed</p>
-            <p class="text-sm text-indigo-600 dark:text-indigo-300 font-semibold mt-1.5">Lecturer, Dept of CSE</p>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1.5 leading-normal">Bangladesh Army University of Science and Technology (BAUST)</p>
-          </div>
-        </div>
-
-        <!-- About / Hero -->
-        <header id="about" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
-
-          <div class="flex flex-wrap items-center gap-2 mb-4">
-            <span id="profile-chip" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-950/50 dark:text-indigo-300">
-              Lecturer · BAUST
-            </span>
-          </div>
-
-          <h1 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight">
-            Hi, I'm <span class="text-indigo-600 dark:text-indigo-400" id="hero-name">Saad Ahmed</span>
-          </h1>
-
-          <div class="research-interests inline-block mt-3 px-3 py-2 rounded-md bg-indigo-500/[0.05] dark:bg-indigo-400/[0.06]">
-            <p class="text-[0.88rem] text-slate-500 dark:text-slate-400">
-              <strong class="font-semibold">Research Focus:</strong>
-              <span id="research-focus">Image Processing, Computer Vision, &amp; Deep Learning.</span>
-            </p>
+            <div class="min-w-0">
+              <h1 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight"><span id="hero-name">Saad Ahmed</span></h1>
+              <p id="hero-subtitle" class="text-sm sm:text-base text-indigo-600 dark:text-indigo-300 font-semibold mt-2">Lecturer, Dept of CSE</p>
+              <p id="hero-institution" class="text-sm text-slate-500 dark:text-slate-400 mt-1 leading-normal">Bangladesh Army University of Science and Technology (BAUST)</p>
+              <div class="research-interests inline-block mt-3 px-3 py-1.5 rounded-md bg-indigo-500/[0.05] dark:bg-indigo-400/[0.06]">
+                <p class="text-[0.8rem] text-slate-500 dark:text-slate-400">
+                  <strong class="font-semibold">Research Focus:</strong>
+                  <span id="research-focus">Image Processing, Computer Vision, &amp; Deep Learning.</span>
+                </p>
+              </div>
+            </div>
           </div>
 
           <div class="academic-summary" id="about-section">
-            <p id="about-text" class="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mt-4 text-justify">I am a Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST). My research interests focus on Image Processing, Computer Vision, and Deep Learning, with a dedication to developing intelligent systems that solve real-world problems and contribute to the global advancement of technology.</p>
+            <p id="about-text" class="text-slate-700 dark:text-slate-300 text-sm md:text-base leading-relaxed mt-4 text-justify">I am a Lecturer in the Department of Computer Science and Engineering at the Bangladesh Army University of Science and Technology (BAUST), and an MSc student in CSE. My research is in computer vision and deep learning, where I build and evaluate image-processing models for visual recognition and analysis. I am most interested in methods that stay accurate and robust on real-world data rather than only on benchmarks, and in keeping that work reproducible and practical to deploy. I am actively publishing in this area and am looking for PhD opportunities to take it further.</p>
           </div>
 
           <div id="metrics" class="flex flex-wrap gap-2.5 mt-4 mb-3">
             <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
-              <span id="total-citations" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span id="total-citations" class="block text-[1.18rem] font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
               <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Citations</span>
             </div>
             <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
-              <span id="total-papers" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span id="total-papers" class="block text-[1.18rem] font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
               <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Papers</span>
             </div>
             <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
-              <span id="h-index" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span id="h-index" class="block text-[1.18rem] font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
               <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">h-index</span>
             </div>
             <div class="bg-slate-50 dark:bg-[#101729] border border-slate-200 dark:border-darkborder rounded-[10px] px-4 py-3 text-center min-w-[72px]">
-              <span id="i10-index" class="block text-[1.18rem] font-bold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
+              <span id="i10-index" class="block text-[1.18rem] font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums leading-tight mb-1">0</span>
               <span class="block text-[0.66rem] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">i10-index</span>
             </div>
           </div>
@@ -387,14 +361,14 @@
 
         <!-- Charts -->
         <section id="charts-section" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-md overflow-hidden">
+          <div class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-sm overflow-hidden">
             <p class="stat-image-caption text-[0.76rem] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5 px-6 pt-5 pb-3">
               <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-indigo-500" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M2.25 13.5a8.25 8.25 0 0 1 8.25-8.25.75.75 0 0 1 .75.75v6.75H18a.75.75 0 0 1 .75.75 8.25 8.25 0 0 1-16.5 0Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.75 3a.75.75 0 0 1 .75-.75 8.25 8.25 0 0 1 8.25 8.25.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V3Z" clip-rule="evenodd"/></svg>
               Research Interest Distribution
             </p>
             <img src="images/Research Interest Distribution.png" alt="Pie chart showing Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning" class="w-full h-auto max-h-[280px] object-contain" loading="lazy" />
           </div>
-          <div class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-md overflow-hidden">
+          <div class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-sm overflow-hidden">
             <p class="stat-image-caption text-[0.76rem] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5 px-6 pt-5 pb-3">
               <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-indigo-500" fill="currentColor" aria-hidden="true"><path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z"/></svg>
               Citation History
@@ -404,35 +378,35 @@
         </section>
 
         <!-- Experience -->
-        <section id="experience" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="experience" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 5.25a3 3 0 0 1 3-3h3a3 3 0 0 1 3 3v.205c.933.085 1.857.197 2.774.334 1.454.218 2.476 1.483 2.476 2.917v3.033c0 1.211-.734 2.352-1.936 2.752A24.726 24.726 0 0 1 12 15.75c-2.73 0-5.357-.442-7.814-1.259-1.202-.4-1.936-1.541-1.936-2.752V8.706c0-1.434 1.022-2.7 2.476-2.917A48.814 48.814 0 0 1 7.5 5.455V5.25Zm7.5 0v.09a49.488 49.488 0 0 0-6 0v-.09a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5Z"/><path d="M3 18.4v-2.796a4.3 4.3 0 0 0 .713.31A26.226 26.226 0 0 0 12 17.25c2.892 0 5.68-.468 8.287-1.335.252-.084.49-.189.713-.311V18.4c0 1.452-1.047 2.728-2.523 2.923a49.19 49.19 0 0 1-12.954 0C4.047 21.128 3 19.852 3 18.4Z"/></svg>
             </div>
-            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Experience</h2>
+            <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white">Experience</h2>
           </div>
           <div id="experience-list" class="timeline-container"></div>
         </section>
 
         <!-- Research Projects -->
-        <section id="research" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="research" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 0 1 .75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 0 1 9.75 22.5a.75.75 0 0 1-.75-.75v-4.131A15.838 15.838 0 0 1 6.382 15H2.25a.75.75 0 0 1-.75-.75 6.75 6.75 0 0 1 7.815-6.666ZM15 6.75a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" clip-rule="evenodd"/><path d="M5.26 17.242a.75.75 0 1 0-.897-1.203 5.243 5.243 0 0 0-2.05 5.022.75.75 0 0 0 .625.627 5.243 5.243 0 0 0 5.022-2.051.75.75 0 1 0-1.202-.897 3.744 3.744 0 0 1-3.008 1.51c0-1.23.592-2.323 1.51-3.008Z"/></svg>
             </div>
-            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Research Projects</h2>
+            <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white">Research Projects</h2>
           </div>
           <div id="research-list"></div>
         </section>
 
         <!-- Research Publications (Journals + Conferences, with filters + search) -->
-        <section id="journals" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="journals" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
             <div class="flex items-center gap-3">
               <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625ZM7.5 15a.75.75 0 0 1 .75-.75h7.5a.75.75 0 0 1 0 1.5h-7.5A.75.75 0 0 1 7.5 15Zm.75 2.25a.75.75 0 0 0 0 1.5H12a.75.75 0 0 0 0-1.5H8.25Z" clip-rule="evenodd"/><path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z"/></svg>
               </div>
-              <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Research Publications</h2>
+              <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white">Research Publications</h2>
             </div>
             <div class="relative w-full md:w-64">
               <input id="search-pub" type="text" placeholder="Search publications..." aria-label="Search publications"
@@ -461,34 +435,34 @@
         </section>
 
         <!-- Teaching -->
-        <section id="teaching" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="teaching" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z"/></svg>
             </div>
-            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Teaching</h2>
+            <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white">Teaching</h2>
           </div>
           <div id="teaching-list"></div>
         </section>
 
         <!-- Education -->
-        <section id="education" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="education" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002a50.978 50.978 0 0 0-.34.18.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z"/><path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.285a.75.75 0 0 1-.46.71 47.878 47.878 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.877 47.877 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286A48.4 48.4 0 0 1 6 13.18v1.27a1.5 1.5 0 0 0-.14 2.508 2.25 2.25 0 0 0 2.12 0v-1.27Z"/></svg>
             </div>
-            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Education</h2>
+            <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white">Education</h2>
           </div>
           <div id="education-list" class="timeline-container"></div>
         </section>
 
         <!-- Skills -->
-        <section id="skills" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="skills" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 7.5h-9v9h9v-9Z"/><path fill-rule="evenodd" d="M8.25 2.25A.75.75 0 0 1 9 3v.75h2.25V3a.75.75 0 0 1 1.5 0v.75H15V3a.75.75 0 0 1 1.5 0v.75h.75a3 3 0 0 1 3 3v.75H21a.75.75 0 0 1 0 1.5h-.75v2.25H21a.75.75 0 0 1 0 1.5h-.75V15H21a.75.75 0 0 1 0 1.5h-.75v.75a3 3 0 0 1-3 3h-.75V21a.75.75 0 0 1-1.5 0v-.75h-2.25V21a.75.75 0 0 1-1.5 0v-.75H9V21a.75.75 0 0 1-1.5 0v-.75h-.75a3 3 0 0 1-3-3v-.75H3a.75.75 0 0 1 0-1.5h.75v-2.25H3a.75.75 0 0 1 0-1.5h.75V9H3a.75.75 0 0 1 0-1.5h.75v-.75a3 3 0 0 1 3-3h.75V3a.75.75 0 0 1 .75-.75ZM6 6.75A.75.75 0 0 1 6.75 6h10.5a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75H6.75a.75.75 0 0 1-.75-.75V6.75Z" clip-rule="evenodd"/></svg>
             </div>
-            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Technical Skills</h2>
+            <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white">Technical Skills</h2>
           </div>
           <p class="skills-group-label text-[0.7rem] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">Research &amp; AI</p>
           <div id="skills-research" class="flex flex-wrap gap-2 mb-5"></div>
@@ -497,23 +471,23 @@
         </section>
 
         <!-- Certifications -->
-        <section id="certs" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="certs" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.166 2.621v.858c-1.035.148-2.059.33-3.071.543a.75.75 0 0 0-.584.859 6.753 6.753 0 0 0 6.138 5.6 6.73 6.73 0 0 0 2.743 1.346A6.707 6.707 0 0 1 9.279 15H8.54c-1.036 0-1.875.84-1.875 1.875V19.5h-.75a2.25 2.25 0 0 0-2.25 2.25c0 .414.336.75.75.75h15.75a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-2.25-2.25h-.75v-2.625c0-1.036-.84-1.875-1.875-1.875h-.739a6.706 6.706 0 0 1-1.112-3.173 6.73 6.73 0 0 0 2.743-1.347 6.753 6.753 0 0 0 6.139-5.6.75.75 0 0 0-.585-.858 47.077 47.077 0 0 0-3.07-.543V2.62a.75.75 0 0 0-.658-.744 49.22 49.22 0 0 0-6.093-.377c-2.063 0-4.096.128-6.093.377a.75.75 0 0 0-.657.744Z" clip-rule="evenodd"/></svg>
             </div>
-            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Certifications &amp; Activities</h2>
+            <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white">Certifications &amp; Activities</h2>
           </div>
           <div id="cert-list" class="space-y-3"></div>
         </section>
 
         <!-- Contact -->
-        <section id="contact" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-md">
+        <section id="contact" class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 shadow-sm">
           <div class="flex items-center gap-3 mb-6">
             <div class="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-300 rounded-xl">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
             </div>
-            <h2 class="section-title text-xl font-bold text-slate-900 dark:text-white">Contact Information</h2>
+            <h2 class="section-title text-xl font-semibold text-slate-900 dark:text-white">Contact Information</h2>
           </div>
           <div class="contact-details space-y-3 text-sm">
             <p class="flex items-center gap-3 text-slate-700 dark:text-slate-300">
@@ -535,11 +509,18 @@
           </div>
         </section>
 
-        <footer class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 text-center shadow-md">
+        <footer class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder p-6 md:p-8 text-center shadow-sm">
           <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">&copy; 2026 Saad Ahmed &bull; BAUST, Saidpur</p>
         </footer>
       </main>
     </div>
+
+    <!-- Floating theme toggle (desktop) -->
+    <button id="theme-toggle-desktop" title="Toggle theme (Alt+T)" aria-label="Toggle light/dark theme"
+            class="hidden lg:flex items-center justify-center fixed top-6 right-6 z-30 p-3.5 rounded-full bg-white dark:bg-darkcard border border-slate-200 dark:border-darkborder text-slate-500 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-300 hover:bg-slate-50 dark:hover:bg-slate-800 shadow-sm transition-colors">
+      <svg class="hidden dark:block w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"/></svg>
+      <svg class="block dark:hidden w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z" clip-rule="evenodd"/></svg>
+    </button>
 
     <button id="back-to-top" title="Back to top" aria-label="Scroll back to top"
             class="fixed bottom-6 right-6 p-3.5 rounded-full bg-[#1d4ed8] hover:bg-[#1a46c0] text-white cursor-pointer transform translate-y-20 opacity-0 transition-all duration-300 z-30 shadow-[0_4px_14px_rgba(29,78,216,0.35)]">
@@ -587,7 +568,7 @@
       const safe = escapeHtml(clean);
       const l = clean.toLowerCase();
       return (l.includes('saad ahmed') || l.includes('ahmed, saad'))
-        ? '<strong class="author-self text-indigo-600 dark:text-indigo-400 font-bold">' + safe + '</strong>'
+        ? '<strong class="author-self text-indigo-600 dark:text-indigo-400 font-semibold">' + safe + '</strong>'
         : safe;
     }).join(', ');
   }
@@ -612,8 +593,8 @@
     const doi     = parseBibField(p.bibtex, 'doi');
 
     const titleHtml = doi
-      ? '<a class="paper-title paper-title-link block text-[0.95rem] font-bold leading-snug text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline transition-colors mb-1" href="https://doi.org/' + escapeAttr(doi) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(title) + '</a>'
-      : '<p class="paper-title text-[0.95rem] font-bold leading-snug text-slate-900 dark:text-white mb-1">' + escapeHtml(title) + '</p>';
+      ? '<a class="paper-title paper-title-link block text-[0.95rem] font-semibold leading-snug text-slate-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline transition-colors mb-1" href="https://doi.org/' + escapeAttr(doi) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(title) + '</a>'
+      : '<p class="paper-title text-[0.95rem] font-semibold leading-snug text-slate-900 dark:text-white mb-1">' + escapeHtml(title) + '</p>';
 
     return '' +
       '<div class="paper-item py-4 border-b border-slate-200 dark:border-darkborder last:border-b-0">' +
