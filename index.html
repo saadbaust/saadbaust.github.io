@@ -156,6 +156,9 @@
     <style>
       html { scroll-behavior: smooth; scrollbar-gutter: stable; }
       section, header[id] { scroll-margin-top: 84px; }
+      @media (max-width: 1023px) {
+        section, header[id] { scroll-margin-top: 180px; }
+      }
       ::-webkit-scrollbar { width: 8px; height: 8px; }
       ::-webkit-scrollbar-track { background: transparent; }
       ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
@@ -210,9 +213,21 @@
 
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
 
+    <!-- Mobile profile card — always visible at the top on small screens -->
+    <div class="lg:hidden bg-white dark:bg-darkcard border-b border-slate-200 dark:border-darkborder px-5 py-5 flex items-center gap-4">
+      <div class="relative w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 border-indigo-100 dark:border-indigo-900 shadow-md">
+        <img src="images/saadahmed.png" alt="Saad Ahmed" class="w-full h-full object-cover" />
+      </div>
+      <div class="min-w-0">
+        <p class="font-extrabold text-base text-slate-900 dark:text-white leading-tight">Saad Ahmed</p>
+        <p class="text-xs text-indigo-600 dark:text-indigo-300 font-semibold mt-0.5">Lecturer, Dept of CSE</p>
+        <p class="text-[0.7rem] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">Bangladesh Army University of Science and Technology (BAUST)</p>
+      </div>
+    </div>
+
     <div class="flex-grow flex w-full max-w-7xl mx-auto px-0 md:px-4 lg:px-6 gap-6">
       <!-- Sidebar -->
-      <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 lg:static lg:block w-[280px] bg-white dark:bg-darkcard border-r border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col h-screen lg:h-auto overflow-hidden lg:overflow-visible">
+      <aside id="sidebar" class="fixed top-0 left-0 right-0 transform -translate-y-full lg:translate-y-0 lg:translate-x-0 lg:static lg:block w-full lg:w-[280px] bg-white dark:bg-darkcard border-b lg:border-b-0 border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col max-h-[90vh] lg:h-auto overflow-hidden lg:overflow-visible">
         <div class="space-y-6 overflow-y-auto pr-1 flex-1 min-h-0">
           <div class="bg-white dark:bg-darkcard rounded-2xl p-5 border border-slate-200 dark:border-darkborder shadow-md text-center relative overflow-hidden">
             <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
@@ -375,14 +390,14 @@
               <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-indigo-500" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M2.25 13.5a8.25 8.25 0 0 1 8.25-8.25.75.75 0 0 1 .75.75v6.75H18a.75.75 0 0 1 .75.75 8.25 8.25 0 0 1-16.5 0Z" clip-rule="evenodd"/><path fill-rule="evenodd" d="M12.75 3a.75.75 0 0 1 .75-.75 8.25 8.25 0 0 1 8.25 8.25.75.75 0 0 1-.75.75h-7.5a.75.75 0 0 1-.75-.75V3Z" clip-rule="evenodd"/></svg>
               Research Interest Distribution
             </p>
-            <img src="images/Research Interest Distribution.png" alt="Pie chart showing Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning" class="w-full h-[280px] object-cover" loading="lazy" />
+            <img src="images/Research Interest Distribution.png" alt="Pie chart showing Saad Ahmed's research interest distribution across Image Processing, Computer Vision, and Deep Learning" class="w-full h-auto max-h-[280px] object-contain" loading="lazy" />
           </div>
           <div class="bg-white dark:bg-darkcard rounded-2xl border border-slate-200 dark:border-darkborder shadow-md overflow-hidden">
             <p class="stat-image-caption text-[0.76rem] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5 px-6 pt-5 pb-3">
               <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 text-indigo-500" fill="currentColor" aria-hidden="true"><path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z"/></svg>
               Citation History
             </p>
-            <img src="images/Citation History.png" alt="Bar chart showing Saad Ahmed's Google Scholar citation history over the years" class="w-full h-[280px] object-cover" loading="lazy" />
+            <img src="images/Citation History.png" alt="Bar chart showing Saad Ahmed's Google Scholar citation history over the years" class="w-full h-auto max-h-[280px] object-contain" loading="lazy" />
           </div>
         </section>
 
@@ -719,15 +734,15 @@
       '<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">' +
         '<td class="course-code px-3.5 py-3 border-b border-slate-100 dark:border-darkborder align-top font-semibold text-indigo-600 dark:text-indigo-400 tabular-nums whitespace-nowrap">' + escapeHtml(t.code || '') + '</td>' +
         '<td class="px-3.5 py-3 border-b border-slate-100 dark:border-darkborder align-top text-slate-800 dark:text-slate-200">' + escapeHtml(t.course || '') + '</td>' +
-        '<td class="px-3.5 py-3 border-b border-slate-100 dark:border-darkborder align-top text-slate-600 dark:text-slate-400">' + escapeHtml(t.semester || '') + '</td>' +
+        '<td class="px-3.5 py-3 border-b border-slate-100 dark:border-darkborder align-top text-slate-600 dark:text-slate-400 whitespace-nowrap">' + escapeHtml(t.semester || '') + '</td>' +
       '</tr>'
     ).join('');
-    return '<div class="table-wrap overflow-x-auto">' +
-        '<table class="teaching-table w-full border-collapse text-[0.9rem]">' +
+    return '<div class="table-wrap overflow-x-auto -mx-1 px-1">' +
+        '<table class="teaching-table w-full border-collapse text-[0.9rem] min-w-[520px]">' +
           '<thead><tr>' +
             '<th class="text-left text-[0.68rem] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold px-3.5 py-2.5 border-b-2 border-slate-200 dark:border-darkborder whitespace-nowrap">Course Code</th>' +
             '<th class="text-left text-[0.68rem] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold px-3.5 py-2.5 border-b-2 border-slate-200 dark:border-darkborder">Course Title</th>' +
-            '<th class="text-left text-[0.68rem] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold px-3.5 py-2.5 border-b-2 border-slate-200 dark:border-darkborder">Semester</th>' +
+            '<th class="text-left text-[0.68rem] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold px-3.5 py-2.5 border-b-2 border-slate-200 dark:border-darkborder whitespace-nowrap">Semester</th>' +
           '</tr></thead>' +
           '<tbody>' + rows + '</tbody>' +
         '</table>' +
@@ -1082,10 +1097,10 @@
       const btn = document.getElementById('mobile-menu-btn');
       if (!sidebar || !overlay || !btn) return;
       const setOpen = (open) => {
-        sidebar.classList.toggle('-translate-x-full', !open);
+        sidebar.classList.toggle('-translate-y-full', !open);
         overlay.classList.toggle('hidden', !open);
       };
-      btn.addEventListener('click', () => setOpen(sidebar.classList.contains('-translate-x-full')));
+      btn.addEventListener('click', () => setOpen(sidebar.classList.contains('-translate-y-full')));
       overlay.addEventListener('click', () => setOpen(false));
       sidebar.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', () => setOpen(false)));
     }
