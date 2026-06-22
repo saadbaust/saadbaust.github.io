@@ -64,7 +64,7 @@
       html { scroll-behavior: smooth; scrollbar-gutter: stable; }
       section, header[id] { scroll-margin-top: 84px; }
       @media (max-width: 1023px) {
-        section, header[id] { scroll-margin-top: 180px; }
+        section, header[id] { scroll-margin-top: 64px; }
       }
       ::-webkit-scrollbar { width: 8px; height: 8px; }
       ::-webkit-scrollbar-track { background: transparent; }
@@ -90,9 +90,15 @@
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[1000] focus:bg-indigo-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">Skip to content</a>
 
     <!-- Mobile top bar -->
-    <header class="lg:hidden bg-white/90 dark:bg-darkcard/90 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-4 py-3 flex items-center justify-between shadow-sm">
+    <header class="lg:hidden bg-white/90 dark:bg-darkcard/90 backdrop-blur-md border-b border-slate-200 dark:border-darkborder px-4 py-2.5 flex items-center justify-between shadow-sm">
       <div class="flex items-center gap-2.5">
-        <span class="font-bold text-slate-900 dark:text-white tracking-tight">Saad Ahmed</span>
+        <div class="w-8 h-8 flex-shrink-0 rounded-lg overflow-hidden border border-indigo-100 dark:border-indigo-900">
+          <img src="images/saadahmed.png" alt="Saad Ahmed" class="w-full h-full object-cover" />
+        </div>
+        <div class="leading-tight">
+          <p class="font-bold text-sm text-slate-900 dark:text-white tracking-tight leading-none">Saad Ahmed</p>
+          <p class="text-[0.65rem] text-indigo-600 dark:text-indigo-300 font-semibold mt-0.5 leading-none">Lecturer, Dept of CSE · BAUST</p>
+        </div>
       </div>
       <div class="flex items-center gap-2">
         <button id="theme-toggle-mobile" class="p-2.5 rounded-lg text-slate-500 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle theme">
@@ -107,21 +113,9 @@
 
     <div id="mobile-menu-overlay" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 hidden transition-opacity duration-300"></div>
 
-    <!-- Mobile profile card — always visible at the top on small screens -->
-    <div class="lg:hidden bg-white dark:bg-darkcard border-b border-slate-200 dark:border-darkborder px-5 py-5 flex items-center gap-4">
-      <div class="relative w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 border-indigo-100 dark:border-indigo-900 shadow-md">
-        <img src="images/saadahmed.png" alt="Saad Ahmed" class="w-full h-full object-cover" />
-      </div>
-      <div class="min-w-0">
-        <p class="font-extrabold text-base text-slate-900 dark:text-white leading-tight">Saad Ahmed</p>
-        <p class="text-xs text-indigo-600 dark:text-indigo-300 font-semibold mt-0.5">Lecturer, Dept of CSE</p>
-        <p class="text-[0.7rem] text-slate-500 dark:text-slate-400 mt-0.5 leading-snug">Bangladesh Army University of Science and Technology (BAUST)</p>
-      </div>
-    </div>
-
     <div class="flex-grow flex w-full max-w-7xl mx-auto px-0 md:px-4 lg:px-6 gap-6">
       <!-- Sidebar -->
-      <aside id="sidebar" class="fixed top-0 left-0 right-0 transform -translate-y-full lg:translate-y-0 lg:translate-x-0 lg:static lg:block w-full lg:w-[280px] bg-white dark:bg-darkcard border-b lg:border-b-0 border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col max-h-[90vh] lg:h-auto overflow-hidden lg:overflow-visible">
+      <aside id="sidebar" class="fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 lg:static lg:block w-[280px] bg-white dark:bg-darkcard border-r border-slate-200 dark:border-darkborder lg:border-none lg:bg-transparent lg:dark:bg-transparent py-6 px-4 z-50 lg:z-10 transition-transform duration-300 ease-in-out flex-shrink-0 flex flex-col h-screen lg:h-auto overflow-hidden lg:overflow-visible">
         <div class="space-y-6 overflow-y-auto pr-1 flex-1 min-h-0">
           <div class="bg-white dark:bg-darkcard rounded-2xl p-5 border border-slate-200 dark:border-darkborder shadow-md text-center relative overflow-hidden">
             <div class="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
@@ -424,10 +418,10 @@
       const btn = document.getElementById('mobile-menu-btn');
       if (!sidebar || !overlay || !btn) return;
       const setOpen = (open) => {
-        sidebar.classList.toggle('-translate-y-full', !open);
+        sidebar.classList.toggle('-translate-x-full', !open);
         overlay.classList.toggle('hidden', !open);
       };
-      btn.addEventListener('click', () => setOpen(sidebar.classList.contains('-translate-y-full')));
+      btn.addEventListener('click', () => setOpen(sidebar.classList.contains('-translate-x-full')));
       overlay.addEventListener('click', () => setOpen(false));
       sidebar.querySelectorAll('a[href]').forEach(a => a.addEventListener('click', () => setOpen(false)));
     }
