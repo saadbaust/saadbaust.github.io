@@ -11,6 +11,11 @@
       "semesters": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
     },
     {
+      "code": "CSE 4103",
+      "title": "Computer Graphics",
+      "semesters": "Winter 2025"
+    },
+    {
       "code": "CSE 2102",
       "title": "Digital Logic Design Sessional",
       "semesters": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
@@ -21,14 +26,14 @@
       "semesters": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
     },
     {
-      "code": "CSE 4103",
-      "title": "Computer Graphics",
-      "semesters": "Winter 2025"
-    },
-    {
       "code": "CSE 4104",
       "title": "Computer Graphics Sessional",
       "semesters": "Summer 2024, Winter 2025"
+    },
+    {
+      "code": "CSE 3104",
+      "title": "Operating System Sessional",
+      "semesters": "Winter 2026"
     }
   ]
 }
