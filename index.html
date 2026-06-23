@@ -643,13 +643,14 @@
       /* Publications & Stats structure */
       .stats-grid {
         display: grid;
-        /* grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); */
+        grid-template-columns: repeat(4, 1fr);
         gap: 16px;
         margin-bottom: 28px;
-        grid-auto-flow: column dense;
-        align-items: center;
-        justify-content: center;
-        align-content: center;
+      }
+      @media (max-width: 560px) {
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
       .stat-card {
         background: var(--badge-bg);
@@ -1600,18 +1601,22 @@
               Research Publications
             </h2>
           </div>
-          <div class="stats-grid">
+          <div class="stats-grid" id="stats-grid">
             <div class="stat-card">
-              <div id="stat-publications" class="stat-num">0</div>
-              <div class="stat-lbl">Total Pubs</div>
-            </div>
-            <div class="stat-card">
-              <div id="stat-citations" class="stat-num">18</div>
+              <div id="stat-citations" class="stat-num" data-target="18">0</div>
               <div class="stat-lbl">Citations</div>
             </div>
             <div class="stat-card">
-              <div id="stat-hindex" class="stat-num">3</div>
+              <div id="stat-hindex" class="stat-num" data-target="3">0</div>
               <div class="stat-lbl">h-index</div>
+            </div>
+            <div class="stat-card">
+              <div id="stat-i10index" class="stat-num" data-target="0">0</div>
+              <div class="stat-lbl">i10-index</div>
+            </div>
+            <div class="stat-card">
+              <div id="stat-publications" class="stat-num" data-target="0">0</div>
+              <div class="stat-lbl">Total Pubs</div>
             </div>
           </div>
 
@@ -1889,6 +1894,92 @@
         .getElementById("theme-toggle-mobile")
         ?.addEventListener("click", toggleTheme);
 
+      // ── Animated stat counters ───────────────────────────────────────
+      // Each stat starts at 0 and counts up to its target. Targets come from
+      // data.json (citations, h-index, i10-index) and publications.bib (total
+      // pubs); the data-target attributes in the HTML are fallbacks used if a
+      // fetch fails. The count-up runs once the stats scroll into view.
+      const statTargets = {};
+      const statAnimFrames = {};
+      const statShown = {};
+      let statsInView = false;
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      // Seed fallback targets from the data-target attributes.
+      document.querySelectorAll(".stat-num[data-target]").forEach((el) => {
+        statTargets[el.id] = Number(el.dataset.target) || 0;
+      });
+
+      function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+      }
+
+      function animateCounter(el, target, duration) {
+        duration = duration || 1400;
+        if (statAnimFrames[el.id]) cancelAnimationFrame(statAnimFrames[el.id]);
+        if (prefersReducedMotion) {
+          el.innerText = target;
+          return;
+        }
+        const start = Number(el.innerText) || 0;
+        const startTime = performance.now();
+        function tick(now) {
+          const p = Math.min((now - startTime) / duration, 1);
+          el.innerText = Math.round(start + (target - start) * easeOutCubic(p));
+          if (p < 1) {
+            statAnimFrames[el.id] = requestAnimationFrame(tick);
+          } else {
+            el.innerText = target;
+            statAnimFrames[el.id] = null;
+          }
+        }
+        statAnimFrames[el.id] = requestAnimationFrame(tick);
+      }
+
+      // Animate one stat to its current target (only once visible, and only
+      // if the target has changed since the last run).
+      function animateStat(id) {
+        const el = document.getElementById(id);
+        if (!el || !statsInView) return;
+        const target = statTargets[id] || 0;
+        if (statShown[id] === target) return;
+        statShown[id] = target;
+        animateCounter(el, target);
+      }
+
+      // Called by the data loaders as real values arrive.
+      function setStat(id, value) {
+        statTargets[id] = Number(value) || 0;
+        animateStat(id);
+      }
+
+      // Start every counter once the stats grid scrolls into view.
+      function revealStats() {
+        if (statsInView) return;
+        statsInView = true;
+        Object.keys(statTargets).forEach(animateStat);
+      }
+
+      const statsGridEl = document.getElementById("stats-grid");
+      if (statsGridEl && "IntersectionObserver" in window) {
+        const statObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                revealStats();
+                statObserver.disconnect();
+              }
+            });
+          },
+          { threshold: 0.35 },
+        );
+        statObserver.observe(statsGridEl);
+      } else {
+        revealStats();
+      }
+
       function cleanBibValue(val) {
         if (!val) return "";
         return val
@@ -1965,7 +2056,7 @@
           const database = parseBibtex(rawText);
 
           const totalCount = database.length;
-          document.getElementById("stat-publications").innerText = totalCount;
+          setStat("stat-publications", totalCount);
 
           const journals = database.filter((e) => e.type === "article");
           const conferences = database.filter(
@@ -2060,13 +2151,9 @@
           const data = await res.json();
 
           const stats = (data && data.stats) || {};
-          if (stats.citations != null) {
-            document.getElementById("stat-citations").innerText =
-              stats.citations;
-          }
-          if (stats.hIndex != null) {
-            document.getElementById("stat-hindex").innerText = stats.hIndex;
-          }
+          if (stats.citations != null) setStat("stat-citations", stats.citations);
+          if (stats.hIndex != null) setStat("stat-hindex", stats.hIndex);
+          if (stats.i10Index != null) setStat("stat-i10index", stats.i10Index);
 
           const courses = (data && data.courses) || [];
           const tbody = document.getElementById("teaching-container");

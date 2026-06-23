@@ -7,7 +7,7 @@
 # Everything else on the site is now hard-coded directly in index.html and is
 # NOT editable here. Three things are CMS-managed:
 #   1. Publications     → your full BibTeX (paste the whole .bib in one box)
-#   2. Stats            → Citations and h-index (Total Papers is auto-counted)
+#   2. Stats            → Citations, h-index, i10-index (Total Pubs auto-counted)
 #   3. Teaching Courses → the rows of the "Teaching Duties" table
 #
 # Save in the CMS → it commits to GitHub → the live site updates within a
@@ -49,9 +49,11 @@ content:
         fields:
           - { name: citations, label: "Citations", type: number }
           - { name: hIndex,    label: "h-index",   type: number }
+          - { name: i10Index,  label: "i10-index", type: number }
       - name: courses
         label: "Teaching Courses"
-        type: list
+        type: object
+        list: true
         description: "Each entry is one row of the Teaching Duties table. Drag to reorder; use the + and trash icons to add or remove courses."
         fields:
           - { name: code,      label: "Course Code",      type: string }
