@@ -1,114 +1,33 @@
 {
-  "profile": {
-    "name": "Saad Ahmed",
-    "subtitle": "Lecturer, Department of CSE",
-    "institution": "Bangladesh Army University of Science and Technology (BAUST), Saidpur.",
-    "researchFocus": "Image Processing, Computer Vision, & Deep Learning.",
-    "about": "I am a Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST). My research interests focus on Image Processing, Computer Vision, and Deep Learning, with a dedication to developing intelligent systems that solve real-world problems and contribute to the global advancement of technology.",
-    "cvLink": "https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing"
-  },
   "stats": {
     "citations": 18,
-    "hIndex": 3,
-    "i10Index": 0
+    "hIndex": 3
   },
-  "contact": {
-    "phone": "+8801724407189",
-    "email": "saadahmed@baust.edu.bd"
-  },
-  "experience": [
-    {
-      "role": "Lecturer",
-      "org": "Dept. of CSE, Bangladesh Army University of Science and Technology (BAUST)",
-      "period": "July 2024 – Present",
-      "desc": "Developing and delivering lectures for undergraduate students, advising on academic planning, conducting Computer Science research, and organizing academic events."
-    }
-  ],
-  "education": [
-    {
-      "degree": "M.Sc. Engineering in Computer Science and Engineering",
-      "inst": "Rajshahi University of Engineering & Technology (RUET)",
-      "year": "March 2025 – Present",
-      "result": "Ongoing"
-    },
-    {
-      "degree": "B.Sc. Engineering in Computer Science and Engineering",
-      "inst": "BAUST",
-      "year": "July 2020 – July 2024",
-      "result": "CGPA: 3.96 / 4.00"
-    }
-  ],
-  "skills": {
-    "research": [
-      "Python",
-      "C/C++",
-      "MATLAB",
-      "Deep Learning (Keras, TensorFlow, PyTorch)",
-      "Pandas",
-      "Scikit-learn",
-      "Matplotlib",
-      "NumPy",
-      "LaTeX",
-      "GitHub"
-    ],
-    "dev": [
-      "PHP",
-      "JavaScript",
-      "MySQL",
-      "Firebase",
-      "WordPress"
-    ]
-  },
-  "certifications": [
-    "Reviewer, 2025 IEEE International Conference on Quantum Photonics, AI and Networking",
-    "Faculty Training Program, BAUST",
-    "Sustainable Energy Challenge, Bikiron"
-  ],
-  "research": [
-    {
-      "title": "AI-Powered Automated Exam Evaluation and OBE-Based University Assessment System",
-      "period": "2025 – 2026",
-      "funding": "Funded by BAUST Research Cell",
-      "desc": "AI-Powered Automated Exam Evaluation and OBE-Based University Assessment System"
-    }
-  ],
-  "teaching": [
+  "courses": [
     {
       "code": "CSE 2101",
-      "course": "Digital Logic Design",
-      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
+      "title": "Digital Logic Design",
+      "semesters": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
     },
     {
       "code": "CSE 2102",
-      "course": "Digital Logic Design Sessional",
-      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
+      "title": "Digital Logic Design Sessional",
+      "semesters": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
     },
     {
       "code": "CSE 4246",
-      "course": "Digital Image Processing Sessional",
-      "semester": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
+      "title": "Digital Image Processing Sessional",
+      "semesters": "Summer 2024, Winter 2025, Summer 2025, Winter 2026, Summer 2026"
     },
     {
       "code": "CSE 4103",
-      "course": "Computer Graphics",
-      "semester": "Winter 2025"
+      "title": "Computer Graphics",
+      "semesters": "Winter 2025"
     },
     {
       "code": "CSE 4104",
-      "course": "Computer Graphics Sessional",
-      "semester": "Summer 2024, Winter 2025"
+      "title": "Computer Graphics Sessional",
+      "semesters": "Summer 2024, Winter 2025"
     }
-  ],
-  "sections": {
-    "about": true,
-    "experience": true,
-    "research": false,
-    "journals": true,
-    "conferences": true,
-    "teaching": true,
-    "education": true,
-    "skills": true,
-    "certifications": true,
-    "contact": true
-  }
+  ]
 }

@@ -4,143 +4,21 @@
 # This single file decides what you can edit when you log into the CMS at
 #   https://app.pagescms.org/saadbaust/saadbaust.github.io
 #
-# After logging in you'll see three things in the left sidebar:
-#   1. Basic Info   → name, intro, stats, CV link, experience, education,
-#                     skills, certifications, phone & email
-#   2. Publications → your full BibTeX (paste the whole .bib in one box)
-#   3. Media        → Event Photos / Memory Photos
+# Everything else on the site is now hard-coded directly in index.html and is
+# NOT editable here. Three things are CMS-managed:
+#   1. Publications     → your full BibTeX (paste the whole .bib in one box)
+#   2. Stats            → Citations and h-index (Total Papers is auto-counted)
+#   3. Teaching Courses → the rows of the "Teaching Duties" table
 #
-# Nothing else needs editing by hand. Save in the CMS → it commits to GitHub →
-# the live site updates automatically within a minute.
+# Save in the CMS → it commits to GitHub → the live site updates within a
+# minute. The site reads publications.bib and data.json in the browser.
 # ───────────────────────────────────────────────────────────────────────────
 
-media:
-  - name: events-images
-    label: "Event Photos"
-    input: images/events
-    output: /images/events
-    categories: [image]
-    rename: false
-
-  - name: memories-images
-    label: "Memory Photos"
-    input: images/memories
-    output: /images/memories
-    categories: [image]
-    rename: false
-
 content:
-  # ── Basic Info ──────────────────────────────────────────────────────────
-  # One screen that controls everything on the home page except the papers.
-  - name: basic-info
-    label: "Basic Info"
-    type: file
-    path: data.json
-    description: "Everything on the home page (except publications) is edited here. Save to publish."
-    fields:
-      - name: profile
-        label: "Profile & Intro"
-        type: object
-        fields:
-          - { name: name,        label: "Full name",                     type: string }
-          - { name: subtitle,    label: "Title / role line",             type: string }
-          - { name: institution, label: "Institution",                   type: string }
-          - { name: researchFocus, label: "Research focus line",         type: string }
-          - { name: about,       label: "Intro paragraph (About me)",    type: text }
-          - { name: cvLink,      label: "CV link (full URL)",            type: string, description: "Paste the share link to your CV / résumé PDF." }
-
-      - name: stats
-        label: "Google Scholar Stats"
-        type: object
-        description: "Your 'Papers' number is counted automatically from Publications — no need to set it here."
-        fields:
-          - { name: citations, label: "Citations", type: number }
-          - { name: hIndex,    label: "h-index",   type: number }
-          - { name: i10Index,  label: "i10-index", type: number }
-
-      - name: contact
-        label: "Contact"
-        type: object
-        fields:
-          - { name: phone, label: "Phone number", type: string }
-          - { name: email, label: "Email address", type: string }
-
-      - name: experience
-        label: "Experience"
-        type: object
-        list: true
-        description: "Add, remove or reorder positions. Newest first looks best."
-        fields:
-          - { name: role,   label: "Role / position", type: string }
-          - { name: org,    label: "Organization",    type: string }
-          - { name: period, label: "Period (e.g. July 2024 – Present)", type: string }
-          - { name: desc,   label: "Description",      type: text }
-
-      - name: education
-        label: "Education"
-        type: object
-        list: true
-        description: "Add, remove or reorder degrees."
-        fields:
-          - { name: degree, label: "Degree", type: string }
-          - { name: inst,   label: "Institution", type: string }
-          - { name: year,   label: "Period / year", type: string }
-          - { name: result, label: "Result (e.g. CGPA: 3.96 / 4.00, or Ongoing)", type: string }
-
-      - name: skills
-        label: "Technical Skills"
-        type: object
-        fields:
-          - { name: research, label: "Research & AI", type: string, list: true }
-          - { name: dev,      label: "Development & Tools", type: string, list: true }
-
-      - name: certifications
-        label: "Certifications & Activities"
-        type: string
-        list: true
-        description: "One item per entry. Use the + button to add more."
-
-      - name: research
-        label: "Research Projects"
-        type: object
-        list: true
-        description: "Your research projects. Add, remove or reorder. If you leave this empty, the Research Projects section is hidden automatically."
-        fields:
-          - { name: title,   label: "Project title", type: string }
-          - { name: period,  label: "Period / status (e.g. 2024 – Present, Ongoing)", type: string }
-          - { name: funding, label: "Funding info (e.g. Funded by BAC, Self-funded)", type: string, description: "Optional — shown below the title. Leave blank if no funding to display." }
-          - { name: desc,    label: "Description", type: text }
-          - { name: link,    label: "Link (optional, full URL)", type: string, description: "Optional — paper, repo, or demo. Leave blank for no button." }
-
-      - name: teaching
-        label: "Teaching"
-        type: object
-        list: true
-        description: "Courses you teach, shown as a table (Course Code · Course Title · Semester). Add, remove or reorder. Leaving it empty hides the section automatically."
-        fields:
-          - { name: code,     label: "Course code (e.g. CSE 4203)", type: string }
-          - { name: course,   label: "Course title", type: string }
-          - { name: semester, label: "Semester (e.g. Spring 2025)", type: string }
-
-      - name: sections
-        label: "Section Visibility"
-        type: object
-        description: "Show or hide any home-page section. Switch one OFF to hide that section from the live site — your content stays saved, it's just hidden. (Teaching and Research Projects also hide automatically when they have no entries.)"
-        fields:
-          - { name: about,          label: "About / intro paragraph",            type: boolean, default: true }
-          - { name: experience,     label: "Experience",                         type: boolean, default: true }
-          - { name: research,       label: "Research Projects",                  type: boolean, default: true }
-          - { name: journals,       label: "Journal Articles",                   type: boolean, default: true }
-          - { name: conferences,    label: "Conference Proceedings",             type: boolean, default: true }
-          - { name: teaching,       label: "Teaching",                           type: boolean, default: true }
-          - { name: education,      label: "Education",                          type: boolean, default: true }
-          - { name: skills,         label: "Technical Skills",                   type: boolean, default: true }
-          - { name: certifications, label: "Certifications & Activities",        type: boolean, default: true }
-          - { name: contact,        label: "Contact",                            type: boolean, default: true }
-
-  # ── Publications ────────────────────────────────────────────────────────
+  # ── Publications (BibTeX) ───────────────────────────────────────────────
   # The whole publications.bib file in one editor. The site reads this file
-  # directly, splits it into entries, and sorts journals vs conferences.
+  # directly, splits it into entries, separates journals vs. conferences, and
+  # counts the total as the "Total Pubs" number on the page.
   - name: publications
     label: "Publications (BibTeX)"
     type: file
@@ -151,6 +29,31 @@ content:
       all entries together in one go, exactly like opening the .bib file in a
       text editor. Each entry must start with @ (for example @article{...} for
       journals or @INPROCEEDINGS{...} for conferences). The site sorts journals
-      and conferences for you and counts the total as your "Papers" number.
+      and conferences for you and counts the total automatically.
       Tip: on Google Scholar or IEEE Xplore, click Cite → BibTeX to copy an
       entry, then paste it in below. To remove a paper, delete its block.
+
+  # ── Stats & Teaching Courses ────────────────────────────────────────────
+  # Both live in data.json. "Total Pubs" is counted automatically from the
+  # BibTeX, so it isn't here. The Teaching Courses list below populates the
+  # "Teaching Duties" table on the page — add, remove, or reorder rows.
+  - name: data
+    label: "Stats & Teaching Courses"
+    type: file
+    path: data.json
+    description: "Citation/h-index stats and the Teaching Duties course table."
+    fields:
+      - name: stats
+        label: "Google Scholar Stats"
+        type: object
+        fields:
+          - { name: citations, label: "Citations", type: number }
+          - { name: hIndex,    label: "h-index",   type: number }
+      - name: courses
+        label: "Teaching Courses"
+        type: list
+        description: "Each entry is one row of the Teaching Duties table. Drag to reorder; use the + and trash icons to add or remove courses."
+        fields:
+          - { name: code,      label: "Course Code",      type: string }
+          - { name: title,     label: "Course Title",     type: string }
+          - { name: semesters, label: "Semesters Taught", type: string }

@@ -39,18 +39,10 @@
       content="https://saadbaust.github.io/images/saadahmed.png"
     />
     <meta
-      property="og:image:secure_url"
-      content="https://saadbaust.github.io/images/saadahmed.png"
-    />
-    <meta
       property="og:image:alt"
       content="Saad Ahmed — Lecturer at BAUST, Researcher in Image Processing and Computer Vision"
     />
     <meta property="og:image:type" content="image/png" />
-    <!-- NOTE: keep these width/height values matching the ACTUAL pixel size of
-         images/saadahmed.png. For best results in Google / link previews use a
-         square image of at least 460×460 (ideally ~1200×1200) and update both
-         numbers below + the same dimensions in the JSON-LD ImageObject. -->
     <meta property="og:image:width" content="170" />
     <meta property="og:image:height" content="170" />
     <meta property="og:site_name" content="Saad Ahmed | BAUST" />
@@ -118,11 +110,7 @@
             "@type": "Person",
             "@id": "https://saadbaust.github.io/#person",
             "name": "Saad Ahmed",
-            "givenName": "Saad",
-            "familyName": "Ahmed",
-            "description": "Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST), and a researcher in Image Processing, Computer Vision, and Deep Learning.",
             "url": "https://saadbaust.github.io/",
-            "mainEntityOfPage": { "@id": "https://saadbaust.github.io/#webpage" },
             "image": { "@id": "https://saadbaust.github.io/#profile-image" },
             "jobTitle": "Lecturer",
             "email": "saadahmed@baust.edu.bd",
@@ -164,18 +152,6 @@
     </script>
 
     <link rel="icon" type="image/png" href="images/logo.png" />
-
-    <!-- Browser UI / address-bar color (matches light & dark themes). -->
-    <meta
-      name="theme-color"
-      content="#f8f9fd"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#0b0f19"
-      media="(prefers-color-scheme: dark)"
-    />
 
     <!-- Apply saved/system theme BEFORE first paint to avoid a light/dark flash. -->
     <script>
@@ -664,24 +640,11 @@
         margin-bottom: 0;
       }
       .pub-row-idx {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-width: 36px;
+        font-weight: 600;
+        color: var(--brand-color);
+        min-width: 24px;
+        font-size: 0.95rem;
         padding-top: 2px;
-        flex-shrink: 0;
-      }
-      .pub-row-idx .pub-idx-num {
-        font-weight: 600;
-        color: var(--text-muted);
-        font-size: 0.85rem;
-        line-height: 1.5;
-      }
-      .pub-row-idx .pub-idx-year {
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        line-height: 1.5;
       }
       .pub-row-content {
         flex-grow: 1;
@@ -689,7 +652,7 @@
 
       .pub-title {
         font-weight: 600;
-        font-size: 0.980rem;
+        font-size: 0.975rem;
         color: var(--text-main);
         margin-bottom: 4px;
       }
@@ -703,7 +666,7 @@
         text-decoration: none;
       }
       .pub-authors {
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         color: var(--text-muted);
         margin-bottom: 4px;
       }
@@ -1053,58 +1016,6 @@
         }
         .social-badges-list {
           justify-content: center;
-        }
-      }
-
-      /* Back-to-top floating button */
-      .back-to-top {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 60;
-        width: 46px;
-        height: 46px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        border-radius: 50%;
-        background-color: #4f46e5;
-        color: #ffffff;
-        cursor: pointer;
-        box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(12px);
-        transition:
-          opacity 0.25s ease,
-          transform 0.25s ease,
-          visibility 0.25s,
-          background-color 0.2s;
-      }
-      .back-to-top.visible {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-      .back-to-top:hover {
-        background-color: #4338ca;
-      }
-      html.dark .back-to-top {
-        background-color: #6366f1;
-        box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
-      }
-      html.dark .back-to-top:hover {
-        background-color: #818cf8;
-      }
-      .back-to-top svg {
-        width: 22px;
-        height: 22px;
-      }
-      @media (max-width: 1024px) {
-        .back-to-top {
-          bottom: 18px;
-          right: 18px;
         }
       }
     </style>
@@ -1716,21 +1627,6 @@
       </main>
     </div>
 
-    <!-- Back-to-top button (appears after scrolling down). -->
-    <button
-      id="back-to-top"
-      class="back-to-top"
-      type="button"
-      aria-label="Back to top"
-      title="Back to top"
-    >
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path
-          d="M12 5.25a.75.75 0 0 1 .53.22l6 6a.75.75 0 1 1-1.06 1.06L12.75 7.81V18a.75.75 0 0 1-1.5 0V7.81l-4.72 4.72a.75.75 0 1 1-1.06-1.06l6-6a.75.75 0 0 1 .53-.22Z"
-        />
-      </svg>
-    </button>
-
     <!-- ===================== SCRIPTS =====================
          Theme toggle, mobile drawer, scroll-spy, BibTeX parsing/rendering,
          and the CMS data loader (stats + teaching courses from data.json). -->
@@ -1756,12 +1652,6 @@
       const navLinks = document.querySelectorAll(
         '#sidebar .sidebar-link[href^="#"]',
       );
-      // The "Home" link uses href="index.html", so it is NOT in navLinks above.
-      // Track it separately, otherwise it stays highlighted alongside whatever
-      // section you've scrolled to (two active links at once).
-      const homeLink = document.querySelector(
-        '#sidebar .sidebar-link[href="index.html"]',
-      );
 
       function syncNavigationHighlight() {
         let currentId = "";
@@ -1772,16 +1662,13 @@
           }
         });
         navLinks.forEach((link) => {
-          link.classList.toggle(
-            "active",
-            link.getAttribute("href") === `#${currentId}`,
-          );
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${currentId}`) {
+            link.classList.add("active");
+          }
         });
-        // Home is active only at the very top, before any section is reached.
-        if (homeLink) homeLink.classList.toggle("active", currentId === "");
       }
       window.addEventListener("scroll", syncNavigationHighlight);
-      syncNavigationHighlight();
 
       const sidebar = document.getElementById("sidebar");
       const overlay = document.getElementById("mobile-menu-overlay");
@@ -1894,19 +1781,17 @@
               .map(
                 (j, idx) => `
               <div class="pub-row-item">
-                <span class="pub-row-idx">
-                  <span class="pub-idx-num">[${idx + 1}]</span>
-                  <span class="pub-idx-year">${j.year || ""}</span>
-                </span>
+                <span class="pub-row-idx">${idx + 1}.</span>
                 <div class="pub-row-content">
-                  <h4 class="pub-title">"${
+                  <h4 class="pub-title">${
                     getPubLink(j)
                       ? `<a href="${getPubLink(j)}" target="_blank" rel="noopener noreferrer">${j.title || "Untitled Journal Paper"}</a>`
                       : j.title || "Untitled Journal Paper"
-                  }"</h4>
+                  }</h4>
                   <p class="pub-authors">${highlightAuthor(j.author)}</p>
                   <p class="pub-venue">
                     <span>${j.journal || "International Journal"}</span>
+                    <span class="pub-meta-badge">${j.year || ""}</span>
                   </p>
                 </div>
               </div>
@@ -1923,19 +1808,17 @@
               .map(
                 (c, idx) => `
               <div class="pub-row-item">
-                <span class="pub-row-idx">
-                  <span class="pub-idx-num">[${idx + 1}]</span>
-                  <span class="pub-idx-year">${c.year || ""}</span>
-                </span>
+                <span class="pub-row-idx">${idx + 1}.</span>
                 <div class="pub-row-content">
-                  <h4 class="pub-title">"${
+                  <h4 class="pub-title">${
                     getPubLink(c)
                       ? `<a href="${getPubLink(c)}" target="_blank" rel="noopener noreferrer">${c.title || "Untitled Conference Paper"}</a>`
                       : c.title || "Untitled Conference Paper"
-                  }"</h4>
+                  }</h4>
                   <p class="pub-authors">${highlightAuthor(c.author)}</p>
                   <p class="pub-venue">
                     <span>${c.booktitle || "International Conference"}</span>
+                    <span class="pub-meta-badge">${c.year || ""}</span>
                   </p>
                 </div>
               </div>
@@ -2007,19 +1890,6 @@
           console.error("Could not load data.json:", err);
           // Leaves the hardcoded fallback values already present in the HTML.
         }
-      }
-
-      // ── Back-to-top button ───────────────────────────────────────────
-      const backToTopBtn = document.getElementById("back-to-top");
-      if (backToTopBtn) {
-        const toggleBackToTop = () => {
-          backToTopBtn.classList.toggle("visible", window.scrollY > 400);
-        };
-        window.addEventListener("scroll", toggleBackToTop);
-        toggleBackToTop();
-        backToTopBtn.addEventListener("click", () => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
       }
 
       window.addEventListener("DOMContentLoaded", () => {
