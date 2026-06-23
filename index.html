@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth [scrollbar-gutter:stable]">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -326,6 +326,39 @@
         clip: rect(0, 0, 0, 0);
         white-space: nowrap;
         border-width: 0;
+      }
+      /* Reveal the "Skip to content" link when keyboard-focused. */
+      .sr-only:focus {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        width: auto;
+        height: auto;
+        padding: 10px 16px;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+        background: #4f46e5;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.875rem;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        z-index: 100;
+      }
+
+      /* Native smooth anchor scrolling + offset so sections don't land under
+         the sticky mobile header; stable gutter prevents layout shift. */
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+        scrollbar-gutter: stable;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
       }
 
       .app-wrapper {
@@ -1188,6 +1221,28 @@
           <a href="#contact" class="sidebar-link">Contact</a>
         </div>
         <div class="nav-block cms-divider">
+          <a
+            href="https://app.pagescms.org/saadbaust/saadbaust.github.io"
+            class="sidebar-link"
+            style="gap: 10px"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Edit publications &amp; stats in the CMS"
+          >
+            <svg
+              style="width: 18px; height: 18px; flex-shrink: 0"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path
+                fill="currentColor"
+                d="M12 2a5 5 0 0 1 5 5v3a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3V7a5 5 0 0 1 5-5m0 12a2 2 0 0 0-1.995 1.85L10 16a2 2 0 1 0 2-2m0-10a3 3 0 0 0-3 3v3h6V7a3 3 0 0 0-3-3"
+              />
+            </svg>
+            CMS Login
+          </a>
           <button
             id="theme-toggle"
             class="sidebar-link theme-toggle-btn"
@@ -1724,10 +1779,17 @@
       aria-label="Back to top"
       title="Back to top"
     >
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path
-          d="M12 5.25a.75.75 0 0 1 .53.22l6 6a.75.75 0 1 1-1.06 1.06L12.75 7.81V18a.75.75 0 0 1-1.5 0V7.81l-4.72 4.72a.75.75 0 1 1-1.06-1.06l6-6a.75.75 0 0 1 .53-.22Z"
-        />
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 19V5" />
+        <path d="m5 12 7-7 7 7" />
       </svg>
     </button>
 
@@ -1763,25 +1825,47 @@
         '#sidebar .sidebar-link[href="index.html"]',
       );
 
-      function syncNavigationHighlight() {
-        let currentId = "";
-        sections.forEach((sec) => {
-          const top = sec.offsetTop - 60;
-          if (window.scrollY >= top) {
-            currentId = sec.getAttribute("id");
-          }
-        });
-        navLinks.forEach((link) => {
-          link.classList.toggle(
-            "active",
-            link.getAttribute("href") === `#${currentId}`,
-          );
-        });
-        // Home is active only at the very top, before any section is reached.
-        if (homeLink) homeLink.classList.toggle("active", currentId === "");
+      // Scroll-spy via IntersectionObserver — no per-scroll layout reads.
+      // A section counts as "current" while it crosses a thin band near the
+      // top of the viewport (just below the sticky header).
+      const navMap = {};
+      navLinks.forEach((link) => {
+        navMap[link.getAttribute("href").slice(1)] = link;
+      });
+      let activeNavId = null;
+      function setActiveNav(id) {
+        if (id === activeNavId) return;
+        activeNavId = id;
+        navLinks.forEach((link) => link.classList.remove("active"));
+        if (homeLink) homeLink.classList.remove("active");
+        if (id && navMap[id]) navMap[id].classList.add("active");
+        else if (homeLink) homeLink.classList.add("active");
       }
-      window.addEventListener("scroll", syncNavigationHighlight);
-      syncNavigationHighlight();
+
+      if ("IntersectionObserver" in window && sections.length) {
+        const visibleTops = new Map();
+        const spy = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) visibleTops.set(e.target.id, e.target.offsetTop);
+              else visibleTops.delete(e.target.id);
+            });
+            if (visibleTops.size) {
+              // topmost section currently in the band
+              const topId = [...visibleTops.entries()].sort(
+                (a, b) => a[1] - b[1],
+              )[0][0];
+              setActiveNav(topId);
+            } else {
+              // Above the first section → Home; below the last → keep last.
+              const firstTop = sections[0] ? sections[0].offsetTop : 0;
+              setActiveNav(window.scrollY < firstTop ? null : activeNavId);
+            }
+          },
+          { rootMargin: "-72px 0px -70% 0px", threshold: 0 },
+        );
+        sections.forEach((sec) => spy.observe(sec));
+      }
 
       const sidebar = document.getElementById("sidebar");
       const overlay = document.getElementById("mobile-menu-overlay");
@@ -1826,10 +1910,12 @@
             let parts = cleanAuth.split(",").map((p) => p.trim());
             cleanAuth = parts.slice(1).concat(parts[0]).join(" ");
           }
+          // Escape the displayed name (matching uses the un-escaped copy).
+          const safeAuth = escapeHtml(trimmedAuth);
           if (cleanAuth.toLowerCase().includes(searchName.toLowerCase())) {
-            return `<strong style="color: var(--brand-color); font-weight: 700;">${trimmedAuth}</strong>`;
+            return `<strong style="color: var(--brand-color); font-weight: 700;">${safeAuth}</strong>`;
           }
-          return trimmedAuth;
+          return safeAuth;
         });
         return formatted.length > 1
           ? formatted.slice(0, -1).join(", ") +
@@ -1896,17 +1982,17 @@
               <div class="pub-row-item">
                 <span class="pub-row-idx">
                   <span class="pub-idx-num">[${idx + 1}]</span>
-                  <span class="pub-idx-year">${j.year || ""}</span>
+                  <span class="pub-idx-year">${escapeHtml(j.year || "")}</span>
                 </span>
                 <div class="pub-row-content">
                   <h4 class="pub-title">"${
                     getPubLink(j)
-                      ? `<a href="${getPubLink(j)}" target="_blank" rel="noopener noreferrer">${j.title || "Untitled Journal Paper"}</a>`
-                      : j.title || "Untitled Journal Paper"
+                      ? `<a href="${escapeHtml(getPubLink(j))}" target="_blank" rel="noopener noreferrer">${escapeHtml(j.title || "Untitled Journal Paper")}</a>`
+                      : escapeHtml(j.title || "Untitled Journal Paper")
                   }"</h4>
                   <p class="pub-authors">${highlightAuthor(j.author)}</p>
                   <p class="pub-venue">
-                    <span>${j.journal || "International Journal"}</span>
+                    <span>${escapeHtml(j.journal || "International Journal")}</span>
                   </p>
                 </div>
               </div>
@@ -1925,17 +2011,17 @@
               <div class="pub-row-item">
                 <span class="pub-row-idx">
                   <span class="pub-idx-num">[${idx + 1}]</span>
-                  <span class="pub-idx-year">${c.year || ""}</span>
+                  <span class="pub-idx-year">${escapeHtml(c.year || "")}</span>
                 </span>
                 <div class="pub-row-content">
                   <h4 class="pub-title">"${
                     getPubLink(c)
-                      ? `<a href="${getPubLink(c)}" target="_blank" rel="noopener noreferrer">${c.title || "Untitled Conference Paper"}</a>`
-                      : c.title || "Untitled Conference Paper"
+                      ? `<a href="${escapeHtml(getPubLink(c))}" target="_blank" rel="noopener noreferrer">${escapeHtml(c.title || "Untitled Conference Paper")}</a>`
+                      : escapeHtml(c.title || "Untitled Conference Paper")
                   }"</h4>
                   <p class="pub-authors">${highlightAuthor(c.author)}</p>
                   <p class="pub-venue">
-                    <span>${c.booktitle || "International Conference"}</span>
+                    <span>${escapeHtml(c.booktitle || "International Conference")}</span>
                   </p>
                 </div>
               </div>
