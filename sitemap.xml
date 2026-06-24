@@ -3,10 +3,10 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- Single-page portfolio. Keep <lastmod> in sync with "dateModified" in
-       index.html's JSON-LD (both are currently 2026-06-23). -->
+       index.html's JSON-LD (both are currently 2026-06-24). -->
   <url>
     <loc>https://saadbaust.github.io/</loc>
-    <lastmod>2026-06-23</lastmod>
+    <lastmod>2026-06-24</lastmod>
     <image:image>
       <image:loc>https://saadbaust.github.io/images/saadahmed.png</image:loc>
       <image:title>Saad Ahmed — Lecturer at the Department of CSE, BAUST</image:title>
