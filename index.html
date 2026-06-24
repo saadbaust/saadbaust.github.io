@@ -1018,14 +1018,14 @@
       .social-badge-item {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         font-size: 0.82rem;
         font-weight: 600;
         text-decoration: none;
         color: var(--text-main);
         background: var(--badge-bg);
-        border: 1px solid var(--border-divider);
-        padding: 6px 14px;
+        border: 2px solid var(--border-divider);
+        padding: 6px;
         border-radius: 9999px;
         transition: all 0.2s;
       }
@@ -1207,6 +1207,248 @@
           right: 18px;
         }
       }
+      /* ===================== OMAR-STYLE LAYOUT ===================== */
+      /* Top navigation bar */
+      .top-navbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        width: 100%;
+        background: var(--card-bg);
+        backdrop-filter: blur(20px) saturate(1.55);
+        border-bottom: 1px solid var(--card-border);
+      }
+      .nav-inner {
+        max-width: 1152px;
+        margin: 0 auto;
+        padding: 0 24px;
+        height: 62px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .nav-brand {
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: -0.01em;
+        color: var(--text-main);
+        text-decoration: none;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .nav-brand:hover {
+        color: var(--brand-color);
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        margin-left: auto;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      .nav-link {
+        padding: 7px 12px;
+        border-radius: 10px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-main);
+        text-decoration: none;
+        white-space: nowrap;
+        transition:
+          background-color 0.15s,
+          color 0.15s;
+      }
+      .nav-link:hover {
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--brand-color);
+      }
+      html.dark .nav-link:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .nav-link.active {
+        background: #4f46e5 !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.18);
+      }
+      html.dark .nav-link.active {
+        background: #6366f1 !important;
+      }
+      .nav-tools {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+      .nav-tool-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        border: none;
+        background: transparent;
+        border-radius: 10px;
+        color: var(--text-muted);
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          background-color 0.15s,
+          color 0.15s;
+      }
+      .nav-tool-btn:hover {
+        background: rgba(0, 0, 0, 0.05);
+        color: var(--brand-color);
+      }
+      html.dark .nav-tool-btn:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+      /* Override the full-width sidebar variant of the toggle for the navbar. */
+      .top-navbar .theme-toggle-btn {
+        width: auto;
+        gap: 0;
+      }
+      .nav-tool-btn .theme-icon {
+        width: 20px;
+        height: 20px;
+      }
+      .nav-hamburger {
+        display: none;
+      }
+
+      /* Sticky left profile rail */
+      .app-wrapper {
+        align-items: flex-start;
+      }
+      aside.profile-rail {
+        width: 270px;
+        flex-shrink: 0;
+        padding: 24px 0;
+        position: static;
+        height: max-content;
+      }
+      .profile-card {
+        padding: 24px;
+        text-align: center;
+      }
+      .profile-card .photo-frame {
+        width: 168px;
+        height: 168px;
+        margin: 0 auto 18px;
+      }
+      .profile-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.15;
+        color: var(--text-main);
+      }
+      .profile-card .title-subtitle {
+        margin-top: 6px;
+      }
+      .profile-card .institution-txt {
+        margin-top: 4px;
+      }
+      .profile-card .profile-target {
+        margin-top: 14px;
+      }
+      .profile-card .social-footer-block {
+        margin-top: 18px;
+        padding-top: 18px;
+      }
+      .profile-card .social-badges-list {
+        justify-content: center;
+      }
+      .profile-cms {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 18px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .profile-cms:hover {
+        color: var(--brand-color);
+      }
+
+      /* About greeting + actions */
+      .about-greeting {
+        font-size: clamp(1.7rem, 3.4vw, 2.1rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        color: var(--text-main);
+        margin-bottom: 18px;
+      }
+      .about-greeting .greeting-name {
+        color: var(--brand-color);
+      }
+      .about-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-divider);
+      }
+
+      /* Responsive: collapse navbar + stack the profile rail */
+      @media (max-width: 1024px) {
+        .nav-inner {
+          height: 58px;
+          gap: 10px;
+        }
+        .nav-brand {
+          margin-right: auto;
+        }
+        .nav-links {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          z-index: 49;
+          margin-left: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 4px;
+          padding: 10px 16px 14px;
+          background: #ffffff;
+          border-bottom: 1px solid var(--border-divider);
+          box-shadow: var(--shadow);
+          display: none;
+        }
+        html.dark .nav-links {
+          background: #151b2c;
+        }
+        .nav-links.open {
+          display: flex;
+        }
+        .nav-link {
+          padding: 10px 14px;
+        }
+        .nav-hamburger {
+          display: inline-flex;
+        }
+
+        .app-wrapper {
+          align-items: stretch;
+        }
+        aside.profile-rail {
+          position: static;
+          width: 100%;
+          top: auto;
+          padding: 24px 0 0;
+          transform: none;
+          background: transparent;
+          border-right: none;
+          height: max-content;
+          z-index: auto;
+        }
+      }
     </style>
   </head>
 
@@ -1216,210 +1458,96 @@
     <div aria-hidden="true" class="corner-glow"></div>
 
     <!-- Mobile-only top bar (name + theme toggle + hamburger). Hidden on desktop. -->
-    <header class="mobile-header-bar">
-      <span class="mobile-header-title">Saad Ahmed</span>
-      <div class="mobile-actions-flex">
-        <button
-          id="theme-toggle-mobile"
-          class="mobile-action-btn theme-toggle-btn"
-          type="button"
-          aria-label="Toggle light/dark theme"
-        >
-          <svg
-            class="theme-icon icon-moon"
-            style="width: 20px; height: 20px"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              d="M21.752 15.002A9.718 9.718 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
-            />
-          </svg>
-          <svg
-            class="theme-icon icon-sun"
-            style="width: 20px; height: 20px"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"
-            />
-          </svg>
-        </button>
-        <button
-          id="mobile-menu-btn"
-          class="mobile-action-btn"
-          aria-label="Toggle menu"
-        >
-          <svg
-            style="width: 24px; height: 24px"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-        </button>
-      </div>
-    </header>
-
-    <div id="mobile-menu-overlay" class="drawer-overlay"></div>
-
-    <div class="app-wrapper">
-      <!-- Left sidebar navigation (becomes a slide-in drawer on mobile).
-           Includes the dark-mode icon toggle at the bottom. -->
-      <aside id="sidebar">
-        <div class="nav-block">
-          <p class="nav-caption">Main</p>
-          <a href="index.html" class="sidebar-link active">Home</a>
-
-          <p class="nav-caption">Sections</p>
-          <a href="#about-section" class="sidebar-link">About Me</a>
-          <a href="#experience" class="sidebar-link">Experience</a>
-          <a href="#publications" class="sidebar-link">Publications</a>
-          <a href="#projects" class="sidebar-link">Projects</a>
-          <a href="#education" class="sidebar-link">Education</a>
-          <a href="#teaching" class="sidebar-link">Teaching</a>
-          <a href="#certifications" class="sidebar-link">Activities</a>
-          <a href="#contact" class="sidebar-link">Contact</a>
-        </div>
-        <div class="nav-block cms-divider">
-          <a
-            href="https://app.pagescms.org/saadbaust/saadbaust.github.io"
-            class="sidebar-link"
-            style="gap: 10px"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Edit publications &amp; stats in the CMS"
-          >
-            <svg
-              style="width: 18px; height: 18px; flex-shrink: 0"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path
-                fill="currentColor"
-                d="M12 2a5 5 0 0 1 5 5v3a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3V7a5 5 0 0 1 5-5m0 12a2 2 0 0 0-1.995 1.85L10 16a2 2 0 1 0 2-2m0-10a3 3 0 0 0-3 3v3h6V7a3 3 0 0 0-3-3"
-              />
-            </svg>
-            CMS Login
-          </a>
+    <!-- Top navigation bar (sticky on all sizes). Brand on the left, section
+         links on the right; collapses to a hamburger dropdown on mobile. -->
+    <header class="top-navbar">
+      <div class="nav-inner">
+        <a href="#main" class="nav-brand">Saad Ahmed</a>
+        <nav class="nav-links" id="nav-links">
+          <a href="#about-section" class="nav-link">About</a>
+          <a href="#experience" class="nav-link">Experience</a>
+          <a href="#publications" class="nav-link">Publications</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#education" class="nav-link">Education</a>
+          <a href="#teaching" class="nav-link">Teaching</a>
+          <a href="#certifications" class="nav-link">Activities</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <div class="nav-tools">
           <button
             id="theme-toggle"
-            class="sidebar-link theme-toggle-btn"
+            class="nav-tool-btn theme-toggle-btn"
             type="button"
             aria-label="Toggle light/dark theme"
           >
             <svg
               class="theme-icon icon-moon"
-              viewBox="0 0 24 24"
               fill="currentColor"
+              viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path d="M0 0h24v24H0z" fill="none" />
               <path
-                fill="currentColor"
-                d="m22.78 11.12l-2.46-2.46a.3.3 0 0 1-.07-.18V5A1.25 1.25 0 0 0 19 3.75h-3.48a.3.3 0 0 1-.18-.07l-2.46-2.46a1.24 1.24 0 0 0-1.76 0L8.66 3.68a.3.3 0 0 1-.18.07H5A1.25 1.25 0 0 0 3.75 5v3.48a.3.3 0 0 1-.07.18l-2.46 2.46a1.24 1.24 0 0 0 0 1.76l2.46 2.46a.3.3 0 0 1 .07.18V19A1.25 1.25 0 0 0 5 20.25h3.48a.3.3 0 0 1 .18.07l2.46 2.46a1.24 1.24 0 0 0 1.76 0l2.46-2.46a.3.3 0 0 1 .18-.07H19A1.25 1.25 0 0 0 20.25 19v-3.48a.3.3 0 0 1 .07-.18l2.46-2.46a1.24 1.24 0 0 0 0-1.76M17 12a5 5 0 0 1-4.81 5a.21.21 0 0 1-.19-.19V7.26a.23.23 0 0 1 .08-.18a.21.21 0 0 1 .18-.08A5 5 0 0 1 17 12"
+                d="M21.752 15.002A9.718 9.718 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
               />
             </svg>
             <svg
               class="theme-icon icon-sun"
-              viewBox="0 0 24 24"
               fill="currentColor"
+              viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path d="M0 0h24v24H0z" fill="none" />
               <path
-                fill="currentColor"
-                d="m22.78 11.12l-2.46-2.46a.3.3 0 0 1-.07-.18V5A1.25 1.25 0 0 0 19 3.75h-3.48a.3.3 0 0 1-.18-.07l-2.46-2.46a1.24 1.24 0 0 0-1.76 0L8.66 3.68a.3.3 0 0 1-.18.07H5A1.25 1.25 0 0 0 3.75 5v3.48a.3.3 0 0 1-.07.18l-2.46 2.46a1.24 1.24 0 0 0 0 1.76l2.46 2.46a.3.3 0 0 1 .07.18V19A1.25 1.25 0 0 0 5 20.25h3.48a.3.3 0 0 1 .18.07l2.46 2.46a1.24 1.24 0 0 0 1.76 0l2.46-2.46a.3.3 0 0 1 .18-.07H19A1.25 1.25 0 0 0 20.25 19v-3.48a.3.3 0 0 1 .07-.18l2.46-2.46a1.24 1.24 0 0 0 0-1.76M17 12a5 5 0 0 1-4.81 5a.21.21 0 0 1-.19-.19V7.26a.23.23 0 0 1 .08-.18a.21.21 0 0 1 .18-.08A5 5 0 0 1 17 12"
+                d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z"
               />
             </svg>
-            <span class="theme-label">Dark Mode</span>
+          </button>
+          <button
+            id="nav-hamburger"
+            class="nav-tool-btn nav-hamburger"
+            type="button"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill-rule="evenodd"
+                d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm0 5.25a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75Z"
+                clip-rule="evenodd"
+              />
+            </svg>
           </button>
         </div>
-      </aside>
+      </div>
+    </header>
 
-      <!-- ===================== MAIN CONTENT ===================== -->
-      <main id="main">
-        <!-- HERO: photo, name, title, CV + Email buttons, social links.
-             CV link, email, and all social URLs are hard-coded here. -->
-        <section class="content-block hero-section">
-          <div class="hero-flex-box">
-            <div class="photo-frame">
-              <img
-                src="images/saadahmed.png"
-                alt="Saad Ahmed — Lecturer, Department of CSE, Bangladesh Army University of Science and Technology (BAUST)"
-                loading="eager"
-                width="160"
-                height="160"
-              />
-            </div>
-            <div class="meta-data-info" style="flex-grow: 1">
-              <h1><span id="profile-name">Saad Ahmed</span></h1>
-              <p id="profile-subtitle" class="title-subtitle">
-                Lecturer, Department of CSE
-              </p>
-              <p id="profile-institution" class="institution-txt">
-                Bangladesh Army University of Science and Technology (BAUST),
-                Saidpur.
-              </p>
-              <p id="profile-target" class="profile-target">
-                Seeking MSc/PhD positions for Fall 2027
-              </p>
-
-              <div class="hero-actions">
-                <a
-                  id="cv-download-btn"
-                  href="https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn btn-primary"
-                >
-                  <svg
-                    style="width: 20px; height: 20px; flex-shrink: 0"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
-                    />
-                    <path
-                      fill="currentColor"
-                      d="M12 2v6.5a1.5 1.5 0 0 0 1.5 1.5H20v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm-.989 9.848a6.22 6.22 0 0 1-2.235 3.872c-.887.716-.076 2.121.988 1.712a6.22 6.22 0 0 1 4.471 0c1.064.41 1.875-.995.988-1.712a6.22 6.22 0 0 1-2.235-3.872c-.177-1.126-1.8-1.127-1.977 0M12 14.303l.806 1.394h-1.61zm2-12.26a2 2 0 0 1 1 .543L19.414 7a2 2 0 0 1 .543 1H14z"
-                    />
-                  </svg>
-                  View CV
-                </a>
-                <a
-                  id="email-link"
-                  href="mailto:saadahmed@baust.edu.bd"
-                  class="btn btn-secondary"
-                >
-                  <svg
-                    style="width: 20px; height: 20px; flex-shrink: 0"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25a.85.85 0 1 1 .9-1.44L12 11l6.7-4.19a.85.85 0 1 1 .9 1.44"
-                    />
-                  </svg>
-                  Email Me
-                </a>
-              </div>
-            </div>
+    <div class="app-wrapper">
+      <!-- Left sidebar navigation (becomes a slide-in drawer on mobile).
+           Includes the dark-mode icon toggle at the bottom. -->
+      <!-- Left profile rail (sticky on desktop, stacks on top on mobile):
+           photo, name, role, affiliation, social links, CMS shortcut. -->
+      <aside class="profile-rail">
+        <div class="profile-card content-block">
+          <div class="photo-frame">
+            <img
+              src="images/saadahmed.png"
+              alt="Saad Ahmed — Lecturer, Department of CSE, Bangladesh Army University of Science and Technology (BAUST)"
+              loading="eager"
+              width="168"
+              height="168"
+            />
           </div>
+          <h1 class="profile-name" id="profile-name">Saad Ahmed</h1>
+          <p id="profile-subtitle" class="title-subtitle">
+            Lecturer, Department of CSE
+          </p>
+          <p id="profile-institution" class="institution-txt">
+            Bangladesh Army University of Science and Technology (BAUST),
+            Saidpur.
+          </p>
+          <p id="profile-target" class="profile-target">
+            Seeking MSc/PhD positions for Fall 2027
+          </p>
 
-          <!-- Social links (text-only). Edit URLs directly in the <a> tags. -->
           <div class="social-footer-block">
             <div class="social-badges-list">
               <a
@@ -1468,30 +1596,9 @@
                   />
                 </svg>
 
-                <span>Google Scholar</span>
+                <span>Scholar</span>
               </a>
-              <a
-                href="https://www.semanticscholar.org/author/Saad-Ahmed/2336915789"
-                class="social-badge-item semantic-scholar"
-                target="_blank"
-                rel="me noopener noreferrer"
-                title="Semantic Scholar"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 512 512"
-                >
-                  <path d="M0 0h512v512H0z" fill="none" />
-                  <path
-                    fill="currentColor"
-                    d="M379.087 75.202c18.168 40.684 25.533 83.89 32.421 127.21q-1.896.538-3.794 1.082c-.91-2.534-1.984-5.021-2.707-7.61c-5.218-18.653-10.48-37.296-15.474-56.011c-1.797-6.733-6.035-10.084-12.096-13.381c-8.901-4.842-17.313-11.084-24.69-18.046c-4.707-4.44-8.735-7.149-15.413-7.078c-44.46.47-88.925.515-133.384.924c-2.963.03-6.63 1.124-8.728 3.065c-8.089 7.484-15.671 15.514-25.642 25.556c26.3 64.04 39.522 133.84 33.845 208.044c-12.626-8.084-22.4-14.48-22.981-31.418c-2.904-84.661-29.02-161.225-83.58-227.108c-1.228-1.482-1.838-3.476-2.738-5.23zM48.73 107.847c12.663 0 25.332-.2 37.984.172c2.51.072 6.022 1.668 7.277 3.68c37.836 60.79 67.334 124.635 71.155 197.682c.018.29-.282.594-1.362 2.716c-22.612-77.293-63.404-142.735-115.872-201.39l.819-2.86zM8 161.029c18.09-.658 33.39-1.318 48.692-1.602c1.541-.03 3.36 2.009 4.65 3.443c29.848 33.202 56.936 68.281 73.633 110.235c3.177 7.98 5.351 16.36 7.989 24.555C108.379 243.235 60.254 202.538 8 161.028Zm194.474 275.77c-31.481-50.066-61.803-98.29-92.128-146.513l1.112-1.428c2.542 2.047 56.622 45.412 80.91 65.302c6.766 5.541 11.878 5.441 18.915-.274c82.584-67.085 174.737-117.862 272.583-158.809c5.223-2.185 10.64-3.916 15.983-5.816c1.186-.42 2.44-.654 4.151-.222c-113.623 65.987-222.022 138.239-301.526 247.76"
-                  />
-                </svg>
-
-                <span>Semantic Scholar</span>
-              </a>
+             
 
               <a
                 href="https://www.researchgate.net/profile/Saad-Ahmed-96"
@@ -1537,6 +1644,25 @@
 
                 <span>ORCID</span>
               </a>
+               <a
+                href="https://www.semanticscholar.org/author/Saad-Ahmed/2336915789"
+                class="social-badge-item semantic-scholar"
+                target="_blank"
+                rel="me noopener noreferrer"
+                title="Semantic Scholar"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M0 0h448v512H0z" fill="none" />
+  <path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm71.564 107.355H303.41c11.722 26.248 16.474 54.123 20.918 82.07l-2.447.7c-.588-1.635-1.282-3.238-1.748-4.908c-3.367-12.035-6.76-24.063-9.983-36.137c-1.159-4.344-3.892-6.507-7.802-8.635c-5.743-3.123-11.17-7.148-15.93-11.64c-3.037-2.865-5.635-4.614-9.943-4.569c-28.685.304-57.372.334-86.055.598c-1.912.019-4.278.724-5.63 1.977c-5.22 4.828-10.111 10.01-16.544 16.488c16.967 41.316 25.497 86.349 21.834 134.222c-8.146-5.215-14.452-9.343-14.826-20.271c-1.874-54.62-18.724-104.014-53.924-146.52c-.792-.956-1.185-2.243-1.766-3.375m-17.03 21.028c4.084-.003 8.168.024 12.25.144c1.62.047 3.885 1.078 4.695 2.375c24.41 39.22 43.44 80.41 45.906 127.537c.011.187-.182.383-.88 1.752c-14.587-49.866-40.905-92.087-74.755-129.93c.177-.613.35-1.228.527-1.843c4.085 0 8.171-.033 12.256-.035m-7.12 33.312c.994-.019 2.168 1.295 3 2.221c19.257 21.42 36.734 44.052 47.506 71.12c2.05 5.147 3.453 10.554 5.154 15.841c-22.312-35.113-53.362-61.368-87.074-88.148c11.67-.425 21.542-.85 31.414-1.034m287.12 18.97a4.4 4.4 0 0 1 1.466.134c-73.305 42.572-143.24 89.187-194.533 159.846l-59.438-94.526l.72-.92c1.64 1.321 36.529 29.297 52.198 42.13c4.365 3.574 7.663 3.51 12.203-.177c53.28-43.28 112.733-76.04 175.86-102.457c3.37-1.41 6.866-2.528 10.312-3.754a4.8 4.8 0 0 1 1.211-.277" />
+                </svg>
+
+                <span>Semantic</span>
+              </a>
               <a
                 href="https://ieeexplore.ieee.org/author/526065849930602"
                 class="social-badge-item ieee"
@@ -1550,14 +1676,11 @@
                   height="22"
                   viewBox="0 0 512 512"
                 >
-                  <path d="M0 0h512v512H0z" fill="none" />
-                  <path
-                    fill="currentColor"
-                    d="m494.415 240.764l-1.337-.22c-42.004-28.95-81.141-61.694-118.012-98.837L334.319 98.58c-16.508-18.539-32.547-39.078-47.81-58.668l-18.544-26.624c-2.273-1.403-5.107-3.727-7.618-4.407c-5.468-2.402-11.366.502-15.828 3.932l-33.556 44.28C157.13 124.641 93.407 187.717 23.884 236.065c-5.5 4.351-13.669 8.597-15.37 15.769c-1.824 6.449 1.49 11.771 5.444 15.781c55.672 38.852 108.899 84.976 156.275 137.577c8.41 8.95 15.227 17.852 23.454 26.257c13.857 18.682 30.134 37.512 42.873 57.555c3.995 4.229 4.68 11.183 10.926 13.245c4.89 1.715 10.927 2.88 15.593 0l4.638-4.72C325.321 414.855 398.376 340.6 480 280.65c8.171-7.39 23.777-10.142 24-23.861c-.583-6.33-4.22-12.566-9.585-16.024zm-55.765 22.118c-9.296 23.543-28.182 42.31-44.698 62.87c-35.73 38.965-73.42 76.67-115.613 106.746c-8.533 6.116-20.046 11.764-30.274 6.91c-31.058-16.47-57.247-43.452-84.43-68.037c-31.526-29.616-63.162-64.102-87.057-100.175c-3.553-5.06-4.553-11.305-4.45-17.98c3.071-12.452 11.493-22.7 19.46-33.196c28.233-36.457 62.816-71.035 97.74-102.622c.805-.808 2.295-2.529 3.561-3.352c14.996-13.14 29.897-24.77 45.616-36.2c16.376-12.914 36.983-2.19 50.761 9.686c14.432 11.177 29.465 23.84 42.656 36.783l2.4 1.396c36.536 34.344 70.468 72.515 98.341 112.869c4.52 7.023 8.513 14.984 5.987 24.302m-15.8-20.412c-36.073-52.883-83.416-99.714-133.583-140.629c-12.976-9.234-28.001-25.394-44.747-13.834c-52.001 36.406-102.05 85.782-142.348 136.136c-8.204 12.232-22.545 23.882-16.04 40.126c4.66 11.992 15.125 20.658 21.825 31.233c39.52 48.1 86.142 92.947 134.862 129.02c21.398 13.855 36.648-8.511 53.26-18.752c34.038-27.244 65.536-60.312 95.364-92.48v-.798c11.962-14.649 24.58-29.072 33.932-44.876c4.078-7.724 2.023-18.32-2.525-25.146M250.555 135.96l4.541-14.763h.587a3359 3359 0 0 0 29.008 80.822l-20.026.345l-.449 2.452l2.974 72.473v1.177c-7.421 1.281-16.514.913-23.797.19l-.575-.784l3.33-74.72v-.547c-5.597-.588-12.655 0-18.354-.588l22.762-66.058zm-11.821 240.948c1.938-26.599 2.273-51.156 3.631-77.69c9.22.922 17.187.583 25.602.248l.581 3.53l3.303 74.153c-11.055 1.629-22.75.716-33.116-.241zm83.884-92.439c-47.804 15.089-107.913 14.4-153.192-5.812c-8.192-3.983-18.544-10.241-21.278-19.928c-2.07-17.739 16.711-27.54 29.477-34.025c7.512-3.317 15.124-7.01 23.455-7.478c7.717 5.784 15.81 10.382 23.768 15.579c-15.487 4.167-34.031 7.739-41.2 24.89c1.251 13.032 15.828 17.171 25.93 20.396c36.569 9.829 76.022 8.568 111.087-4.36c6.61-3.932 17.074-8.654 16.165-18.34c-1.161-10.363-12.869-14.976-21.047-18.2c-5.028.693-9.806 1.842-14.466 3.352c-2.49-7.165-4.644-14.437-7.632-21.332c15.508 4.154 30.967 8.398 46.977 11.305v.326c-3.282.348-6.925 1.49-10.093 2.758v.574c9.087 4.635 21.733 12.255 21.86 24.358c-2.165 14.649-18.01 21.33-29.81 25.937z"
-                  />
+                  <path d="M0 0h448v512H0z" fill="none" />
+  <path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm176.125 64a6.7 6.7 0 0 1 2.68.568c1.62.44 3.447 1.94 4.914 2.844l11.965 17.178c9.846 12.639 20.195 25.889 30.845 37.85l26.287 27.822c23.788 23.963 49.037 45.09 76.137 63.767l.863.14c3.462 2.232 5.808 6.257 6.184 10.34c-.144 8.852-10.213 10.627-15.484 15.395c-52.661 38.678-99.793 86.582-136.957 139.922l-2.993 3.045c-3.01 1.858-6.903 1.106-10.058 0c-4.03-1.33-4.472-5.816-7.049-8.545c-8.218-12.93-18.72-25.08-27.66-37.133c-5.308-5.422-9.708-11.164-15.133-16.94c-30.565-33.935-64.905-63.693-100.822-88.759c-2.55-2.587-4.69-6.02-3.512-10.182c1.097-4.626 6.368-7.366 9.916-10.173c44.853-31.193 85.965-71.886 120.695-115.465l21.65-28.569c2.16-1.659 4.838-3.128 7.532-3.105m-.926 41.275c-3.617.068-7.184 1.182-10.486 3.786c-10.141 7.374-19.755 14.877-29.43 23.355c-.817.53-1.778 1.643-2.297 2.164c-22.532 20.378-44.844 42.687-63.058 66.207c-5.14 6.772-10.573 13.382-12.555 21.416c-.067 4.307.579 8.337 2.871 11.602c15.416 23.273 35.826 45.521 56.166 64.629c17.537 15.86 34.433 33.268 54.47 43.894c6.6 3.131 14.027-.513 19.532-4.459c27.221-19.404 51.538-43.728 74.59-68.867c10.655-13.264 22.84-25.373 28.838-40.563c1.63-6.01-.948-11.146-3.863-15.677c-17.983-26.035-39.876-50.662-63.448-72.819l-1.547-.902c-8.51-8.35-18.208-16.52-27.52-23.73c-6.11-5.268-14.305-10.185-22.263-10.036m1.285 7.752c7.677.066 14.7 7.048 20.979 11.516c32.365 26.397 62.908 56.61 86.182 90.728c2.934 4.405 4.26 11.24 1.628 16.223c-6.033 10.197-14.175 19.503-21.892 28.953v.514c-19.244 20.754-39.564 42.088-61.524 59.664c-10.717 6.607-20.556 21.038-34.36 12.1c-31.433-23.273-61.511-52.208-87.009-83.24c-4.322-6.823-11.075-12.413-14.08-20.15c-4.197-10.48 5.055-17.996 10.348-25.888c25.999-32.486 58.289-64.342 91.838-87.83c2.7-1.864 5.332-2.611 7.89-2.59m-1.068 24.004l-2.928 9.524l-14.685 42.617c3.677.38 8.23 0 11.842.379v.353l-2.149 48.207l.371.506c4.699.466 10.564.704 15.352-.123v-.76L229.3 222.98l.289-1.583l12.92-.222a2167 2167 0 0 1-18.715-52.143zm-34.848 61.953c-5.374.302-10.286 2.685-15.132 4.825c-8.236 4.184-20.354 10.508-19.018 21.953c1.764 6.249 8.443 10.286 13.728 12.855c29.213 13.04 67.991 13.485 98.833 3.75h.001c7.614-2.972 17.835-7.283 19.23-16.734c-.08-7.809-8.238-12.724-14.1-15.715v-.37c2.043-.818 4.394-1.554 6.511-1.778v-.211c-10.33-1.875-20.303-4.613-30.308-7.293c1.927 4.448 3.317 9.138 4.923 13.761a54 54 0 0 1 9.334-2.162c5.276 2.08 12.83 5.057 13.578 11.742c.587 6.25-6.165 9.296-10.43 11.832c-22.622 8.34-48.074 9.154-71.667 2.813c-6.517-2.08-15.923-4.75-16.73-13.158c4.625-11.065 16.59-13.37 26.581-16.059c-5.134-3.353-10.355-6.32-15.334-10.05m26.635 52.899c-.876 17.118-1.091 32.962-2.342 50.123c6.688.617 14.234 1.205 21.366.154l-2.131-47.84l-.375-2.277c-5.43.216-10.57.434-16.518-.16" />
                 </svg>
 
-                <span>IEEE Xplore</span>
+                <span>IEEE</span>
               </a>
 
               <a
@@ -1616,20 +1739,49 @@
               </a>
             </div>
           </div>
-        </section>
 
+          <a
+            href="https://app.pagescms.org/saadbaust/saadbaust.github.io"
+            class="profile-cms"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Edit publications &amp; stats in the CMS"
+          >
+            <svg
+              style="width: 16px; height: 16px; flex-shrink: 0"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path
+                fill="currentColor"
+                d="M12 2a5 5 0 0 1 5 5v3a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3V7a5 5 0 0 1 5-5m0 12a2 2 0 0 0-1.995 1.85L10 16a2 2 0 1 0 2-2m0-10a3 3 0 0 0-3 3v3h6V7a3 3 0 0 0-3-3"
+              />
+            </svg>
+            CMS Login
+          </a>
+        </div>
+      </aside>
+
+      <!-- ===================== MAIN CONTENT ===================== -->
+      <main id="main">
         <!-- ABOUT (hard-coded). -->
         <section id="about-section" class="content-block">
-          <h2 class="section-heading">About Me</h2>
+          <h2 class="about-greeting">
+            Hello, this is <span class="greeting-name">Saad</span>,
+          </h2>
           <p id="about-p1" class="about-paragraph">
-            Lecturer in CSE with a B.Sc. CGPA of
-            <strong>3.96 out of 4.00</strong> (1st position) and ongoing M.Sc.
-            at RUET. Combines formal academic career, course design, and student
-            mentorship experience with an active publication record in machine
-            learning, lightweight deep learning, computer vision, and XAI.
-            Current research focuses on video data analytics and multimodal
-            architectures. Seeking a Ph.D. or research-focused M.Sc.
-            opportunity.
+            I'm a Lecturer in the Department of CSE at Bangladesh Army
+            University of Science and Technology (BAUST), Saidpur. I completed
+            my B.Sc. in CSE with a CGPA of
+            <strong>3.96 out of 4.00</strong> (1st position) and am currently
+            pursuing my M.Sc. at RUET. I combine a formal academic career,
+            course design, and student mentorship with an active publication
+            record in machine learning, lightweight deep learning, computer
+            vision, and explainable AI (XAI). My current research focuses on
+            video data analytics and multimodal architectures, and I'm seeking a
+            Ph.D. or research-focused M.Sc. opportunity.
           </p>
           <h3 class="interests-title">Core Research Focus:</h3>
           <ul class="interests-list">
@@ -1638,6 +1790,48 @@
             <li>Explainable AI</li>
             <li>Multimodal Architectures</li>
           </ul>
+          <div class="about-actions">
+            <a
+              id="cv-download-btn"
+              href="https://drive.google.com/file/d/1QLg1CEy51joq-QIzeS2zyTFx0I3CEQXT/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary"
+            >
+              <svg
+                style="width: 20px; height: 20px; flex-shrink: 0"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+                />
+                <path
+                  fill="currentColor"
+                  d="M12 2v6.5a1.5 1.5 0 0 0 1.5 1.5H20v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm-.989 9.848a6.22 6.22 0 0 1-2.235 3.872c-.887.716-.076 2.121.988 1.712a6.22 6.22 0 0 1 4.471 0c1.064.41 1.875-.995.988-1.712a6.22 6.22 0 0 1-2.235-3.872c-.177-1.126-1.8-1.127-1.977 0M12 14.303l.806 1.394h-1.61zm2-12.26a2 2 0 0 1 1 .543L19.414 7a2 2 0 0 1 .543 1H14z"
+                />
+              </svg>
+              View CV
+            </a>
+            <a
+              id="email-link"
+              href="mailto:saadahmed@baust.edu.bd"
+              class="btn btn-secondary"
+            >
+              <svg
+                style="width: 20px; height: 20px; flex-shrink: 0"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25a.85.85 0 1 1 .9-1.44L12 11l6.7-4.19a.85.85 0 1 1 .9 1.44"
+                />
+              </svg>
+              Email Me
+            </a>
+          </div>
         </section>
 
         <!-- EXPERIENCE (hard-coded timeline). -->
@@ -1915,7 +2109,7 @@
          Theme toggle, mobile drawer, scroll-spy, BibTeX parsing/rendering,
          and the CMS data loader (stats + teaching courses from data.json). -->
     <script>
-      // ── Theme toggle (desktop + mobile) ──────────────────────────────
+      // \u2500\u2500 Theme toggle \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
       function syncThemeLabel() {
         const isDark = document.documentElement.classList.contains("dark");
         document.querySelectorAll(".theme-label").forEach((el) => {
@@ -1932,20 +2126,27 @@
         ?.addEventListener("click", toggleTheme);
       syncThemeLabel();
 
-      const sections = document.querySelectorAll("section[id]");
-      const navLinks = document.querySelectorAll(
-        '#sidebar .sidebar-link[href^="#"]',
-      );
-      // The "Home" link uses href="index.html", so it is NOT in navLinks above.
-      // Track it separately, otherwise it stays highlighted alongside whatever
-      // section you've scrolled to (two active links at once).
-      const homeLink = document.querySelector(
-        '#sidebar .sidebar-link[href="index.html"]',
-      );
+      // \u2500\u2500 Mobile nav dropdown \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+      const hamburger = document.getElementById("nav-hamburger");
+      const navLinksEl = document.getElementById("nav-links");
+      if (hamburger && navLinksEl) {
+        hamburger.addEventListener("click", () => {
+          const open = navLinksEl.classList.toggle("open");
+          hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+        });
+        navLinksEl.querySelectorAll("a").forEach((a) =>
+          a.addEventListener("click", () => {
+            navLinksEl.classList.remove("open");
+            hamburger.setAttribute("aria-expanded", "false");
+          }),
+        );
+      }
 
-      // Scroll-spy via IntersectionObserver — no per-scroll layout reads.
-      // A section counts as "current" while it crosses a thin band near the
-      // top of the viewport (just below the sticky header).
+      // \u2500\u2500 Scroll-spy (highlights the active section in the navbar) \u2500\u2500
+      const sections = document.querySelectorAll("main section[id]");
+      const navLinks = document.querySelectorAll(
+        '#nav-links .nav-link[href^="#"]',
+      );
       const navMap = {};
       navLinks.forEach((link) => {
         navMap[link.getAttribute("href").slice(1)] = link;
@@ -1955,9 +2156,7 @@
         if (id === activeNavId) return;
         activeNavId = id;
         navLinks.forEach((link) => link.classList.remove("active"));
-        if (homeLink) homeLink.classList.remove("active");
         if (id && navMap[id]) navMap[id].classList.add("active");
-        else if (homeLink) homeLink.classList.add("active");
       }
 
       if ("IntersectionObserver" in window && sections.length) {
@@ -1970,43 +2169,16 @@
               else visibleTops.delete(e.target.id);
             });
             if (visibleTops.size) {
-              // topmost section currently in the band
               const topId = [...visibleTops.entries()].sort(
                 (a, b) => a[1] - b[1],
               )[0][0];
               setActiveNav(topId);
-            } else {
-              // Above the first section → Home; below the last → keep last.
-              const firstTop = sections[0] ? sections[0].offsetTop : 0;
-              setActiveNav(window.scrollY < firstTop ? null : activeNavId);
             }
           },
-          { rootMargin: "-72px 0px -70% 0px", threshold: 0 },
+          { rootMargin: "-80px 0px -70% 0px", threshold: 0 },
         );
         sections.forEach((sec) => spy.observe(sec));
       }
-
-      const sidebar = document.getElementById("sidebar");
-      const overlay = document.getElementById("mobile-menu-overlay");
-      const openBtn = document.getElementById("mobile-menu-btn");
-
-      if (openBtn && sidebar && overlay) {
-        const toggleMenu = (status) => {
-          sidebar.classList.toggle("open", status);
-          overlay.classList.toggle("visible", status);
-        };
-        openBtn.addEventListener("click", () =>
-          toggleMenu(!sidebar.classList.contains("open")),
-        );
-        overlay.addEventListener("click", () => toggleMenu(false));
-        sidebar
-          .querySelectorAll("a")
-          .forEach((a) => a.addEventListener("click", () => toggleMenu(false)));
-      }
-
-      document
-        .getElementById("theme-toggle-mobile")
-        ?.addEventListener("click", toggleTheme);
 
       // ── Animated stat counters ───────────────────────────────────────
       // Each stat starts at 0 and counts up to its target. Targets come from
