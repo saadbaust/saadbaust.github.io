@@ -138,7 +138,9 @@
             "familyName": "Ahmed",
             "description": "Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST), and a researcher in Image Processing, Computer Vision, and Deep Learning.",
             "url": "https://saadbaust.github.io/",
-            "mainEntityOfPage": { "@id": "https://saadbaust.github.io/#webpage" },
+            "mainEntityOfPage": {
+              "@id": "https://saadbaust.github.io/#webpage"
+            },
             "image": { "@id": "https://saadbaust.github.io/#profile-image" },
             "jobTitle": "Lecturer",
             "email": "saadahmed@baust.edu.bd",
@@ -203,11 +205,9 @@
     <!-- Apply saved/system theme BEFORE first paint to avoid a light/dark flash. -->
     <script>
       (function () {
-        var t =
-          localStorage.getItem("theme") ||
-          (window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light");
+        // Default to light (white) mode. Only switch to dark if the visitor
+        // has manually chosen it before. No automatic OS-based dark mode.
+        var t = localStorage.getItem("theme") || "light";
         document.documentElement.classList.toggle("dark", t === "dark");
       })();
     </script>
@@ -512,6 +512,23 @@
         color: var(--text-muted);
         margin-top: 4px;
       }
+      /* "Seeking positions" line shown in a subtle white card under the role. */
+      .profile-target {
+        display: inline-block;
+        margin-top: 13px;
+        padding: 5px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        line-height: 1.5;
+        color: var(--text-main);
+        background: #ffffff;
+        border: 1px solid var(--border-divider);
+        border-radius: 10px;
+      }
+      /* In dark mode a white card + light text would vanish — keep it readable. */
+      html.dark .profile-target {
+        background: var(--badge-bg);
+      }
 
       .section-heading {
         font-size: 1.4rem;
@@ -662,28 +679,53 @@
         margin-top: 6px;
         text-align: justify;
       }
+      /* Bulleted job description with small dots. */
+      .job-desc-list {
+        list-style: none;
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .job-desc-list li {
+        position: relative;
+        padding-left: 16px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+      }
+      .job-desc-list li::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 0.62em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--brand-color);
+      }
 
       /* Publications & Stats structure */
+      /* Small, centered stat boxes. Cards don't stretch, so they stay compact
+         and the group sits centered; restoring i10-index just adds one more
+         centered box (no edit needed here). */
       .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
         margin-bottom: 28px;
       }
-      @media (max-width: 560px) {
-        .stats-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
       .stat-card {
+        flex: 0 1 125px;
         background: var(--badge-bg);
         border: 1px solid var(--border-divider);
-        padding: 16px;
+        padding: 10px 12px;
         border-radius: 12px;
         text-align: center;
       }
       .stat-num {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
         font-weight: 700;
         color: var(--brand-color);
         line-height: 1.2;
@@ -746,7 +788,7 @@
 
       .pub-title {
         font-weight: 600;
-        font-size: 0.980rem;
+        font-size: 0.98rem;
         color: var(--text-main);
         margin-bottom: 4px;
       }
@@ -970,6 +1012,7 @@
       .social-badges-list {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         gap: 8px;
       }
       .social-badge-item {
@@ -1239,6 +1282,7 @@
           <a href="#about-section" class="sidebar-link">About Me</a>
           <a href="#experience" class="sidebar-link">Experience</a>
           <a href="#publications" class="sidebar-link">Publications</a>
+          <a href="#projects" class="sidebar-link">Projects</a>
           <a href="#education" class="sidebar-link">Education</a>
           <a href="#teaching" class="sidebar-link">Teaching</a>
           <a href="#certifications" class="sidebar-link">Activities</a>
@@ -1325,6 +1369,9 @@
               <p id="profile-institution" class="institution-txt">
                 Bangladesh Army University of Science and Technology (BAUST),
                 Saidpur.
+              </p>
+              <p id="profile-target" class="profile-target">
+                Seeking MSc/PhD positions for Fall 2027
               </p>
 
               <div class="hero-actions">
@@ -1575,17 +1622,21 @@
         <section id="about-section" class="content-block">
           <h2 class="section-heading">About Me</h2>
           <p id="about-p1" class="about-paragraph">
-            I am a Lecturer at the Department of CSE, Bangladesh Army University
-            of Science and Technology (BAUST). My research interests focus on
-            Image Processing, Computer Vision, and Deep Learning, with a
-            dedication to developing intelligent systems that solve real-world
-            problems and contribute to the global advancement of technology.
+            Lecturer in CSE with a B.Sc. CGPA of
+            <strong>3.96 out of 4.00</strong> (1st position) and ongoing M.Sc.
+            at RUET. Combines formal academic career, course design, and student
+            mentorship experience with an active publication record in machine
+            learning, lightweight deep learning, computer vision, and XAI.
+            Current research focuses on video data analytics and multimodal
+            architectures. Seeking a Ph.D. or research-focused M.Sc.
+            opportunity.
           </p>
           <h3 class="interests-title">Core Research Focus:</h3>
           <ul class="interests-list">
-            <li>Image Processing</li>
             <li>Computer Vision</li>
             <li>Deep Learning</li>
+            <li>Explainable AI</li>
+            <li>Multimodal Architectures</li>
           </ul>
         </section>
 
@@ -1605,11 +1656,14 @@
                 Dept. of CSE, Bangladesh Army University of Science and
                 Technology (BAUST)
               </p>
-              <p class="job-desc">
-                Developing and delivering lectures for undergraduate students,
-                advising on academic planning, conducting Computer Science
-                research, and organizing academic events.
-              </p>
+              <ul class="job-desc-list">
+                <li>
+                  Developing and delivering lectures for undergraduate students
+                </li>
+                <li>Advising on academic planning</li>
+                <li>Conducting Computer Science research</li>
+                <li>Organizing academic events</li>
+              </ul>
             </div>
           </div>
         </section>
@@ -1633,12 +1687,19 @@
               <div id="stat-hindex" class="stat-num" data-target="3">0</div>
               <div class="stat-lbl">h-index</div>
             </div>
+            <!--
+              i10-index is hidden for now (currently 0). Uncomment this card in
+              the future once the i10-index is greater than 0 to show it again;
+              the stats grid expands from 3 to 4 cards automatically.
             <div class="stat-card">
               <div id="stat-i10index" class="stat-num" data-target="0">0</div>
               <div class="stat-lbl">i10-index</div>
             </div>
+            -->
             <div class="stat-card">
-              <div id="stat-publications" class="stat-num" data-target="0">0</div>
+              <div id="stat-publications" class="stat-num" data-target="0">
+                0
+              </div>
               <div class="stat-lbl">Total Pubs</div>
             </div>
           </div>
@@ -1648,6 +1709,33 @@
 
           <h3 class="pub-subheading">Conference Papers</h3>
           <div id="conference-container"></div>
+        </section>
+
+        <!-- RESEARCH PROJECTS (hard-coded, numbered like the publication list). -->
+        <section id="projects" class="content-block">
+          <div class="section-heading-wrap">
+            <h2 class="section-heading" style="margin-bottom: 0">
+              Research Projects
+            </h2>
+          </div>
+          <div id="projects-container">
+            <div class="pub-row-item">
+              <span class="pub-row-idx">
+                <span class="pub-idx-num">[1]</span>
+                <span class="pub-idx-year">2025&ndash;2026</span>
+              </span>
+              <div class="pub-row-content">
+                <h4 class="pub-title">
+                  AI-Powered Automated Exam Evaluation and OBE-Based University
+                  Assessment System
+                </h4>
+                <p class="pub-venue">
+                  <span>Funded by BAC</span>
+                  <span class="pub-meta-badge">Ongoing</span>
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- EDUCATION (hard-coded timeline). -->
@@ -1665,7 +1753,8 @@
                 <span class="edu-duration">Mar 2025 – Present</span>
               </div>
               <p class="edu-school">
-                Rajshahi University of Engineering &amp; Technology (RUET), Rajshahi.
+                Rajshahi University of Engineering &amp; Technology (RUET),
+                Rajshahi.
               </p>
               <p class="edu-grade">Ongoing</p>
             </div>
@@ -1678,7 +1767,8 @@
                 <span class="edu-duration">Jul 2020 – Jul 2024</span>
               </div>
               <p class="edu-school">
-                Bangladesh Army University of Science and Technology (BAUST), Saidpur.
+                Bangladesh Army University of Science and Technology (BAUST),
+                Saidpur.
               </p>
               <p class="edu-grade">CGPA: 3.91 out of 4.00 (Ranked 1st)</p>
             </div>
@@ -1842,23 +1932,6 @@
         ?.addEventListener("click", toggleTheme);
       syncThemeLabel();
 
-      // Follow the device theme LIVE — but only while the visitor hasn't made a
-      // manual choice. The inline <head> script already applies the device
-      // theme on first load; this keeps the page in sync if the OS switches
-      // light/dark while the page is open. Once the visitor clicks the toggle,
-      // their saved preference in localStorage wins and this stops overriding.
-      const deviceTheme = window.matchMedia("(prefers-color-scheme: dark)");
-      const onDeviceThemeChange = (e) => {
-        if (localStorage.getItem("theme")) return; // manual choice set → leave it
-        document.documentElement.classList.toggle("dark", e.matches);
-        syncThemeLabel();
-      };
-      if (deviceTheme.addEventListener) {
-        deviceTheme.addEventListener("change", onDeviceThemeChange);
-      } else if (deviceTheme.addListener) {
-        deviceTheme.addListener(onDeviceThemeChange); // older Safari
-      }
-
       const sections = document.querySelectorAll("section[id]");
       const navLinks = document.querySelectorAll(
         '#sidebar .sidebar-link[href^="#"]',
@@ -1892,7 +1965,8 @@
         const spy = new IntersectionObserver(
           (entries) => {
             entries.forEach((e) => {
-              if (e.isIntersecting) visibleTops.set(e.target.id, e.target.offsetTop);
+              if (e.isIntersecting)
+                visibleTops.set(e.target.id, e.target.offsetTop);
               else visibleTops.delete(e.target.id);
             });
             if (visibleTops.size) {
@@ -2191,7 +2265,8 @@
           const data = await res.json();
 
           const stats = (data && data.stats) || {};
-          if (stats.citations != null) setStat("stat-citations", stats.citations);
+          if (stats.citations != null)
+            setStat("stat-citations", stats.citations);
           if (stats.hIndex != null) setStat("stat-hindex", stats.hIndex);
           if (stats.i10Index != null) setStat("stat-i10index", stats.i10Index);
 
