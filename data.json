@@ -1,3 +1,28 @@
+/*
+═══════════════════════════════════════════════════════════════════════════
+DATA FILE FOR CMS (JSON Format)
+
+Managed via Pages CMS: https://app.pagescms.org/saadbaust/saadbaust.github.io
+
+Two data sets:
+1. stats: Research metrics (citations, h-index, i10-index)
+   - Displayed in the Publications section
+   - Editable in CMS → "Stats & Teaching Courses" → Stats tab
+
+2. courses: Teaching duties (course list for the Teaching table)
+   - Editable in CMS → "Stats & Teaching Courses" → Teaching Courses tab
+   - Each entry becomes one row in the "Teaching Duties" table
+   - Reorderable via drag-drop in CMS
+
+Update workflow:
+   1. Edit values in CMS
+   2. Click "Save"
+   3. Auto-commits to GitHub
+   4. Site fetches updated data.json within 60 seconds
+   5. Animated counters and table refresh on page
+
+═══════════════════════════════════════════════════════════════════════════
+*/
 {
   "stats": {
     "citations": 18,
@@ -38,26 +63,26 @@
     {
       "code": "CSE 1100",
       "title": "Introduction to Computer System Sessional",
-      "semesters": " Summer-2024"
+      "semesters": "Summer-2024"
     },
     {
-      "code": "CSE 1208 ",
+      "code": "CSE 1208",
       "title": "Numerical Methods Sessional",
-      "semesters": " Summer-2024, Winter-2025"
+      "semesters": "Summer-2024, Winter-2025"
     },
     {
       "code": "CSE 2104",
       "title": "Data Structures and Algorithm I Sessional",
-      "semesters": " Summer-2024"
+      "semesters": "Summer-2024"
     },
     {
       "code": "CSE 3202",
-      "title": "Artificial Intelligence Sessional ",
-      "semesters": " Summer-2024"
+      "title": "Artificial Intelligence Sessional",
+      "semesters": "Summer-2024"
     },
     {
-      "code": "CSE 2206 ",
-      "title": "Database Management Systems Sessional ",
+      "code": "CSE 2206",
+      "title": "Database Management Systems Sessional",
       "semesters": "Winter-2025"
     }
   ]

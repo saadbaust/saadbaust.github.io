@@ -3,8 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- SEO: title, description, keywords, canonical, Open Graph + Twitter cards.
-         Update these by hand if the role, name, or summary changes. -->
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         SEO Meta Tags: title, description, keywords, canonical, Open Graph.
+         Update these manually when role, name, institution, or summary changes.
+         These tags control how the page appears in search engines and social media.
+         ═══════════════════════════════════════════════════════════════════════ -->
     <title>Saad Ahmed | Lecturer &amp; Researcher | BAUST</title>
     <meta
       name="description"
@@ -76,8 +79,12 @@
       content="Saad Ahmed — Lecturer at BAUST, Researcher in Image Processing and Computer Vision"
     />
 
-    <!-- Structured data (schema.org) for rich results. Static — update by hand,
-         and keep "dateModified" in sync with <lastmod> in sitemap.xml. -->
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         Structured Data (JSON-LD): Schema.org markup for rich search results.
+         Enables Google to display enhanced profile cards and academic credentials.
+         IMPORTANT: Keep "dateModified" here synchronized with sitemap.xml <lastmod>.
+         Update both whenever content changes significantly.
+         ═══════════════════════════════════════════════════════════════════════ -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -127,7 +134,7 @@
             },
             "image": { "@id": "https://saadbaust.github.io/#profile-image" },
             "mainEntity": { "@id": "https://saadbaust.github.io/#person" },
-            "dateModified": "2026-06-24"
+            "dateModified": "2026-06-25"
           },
           {
             "@type": "Person",
@@ -220,8 +227,11 @@
       rel="stylesheet"
     />
 
-    <!-- All styling lives here. Colors are CSS variables in :root (light) and
-         html.dark (dark). No external stylesheet. -->
+    <!-- ═══════════════════════════════════════════════════════════════════════
+         All Styling: Inline CSS with CSS custom properties for theming.
+         Light mode colors in :root | Dark mode overrides in html.dark
+         No external stylesheets, fonts loaded from Google Fonts CDN.
+         ═══════════════════════════════════════════════════════════════════════ -->
     <style>
       :root {
         --bg-main: linear-gradient(180deg, #f8f9fd 0%, #edf0f7 100%);
@@ -292,7 +302,7 @@
         background: #cbd5e1;
         border-radius: 9999px;
       }
-      .dark ::-webkit-scrollbar-thumb {
+      html.dark ::-webkit-scrollbar-thumb {
         background: #334155;
       }
       ::-webkit-scrollbar-thumb:hover {
@@ -350,7 +360,8 @@
         white-space: nowrap;
         border-width: 0;
       }
-      /* Reveal the "Skip to content" link when keyboard-focused. */
+      /* Keyboard accessibility: Reveal "Skip to content" link when focused.
+         Essential for screen reader and keyboard-only navigation users. */
       .sr-only:focus {
         position: fixed;
         top: 12px;
@@ -371,8 +382,8 @@
         z-index: 100;
       }
 
-      /* Native smooth anchor scrolling + offset so sections don't land under
-         the sticky mobile header; stable gutter prevents layout shift. */
+      /* Scroll behavior: Smooth anchoring with padding to account for sticky header.
+         Stable gutter prevents content shift when scrollbar appears/disappears. */
       html {
         scroll-behavior: smooth;
         scroll-padding-top: 80px;
@@ -600,7 +611,8 @@
         line-height: 1;
       }
 
-      /* Timeline structures */
+      /* Timeline Layout: Experience and Education sections use this structure.
+         Vertical line with dots for each entry, positioned to the left. */
       .timeline-container {
         position: relative;
         padding-left: 28px;
@@ -705,10 +717,10 @@
         background: var(--brand-color);
       }
 
-      /* Publications & Stats structure */
-      /* Small, centered stat boxes. Cards don't stretch, so they stay compact
-         and the group sits centered; restoring i10-index just adds one more
-         centered box (no edit needed here). */
+      /* Stats Grid & Publication Cards: Research metrics display.
+         Small centered cards (Citations, h-index, Total Pubs) that expand/collapse.
+         i10-index card is hidden by default (commented out) but can be uncommented
+         when the value becomes > 0. Grid auto-adjusts with flexbox. */
       .stats-grid {
         display: flex;
         flex-wrap: wrap;
@@ -825,7 +837,8 @@
         text-transform: uppercase;
       }
 
-      /* Skills arrays layouts */
+      /* Skills Section: Tag-based layout for technical competencies.
+         Flex wrap for responsive arrangement across screen sizes. */
       .skills-category-title {
         font-size: 0.95rem;
         font-weight: 600;
@@ -854,7 +867,8 @@
         color: var(--text-main);
       }
 
-      /* Teaching Table Layout styling */
+      /* Teaching Table: Course list layout with responsive scrolling.
+         Populated from data.json via CMS; static fallback in HTML as no-JS backup. */
       .table-wrapper {
         width: 100%;
         overflow-x: auto;
@@ -895,7 +909,8 @@
         white-space: nowrap;
       }
 
-      /* Standard Academic Lists (Certificates & Contacts) */
+      /* Academic Lists: Bulleted lists for certifications, activities, contacts.
+         Uses bullet styling with brand color accent dots. */
       .academic-list {
         list-style: none;
         display: flex;
@@ -935,7 +950,8 @@
         margin-right: 4px;
       }
 
-      /* Hero Actions content */
+      /* Hero Section: Profile photo, name, title, and action buttons (CV, Email).
+         Flexbox layout that stacks vertically on mobile. */
       .hero-section {
         position: relative;
       }
@@ -1003,7 +1019,8 @@
         background-color: #334155;
       }
 
-      /* Social Links badge arrays */
+      /* Social Links: Profile badges for LinkedIn, Scholar, GitHub, etc.
+         Hover effects with platform-specific colors. Center-aligned on mobile. */
       .social-footer-block {
         margin-top: 20px;
         padding-top: 20px;
@@ -1156,7 +1173,8 @@
         }
       }
 
-      /* Back-to-top floating button */
+      /* Back-to-Top Button: Fixed position button appears after scrolling 400px.
+         Smooth scroll animation, accessible with aria-label. */
       .back-to-top {
         position: fixed;
         bottom: 24px;
@@ -1207,8 +1225,12 @@
           right: 18px;
         }
       }
-      /* ===================== OMAR-STYLE LAYOUT ===================== */
-      /* Top navigation bar */
+      /* ═══════════════════════════════════════════════════════════════════════
+         Desktop Layout: Top navbar + left profile rail + main content area.
+         Responsive: Collapses to hamburger menu and stacked layout on mobile (<1024px).
+         ═══════════════════════════════════════════════════════════════════════ */
+
+      /* Top Navigation Bar: Sticky header with brand name, section links, theme toggle. */
       .top-navbar {
         position: sticky;
         top: 0;
@@ -1317,7 +1339,8 @@
         display: none;
       }
 
-      /* Sticky left profile rail */
+      /* Left Profile Rail: Sticky sidebar on desktop with photo, name, social links.
+         Becomes a stacked card above main content on mobile screens. */
       .app-wrapper {
         align-items: flex-start;
       }
@@ -1396,7 +1419,11 @@
         border-top: 1px solid var(--border-divider);
       }
 
-      /* Responsive: collapse navbar + stack the profile rail */
+      /* Mobile Responsive (max-width: 1024px):
+         - Hamburger menu for nav links (appears in collapsed state)
+         - Profile rail stacks above main content
+         - Single-column layout, centered text
+         - Adjusted spacing and touch-friendly sizes */
       @media (max-width: 1024px) {
         .nav-inner {
           height: 58px;
@@ -1527,10 +1554,11 @@
     </header>
 
     <div class="app-wrapper">
-      <!-- Left sidebar navigation (becomes a slide-in drawer on mobile).
-           Includes the dark-mode icon toggle at the bottom. -->
-      <!-- Left profile rail (sticky on desktop, stacks on top on mobile):
-           photo, name, role, affiliation, social links, CMS shortcut. -->
+      <!-- ═══════════════════════════════════════════════════════════════════════
+           LEFT PROFILE RAIL
+           Profile card with photo, name, title, institution, social links, CMS link.
+           Desktop: Sticky sidebar | Mobile: Stacks above main content
+           ═══════════════════════════════════════════════════════════════════════ -->
       <aside class="profile-rail">
         <div class="profile-card content-block">
           <div class="photo-frame">
@@ -1604,8 +1632,6 @@
 
                 <span>Scholar</span>
               </a>
-             
-
               <a
                 href="https://www.researchgate.net/profile/Saad-Ahmed-96"
                 class="social-badge-item researchgate"
@@ -1770,9 +1796,15 @@
         </div>
       </aside>
 
-      <!-- ===================== MAIN CONTENT ===================== -->
+      <!-- ═══════════════════════════════════════════════════════════════════════
+           MAIN CONTENT AREA
+           All sections are hard-coded HTML except:
+           - Publications: Rendered from publications.bib via JavaScript
+           - Teaching: Rows populated from data.json (CMS-managed)
+           - Stats: Animated counters from data.json (CMS-managed)
+           ═══════════════════════════════════════════════════════════════════════ -->
       <main id="main">
-        <!-- ABOUT (hard-coded). -->
+        <!-- ABOUT SECTION: Hard-coded biography, research focus, action buttons. -->
         <section id="about-section" class="content-block">
           <h2 class="about-greeting">
             Hello, this is <span class="greeting-name">Saad</span>,
@@ -1840,7 +1872,7 @@
           </div>
         </section>
 
-        <!-- EXPERIENCE (hard-coded timeline). -->
+        <!-- EXPERIENCE SECTION: Hard-coded timeline of positions and roles. -->
         <section id="experience" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">Experience</h2>
@@ -1850,7 +1882,7 @@
               <div class="timeline-dot"></div>
               <div class="timeline-header">
                 <h3 class="job-title">Lecturer</h3>
-                <span class="job-duration">July 2024 – Present</span>
+                <span class="job-duration">July 2024 &ndash; Present</span>
               </div>
               <p class="company-name">
                 Dept. of CSE, Bangladesh Army University of Science and
@@ -1868,10 +1900,10 @@
           </div>
         </section>
 
-        <!-- PUBLICATIONS (CMS-driven).
-             Stat cards: Total Pubs is auto-counted from publications.bib;
-             Citations + h-index come from data.json. The journal/conference
-             lists are rendered from publications.bib by loadPublications(). -->
+        <!-- PUBLICATIONS SECTION: CMS-driven with JavaScript rendering.
+             - Stat cards: Total Pubs auto-counted from BibTeX, Citations/h-index from CMS
+             - Journal/Conference lists: Parsed & rendered from publications.bib by loadPublications()
+             - Data fetches: Async fetch() calls that populate containers on page load -->
         <section id="publications" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">
@@ -1911,7 +1943,7 @@
           <div id="conference-container"></div>
         </section>
 
-        <!-- RESEARCH PROJECTS (hard-coded, numbered like the publication list). -->
+        <!-- RESEARCH PROJECTS SECTION: Hard-coded list with index numbering (matches publication style). -->
         <section id="projects" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">
@@ -1938,7 +1970,7 @@
           </div>
         </section>
 
-        <!-- EDUCATION (hard-coded timeline). -->
+        <!-- EDUCATION SECTION: Hard-coded timeline of degrees and institutions. -->
         <section id="education" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">Education</h2>
@@ -1950,7 +1982,7 @@
                 <h3 class="edu-degree">
                   M.Sc. Engineering in Computer Science and Engineering
                 </h3>
-                <span class="edu-duration">Mar 2025 – Present</span>
+                <span class="edu-duration">March 2025 &ndash; Present</span>
               </div>
               <p class="edu-school">
                 Rajshahi University of Engineering &amp; Technology (RUET),
@@ -1964,20 +1996,21 @@
                 <h3 class="edu-degree">
                   B.Sc. Engineering in Computer Science and Engineering
                 </h3>
-                <span class="edu-duration">Jul 2020 – Jul 2024</span>
+                <span class="edu-duration">July 2020 &ndash; July 2024</span>
               </div>
               <p class="edu-school">
                 Bangladesh Army University of Science and Technology (BAUST),
                 Saidpur.
               </p>
-              <p class="edu-grade">CGPA: 3.91 out of 4.00 (Ranked 1st)</p>
+              <p class="edu-grade">CGPA: 3.96 out of 4.00 (Ranked 1st)</p>
             </div>
           </div>
         </section>
 
-        <!-- TEACHING (CMS-driven).
-             The rows below are a static fallback; loadData() replaces them with
-             the "courses" list from data.json (edited in the CMS). -->
+        <!-- TEACHING SECTION: CMS-driven table with fallback.
+             - Static HTML rows below are a no-JS fallback
+             - loadData() fetches courses from data.json and populates the table
+             - Edited via Pages CMS "Stats & Teaching Courses" interface -->
         <section id="teaching" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">Teaching</h2>
@@ -2031,7 +2064,7 @@
           </div>
         </section>
 
-        <!-- CERTIFICATIONS & ACTIVITIES (hard-coded). -->
+        <!-- CERTIFICATIONS & ACTIVITIES SECTION: Hard-coded bulleted list. -->
         <section id="certifications" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">
@@ -2050,7 +2083,7 @@
           </ul>
         </section>
 
-        <!-- CONTACT (hard-coded). -->
+        <!-- CONTACT SECTION: Hard-coded contact details (email, phone). -->
         <section id="contact" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">
@@ -2089,7 +2122,7 @@
       </main>
     </div>
 
-    <!-- Back-to-top button (appears after scrolling down). -->
+    <!-- Back-to-Top Button: Fixed position, animates in after 400px scroll. -->
     <button
       id="back-to-top"
       class="back-to-top"
@@ -2111,11 +2144,17 @@
       </svg>
     </button>
 
-    <!-- ===================== SCRIPTS =====================
-         Theme toggle, mobile drawer, scroll-spy, BibTeX parsing/rendering,
-         and the CMS data loader (stats + teaching courses from data.json). -->
+    <!-- \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550
+         JAVASCRIPT: Interactivity, data fetching, and rendering.
+         Includes: theme toggle, mobile nav, scroll-spy, BibTeX parsing, CMS data loader.
+         All functions execute on DOMContentLoaded. See function comments below.
+         \u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550\u2550 -->
     <script>
-      // \u2500\u2500 Theme toggle \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+      // \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501
+      // THEME TOGGLE: Light/dark mode with localStorage persistence.
+      // Default: light. Toggled via sun/moon icon in navbar.
+      // Applied to <html> element class before first paint to prevent flash.
+      // \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501
       function syncThemeLabel() {
         const isDark = document.documentElement.classList.contains("dark");
         document.querySelectorAll(".theme-label").forEach((el) => {
@@ -2132,7 +2171,11 @@
         ?.addEventListener("click", toggleTheme);
       syncThemeLabel();
 
-      // \u2500\u2500 Mobile nav dropdown \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+      // \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501
+      // MOBILE NAVIGATION: Hamburger menu toggle for nav links.
+      // Hamburger opens/closes nav-links dropdown. Clicking a link closes it.
+      // Uses aria-expanded for accessibility.
+      // \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501
       const hamburger = document.getElementById("nav-hamburger");
       const navLinksEl = document.getElementById("nav-links");
       if (hamburger && navLinksEl) {
@@ -2148,7 +2191,11 @@
         );
       }
 
-      // \u2500\u2500 Scroll-spy (highlights the active section in the navbar) \u2500\u2500
+      // \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501
+      // SCROLL-SPY: Highlights active section link in navbar as user scrolls.
+      // Uses IntersectionObserver to track which section is in viewport.
+      // Updates nav-link.active class based on scroll position.
+      // \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501
       const sections = document.querySelectorAll("main section[id]");
       const navLinks = document.querySelectorAll(
         '#nav-links .nav-link[href^="#"]',
@@ -2186,11 +2233,12 @@
         sections.forEach((sec) => spy.observe(sec));
       }
 
-      // ── Animated stat counters ───────────────────────────────────────
-      // Each stat starts at 0 and counts up to its target. Targets come from
-      // data.json (citations, h-index, i10-index) and publications.bib (total
-      // pubs); the data-target attributes in the HTML are fallbacks used if a
-      // fetch fails. The count-up runs once the stats scroll into view.
+      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      // ANIMATED STAT COUNTERS: Numbers count up when stats section scrolls in view.
+      // Sources: Citations/h-index from data.json, Total Pubs from publications.bib
+      // Fallback: data-target attributes in HTML if fetch fails
+      // Animation: Ease-out cubic, 1400ms, respects prefers-reduced-motion
+      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       const statTargets = {};
       const statAnimFrames = {};
       const statShown = {};
@@ -2272,49 +2320,55 @@
         revealStats();
       }
 
+      // Clean BibTeX field values: Remove wrapping braces, quotes, and extra whitespace.
       function cleanBibValue(val) {
         if (!val) return "";
         return val
-          .replace(/^[\s{"]|[\s}"]$/g, "")
-          .replace(/\\&/g, "&")
-          .replace(/[\{\}]/g, "")
-          .trim();
+          .replace(/^[\s{"]|[\s}"]$/g, "")  // Remove leading/trailing braces & quotes
+          .replace(/\\&/g, "&")              // Convert escaped ampersands
+          .replace(/[\{\}]/g, "")            // Remove remaining braces
+          .trim();                           // Trim whitespace
       }
 
+      // Highlight the user's name in author lists with bold + brand color.
+      // Handles BibTeX "Last, First" name format by reordering before matching.
       function highlightAuthor(authorStr, searchName = "Saad Ahmed") {
         if (!authorStr) return "";
-        let authors = authorStr.split(/\s+and\s+/i);
+        let authors = authorStr.split(/\s+and\s+/i);  // Split on " and "
         let formatted = authors.map((auth) => {
           let trimmedAuth = auth.trim();
           let cleanAuth = trimmedAuth;
-          // BibTeX often stores names as "Last, First" — reorder to
-          // "First Last" before matching so e.g. "Ahmed, Saad" is found.
+          // Reorder "Last, First" to "First Last" for matching
           if (cleanAuth.includes(",")) {
             let parts = cleanAuth.split(",").map((p) => p.trim());
             cleanAuth = parts.slice(1).concat(parts[0]).join(" ");
           }
-          // Escape the displayed name (matching uses the un-escaped copy).
           const safeAuth = escapeHtml(trimmedAuth);
+          // Return highlighted name if it matches
           if (cleanAuth.toLowerCase().includes(searchName.toLowerCase())) {
             return `<strong style="color: var(--brand-color); font-weight: 700;">${safeAuth}</strong>`;
           }
           return safeAuth;
         });
+        // Rejoin with commas and " and " for proper English list formatting
         return formatted.length > 1
-          ? formatted.slice(0, -1).join(", ") +
-              " and " +
-              formatted[formatted.length - 1]
+          ? formatted.slice(0, -1).join(", ") + " and " + formatted[formatted.length - 1]
           : formatted[0];
       }
 
+      // Extract publication link: Prefer URL field, fall back to DOI, else null.
       function getPubLink(entry) {
         if (entry.url) return entry.url;
         if (entry.doi) return `https://doi.org/${entry.doi}`;
         return null;
       }
 
+      // Parse BibTeX file into structured entry objects.
+      // Returns array of {type, key, field1, field2, ...} objects.
+      // Handles multiline values and field cleanup.
       function parseBibtex(text) {
         const entries = [];
+        // Match: @TYPE{key, fields...}
         const entryRegex = /@([a-zA-Z]+)\s*\{\s*([^,]+),([^]*?)\n\s*\}/g;
         let match;
         while ((match = entryRegex.exec(text)) !== null) {
@@ -2322,8 +2376,8 @@
           const key = match[2].trim();
           const fieldsRaw = match[3];
           const fields = {};
-          const fieldRegex =
-            /^\s*([a-zA-Z0-9_\-]+)\s*=\s*([^]*?)(?=\s*[a-zA-Z0-9_\-]+\s*=|$)/gm;
+          // Match: field = value (handles multiline values)
+          const fieldRegex = /^\s*([a-zA-Z0-9_\-]+)\s*=\s*([^]*?)(?=\s*[a-zA-Z0-9_\-]+\s*=|$)/gm;
           let fMatch;
           while ((fMatch = fieldRegex.exec(fieldsRaw)) !== null) {
             let fName = fMatch[1].toLowerCase().trim();
@@ -2336,24 +2390,24 @@
         return entries;
       }
 
+      // Load and render publications from publications.bib.
+      // Parses BibTeX, separates journals from conferences, renders HTML.
+      // Auto-counts total pubs and updates stat. Handles fetch errors gracefully.
       async function loadPublications() {
         try {
           const res = await fetch("publications.bib");
-          if (!res.ok)
-            throw new Error(
-              "Could not find dynamic local publications database library asset.",
-            );
+          if (!res.ok) throw new Error("Failed to fetch publications.bib");
           let rawText = await res.text();
-          rawText = rawText + "\n\n";
+          rawText = rawText + "\n\n";  // Ensure trailing newlines for regex
           const database = parseBibtex(rawText);
 
+          // Update total publications count
           const totalCount = database.length;
           setStat("stat-publications", totalCount);
 
+          // Separate by type
           const journals = database.filter((e) => e.type === "article");
-          const conferences = database.filter(
-            (e) => e.type === "inproceedings",
-          );
+          const conferences = database.filter((e) => e.type === "inproceedings");
 
           const jContainer = document.getElementById("journal-container");
           if (journals.length === 0) {
@@ -2421,10 +2475,13 @@
         }
       }
 
-      // ── Stats + Teaching courses from CMS (data.json) ────────────────
-      // Citations and h-index, plus the Teaching Duties table rows, are
-      // edited in the CMS and read from data.json. Total Pubs is counted
-      // automatically from publications.bib.
+      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      // CMS DATA LOADER: Fetch and render stats + teaching courses from data.json.
+      // Edited via Pages CMS "Stats & Teaching Courses" interface.
+      // Falls back to static HTML if fetch fails (no-JS support).
+      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+      // Escape HTML special characters to prevent XSS.
       function escapeHtml(s) {
         return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
           return {
@@ -2475,7 +2532,9 @@
         }
       }
 
-      // ── Back-to-top button ───────────────────────────────────────────
+      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      // BACK-TO-TOP BUTTON: Smooth scroll to top, appears after 400px scroll.
+      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       const backToTopBtn = document.getElementById("back-to-top");
       if (backToTopBtn) {
         const toggleBackToTop = () => {
@@ -2488,9 +2547,12 @@
         });
       }
 
+      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+      // INITIALIZATION: Fire data loaders after DOM is ready.
+      // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       window.addEventListener("DOMContentLoaded", () => {
-        loadPublications();
-        loadData();
+        loadPublications();  // Parse & render publications.bib
+        loadData();          // Load stats & teaching courses from data.json
       });
     </script>
   </body>
