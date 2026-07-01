@@ -134,7 +134,7 @@
             },
             "image": { "@id": "https://saadbaust.github.io/#profile-image" },
             "mainEntity": { "@id": "https://saadbaust.github.io/#person" },
-            "dateModified": "2026-06-25"
+            "dateModified": "2026-07-01"
           },
           {
             "@type": "Person",
@@ -195,7 +195,7 @@
       }
     </script>
 
-    <link rel="icon" type="image/png" href="images/logo.png" />
+    <link rel="icon" type="image/webp" href="images/saadahmed.webp" />
 
     <!-- Browser UI / address-bar color (matches light & dark themes). -->
     <meta
@@ -408,6 +408,9 @@
         html {
           scroll-behavior: auto;
         }
+        .corner-glow {
+          animation: none;
+        }
       }
 
       .app-wrapper {
@@ -521,12 +524,6 @@
         padding: 32px;
       }
 
-      .meta-data-info h1 span {
-        font-size: clamp(2.1rem, 4.4vw, 2.7rem);
-        font-weight: 600;
-        letter-spacing: -0.022em;
-        line-height: 1.04;
-      }
       .title-subtitle {
         font-size: 1rem;
         color: var(--brand-color);
@@ -1100,79 +1097,11 @@
         color: #ff0000;
       }
 
-      .mobile-header-bar {
-        display: none;
-      }
-
       @media (max-width: 1024px) {
-        .mobile-header-bar {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          background-color: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(12px);
-          border-bottom: 1px solid var(--border-divider);
-          padding: 12px 16px;
-          position: sticky;
-          top: 0;
-          z-index: 40;
-        }
-        html.dark .mobile-header-bar {
-          background-color: rgba(21, 27, 44, 0.9);
-        }
-        .mobile-header-title {
-          font-weight: 700;
-          font-size: 1rem;
-        }
-        .mobile-actions-flex {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-        }
-        .mobile-action-btn {
-          background: transparent;
-          border: none;
-          padding: 10px;
-          border-radius: 8px;
-          color: var(--text-muted);
-          cursor: pointer;
-        }
-
         .app-wrapper {
           flex-direction: column;
           padding: 0 16px;
           gap: 0;
-        }
-        aside {
-          position: fixed;
-          top: 0;
-          left: 0;
-          bottom: 0;
-          width: 280px;
-          background: #ffffff;
-          border-right: 1px solid var(--border-divider);
-          z-index: 50;
-          padding: 24px 16px;
-          transform: translateX(-110%);
-          transition: transform 0.3s ease-in-out;
-          height: 100vh;
-        }
-        html.dark aside {
-          background: #151b2c;
-        }
-        aside.open {
-          transform: translateX(0);
-        }
-        .drawer-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(15, 23, 42, 0.5);
-          backdrop-filter: blur(4px);
-          z-index: 45;
-          display: none;
-        }
-        .drawer-overlay.visible {
-          display: block;
         }
 
         .hero-flex-box {
@@ -1705,7 +1634,7 @@
                   height="22"
                   viewBox="0 0 512 512"
                 >
-                  <path d="M0 0h448v512H0z" fill="none" />
+                  <path d="M0 0h512v512H0z" fill="none" />
   <path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm71.564 107.355H303.41c11.722 26.248 16.474 54.123 20.918 82.07l-2.447.7c-.588-1.635-1.282-3.238-1.748-4.908c-3.367-12.035-6.76-24.063-9.983-36.137c-1.159-4.344-3.892-6.507-7.802-8.635c-5.743-3.123-11.17-7.148-15.93-11.64c-3.037-2.865-5.635-4.614-9.943-4.569c-28.685.304-57.372.334-86.055.598c-1.912.019-4.278.724-5.63 1.977c-5.22 4.828-10.111 10.01-16.544 16.488c16.967 41.316 25.497 86.349 21.834 134.222c-8.146-5.215-14.452-9.343-14.826-20.271c-1.874-54.62-18.724-104.014-53.924-146.52c-.792-.956-1.185-2.243-1.766-3.375m-17.03 21.028c4.084-.003 8.168.024 12.25.144c1.62.047 3.885 1.078 4.695 2.375c24.41 39.22 43.44 80.41 45.906 127.537c.011.187-.182.383-.88 1.752c-14.587-49.866-40.905-92.087-74.755-129.93c.177-.613.35-1.228.527-1.843c4.085 0 8.171-.033 12.256-.035m-7.12 33.312c.994-.019 2.168 1.295 3 2.221c19.257 21.42 36.734 44.052 47.506 71.12c2.05 5.147 3.453 10.554 5.154 15.841c-22.312-35.113-53.362-61.368-87.074-88.148c11.67-.425 21.542-.85 31.414-1.034m287.12 18.97a4.4 4.4 0 0 1 1.466.134c-73.305 42.572-143.24 89.187-194.533 159.846l-59.438-94.526l.72-.92c1.64 1.321 36.529 29.297 52.198 42.13c4.365 3.574 7.663 3.51 12.203-.177c53.28-43.28 112.733-76.04 175.86-102.457c3.37-1.41 6.866-2.528 10.312-3.754a4.8 4.8 0 0 1 1.211-.277" />
                 </svg>
 
@@ -1724,7 +1653,7 @@
                   height="22"
                   viewBox="0 0 512 512"
                 >
-                  <path d="M0 0h448v512H0z" fill="none" />
+                  <path d="M0 0h512v512H0z" fill="none" />
   <path fill="currentColor" d="M48 32C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm176.125 64a6.7 6.7 0 0 1 2.68.568c1.62.44 3.447 1.94 4.914 2.844l11.965 17.178c9.846 12.639 20.195 25.889 30.845 37.85l26.287 27.822c23.788 23.963 49.037 45.09 76.137 63.767l.863.14c3.462 2.232 5.808 6.257 6.184 10.34c-.144 8.852-10.213 10.627-15.484 15.395c-52.661 38.678-99.793 86.582-136.957 139.922l-2.993 3.045c-3.01 1.858-6.903 1.106-10.058 0c-4.03-1.33-4.472-5.816-7.049-8.545c-8.218-12.93-18.72-25.08-27.66-37.133c-5.308-5.422-9.708-11.164-15.133-16.94c-30.565-33.935-64.905-63.693-100.822-88.759c-2.55-2.587-4.69-6.02-3.512-10.182c1.097-4.626 6.368-7.366 9.916-10.173c44.853-31.193 85.965-71.886 120.695-115.465l21.65-28.569c2.16-1.659 4.838-3.128 7.532-3.105m-.926 41.275c-3.617.068-7.184 1.182-10.486 3.786c-10.141 7.374-19.755 14.877-29.43 23.355c-.817.53-1.778 1.643-2.297 2.164c-22.532 20.378-44.844 42.687-63.058 66.207c-5.14 6.772-10.573 13.382-12.555 21.416c-.067 4.307.579 8.337 2.871 11.602c15.416 23.273 35.826 45.521 56.166 64.629c17.537 15.86 34.433 33.268 54.47 43.894c6.6 3.131 14.027-.513 19.532-4.459c27.221-19.404 51.538-43.728 74.59-68.867c10.655-13.264 22.84-25.373 28.838-40.563c1.63-6.01-.948-11.146-3.863-15.677c-17.983-26.035-39.876-50.662-63.448-72.819l-1.547-.902c-8.51-8.35-18.208-16.52-27.52-23.73c-6.11-5.268-14.305-10.185-22.263-10.036m1.285 7.752c7.677.066 14.7 7.048 20.979 11.516c32.365 26.397 62.908 56.61 86.182 90.728c2.934 4.405 4.26 11.24 1.628 16.223c-6.033 10.197-14.175 19.503-21.892 28.953v.514c-19.244 20.754-39.564 42.088-61.524 59.664c-10.717 6.607-20.556 21.038-34.36 12.1c-31.433-23.273-61.511-52.208-87.009-83.24c-4.322-6.823-11.075-12.413-14.08-20.15c-4.197-10.48 5.055-17.996 10.348-25.888c25.999-32.486 58.289-64.342 91.838-87.83c2.7-1.864 5.332-2.611 7.89-2.59m-1.068 24.004l-2.928 9.524l-14.685 42.617c3.677.38 8.23 0 11.842.379v.353l-2.149 48.207l.371.506c4.699.466 10.564.704 15.352-.123v-.76L229.3 222.98l.289-1.583l12.92-.222a2167 2167 0 0 1-18.715-52.143zm-34.848 61.953c-5.374.302-10.286 2.685-15.132 4.825c-8.236 4.184-20.354 10.508-19.018 21.953c1.764 6.249 8.443 10.286 13.728 12.855c29.213 13.04 67.991 13.485 98.833 3.75h.001c7.614-2.972 17.835-7.283 19.23-16.734c-.08-7.809-8.238-12.724-14.1-15.715v-.37c2.043-.818 4.394-1.554 6.511-1.778v-.211c-10.33-1.875-20.303-4.613-30.308-7.293c1.927 4.448 3.317 9.138 4.923 13.761a54 54 0 0 1 9.334-2.162c5.276 2.08 12.83 5.057 13.578 11.742c.587 6.25-6.165 9.296-10.43 11.832c-22.622 8.34-48.074 9.154-71.667 2.813c-6.517-2.08-15.923-4.75-16.73-13.158c4.625-11.065 16.59-13.37 26.581-16.059c-5.134-3.353-10.355-6.32-15.334-10.05m26.635 52.899c-.876 17.118-1.091 32.962-2.342 50.123c6.688.617 14.234 1.205 21.366.154l-2.131-47.84l-.375-2.277c-5.43.216-10.57.434-16.518-.16" />
                 </svg>
 
@@ -2050,6 +1979,11 @@
                   </td>
                 </tr>
                 <tr>
+                  <td class="course-code">CSE 4103</td>
+                  <td>Computer Graphics</td>
+                  <td>Winter 2025</td>
+                </tr>
+                <tr>
                   <td class="course-code">CSE 2102</td>
                   <td>Digital Logic Design Sessional</td>
                   <td>
@@ -2066,14 +2000,39 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="course-code">CSE 4103</td>
-                  <td>Computer Graphics</td>
-                  <td>Winter 2025</td>
-                </tr>
-                <tr>
                   <td class="course-code">CSE 4104</td>
                   <td>Computer Graphics Sessional</td>
                   <td>Summer 2024, Winter 2025</td>
+                </tr>
+                <tr>
+                  <td class="course-code">CSE 3104</td>
+                  <td>Operating System Sessional</td>
+                  <td>Winter 2026</td>
+                </tr>
+                <tr>
+                  <td class="course-code">CSE 1100</td>
+                  <td>Introduction to Computer System Sessional</td>
+                  <td>Summer 2024</td>
+                </tr>
+                <tr>
+                  <td class="course-code">CSE 1208</td>
+                  <td>Numerical Methods Sessional</td>
+                  <td>Summer 2024, Winter 2025</td>
+                </tr>
+                <tr>
+                  <td class="course-code">CSE 2104</td>
+                  <td>Data Structures and Algorithm I Sessional</td>
+                  <td>Summer 2024</td>
+                </tr>
+                <tr>
+                  <td class="course-code">CSE 3202</td>
+                  <td>Artificial Intelligence Sessional</td>
+                  <td>Summer 2024</td>
+                </tr>
+                <tr>
+                  <td class="course-code">CSE 2206</td>
+                  <td>Database Management Systems Sessional</td>
+                  <td>Winter 2025</td>
                 </tr>
               </tbody>
             </table>
@@ -2421,9 +2380,15 @@
           const totalCount = database.length;
           setStat("stat-publications", totalCount);
 
-          // Separate by type
-          const journals = database.filter((e) => e.type === "article");
-          const conferences = database.filter((e) => e.type === "inproceedings");
+          // Separate by type, newest first (sort by year descending)
+          const byYearDesc = (a, b) =>
+            (Number(b.year) || 0) - (Number(a.year) || 0);
+          const journals = database
+            .filter((e) => e.type === "article")
+            .sort(byYearDesc);
+          const conferences = database
+            .filter((e) => e.type === "inproceedings")
+            .sort(byYearDesc);
 
           const jContainer = document.getElementById("journal-container");
           if (journals.length === 0) {
@@ -2519,7 +2484,10 @@
           if (stats.citations != null)
             setStat("stat-citations", stats.citations);
           if (stats.hIndex != null) setStat("stat-hindex", stats.hIndex);
-          if (stats.i10Index != null) setStat("stat-i10index", stats.i10Index);
+          // i10-index card is only present in the DOM when uncommented in the
+          // markup — guard so we don't wire a stat to a missing element.
+          if (stats.i10Index != null && document.getElementById("stat-i10index"))
+            setStat("stat-i10index", stats.i10Index);
 
           const courses = (data && data.courses) || [];
           const tbody = document.getElementById("teaching-container");
@@ -2556,7 +2524,7 @@
         const toggleBackToTop = () => {
           backToTopBtn.classList.toggle("visible", window.scrollY > 400);
         };
-        window.addEventListener("scroll", toggleBackToTop);
+        window.addEventListener("scroll", toggleBackToTop, { passive: true });
         toggleBackToTop();
         backToTopBtn.addEventListener("click", () => {
           window.scrollTo({ top: 0, behavior: "smooth" });

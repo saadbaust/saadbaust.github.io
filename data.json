@@ -38,27 +38,27 @@
     {
       "code": "CSE 1100",
       "title": "Introduction to Computer System Sessional",
-      "semesters": "Summer-2024"
+      "semesters": "Summer 2024"
     },
     {
       "code": "CSE 1208",
       "title": "Numerical Methods Sessional",
-      "semesters": "Summer-2024, Winter-2025"
+      "semesters": "Summer 2024, Winter 2025"
     },
     {
       "code": "CSE 2104",
       "title": "Data Structures and Algorithm I Sessional",
-      "semesters": "Summer-2024"
+      "semesters": "Summer 2024"
     },
     {
       "code": "CSE 3202",
       "title": "Artificial Intelligence Sessional",
-      "semesters": "Summer-2024"
+      "semesters": "Summer 2024"
     },
     {
       "code": "CSE 2206",
       "title": "Database Management Systems Sessional",
-      "semesters": "Winter-2025"
+      "semesters": "Winter 2025"
     }
   ]
 }
