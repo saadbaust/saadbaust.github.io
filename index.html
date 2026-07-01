@@ -49,13 +49,13 @@
       property="og:image:alt"
       content="Saad Ahmed — Lecturer at BAUST, Researcher in Image Processing and Computer Vision"
     />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:type" content="image/webp" />
     <!-- NOTE: keep these width/height values matching the ACTUAL pixel size of
          images/saadahmed.webp. For best results in Google / link previews use a
          square image of at least 460×460 (ideally ~1200×1200) and update both
          numbers below + the same dimensions in the JSON-LD ImageObject. -->
-    <meta property="og:image:width" content="170" />
-    <meta property="og:image:height" content="170" />
+    <meta property="og:image:width" content="480" />
+    <meta property="og:image:height" content="480" />
     <meta property="og:site_name" content="Saad Ahmed | BAUST" />
     <meta property="og:locale" content="en_US" />
     <meta property="profile:first_name" content="Saad" />
@@ -103,8 +103,8 @@
             "@id": "https://saadbaust.github.io/#profile-image",
             "url": "https://saadbaust.github.io/images/saadahmed.webp",
             "contentUrl": "https://saadbaust.github.io/images/saadahmed.webp",
-            "width": 170,
-            "height": 170,
+            "width": 480,
+            "height": 480,
             "caption": "Saad Ahmed — Lecturer, Department of CSE, BAUST"
           },
           {
@@ -219,13 +219,28 @@
       })();
     </script>
 
-    <!-- Inter web font. -->
+    <!-- Inter web font. Loaded non-render-blocking via the media="print" swap
+         trick so it never delays first paint / LCP; <noscript> keeps it working
+         with JavaScript disabled. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- ═══════════════════════════════════════════════════════════════════════
          All Styling: Inline CSS with CSS custom properties for theming.
@@ -1566,6 +1581,7 @@
               src="images/saadahmed.webp"
               alt="Saad Ahmed — Lecturer, Department of CSE, Bangladesh Army University of Science and Technology (BAUST)"
               loading="eager"
+              fetchpriority="high"
               width="168"
               height="168"
             />
@@ -1957,10 +1973,10 @@
                 <span class="pub-idx-year">2025&ndash;2026</span>
               </span>
               <div class="pub-row-content">
-                <h4 class="pub-title">
+                <h3 class="pub-title">
                   AI-Powered Automated Exam Evaluation and OBE-Based University
                   Assessment System
-                </h4>
+                </h3>
                 <p class="pub-venue">
                   <span>Funded by BAC</span>
                   <span class="pub-meta-badge">Ongoing</span>
