@@ -49,7 +49,7 @@ To deploy, host the file as-is on GitHub Pages — nothing to compile.
 | `.pages.yml` | Pages CMS configuration — exposes just the two editable areas (Publications and Stats). |
 | `sitemap.xml` | Tells search engines to index the home page (and the profile image). |
 | `robots.txt` | Allows everything; explicitly leaves `data.json` / `publications.bib` crawlable so Google can render and index the dynamic content. |
-| `images/` | Your photos, profile picture (`saadahmed.png`), and the site logo/favicon (`logo.png`). |
+| `images/` | Your photos, profile picture (`saadahmed.webp`), and the site logo/favicon (`logo.png`). |
 
 > **Removed since the previous version:** the photo **gallery** (`gallery.html`, its navbar link, the gallery image folders, and the gallery GitHub Action) is gone, along with the Tailwind CDN and the old all-content `data.json`. The CMS no longer has a "Media" section.
 
@@ -79,7 +79,7 @@ Open `index.html` and edit the relevant section directly:
 - **Social links** — edit the `<a class="social-badge-item …">` tags in the social block.
 - **Experience / Education / Skills / Certifications / Contact** — each is a clearly labelled `<section>` with plain HTML. (Teaching Duties rows come from the CMS, not the HTML.)
 
-> **Profile photo & favicon.** `images/saadahmed.png` (profile) and `images/logo.png` (favicon) are static files referenced directly. To replace one, upload a file with the same name so it overwrites cleanly.
+> **Profile photo & favicon.** `images/saadahmed.webp` (profile) and `images/logo.png` (favicon) are static files referenced directly. To replace one, upload a file with the same name so it overwrites cleanly.
 
 ---
 
@@ -104,7 +104,7 @@ After any significant content change, bump the `<lastmod>` date in `sitemap.xml`
 
 ## Using This as Your Own Template
 
-1. **Replace the profile image** (`images/saadahmed.png`) and favicon (`images/logo.png`).
+1. **Replace the profile image** (`images/saadahmed.webp`) and favicon (`images/logo.png`).
 2. **Edit `index.html`** with your own profile, experience, education, skills, teaching, certifications, contact details, CV link, and social links.
 3. **Edit `publications.bib`** — paste your own BibTeX — and set your `citations` / `hIndex` and `courses` in `data.json`.
 4. **Find-and-replace `saadbaust.github.io`** with your own URL across `index.html` (meta tags + JSON-LD), `sitemap.xml`, and `robots.txt`.
