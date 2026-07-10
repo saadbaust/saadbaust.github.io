@@ -1,9 +1,4 @@
 {
-  "stats": {
-    "citations": 19,
-    "hIndex": 3,
-    "i10Index": 0
-  },
   "profile": {
     "subtitle": "Lecturer, Department of CSE",
     "institution": "Bangladesh Army University of Science and Technology (BAUST), Saidpur.",
@@ -17,6 +12,11 @@
       "Explainable AI",
       "Multimodal Architectures"
     ]
+  },
+  "stats": {
+    "citations": 19,
+    "hIndex": 3,
+    "i10Index": 0
   },
   "experience": [
     {
@@ -87,41 +87,16 @@
       "timeframe": "October 2024 – Ongoing"
     },
     {
-      "title": "Image Caption Generation for Bengali Food Images Using a Multimodal Approach",
+      "title": "Lightweight and Ensemble Method for Recognizing Bangladeshi Medicinal Plant  ",
       "timeframe": "February 2025 – Ongoing"
     },
     {
-      "title": "Temporal Pattern Analysis of Trending Social Media Blog Posts Using Multimodal Approaches",
+      "title": "Lightweight and Interpretable CNNs for Automated Waste Management System ",
       "timeframe": "February 2025 – Ongoing"
     }
   ],
   "coSupervisionsCompleted": [
-    "M. N. Hossain, D. Karmakar, P. Nandi, M. Osama, and M. K. Syfullah, \"A deep learning approach for multiclass domain-specific question classification in computer science for Bangla language,\" in Proc. 2025 Int. Conf. Electr., Comput. Commun. Eng. (ECCE), Chattogram, Bangladesh, Feb. 2025. (Accepted and Presented)",
     "M. A. Kadir, B. Nassar, S. M. J. Alam, S. Ahmed, and M. K. Syfullah, \"Car price prediction: A comparative study of machine learning and deep learning approaches,\" in Proc. 2025 Int. Conf. Electr., Comput. Commun. Eng. (ECCE), Chattogram, Bangladesh, Feb. 2025. (Accepted and Presented)"
-  ],
-  "leadership": [
-    "Advisor, BAUST Mechatronics and Robotics Club (2025–Present).",
-    "Executive Member (Creative Team), Career Society of BAUST (2021–2024).",
-    "General Member, Robotics Club BAUST (2021–2024).",
-    "Organized workshops on robotics and programming for students and the local community, training 100+ participants.",
-    "Judge, World Robot Olympiad (WRO), Regional Round, Bangladesh (2025).",
-    "Faculty Training Program, BAUST.",
-    "Sustainable Energy Challenge, Bikiron."
-  ],
-  "devProjects": [
-    {
-      "name": "EcoFishLab",
-      "description": "Developed and deployed the official website of the Laboratory of Fish Ecophysiology using WordPress, delivering a responsive interface to showcase environmental and aquaculture research.",
-      "tools": "WordPress, HTML, CSS"
-    },
-    {
-      "name": "Safeline Energy Tech",
-      "description": "Built and maintained an online service-providing platform for Safeline Energy Tech Ltd. across the full software development life cycle, adapting to evolving client requirements.",
-      "tools": "HTML, Tailwind CSS, PHP, MySQL"
-    }
-  ],
-  "awards": [
-    "Awarded board scholarships in the Primary (PSC) and Junior (JSC) School Certificate examinations for ranking among top-performing students, awarded by the Board of Intermediate & Secondary Education, Dhaka, Bangladesh."
   ],
   "courses": [
     {
@@ -179,5 +154,29 @@
       "title": "Database Management Systems Sessional",
       "semesters": "Winter 2025"
     }
+  ],
+  "leadership": [
+    "Advisor, BAUST Mechatronics and Robotics Club (2025–Present).",
+    "Executive Member (Creative Team), Career Society of BAUST (2021–2024).",
+    "General Member, Robotics Club BAUST (2021–2024).",
+    "Organized workshops on robotics and programming for students and the local community, training 100+ participants.",
+    "Judge, World Robot Olympiad (WRO), Regional Round, Bangladesh (2025).",
+    "Faculty Training Program, BAUST.",
+    "Sustainable Energy Challenge, Bikiron."
+  ],
+  "devProjects": [
+    {
+      "name": "EcoFishLab",
+      "description": "Developed and deployed the official website of the Laboratory of Fish Ecophysiology using WordPress, delivering a responsive interface to showcase environmental and aquaculture research.",
+      "tools": "WordPress, HTML, CSS"
+    },
+    {
+      "name": "Safeline Energy Tech",
+      "description": "Built and maintained an online service-providing platform for Safeline Energy Tech Ltd. across the full software development life cycle, adapting to evolving client requirements.",
+      "tools": "HTML, Tailwind CSS, PHP, MySQL"
+    }
+  ],
+  "awards": [
+    "Awarded board scholarships in the Primary (PSC) and Junior (JSC) School Certificate examinations for ranking among top-performing students, awarded by the Board of Intermediate & Secondary Education, Dhaka, Bangladesh."
   ]
 }
