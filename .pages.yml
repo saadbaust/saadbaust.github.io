@@ -7,9 +7,19 @@
 # Everything else is hard-coded in index.html and NOT editable here.
 #
 # CMS-Managed Content:
-#   1. Publications (BibTeX file) — your complete .bib file
-#   2. Stats — Citations, h-index, i10-index counts
-#   3. Teaching Courses — rows in the "Teaching Duties" table
+#   1. Publications (BibTeX file) — journals, conferences AND datasets
+#   2. Profile Card — subtitle, institution, objective line
+#   3. About — intro paragraph + research-focus tags
+#   4. Stats — Citations, h-index, i10-index counts
+#   5. Experience — the Experience timeline entries
+#   6. Education — degrees / certificates with results
+#   7. Research Projects — funded/collaborative project list
+#   8. Thesis — thesis / M.Sc. research entries
+#   9. Research Activities — review experience + undergrad thesis co-supervisions
+#  10. Teaching Courses — rows in the "Teaching Duties" table
+#  11. Leadership & Co-curricular Activities — bulleted list
+#  12. Projects — software / web development projects
+#  13. Awards & Achievements — bulleted list
 #
 # Workflow: Edit in CMS → auto-commits to GitHub → live site updates in ~60 sec
 # Technical: Site fetches publications.bib and data.json in the browser at load time.
@@ -19,8 +29,8 @@ content:
   # ═══════════════════════════════════════════════════════════════════════════
   # PUBLICATIONS (BibTeX FILE)
   # The entire publications.bib file in a single code editor.
-  # The site parses this in the browser: splits entries, categorizes (journal/conf),
-  # and auto-counts total papers. No manual "Total Pubs" field needed.
+  # The site parses this in the browser: splits entries, categorizes
+  # (journal / conference / dataset), and auto-counts total papers.
   # ═══════════════════════════════════════════════════════════════════════════
   - name: publications
     label: "Publications (BibTeX)"
@@ -30,40 +40,154 @@ content:
     description: >-
       Paste your COMPLETE BibTeX here — the entire contents of your .bib file
       exactly as if opened in a text editor. All entries must start with @
-      (e.g., @article{...} for journals, @INPROCEEDINGS{...} for conferences).
-      The site auto-sorts and counts papers.
-      How to add: Google Scholar or IEEE Xplore → Cite button → BibTeX → copy & paste.
+      (e.g., @article{...} for journals, @INPROCEEDINGS{...} for conferences,
+      @misc{...} for datasets). The site auto-sorts and counts entries.
+      How to add: Google Scholar / IEEE Xplore / Kaggle → Cite → BibTeX → copy & paste.
       How to remove: Delete the entire entry block (from @ to closing }).
 
   # ═══════════════════════════════════════════════════════════════════════════
-  # STATS & TEACHING COURSES (data.json)
-  # Two independent data sets in one file:
-  # 1. Stats: Citations, h-index, i10-index (displayed on Publications section)
-  # 2. Teaching: Course list populating the "Teaching Duties" table
+  # SITE CONTENT (data.json)
+  # Every structured, editable section of the site lives here.
   # Note: "Total Pubs" is auto-counted from BibTeX, not stored here.
   # ═══════════════════════════════════════════════════════════════════════════
   - name: data
-    label: "Stats & Teaching Courses"
+    label: "Site Content (Stats, Experience, Projects, Activities, Teaching…)"
     type: file
     path: data.json
-    description: "Research citation stats and the Teaching Duties course table."
+    description: "All editable sections of the portfolio except the BibTeX publications."
     fields:
-      # Research metrics from Google Scholar
+      # ── Profile rail (name card on the left) ────────────────────────────────
+      - name: profile
+        label: "Profile Card"
+        type: object
+        description: "The text under your photo in the left profile card."
+        fields:
+          - { name: subtitle,    label: "Subtitle / Role", type: string, description: "E.g., Lecturer, Department of CSE" }
+          - { name: institution, label: "Institution",     type: string }
+          - { name: target,      label: "Objective Line",  type: string, description: "E.g., Seeking MSc/PhD positions for Fall 2027" }
+
+      # ── About section ───────────────────────────────────────────────────────
+      - name: about
+        label: "About"
+        type: object
+        description: "The intro paragraph and research-focus tags in the About section."
+        fields:
+          - { name: paragraph, label: "Intro Paragraph", type: text }
+          - { name: interests, label: "Core Research Focus", type: string, list: true, description: "Short interest tags, one per line" }
+
+      # ── Research metrics from Google Scholar ────────────────────────────────
       - name: stats
         label: "Google Scholar Stats"
         type: object
         fields:
-          - { name: citations, label: "Citations",     type: number, description: "Total citation count across all papers" }
-          - { name: hIndex,    label: "h-index",       type: number, description: "h-index metric (papers with h+ citations)" }
-          - { name: i10Index,  label: "i10-index",     type: number, description: "Number of papers with 10+ citations" }
+          - { name: citations, label: "Citations", type: number, description: "Total citation count across all papers" }
+          - { name: hIndex,    label: "h-index",   type: number, description: "h-index metric (papers with h+ citations)" }
+          - { name: i10Index,  label: "i10-index", type: number, description: "Number of papers with 10+ citations" }
 
-      # Teaching duties table: add, remove, reorder courses
+      # ── Experience timeline ─────────────────────────────────────────────────
+      - name: experience
+        label: "Experience"
+        type: object
+        list: true
+        description: "Each entry = one position in the Experience timeline. Drag to reorder."
+        fields:
+          - { name: title,    label: "Job Title",    type: string, description: "E.g., Lecturer" }
+          - { name: org,      label: "Organization", type: string, description: "Department / institution" }
+          - { name: location, label: "Location",     type: string, description: "E.g., On Site — Nilphamari (optional)" }
+          - { name: duration, label: "Duration",     type: string, description: "E.g., July 2024 – Present" }
+          - { name: bullets,  label: "Bullet Points", type: string, list: true, description: "One line per responsibility / achievement" }
+
+      # ── Education timeline ──────────────────────────────────────────────────
+      - name: education
+        label: "Education"
+        type: object
+        list: true
+        description: "Each entry = one degree / certificate, newest first. Drag to reorder."
+        fields:
+          - { name: degree,   label: "Degree / Certificate", type: string, description: "E.g., B.Sc. Engineering in CSE" }
+          - { name: school,   label: "Institution",          type: string }
+          - { name: duration, label: "Duration",             type: string, description: "E.g., July 2020 – July 2024" }
+          - { name: grade,    label: "Result / Grade",       type: string, description: "E.g., CGPA: 3.96 / 4.00 (Ranked 1st)" }
+
+      # ── Research projects ───────────────────────────────────────────────────
+      - name: researchProjects
+        label: "Research Projects"
+        type: object
+        list: true
+        description: "Funded / collaborative research projects. Drag to reorder."
+        fields:
+          - { name: title,    label: "Project Title", type: string }
+          - { name: meta,     label: "Details",       type: string, description: "E.g., Role: Contributor · Funded by BAC" }
+          - { name: duration, label: "Duration",      type: string, description: "E.g., 2025–2026" }
+          - { name: status,   label: "Status Badge",  type: string, description: "E.g., Ongoing, Completed (optional)" }
+
+      # ── Thesis / M.Sc. research ─────────────────────────────────────────────
+      - name: thesis
+        label: "Thesis"
+        type: object
+        list: true
+        description: "Thesis and major research works. Drag to reorder."
+        fields:
+          - { name: title,       label: "Title",       type: string }
+          - { name: duration,    label: "Duration",    type: string, description: "E.g., 2026–Present" }
+          - { name: description, label: "Description", type: text }
+
+      # ── Research Activities: Review experience ──────────────────────────────
+      - name: reviewExperience
+        label: "Review Experience"
+        type: string
+        list: true
+        description: "Peer-review / reviewer roles. One entry per line."
+
+      # ── Research Activities: Co-supervisions (ongoing) ──────────────────────
+      - name: coSupervisionsOngoing
+        label: "Thesis Co-Supervisions — Ongoing"
+        type: object
+        list: true
+        description: "Ongoing undergraduate thesis groups you co-supervise."
+        fields:
+          - { name: title,     label: "Thesis Topic", type: string }
+          - { name: timeframe, label: "Timeframe",    type: string, description: "E.g., October 2024 – Ongoing" }
+
+      # ── Research Activities: Co-supervisions (completed) ────────────────────
+      - name: coSupervisionsCompleted
+        label: "Thesis Co-Supervisions — Completed"
+        type: string
+        list: true
+        description: "Completed co-supervised works, as full citations. One per line."
+
+      # ── Teaching duties table ───────────────────────────────────────────────
       - name: courses
         label: "Teaching Courses"
         type: object
         list: true
-        description: "Each row = one course in the Teaching Duties table. Drag rows to reorder. Use + to add, trash to remove."
+        description: "Each row = one course in the Teaching Duties table. Drag to reorder."
         fields:
           - { name: code,      label: "Course Code",      type: string, description: "E.g., CSE 2101" }
           - { name: title,     label: "Course Title",     type: string, description: "E.g., Digital Logic Design" }
           - { name: semesters, label: "Semesters Taught", type: string, description: "E.g., Summer 2024, Winter 2025" }
+
+      # ── Leadership & Co-curricular Activities ───────────────────────────────
+      - name: leadership
+        label: "Leadership & Co-curricular Activities"
+        type: string
+        list: true
+        description: "Bulleted list. One activity per line."
+
+      # ── Software / web development projects ─────────────────────────────────
+      - name: devProjects
+        label: "Projects (Software / Web)"
+        type: object
+        list: true
+        description: "Development projects. Drag to reorder."
+        fields:
+          - { name: name,        label: "Project Name", type: string }
+          - { name: description, label: "Description",  type: text }
+          - { name: tools,       label: "Tools",        type: string, description: "E.g., WordPress, HTML, CSS" }
+
+      # ── Awards & Achievements ───────────────────────────────────────────────
+      - name: awards
+        label: "Awards & Achievements"
+        type: string
+        list: true
+        description: "Bulleted list. One award per line."

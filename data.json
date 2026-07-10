@@ -4,6 +4,125 @@
     "hIndex": 3,
     "i10Index": 0
   },
+  "profile": {
+    "subtitle": "Lecturer, Department of CSE",
+    "institution": "Bangladesh Army University of Science and Technology (BAUST), Saidpur.",
+    "target": "Seeking MSc/PhD positions for Fall 2027"
+  },
+  "about": {
+    "paragraph": "I'm a Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. I completed my B.Sc. in CSE with a CGPA of 3.96 out of 4.00 (1st position) and am currently pursuing my M.Sc. at RUET. I combine a formal academic career, course design, and student mentorship with an active publication record in machine learning, lightweight deep learning, computer vision, and explainable AI (XAI). My current research focuses on video data analytics and multimodal architectures, and I'm seeking a Ph.D. or research-focused M.Sc. opportunity.",
+    "interests": [
+      "Computer Vision",
+      "Deep Learning",
+      "Explainable AI",
+      "Multimodal Architectures"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Lecturer",
+      "org": "Dept. of CSE, Bangladesh Army University of Science and Technology (BAUST)",
+      "location": "On Site — Nilphamari",
+      "duration": "July 2024 – Present",
+      "bullets": [
+        "Taught Courses: Digital Logic Design, Computer Graphics, and sessional (laboratory) courses on Digital Image Processing, Operating Systems, Artificial Intelligence, Data Structures and Algorithms I, Numerical Methods, Database Management Systems, and Introduction to Computer Systems, to 400+ students.",
+        "Co-supervised 6 undergraduate thesis groups, guiding them through research, experimentation, and publication.",
+        "Organized workshops and academic events on programming and robotics for students."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "M.Sc. Engineering in Computer Science and Engineering (CSE)",
+      "school": "Rajshahi University of Engineering & Technology (RUET), Rajshahi.",
+      "duration": "March 2025 – Present",
+      "grade": "Ongoing"
+    },
+    {
+      "degree": "B.Sc. Engineering in Computer Science and Engineering (CSE)",
+      "school": "Bangladesh Army University of Science and Technology (BAUST), Saidpur.",
+      "duration": "July 2020 – July 2024",
+      "grade": "CGPA: 3.96 / 4.00 (Ranked 1st)"
+    },
+    {
+      "degree": "Higher Secondary Certificate (HSC)",
+      "school": "Bangladesh Agricultural University College (K.B. College).",
+      "duration": "2016 – 2019",
+      "grade": "GPA: 4.25 / 5.00"
+    },
+    {
+      "degree": "Secondary School Certificate (SSC)",
+      "school": "Bangladesh Agricultural University High School (K.B. High School).",
+      "duration": "2010 – 2016",
+      "grade": "GPA: 5.00 / 5.00"
+    }
+  ],
+  "researchProjects": [
+    {
+      "title": "AI-Powered Automated Exam Evaluation and OBE-Based University Assessment System",
+      "meta": "Role: Contributor · Funded by Bangladesh Accreditation Council (BAC)",
+      "duration": "2025–2026",
+      "status": "Ongoing"
+    }
+  ],
+  "thesis": [
+    {
+      "title": "Confound-Robust Multimodal Representation Learning for Dose-Resolved Aquatic Stressor Identification from Fish Behavior and Water Chemistry",
+      "duration": "2026–Present",
+      "description": "An automated stress monitoring system that will help the production of fish in Bangladesh."
+    },
+    {
+      "title": "Bangla Sign Language Recognition: Dataset Innovation and Methodologies",
+      "duration": "2023–2024",
+      "description": "Thesis on classification of sign language for Bangla Sign Language (BdSL). The goal is to provide a brand new dataset and a comparative analysis of various deep learning methods including ensemble techniques."
+    }
+  ],
+  "reviewExperience": [
+    "Reviewer, 2025 IEEE International Conference on Quantum Photonics, Artificial Intelligence & Networking (QPAIN).",
+    "Reviewer, International Conference on Computing Advancements (ICCA) 2026, ACM."
+  ],
+  "coSupervisionsOngoing": [
+    {
+      "title": "BTNAT – A Hybrid Attention-Based Deep Learning Model for Bangladeshi Tree Identification from Bark Characteristics",
+      "timeframe": "October 2024 – Ongoing"
+    },
+    {
+      "title": "Image Caption Generation for Bengali Food Images Using a Multimodal Approach",
+      "timeframe": "February 2025 – Ongoing"
+    },
+    {
+      "title": "Temporal Pattern Analysis of Trending Social Media Blog Posts Using Multimodal Approaches",
+      "timeframe": "February 2025 – Ongoing"
+    }
+  ],
+  "coSupervisionsCompleted": [
+    "M. N. Hossain, D. Karmakar, P. Nandi, M. Osama, and M. K. Syfullah, \"A deep learning approach for multiclass domain-specific question classification in computer science for Bangla language,\" in Proc. 2025 Int. Conf. Electr., Comput. Commun. Eng. (ECCE), Chattogram, Bangladesh, Feb. 2025. (Accepted and Presented)",
+    "M. A. Kadir, B. Nassar, S. M. J. Alam, S. Ahmed, and M. K. Syfullah, \"Car price prediction: A comparative study of machine learning and deep learning approaches,\" in Proc. 2025 Int. Conf. Electr., Comput. Commun. Eng. (ECCE), Chattogram, Bangladesh, Feb. 2025. (Accepted and Presented)"
+  ],
+  "leadership": [
+    "Advisor, BAUST Mechatronics and Robotics Club (2025–Present).",
+    "Executive Member (Creative Team), Career Society of BAUST (2021–2024).",
+    "General Member, Robotics Club BAUST (2021–2024).",
+    "Organized workshops on robotics and programming for students and the local community, training 100+ participants.",
+    "Judge, World Robot Olympiad (WRO), Regional Round, Bangladesh (2025).",
+    "Faculty Training Program, BAUST.",
+    "Sustainable Energy Challenge, Bikiron."
+  ],
+  "devProjects": [
+    {
+      "name": "EcoFishLab",
+      "description": "Developed and deployed the official website of the Laboratory of Fish Ecophysiology using WordPress, delivering a responsive interface to showcase environmental and aquaculture research.",
+      "tools": "WordPress, HTML, CSS"
+    },
+    {
+      "name": "Safeline Energy Tech",
+      "description": "Built and maintained an online service-providing platform for Safeline Energy Tech Ltd. across the full software development life cycle, adapting to evolving client requirements.",
+      "tools": "HTML, Tailwind CSS, PHP, MySQL"
+    }
+  ],
+  "awards": [
+    "Awarded board scholarships in the Primary (PSC) and Junior (JSC) School Certificate examinations for ranking among top-performing students, awarded by the Board of Intermediate & Secondary Education, Dhaka, Bangladesh."
+  ],
   "courses": [
     {
       "code": "CSE 2101",

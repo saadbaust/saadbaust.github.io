@@ -849,6 +849,46 @@
         text-transform: uppercase;
       }
 
+      /* Co-supervision status sub-titles (Ongoing / Completed). */
+      .cosup-status-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--brand-color);
+        margin: 4px 0 14px;
+        letter-spacing: 0.02em;
+      }
+      .cosup-status-title + .academic-list {
+        margin-top: 2px;
+      }
+
+      /* Simple text entries (Projects) — plain, low-emphasis, CV-style. */
+      #dev-projects-container {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .simple-entry-title {
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 4px;
+      }
+      .simple-entry-desc {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+        margin-bottom: 4px;
+        text-align: justify;
+      }
+      .simple-entry-meta {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+      }
+      .simple-entry-meta .meta-label {
+        font-weight: 600;
+        color: var(--text-main);
+      }
+
       /* Skills Section: Tag-based layout for technical competencies.
          Flex wrap for responsive arrangement across screen sizes. */
       .skills-category-title {
@@ -1443,11 +1483,12 @@
         <nav class="nav-links" id="nav-links">
           <a href="#about-section" class="nav-link">About</a>
           <a href="#experience" class="nav-link">Experience</a>
-          <a href="#publications" class="nav-link">Publications</a>
-          <a href="#projects" class="nav-link">Projects</a>
           <a href="#education" class="nav-link">Education</a>
+          <a href="#publications" class="nav-link">Publications</a>
+          <a href="#projects" class="nav-link">Research</a>
+          <a href="#thesis" class="nav-link">Thesis</a>
+          <a href="#research-activities" class="nav-link">Activities</a>
           <a href="#teaching" class="nav-link">Teaching</a>
-          <a href="#certifications" class="nav-link">Activities</a>
           <a href="#contact" class="nav-link">Contact</a>
         </nav>
         <div class="nav-tools">
@@ -1817,7 +1858,9 @@
           </div>
         </section>
 
-        <!-- EXPERIENCE SECTION: Hard-coded timeline of positions and roles. -->
+        <!-- EXPERIENCE SECTION: CMS-driven timeline.
+             loadData() replaces the static fallback below with entries from
+             data.json ("experience"). Edited via Pages CMS. -->
         <section id="experience" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">Experience</h2>
@@ -1831,16 +1874,88 @@
               </div>
               <p class="company-name">
                 Dept. of CSE, Bangladesh Army University of Science and
-                Technology (BAUST)
+                Technology (BAUST) &middot; On Site &mdash; Nilphamari
               </p>
               <ul class="job-desc-list">
                 <li>
-                  Developing and delivering lectures for undergraduate students
+                  Taught Courses: Digital Logic Design, Computer Graphics, and
+                  sessional (laboratory) courses on Digital Image Processing,
+                  Operating Systems, Artificial Intelligence, Data Structures and
+                  Algorithms I, Numerical Methods, Database Management Systems,
+                  and Introduction to Computer Systems, to 400+ students.
                 </li>
-                <li>Advising on academic planning</li>
-                <li>Conducting Computer Science research</li>
-                <li>Organizing academic events</li>
+                <li>
+                  Co-supervised 6 undergraduate thesis groups, guiding them
+                  through research, experimentation, and publication.
+                </li>
+                <li>
+                  Organized workshops and academic events on programming and
+                  robotics for students.
+                </li>
               </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- EDUCATION SECTION: CMS-driven timeline (data.json "education").
+             Placed high for graduate-school applications so academic results
+             are visible early. Static entries below are a no-JS fallback;
+             loadData() replaces them. -->
+        <section id="education" class="content-block">
+          <div class="section-heading-wrap">
+            <h2 class="section-heading" style="margin-bottom: 0">Education</h2>
+          </div>
+          <div class="timeline-container" id="education-container">
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <h3 class="edu-degree">
+                  M.Sc. Engineering in Computer Science and Engineering (CSE)
+                </h3>
+                <span class="edu-duration">March 2025 &ndash; Present</span>
+              </div>
+              <p class="edu-school">
+                Rajshahi University of Engineering &amp; Technology (RUET),
+                Rajshahi.
+              </p>
+              <p class="edu-grade">Ongoing</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <h3 class="edu-degree">
+                  B.Sc. Engineering in Computer Science and Engineering (CSE)
+                </h3>
+                <span class="edu-duration">July 2020 &ndash; July 2024</span>
+              </div>
+              <p class="edu-school">
+                Bangladesh Army University of Science and Technology (BAUST),
+                Saidpur.
+              </p>
+              <p class="edu-grade">CGPA: 3.96 / 4.00 (Ranked 1st)</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <h3 class="edu-degree">Higher Secondary Certificate (HSC)</h3>
+                <span class="edu-duration">2016 &ndash; 2019</span>
+              </div>
+              <p class="edu-school">
+                Bangladesh Agricultural University College (K.B. College).
+              </p>
+              <p class="edu-grade">GPA: 4.25 / 5.00</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-header">
+                <h3 class="edu-degree">Secondary School Certificate (SSC)</h3>
+                <span class="edu-duration">2010 &ndash; 2016</span>
+              </div>
+              <p class="edu-school">
+                Bangladesh Agricultural University High School (K.B. High
+                School).
+              </p>
+              <p class="edu-grade">GPA: 5.00 / 5.00</p>
             </div>
           </div>
         </section>
@@ -1857,7 +1972,7 @@
           </div>
           <div class="stats-grid" id="stats-grid">
             <div class="stat-card">
-              <div id="stat-citations" class="stat-num" data-target="18">0</div>
+              <div id="stat-citations" class="stat-num" data-target="19">0</div>
               <div class="stat-lbl">Citations</div>
             </div>
             <div class="stat-card">
@@ -1886,9 +2001,17 @@
 
           <h3 class="pub-subheading">Conference Papers</h3>
           <div id="conference-container"></div>
+
+          <!-- Datasets subsection: hidden until at least one @misc dataset entry
+               is found in publications.bib (shown by loadPublications()). -->
+          <div id="datasets-section" style="display: none">
+            <h3 class="pub-subheading">Datasets</h3>
+            <div id="dataset-container"></div>
+          </div>
         </section>
 
-        <!-- RESEARCH PROJECTS SECTION: Hard-coded list with index numbering (matches publication style). -->
+        <!-- RESEARCH PROJECTS SECTION: CMS-driven list (data.json "researchProjects").
+             Static entry below is a no-JS fallback; loadData() replaces it. -->
         <section id="projects" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">
@@ -1906,8 +2029,11 @@
                   AI-Powered Automated Exam Evaluation and OBE-Based University
                   Assessment System
                 </h3>
+                <p class="pub-authors">
+                  Role: Contributor &middot; Funded by Bangladesh Accreditation
+                  Council (BAC)
+                </p>
                 <p class="pub-venue">
-                  <span>Funded by BAC</span>
                   <span class="pub-meta-badge">Ongoing</span>
                 </p>
               </div>
@@ -1915,40 +2041,137 @@
           </div>
         </section>
 
-        <!-- EDUCATION SECTION: Hard-coded timeline of degrees and institutions. -->
-        <section id="education" class="content-block">
+        <!-- THESIS SECTION: CMS-driven (data.json "thesis").
+             Static entries below are a no-JS fallback; loadData() replaces them. -->
+        <section id="thesis" class="content-block">
           <div class="section-heading-wrap">
-            <h2 class="section-heading" style="margin-bottom: 0">Education</h2>
+            <h2 class="section-heading" style="margin-bottom: 0">Thesis</h2>
           </div>
-          <div class="timeline-container" id="education-container">
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-header">
-                <h3 class="edu-degree">
-                  M.Sc. Engineering in Computer Science and Engineering
+          <div id="thesis-container">
+            <div class="pub-row-item">
+              <span class="pub-row-idx">
+                <span class="pub-idx-num">[1]</span>
+                <span class="pub-idx-year">2026&ndash;Present</span>
+              </span>
+              <div class="pub-row-content">
+                <h3 class="pub-title">
+                  Confound-Robust Multimodal Representation Learning for
+                  Dose-Resolved Aquatic Stressor Identification from Fish
+                  Behavior and Water Chemistry
                 </h3>
-                <span class="edu-duration">March 2025 &ndash; Present</span>
+                <p class="pub-authors">
+                  An automated stress monitoring system that will help the
+                  production of fish in Bangladesh.
+                </p>
               </div>
-              <p class="edu-school">
-                Rajshahi University of Engineering &amp; Technology (RUET),
-                Rajshahi.
-              </p>
-              <p class="edu-grade">Ongoing</p>
             </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-header">
-                <h3 class="edu-degree">
-                  B.Sc. Engineering in Computer Science and Engineering
+            <div class="pub-row-item">
+              <span class="pub-row-idx">
+                <span class="pub-idx-num">[2]</span>
+                <span class="pub-idx-year">2023&ndash;2024</span>
+              </span>
+              <div class="pub-row-content">
+                <h3 class="pub-title">
+                  Bangla Sign Language Recognition: Dataset Innovation and
+                  Methodologies
                 </h3>
-                <span class="edu-duration">July 2020 &ndash; July 2024</span>
+                <p class="pub-authors">
+                  Thesis on classification of sign language for Bangla Sign
+                  Language (BdSL). The goal is to provide a brand new dataset and
+                  a comparative analysis of various deep learning methods
+                  including ensemble techniques.
+                </p>
               </div>
-              <p class="edu-school">
-                Bangladesh Army University of Science and Technology (BAUST),
-                Saidpur.
-              </p>
-              <p class="edu-grade">CGPA: 3.96 out of 4.00 (Ranked 1st)</p>
             </div>
+          </div>
+        </section>
+
+        <!-- RESEARCH ACTIVITIES SECTION: CMS-driven (data.json).
+             Two parts: Review Experience + Undergraduate Thesis Co-Supervisions.
+             Static content below is a no-JS fallback; loadData() replaces it. -->
+        <section id="research-activities" class="content-block">
+          <div class="section-heading-wrap">
+            <h2 class="section-heading" style="margin-bottom: 0">
+              Research Activities
+            </h2>
+          </div>
+
+          <h3 class="pub-subheading">Review Experience</h3>
+          <ul class="academic-list" id="review-experience-container">
+            <li class="academic-list-item">
+              Reviewer, 2025 IEEE International Conference on Quantum Photonics,
+              Artificial Intelligence &amp; Networking (QPAIN).
+            </li>
+            <li class="academic-list-item">
+              Reviewer, International Conference on Computing Advancements (ICCA)
+              2026, ACM.
+            </li>
+          </ul>
+
+          <h3 class="pub-subheading">Undergraduate Thesis Co-Supervisions</h3>
+          <div id="cosupervision-container">
+            <h4 class="cosup-status-title">Ongoing</h4>
+            <div class="pub-row-item">
+              <span class="pub-row-idx">
+                <span class="pub-idx-num">[1]</span>
+              </span>
+              <div class="pub-row-content">
+                <h3 class="pub-title">
+                  BTNAT &ndash; A Hybrid Attention-Based Deep Learning Model for
+                  Bangladeshi Tree Identification from Bark Characteristics
+                </h3>
+                <p class="pub-venue">
+                  <span>October 2024 &ndash; Ongoing</span>
+                </p>
+              </div>
+            </div>
+            <div class="pub-row-item">
+              <span class="pub-row-idx">
+                <span class="pub-idx-num">[2]</span>
+              </span>
+              <div class="pub-row-content">
+                <h3 class="pub-title">
+                  Image Caption Generation for Bengali Food Images Using a
+                  Multimodal Approach
+                </h3>
+                <p class="pub-venue">
+                  <span>February 2025 &ndash; Ongoing</span>
+                </p>
+              </div>
+            </div>
+            <div class="pub-row-item">
+              <span class="pub-row-idx">
+                <span class="pub-idx-num">[3]</span>
+              </span>
+              <div class="pub-row-content">
+                <h3 class="pub-title">
+                  Temporal Pattern Analysis of Trending Social Media Blog Posts
+                  Using Multimodal Approaches
+                </h3>
+                <p class="pub-venue">
+                  <span>February 2025 &ndash; Ongoing</span>
+                </p>
+              </div>
+            </div>
+
+            <h4 class="cosup-status-title">Completed</h4>
+            <ul class="academic-list">
+              <li class="academic-list-item">
+                M. N. Hossain, D. Karmakar, P. Nandi, M. Osama, and M. K.
+                Syfullah, &ldquo;A deep learning approach for multiclass
+                domain-specific question classification in computer science for
+                Bangla language,&rdquo; in Proc. 2025 Int. Conf. Electr.,
+                Comput. Commun. Eng. (ECCE), Chattogram, Bangladesh, Feb. 2025.
+                (Accepted and Presented)
+              </li>
+              <li class="academic-list-item">
+                M. A. Kadir, B. Nassar, S. M. J. Alam, S. Ahmed, and M. K.
+                Syfullah, &ldquo;Car price prediction: A comparative study of
+                machine learning and deep learning approaches,&rdquo; in Proc.
+                2025 Int. Conf. Electr., Comput. Commun. Eng. (ECCE), Chattogram,
+                Bangladesh, Feb. 2025. (Accepted and Presented)
+              </li>
+            </ul>
           </div>
         </section>
 
@@ -2039,21 +2262,87 @@
           </div>
         </section>
 
-        <!-- CERTIFICATIONS & ACTIVITIES SECTION: Hard-coded bulleted list. -->
-        <section id="certifications" class="content-block">
+        <!-- LEADERSHIP & CO-CURRICULAR ACTIVITIES: CMS-driven bulleted list
+             (data.json "leadership"). Static items are a no-JS fallback. -->
+        <section id="leadership" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">
-              Certifications &amp; Activities
+              Leadership &amp; Co-curricular Activities
             </h2>
           </div>
-          <ul class="academic-list" id="activities-container">
+          <ul class="academic-list" id="leadership-container">
             <li class="academic-list-item">
-              Reviewer, 2025 IEEE International Conference on Quantum Photonics,
-              AI and Networking
+              Advisor, BAUST Mechatronics and Robotics Club (2025&ndash;Present).
             </li>
-            <li class="academic-list-item">Faculty Training Program, BAUST</li>
             <li class="academic-list-item">
-              Sustainable Energy Challenge, Bikiron
+              Executive Member (Creative Team), Career Society of BAUST
+              (2021&ndash;2024).
+            </li>
+            <li class="academic-list-item">
+              General Member, Robotics Club BAUST (2021&ndash;2024).
+            </li>
+            <li class="academic-list-item">
+              Organized workshops on robotics and programming for students and
+              the local community, training 100+ participants.
+            </li>
+            <li class="academic-list-item">
+              Judge, World Robot Olympiad (WRO), Regional Round, Bangladesh
+              (2025).
+            </li>
+            <li class="academic-list-item">Faculty Training Program, BAUST.</li>
+            <li class="academic-list-item">
+              Sustainable Energy Challenge, Bikiron.
+            </li>
+          </ul>
+        </section>
+
+        <!-- PROJECTS (SOFTWARE / WEB) SECTION: CMS-driven (data.json "devProjects").
+             Static cards below are a no-JS fallback; loadData() replaces them. -->
+        <section id="dev-projects" class="content-block">
+          <div class="section-heading-wrap">
+            <h2 class="section-heading" style="margin-bottom: 0">Projects</h2>
+          </div>
+          <div id="dev-projects-container">
+            <div class="simple-entry">
+              <h3 class="simple-entry-title">EcoFishLab</h3>
+              <p class="simple-entry-desc">
+                Developed and deployed the official website of the Laboratory of
+                Fish Ecophysiology using WordPress, delivering a responsive
+                interface to showcase environmental and aquaculture research.
+              </p>
+              <p class="simple-entry-meta">
+                <span class="meta-label">Tools:</span> WordPress, HTML, CSS
+              </p>
+            </div>
+            <div class="simple-entry">
+              <h3 class="simple-entry-title">Safeline Energy Tech</h3>
+              <p class="simple-entry-desc">
+                Built and maintained an online service-providing platform for
+                Safeline Energy Tech Ltd. across the full software development
+                life cycle, adapting to evolving client requirements.
+              </p>
+              <p class="simple-entry-meta">
+                <span class="meta-label">Tools:</span> HTML, Tailwind CSS, PHP,
+                MySQL
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- AWARDS & ACHIEVEMENTS: CMS-driven bulleted list (data.json "awards").
+             Static items are a no-JS fallback. -->
+        <section id="awards" class="content-block">
+          <div class="section-heading-wrap">
+            <h2 class="section-heading" style="margin-bottom: 0">
+              Awards &amp; Achievements
+            </h2>
+          </div>
+          <ul class="academic-list" id="awards-container">
+            <li class="academic-list-item">
+              Awarded board scholarships in the Primary (PSC) and Junior (JSC)
+              School Certificate examinations for ranking among top-performing
+              students, awarded by the Board of Intermediate &amp; Secondary
+              Education, Dhaka, Bangladesh.
             </li>
           </ul>
         </section>
@@ -2376,10 +2665,6 @@
           rawText = rawText + "\n\n";  // Ensure trailing newlines for regex
           const database = parseBibtex(rawText);
 
-          // Update total publications count
-          const totalCount = database.length;
-          setStat("stat-publications", totalCount);
-
           // Separate by type, newest first (sort by year descending)
           const byYearDesc = (a, b) =>
             (Number(b.year) || 0) - (Number(a.year) || 0);
@@ -2389,6 +2674,13 @@
           const conferences = database
             .filter((e) => e.type === "inproceedings")
             .sort(byYearDesc);
+          const datasets = database
+            .filter((e) => e.type === "misc")
+            .sort(byYearDesc);
+
+          // "Total Pubs" counts peer-reviewed papers (journals + conferences);
+          // datasets are listed separately and not included in the tally.
+          setStat("stat-publications", journals.length + conferences.length);
 
           const jContainer = document.getElementById("journal-container");
           if (journals.length === 0) {
@@ -2447,6 +2739,41 @@
               )
               .join("");
           }
+
+          // Datasets (@misc). The wrapper stays hidden unless at least one
+          // dataset entry exists in the BibTeX file.
+          const dSection = document.getElementById("datasets-section");
+          const dContainer = document.getElementById("dataset-container");
+          if (dContainer) {
+            if (datasets.length === 0) {
+              if (dSection) dSection.style.display = "none";
+            } else {
+              if (dSection) dSection.style.display = "";
+              dContainer.innerHTML = datasets
+                .map(
+                  (d, idx) => `
+              <div class="pub-row-item">
+                <span class="pub-row-idx">
+                  <span class="pub-idx-num">[${idx + 1}]</span>
+                  <span class="pub-idx-year">${escapeHtml(d.year || "")}</span>
+                </span>
+                <div class="pub-row-content">
+                  <h4 class="pub-title">"${
+                    getPubLink(d)
+                      ? `<a href="${escapeHtml(getPubLink(d))}" target="_blank" rel="noopener noreferrer">${escapeHtml(d.title || "Untitled Dataset")}</a>`
+                      : escapeHtml(d.title || "Untitled Dataset")
+                  }"</h4>
+                  <p class="pub-authors">${highlightAuthor(d.author)}</p>
+                  <p class="pub-venue">
+                    <span>${escapeHtml(d.publisher || "Dataset")}</span>
+                  </p>
+                </div>
+              </div>
+            `,
+                )
+                .join("");
+            }
+          }
         } catch (err) {
           console.error("Error structuralizing publications payload:", err);
           document.getElementById("journal-container").innerHTML =
@@ -2474,6 +2801,178 @@
           }[c];
         });
       }
+      // ── Renderers for the CMS-driven sections of data.json ─────────────────
+      // Each bails out (keeping the static HTML fallback) if its data is
+      // missing or empty, so a partial data.json never blanks a section.
+
+      // Experience timeline.
+      function renderExperience(list) {
+        const c = document.getElementById("experience-container");
+        if (!c || !Array.isArray(list) || !list.length) return;
+        c.innerHTML = list
+          .map((e) => {
+            const org = [e.org, e.location]
+              .filter(Boolean)
+              .map(escapeHtml)
+              .join(" &middot; ");
+            const bullets = Array.isArray(e.bullets) ? e.bullets : [];
+            return `
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-header">
+                  <h3 class="job-title">${escapeHtml(e.title || "")}</h3>
+                  <span class="job-duration">${escapeHtml(e.duration || "")}</span>
+                </div>
+                ${org ? `<p class="company-name">${org}</p>` : ""}
+                ${
+                  bullets.length
+                    ? `<ul class="job-desc-list">${bullets
+                        .map((b) => `<li>${escapeHtml(b)}</li>`)
+                        .join("")}</ul>`
+                    : ""
+                }
+              </div>`;
+          })
+          .join("");
+      }
+
+      // Profile rail text (subtitle, institution, and the target/objective line).
+      function renderProfile(p) {
+        if (!p || typeof p !== "object") return;
+        const set = (id, val) => {
+          const el = document.getElementById(id);
+          if (el && val != null && val !== "") el.textContent = val;
+        };
+        set("profile-subtitle", p.subtitle);
+        set("profile-institution", p.institution);
+        set("profile-target", p.target);
+      }
+
+      // About section: intro paragraph + "Core Research Focus" interest tags.
+      function renderAbout(a) {
+        if (!a || typeof a !== "object") return;
+        const para = document.getElementById("about-p1");
+        if (para && a.paragraph) para.textContent = a.paragraph;
+        const list = document.querySelector(".interests-list");
+        if (list && Array.isArray(a.interests) && a.interests.length) {
+          list.innerHTML = a.interests
+            .map((i) => `<li>${escapeHtml(i)}</li>`)
+            .join("");
+        }
+      }
+
+      // Education timeline (degree, institution, duration, result/grade).
+      function renderEducation(list) {
+        const c = document.getElementById("education-container");
+        if (!c || !Array.isArray(list) || !list.length) return;
+        c.innerHTML = list
+          .map(
+            (e) => `
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-header">
+                  <h3 class="edu-degree">${escapeHtml(e.degree || "")}</h3>
+                  <span class="edu-duration">${escapeHtml(e.duration || "")}</span>
+                </div>
+                ${e.school ? `<p class="edu-school">${escapeHtml(e.school)}</p>` : ""}
+                ${e.grade ? `<p class="edu-grade">${escapeHtml(e.grade)}</p>` : ""}
+              </div>`,
+          )
+          .join("");
+      }
+
+      // Indexed rows (Research Projects, Thesis) sharing the publication layout.
+      function renderIndexedRows(id, list, opts) {
+        opts = opts || {};
+        const c = document.getElementById(id);
+        if (!c || !Array.isArray(list) || !list.length) return;
+        c.innerHTML = list
+          .map((item, idx) => {
+            const year = item.duration || item.year || "";
+            const note = item.meta || item.description || "";
+            return `
+              <div class="pub-row-item">
+                <span class="pub-row-idx">
+                  <span class="pub-idx-num">[${idx + 1}]</span>
+                  ${year ? `<span class="pub-idx-year">${escapeHtml(year)}</span>` : ""}
+                </span>
+                <div class="pub-row-content">
+                  <h3 class="pub-title">${escapeHtml(item.title || "")}</h3>
+                  ${note ? `<p class="pub-authors">${escapeHtml(note)}</p>` : ""}
+                  ${
+                    opts.badge && item.status
+                      ? `<p class="pub-venue"><span class="pub-meta-badge">${escapeHtml(item.status)}</span></p>`
+                      : ""
+                  }
+                </div>
+              </div>`;
+          })
+          .join("");
+      }
+
+      // Simple bulleted <ul> (Review Experience, Leadership, Awards).
+      function renderBulletList(id, list) {
+        const c = document.getElementById(id);
+        if (!c || !Array.isArray(list) || !list.length) return;
+        c.innerHTML = list
+          .map((item) => `<li class="academic-list-item">${escapeHtml(item)}</li>`)
+          .join("");
+      }
+
+      // Undergraduate thesis co-supervisions: Ongoing rows + Completed citations.
+      function renderCoSupervisions(ongoing, completed) {
+        const c = document.getElementById("cosupervision-container");
+        if (!c) return;
+        ongoing = Array.isArray(ongoing) ? ongoing : [];
+        completed = Array.isArray(completed) ? completed : [];
+        if (!ongoing.length && !completed.length) return;
+        let html = "";
+        if (ongoing.length) {
+          html += `<h4 class="cosup-status-title">Ongoing</h4>`;
+          html += ongoing
+            .map(
+              (o, idx) => `
+              <div class="pub-row-item">
+                <span class="pub-row-idx">
+                  <span class="pub-idx-num">[${idx + 1}]</span>
+                </span>
+                <div class="pub-row-content">
+                  <h3 class="pub-title">${escapeHtml(o.title || "")}</h3>
+                  ${o.timeframe ? `<p class="pub-venue"><span>${escapeHtml(o.timeframe)}</span></p>` : ""}
+                </div>
+              </div>`,
+            )
+            .join("");
+        }
+        if (completed.length) {
+          html += `<h4 class="cosup-status-title">Completed</h4>`;
+          html += `<ul class="academic-list">${completed
+            .map((item) => `<li class="academic-list-item">${escapeHtml(item)}</li>`)
+            .join("")}</ul>`;
+        }
+        c.innerHTML = html;
+      }
+
+      // Software / web development project cards.
+      function renderDevProjects(list) {
+        const c = document.getElementById("dev-projects-container");
+        if (!c || !Array.isArray(list) || !list.length) return;
+        c.innerHTML = list
+          .map(
+            (p) => `
+              <div class="simple-entry">
+                <h3 class="simple-entry-title">${escapeHtml(p.name || "")}</h3>
+                ${p.description ? `<p class="simple-entry-desc">${escapeHtml(p.description)}</p>` : ""}
+                ${
+                  p.tools
+                    ? `<p class="simple-entry-meta"><span class="meta-label">Tools:</span> ${escapeHtml(p.tools)}</p>`
+                    : ""
+                }
+              </div>`,
+          )
+          .join("");
+      }
+
       async function loadData() {
         try {
           const res = await fetch("data.json", { cache: "no-cache" });
@@ -2510,6 +3009,25 @@
               })
               .join("");
           }
+
+          // Render the remaining CMS-driven sections (each keeps its static
+          // HTML fallback if the corresponding data is absent).
+          renderProfile(data.profile);
+          renderAbout(data.about);
+          renderExperience(data.experience);
+          renderEducation(data.education);
+          renderIndexedRows("projects-container", data.researchProjects, {
+            badge: true,
+          });
+          renderIndexedRows("thesis-container", data.thesis);
+          renderBulletList("review-experience-container", data.reviewExperience);
+          renderCoSupervisions(
+            data.coSupervisionsOngoing,
+            data.coSupervisionsCompleted,
+          );
+          renderBulletList("leadership-container", data.leadership);
+          renderDevProjects(data.devProjects);
+          renderBulletList("awards-container", data.awards);
         } catch (err) {
           console.error("Could not load data.json:", err);
           // Leaves the hardcoded fallback values already present in the HTML.
