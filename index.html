@@ -11,11 +11,11 @@
     <title>Saad Ahmed | Lecturer &amp; Researcher | BAUST</title>
     <meta
       name="description"
-      content="Saad Ahmed, Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. Researcher in Image Processing, Computer Vision &amp; Deep Learning."
+      content="Saad Ahmed, Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. Researcher in Computer Vision, Deep Learning &amp; Explainable AI (XAI)."
     />
     <meta
       name="keywords"
-      content="Saad Ahmed, Saad Ahmed BAUST, Saad Ahmed Lecturer, Saad Ahmed CSE, Saad Ahmed researcher, BAUST CSE, Bangladesh Army University of Science and Technology, Lecturer CSE BAUST, Saidpur, Computer Vision, Deep Learning, Image Processing"
+      content="Saad Ahmed, Saad Ahmed BAUST, Saad Ahmed Lecturer, Saad Ahmed CSE, Saad Ahmed researcher, BAUST CSE, Bangladesh Army University of Science and Technology, Lecturer CSE BAUST, Saidpur, Computer Vision, Deep Learning, Explainable AI, XAI, Multimodal Learning, Lightweight Deep Learning, Image Processing"
     />
     <meta name="author" content="Saad Ahmed" />
     <meta
@@ -34,7 +34,7 @@
     />
     <meta
       property="og:description"
-      content="Saad Ahmed, Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. Researcher in Image Processing, Computer Vision &amp; Deep Learning."
+      content="Saad Ahmed, Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. Researcher in Computer Vision, Deep Learning &amp; Explainable AI (XAI)."
     />
     <meta property="og:url" content="https://saadbaust.github.io/" />
     <meta
@@ -68,7 +68,7 @@
     />
     <meta
       name="twitter:description"
-      content="Saad Ahmed, Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. Researcher in Image Processing, Computer Vision &amp; Deep Learning."
+      content="Saad Ahmed, Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. Researcher in Computer Vision, Deep Learning &amp; Explainable AI (XAI)."
     />
     <meta
       name="twitter:image"
@@ -126,7 +126,7 @@
             "@id": "https://saadbaust.github.io/#webpage",
             "url": "https://saadbaust.github.io/",
             "name": "Saad Ahmed | Lecturer & Researcher | BAUST",
-            "description": "Official portfolio of Saad Ahmed, Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. Researcher in Image Processing, Computer Vision, and Deep Learning.",
+            "description": "Official portfolio of Saad Ahmed, Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. Researcher in Computer Vision, Deep Learning, and Explainable AI.",
             "inLanguage": "en",
             "isPartOf": { "@id": "https://saadbaust.github.io/#website" },
             "primaryImageOfPage": {
@@ -134,7 +134,7 @@
             },
             "image": { "@id": "https://saadbaust.github.io/#profile-image" },
             "mainEntity": { "@id": "https://saadbaust.github.io/#person" },
-            "dateModified": "2026-07-01"
+            "dateModified": "2026-07-10"
           },
           {
             "@type": "Person",
@@ -143,7 +143,7 @@
             "alternateName": "Saad Ahmed BAUST",
             "givenName": "Saad",
             "familyName": "Ahmed",
-            "description": "Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST), and a researcher in Image Processing, Computer Vision, and Deep Learning.",
+            "description": "Lecturer at the Department of CSE, Bangladesh Army University of Science and Technology (BAUST), and a researcher in Computer Vision, Deep Learning, and Explainable AI.",
             "url": "https://saadbaust.github.io/",
             "mainEntityOfPage": {
               "@id": "https://saadbaust.github.io/#webpage"
@@ -185,10 +185,13 @@
               "https://ieeexplore.ieee.org/author/526065849930602"
             ],
             "knowsAbout": [
-              "Image Processing",
               "Computer Vision",
               "Deep Learning",
-              "Machine Learning"
+              "Explainable AI",
+              "Multimodal Learning",
+              "Lightweight Neural Architectures",
+              "Machine Learning",
+              "Image Processing"
             ]
           }
         ]
@@ -1784,13 +1787,18 @@
 
       <!-- ═══════════════════════════════════════════════════════════════════════
            MAIN CONTENT AREA
-           All sections are hard-coded HTML except:
-           - Publications: Rendered from publications.bib via JavaScript
-           - Teaching: Rows populated from data.json (CMS-managed)
-           - Stats: Animated counters from data.json (CMS-managed)
+           Most sections are CMS-managed and rendered by JavaScript at load time,
+           each with a static HTML copy as a no-JS fallback:
+           - Publications (+ Datasets): parsed from publications.bib
+           - Profile → Thesis (About, Stats, Experience, Education, Research
+             Projects, Thesis): from data.json
+           - Activities → Awards (Research Activities, Teaching, Leadership,
+             Projects, Awards): from content.json
+           Only Contact and the hero action buttons are purely hard-coded.
            ═══════════════════════════════════════════════════════════════════════ -->
       <main id="main">
-        <!-- ABOUT SECTION: Hard-coded biography, research focus, action buttons. -->
+        <!-- ABOUT SECTION: intro + research focus rendered from data.json ("about"),
+             with the action buttons hard-coded. -->
         <section id="about-section" class="content-block">
           <h2 class="about-greeting">
             Hello, this is <span class="greeting-name">Saad</span>,
@@ -2086,7 +2094,7 @@
           </div>
         </section>
 
-        <!-- RESEARCH ACTIVITIES SECTION: CMS-driven (data.json).
+        <!-- RESEARCH ACTIVITIES SECTION: CMS-driven (content.json).
              Two parts: Review Experience + Undergraduate Thesis Co-Supervisions.
              Static content below is a no-JS fallback; loadData() replaces it. -->
         <section id="research-activities" class="content-block">
@@ -2177,8 +2185,8 @@
 
         <!-- TEACHING SECTION: CMS-driven table with fallback.
              - Static HTML rows below are a no-JS fallback
-             - loadData() fetches courses from data.json and populates the table
-             - Edited via Pages CMS "Stats & Teaching Courses" interface -->
+             - loadData() fetches courses from content.json and populates the table
+             - Edited via Pages CMS "Activities, Teaching & Extras" interface -->
         <section id="teaching" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">Teaching</h2>
@@ -2263,7 +2271,7 @@
         </section>
 
         <!-- LEADERSHIP & CO-CURRICULAR ACTIVITIES: CMS-driven bulleted list
-             (data.json "leadership"). Static items are a no-JS fallback. -->
+             (content.json "leadership"). Static items are a no-JS fallback. -->
         <section id="leadership" class="content-block">
           <div class="section-heading-wrap">
             <h2 class="section-heading" style="margin-bottom: 0">
@@ -2296,7 +2304,7 @@
           </ul>
         </section>
 
-        <!-- PROJECTS (SOFTWARE / WEB) SECTION: CMS-driven (data.json "devProjects").
+        <!-- PROJECTS (SOFTWARE / WEB) SECTION: CMS-driven (content.json "devProjects").
              Static cards below are a no-JS fallback; loadData() replaces them. -->
         <section id="dev-projects" class="content-block">
           <div class="section-heading-wrap">
@@ -2329,7 +2337,7 @@
           </div>
         </section>
 
-        <!-- AWARDS & ACHIEVEMENTS: CMS-driven bulleted list (data.json "awards").
+        <!-- AWARDS & ACHIEVEMENTS: CMS-driven bulleted list (content.json "awards").
              Static items are a no-JS fallback. -->
         <section id="awards" class="content-block">
           <div class="section-heading-wrap">
@@ -2784,9 +2792,10 @@
       }
 
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      // CMS DATA LOADER: Fetch and render stats + teaching courses from data.json.
-      // Edited via Pages CMS "Stats & Teaching Courses" interface.
-      // Falls back to static HTML if fetch fails (no-JS support).
+      // CMS DATA LOADER: Fetch and render every structured section from the two
+      // JSON files — data.json (profile → thesis) and content.json (activities
+      // → awards) — merged into one object. Edited via Pages CMS.
+      // Falls back to static HTML if a fetch fails (no-JS support).
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
       // Escape HTML special characters to prevent XSS.
@@ -2975,9 +2984,25 @@
 
       async function loadData() {
         try {
-          const res = await fetch("data.json", { cache: "no-cache" });
-          if (!res.ok) throw new Error("HTTP " + res.status);
-          const data = await res.json();
+          // Content is split across two files so neither CMS screen gets too
+          // long: data.json = top half (profile → thesis), content.json =
+          // lower half (activities → awards). Fetch both in parallel and merge.
+          const [primaryRes, extraRes] = await Promise.all([
+            fetch("data.json", { cache: "no-cache" }).catch(() => null),
+            fetch("content.json", { cache: "no-cache" }).catch(() => null),
+          ]);
+          if (!primaryRes || !primaryRes.ok)
+            throw new Error("data.json unavailable");
+          const primary = await primaryRes.json();
+          let extra = {};
+          if (extraRes && extraRes.ok) {
+            try {
+              extra = await extraRes.json();
+            } catch (e) {
+              console.error("Could not parse content.json:", e);
+            }
+          }
+          const data = Object.assign({}, primary, extra);
 
           const stats = (data && data.stats) || {};
           if (stats.citations != null)
@@ -3054,7 +3079,7 @@
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
       window.addEventListener("DOMContentLoaded", () => {
         loadPublications();  // Parse & render publications.bib
-        loadData();          // Load stats & teaching courses from data.json
+        loadData();          // Load & render data.json + content.json sections
       });
     </script>
   </body>

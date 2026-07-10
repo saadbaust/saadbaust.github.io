@@ -6,23 +6,30 @@
 # This config defines what content is editable via the Pages CMS interface.
 # Everything else is hard-coded in index.html and NOT editable here.
 #
-# CMS-Managed Content:
-#   1. Publications (BibTeX file) — journals, conferences AND datasets
-#   2. Profile Card — subtitle, institution, objective line
-#   3. About — intro paragraph + research-focus tags
-#   4. Stats — Citations, h-index, i10-index counts
-#   5. Experience — the Experience timeline entries
-#   6. Education — degrees / certificates with results
-#   7. Research Projects — funded/collaborative project list
-#   8. Thesis — thesis / M.Sc. research entries
-#   9. Research Activities — review experience + undergrad thesis co-supervisions
-#  10. Teaching Courses — rows in the "Teaching Duties" table
-#  11. Leadership & Co-curricular Activities — bulleted list
-#  12. Projects — software / web development projects
-#  13. Awards & Achievements — bulleted list
+# The CMS has THREE screens (one per file):
+#
+#   A. Publications (BibTeX)  → publications.bib
+#        journals, conferences AND datasets
+#
+#   B. Profile, Experience & Research  → data.json   (top half of the page)
+#        1. Profile Card — subtitle, institution, objective line
+#        2. About — intro paragraph + research-focus tags
+#        3. Stats — Citations, h-index, i10-index counts
+#        4. Experience — the Experience timeline entries
+#        5. Education — degrees / certificates with results
+#        6. Research Projects — funded/collaborative project list
+#        7. Thesis — thesis / M.Sc. research entries
+#
+#   C. Activities, Teaching & Extras  → content.json  (lower half of the page)
+#        8.  Research Activities — review experience + undergrad thesis co-supervisions
+#        9.  Teaching Courses — rows in the "Teaching Duties" table
+#        10. Leadership & Co-curricular Activities — bulleted list
+#        11. Projects — software / web development projects
+#        12. Awards & Achievements — bulleted list
 #
 # Workflow: Edit in CMS → auto-commits to GitHub → live site updates in ~60 sec
-# Technical: Site fetches publications.bib and data.json in the browser at load time.
+# Technical: Site fetches publications.bib, data.json and content.json in the
+# browser at load time. "Total Pubs" is auto-counted from BibTeX.
 # ═══════════════════════════════════════════════════════════════════════════
 
 content:
@@ -46,15 +53,15 @@ content:
       How to remove: Delete the entire entry block (from @ to closing }).
 
   # ═══════════════════════════════════════════════════════════════════════════
-  # SITE CONTENT (data.json)
-  # Every structured, editable section of the site lives here.
+  # PROFILE, EXPERIENCE & RESEARCH (data.json)
+  # The top half of the page: identity + the core academic / professional record.
   # Note: "Total Pubs" is auto-counted from BibTeX, not stored here.
   # ═══════════════════════════════════════════════════════════════════════════
   - name: data
-    label: "Site Content (Stats, Experience, Projects, Activities, Teaching…)"
+    label: "Profile, Experience & Research"
     type: file
     path: data.json
-    description: "All editable sections of the portfolio except the BibTeX publications."
+    description: "Profile card, About, Stats, Experience, Education, Research Projects, and Thesis."
     fields:
       # ── Profile rail (name card on the left) ────────────────────────────────
       - name: profile
@@ -132,6 +139,17 @@ content:
           - { name: duration,    label: "Duration",    type: string, description: "E.g., 2026–Present" }
           - { name: description, label: "Description", type: text }
 
+  # ═══════════════════════════════════════════════════════════════════════════
+  # ACTIVITIES, TEACHING & EXTRAS (content.json)
+  # The lower half of the page: research activities, teaching, and the
+  # secondary sections. Kept in a separate file so neither screen is too long.
+  # ═══════════════════════════════════════════════════════════════════════════
+  - name: content
+    label: "Activities, Teaching & Extras"
+    type: file
+    path: content.json
+    description: "Research Activities, Teaching Courses, Leadership, Projects, and Awards."
+    fields:
       # ── Research Activities: Review experience ──────────────────────────────
       - name: reviewExperience
         label: "Review Experience"
