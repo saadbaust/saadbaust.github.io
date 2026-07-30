@@ -222,7 +222,7 @@
       })();
     </script>
 
-    <!-- Inter web font. Loaded non-render-blocking via the media="print" swap
+    <!-- Poppins web font. Loaded non-render-blocking via the media="print" swap
          trick so it never delays first paint / LCP; <noscript> keeps it working
          with JavaScript disabled. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -230,17 +230,17 @@
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media='all'"
     />
     <noscript>
       <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
       />
     </noscript>
@@ -254,16 +254,17 @@
       :root {
         --bg-main: linear-gradient(180deg, #f8f9fd 0%, #edf0f7 100%);
         --text-main: #1e293b;
-        --text-muted: #64748b;
+        --text-muted: #475569;
         --brand-color: #4f46e5;
         --brand-muted: #e0e7ff;
         --card-bg: rgba(255, 255, 255, 0.52);
         --card-border: rgba(255, 255, 255, 0.55);
+        --card-highlight: rgba(255, 255, 255, 0.65);
         --badge-bg: #f8fafc;
         --border-divider: #e2e8f0;
         --shadow:
-          0 1px 3px rgba(2, 6, 23, 0.05), 0 4px 12px -4px rgba(2, 6, 23, 0.08);
-        --glow-opacity: 0.3;
+          0 1px 2px rgba(2, 6, 23, 0.03), 0 3px 8px -4px rgba(2, 6, 23, 0.05);
+        --glow-opacity: 0.1;
         --glow-blur: 90px;
         --timeline-line: #cbd5e1;
       }
@@ -271,16 +272,17 @@
       html.dark {
         --bg-main: #0b0f19;
         --text-main: #e2e8f0;
-        --text-muted: #94a3b8;
+        --text-muted: #a3aec1;
         --brand-color: #818cf8;
         --brand-muted: #1e1b4b;
         --card-bg: rgba(17, 23, 40, 0.52);
         --card-border: rgba(129, 140, 248, 0.18);
+        --card-highlight: rgba(255, 255, 255, 0.06);
         --badge-bg: #101729;
         --border-divider: #222d44;
         --shadow:
-          0 1px 3px rgba(0, 0, 0, 0.18), 0 4px 14px -4px rgba(0, 0, 0, 0.28);
-        --glow-opacity: 0.5;
+          0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px -4px rgba(0, 0, 0, 0.18);
+        --glow-opacity: 0.16;
         --glow-blur: 96px;
         --timeline-line: #334155;
       }
@@ -295,7 +297,7 @@
         background-attachment: fixed;
         color: var(--text-main);
         font-family:
-          "Inter",
+          "Poppins",
           system-ui,
           -apple-system,
           sans-serif;
@@ -305,7 +307,7 @@
         transition:
           background-color 0.3s,
           color 0.3s;
-        line-height: 1.5;
+        line-height: 1.6;
         overflow-x: hidden;
       }
 
@@ -327,15 +329,6 @@
         background: #94a3b8;
       }
 
-      @keyframes glowDrift {
-        0%,
-        100% {
-          transform: translateY(0) scale(1);
-        }
-        50% {
-          transform: translateY(10px) scale(1.03);
-        }
-      }
       .corner-glow {
         position: fixed;
         top: -280px;
@@ -345,8 +338,6 @@
         z-index: -10;
         pointer-events: none;
         border-radius: 50%;
-        will-change: transform, opacity;
-        animation: glowDrift 12s ease-in-out infinite;
         opacity: var(--glow-opacity);
         filter: blur(var(--glow-blur));
         background:
@@ -403,6 +394,9 @@
       /* Scroll behavior: Smooth anchoring with padding to account for sticky header.
          Stable gutter prevents content shift when scrollbar appears/disappears. */
       html {
+        /* Poppins runs wider/larger than Inter, so keep the base at the
+           browser default (16px). Matches the reference site's compact feel. */
+        font-size: 100%;
         scroll-behavior: smooth;
         scroll-padding-top: 80px;
         scrollbar-gutter: stable;
@@ -441,7 +435,7 @@
       .nav-caption {
         padding: 16px 16px 4px 16px;
         font-size: 0.68rem;
-        font-weight: 700;
+        font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.05em;
         color: var(--text-muted);
@@ -523,14 +517,15 @@
         backdrop-filter: blur(20px) saturate(1.55);
         border-radius: 20px;
         border: 1px solid var(--card-border);
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow), inset 0 1px 0 var(--card-highlight);
         padding: 32px;
+        scroll-margin-top: 88px;
       }
 
       .title-subtitle {
         font-size: 1rem;
         color: var(--brand-color);
-        font-weight: 600;
+        font-weight: 500;
         margin-top: 8px;
       }
       .institution-txt {
@@ -557,7 +552,7 @@
       }
 
       .section-heading {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         font-weight: 600;
         letter-spacing: -0.015em;
         line-height: 1.15;
@@ -572,6 +567,8 @@
         align-items: center;
         gap: 12px;
         margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border-divider);
       }
       .section-icon-pill {
         padding: 10px;
@@ -592,6 +589,7 @@
         line-height: 1.65;
         margin-bottom: 14px;
         text-align: justify;
+        hyphens: auto;
       }
       .about-paragraph:last-child {
         margin-bottom: 0;
@@ -599,7 +597,7 @@
 
       .interests-title {
         font-size: 1.05rem;
-        font-weight: 600;
+        font-weight: 500;
         margin-top: 24px;
         margin-bottom: 12px;
         color: var(--text-main);
@@ -676,7 +674,7 @@
       .job-title,
       .edu-degree {
         font-size: 1.05rem;
-        font-weight: 600;
+        font-weight: 500;
         color: var(--text-main);
       }
       .job-duration,
@@ -705,6 +703,7 @@
         color: var(--text-muted);
         margin-top: 6px;
         text-align: justify;
+        hyphens: auto;
       }
       /* Bulleted job description with small dots. */
       .job-desc-list {
@@ -753,7 +752,7 @@
       }
       .stat-num {
         font-size: 1.3rem;
-        font-weight: 700;
+        font-weight: 500;
         color: var(--brand-color);
         line-height: 1.2;
       }
@@ -767,10 +766,10 @@
       }
 
       .pub-subheading {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         font-weight: 600;
         color: var(--text-main);
-        margin: 28px 0 16px;
+        margin: 20px 0 12px;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -783,8 +782,8 @@
         display: flex;
         gap: 16px;
         align-items: flex-start;
-        margin-bottom: 20px;
-        line-height: 1.5;
+        margin-bottom: 13px;
+        line-height: 1.45;
       }
       .pub-row-item:last-child {
         margin-bottom: 0;
@@ -814,10 +813,10 @@
       }
 
       .pub-title {
-        font-weight: 600;
-        font-size: 0.98rem;
+        font-weight: 500;
+        font-size: 0.95rem;
         color: var(--text-main);
-        margin-bottom: 4px;
+        margin-bottom: 3px;
       }
       .pub-title a {
         color: inherit;
@@ -829,12 +828,13 @@
         text-decoration: none;
       }
       .pub-authors {
-        font-size: 0.88rem;
+        font-size: 0.86rem;
+        line-height: 1.45;
         color: var(--text-muted);
-        margin-bottom: 4px;
+        margin-bottom: 2px;
       }
       .pub-venue {
-        font-size: 0.88rem;
+        font-size: 0.86rem;
         font-weight: 500;
         color: var(--text-muted);
         display: flex;
@@ -855,7 +855,7 @@
       /* Co-supervision status sub-titles (Ongoing / Completed). */
       .cosup-status-title {
         font-size: 0.95rem;
-        font-weight: 700;
+        font-weight: 500;
         color: var(--brand-color);
         margin: 4px 0 14px;
         letter-spacing: 0.02em;
@@ -872,7 +872,7 @@
       }
       .simple-entry-title {
         font-size: 0.98rem;
-        font-weight: 700;
+        font-weight: 500;
         color: var(--text-main);
         margin-bottom: 4px;
       }
@@ -882,6 +882,7 @@
         color: var(--text-muted);
         margin-bottom: 4px;
         text-align: justify;
+        hyphens: auto;
       }
       .simple-entry-meta {
         font-size: 0.85rem;
@@ -896,7 +897,7 @@
          Flex wrap for responsive arrangement across screen sizes. */
       .skills-category-title {
         font-size: 0.95rem;
-        font-weight: 600;
+        font-weight: 500;
         margin: 16px 0 8px;
         color: var(--text-main);
       }
@@ -940,7 +941,7 @@
       .teaching-table th {
         background: transparent;
         color: var(--text-muted);
-        font-weight: 700;
+        font-weight: 600;
         font-size: 0.68rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -1103,7 +1104,6 @@
       }
       .social-badge-item:hover {
         background: #ffffff;
-        transform: translateY(-1px);
       }
       html.dark .social-badge-item:hover {
         background: #1c2a45;
@@ -1226,6 +1226,7 @@
         background: var(--card-bg);
         backdrop-filter: blur(20px) saturate(1.55);
         border-bottom: 1px solid var(--card-border);
+        box-shadow: inset 0 1px 0 var(--card-highlight);
       }
       .nav-inner {
         max-width: 1152px;
@@ -1237,7 +1238,7 @@
         gap: 16px;
       }
       .nav-brand {
-        font-weight: 800;
+        font-weight: 600;
         font-size: 1.1rem;
         letter-spacing: -0.01em;
         color: var(--text-main);
@@ -1349,7 +1350,7 @@
       }
       .profile-name {
         font-size: 1.5rem;
-        font-weight: 700;
+        font-weight: 600;
         letter-spacing: -0.02em;
         line-height: 1.15;
         color: var(--text-main);
@@ -1388,7 +1389,7 @@
       /* About greeting + actions */
       .about-greeting {
         font-size: clamp(1.7rem, 3.4vw, 2.1rem);
-        font-weight: 700;
+        font-weight: 600;
         letter-spacing: -0.02em;
         line-height: 1.1;
         color: var(--text-main);
@@ -1810,7 +1811,7 @@
             Hello, this is <span class="greeting-name">Saad</span>,
           </h2>
           <p id="about-p1" class="about-paragraph">
-            I'm a Lecturer in the Department of CSE at Bangladesh Army
+            I am a Lecturer in the Department of CSE at Bangladesh Army
             University of Science and Technology (BAUST), Saidpur. I completed
             my B.Sc. in CSE with a CGPA of
             <strong>3.96 out of 4.00</strong> (1st position) and am currently
@@ -1818,7 +1819,7 @@
             course design, and student mentorship with an active publication
             record in machine learning, lightweight deep learning, computer
             vision, and explainable AI (XAI). My current research focuses on
-            video data analytics and multimodal architectures, and I'm seeking a
+            video data analytics and multimodal architectures, and I am seeking a
             Ph.D. or research-focused M.Sc. opportunity.
           </p>
           <h3 class="interests-title">Core Research Focus:</h3>
@@ -2624,7 +2625,7 @@
           const safeAuth = escapeHtml(trimmedAuth);
           // Return highlighted name if it matches
           if (cleanAuth.toLowerCase().includes(searchName.toLowerCase())) {
-            return `<strong style="color: var(--brand-color); font-weight: 700;">${safeAuth}</strong>`;
+            return `<strong style="color: var(--brand-color); font-weight: 600;">${safeAuth}</strong>`;
           }
           return safeAuth;
         });
