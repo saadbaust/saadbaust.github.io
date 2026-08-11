@@ -731,40 +731,8 @@
         background: var(--brand-color);
       }
 
-      /* Stats Grid & Publication Cards: Research metrics display.
-         Small centered cards (Citations, h-index, Total Pubs) that expand/collapse.
-         i10-index card is hidden by default (commented out) but can be uncommented
-         when the value becomes > 0. Grid auto-adjusts with flexbox. */
-      .stats-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-        margin-bottom: 28px;
-      }
-      .stat-card {
-        flex: 0 1 125px;
-        background: var(--badge-bg);
-        border: 1px solid var(--border-divider);
-        padding: 10px 12px;
-        border-radius: 12px;
-        text-align: center;
-      }
-      .stat-num {
-        font-size: 1.3rem;
-        font-weight: 500;
-        color: var(--brand-color);
-        line-height: 1.2;
-      }
-      .stat-lbl {
-        font-size: 0.78rem;
-        text-transform: uppercase;
-        font-weight: 600;
-        color: var(--text-muted);
-        margin-top: 4px;
-        letter-spacing: 0.02em;
-      }
-
+      /* Publication list sub-headings (Journal Articles, Conference Papers,
+         Preprints, Datasets). */
       .pub-subheading {
         font-size: 1.1rem;
         font-weight: 600;
@@ -774,7 +742,9 @@
         align-items: center;
         gap: 8px;
       }
-      .pub-subheading:first-of-type {
+      /* Only the first sub-heading directly under a section title loses its top
+         margin. Nested wrappers (Preprints, Datasets) keep their spacing. */
+      .section-heading-wrap + .pub-subheading {
         margin-top: 0;
       }
 
@@ -1773,7 +1743,7 @@
             class="profile-cms"
             target="_blank"
             rel="noopener noreferrer"
-            title="Edit publications &amp; stats in the CMS"
+            title="Edit publications &amp; page content in the CMS"
           >
             <svg
               style="width: 16px; height: 16px; flex-shrink: 0"
@@ -1796,8 +1766,9 @@
            MAIN CONTENT AREA
            Most sections are CMS-managed and rendered by JavaScript at load time,
            each with a static HTML copy as a no-JS fallback:
-           - Publications (+ Datasets): parsed from publications.bib
-           - Profile → Thesis (About, Stats, Experience, Education, Research
+           - Publications (Journals, Conferences, Preprints, Datasets):
+             parsed from publications.bib
+           - Profile → Thesis (About, Experience, Education, Research
              Projects, Thesis): from data.json
            - Activities → Awards (Research Activities, Teaching, Leadership,
              Projects, Awards): from content.json
@@ -1976,8 +1947,8 @@
         </section>
 
         <!-- PUBLICATIONS SECTION: CMS-driven with JavaScript rendering.
-             - Stat cards: Total Pubs auto-counted from BibTeX, Citations/h-index from CMS
-             - Journal/Conference lists: Parsed & rendered from publications.bib by loadPublications()
+             - Journal/Conference/Preprint/Dataset lists: parsed & rendered from
+               publications.bib by loadPublications()
              - Data fetches: Async fetch() calls that populate containers on page load -->
         <section id="publications" class="content-block">
           <div class="section-heading-wrap">
@@ -1985,37 +1956,20 @@
               Research Publications
             </h2>
           </div>
-          <div class="stats-grid" id="stats-grid">
-            <div class="stat-card">
-              <div id="stat-citations" class="stat-num" data-target="19">0</div>
-              <div class="stat-lbl">Citations</div>
-            </div>
-            <div class="stat-card">
-              <div id="stat-hindex" class="stat-num" data-target="3">0</div>
-              <div class="stat-lbl">h-index</div>
-            </div>
-            <!--
-              i10-index is hidden for now (currently 0). Uncomment this card in
-              the future once the i10-index is greater than 0 to show it again;
-              the stats grid expands from 3 to 4 cards automatically.
-            <div class="stat-card">
-              <div id="stat-i10index" class="stat-num" data-target="0">0</div>
-              <div class="stat-lbl">i10-index</div>
-            </div>
-            -->
-            <div class="stat-card">
-              <div id="stat-publications" class="stat-num" data-target="0">
-                0
-              </div>
-              <div class="stat-lbl">Total Pubs</div>
-            </div>
-          </div>
 
           <h3 class="pub-subheading">Journal Articles</h3>
           <div id="journal-container"></div>
 
           <h3 class="pub-subheading">Conference Papers</h3>
           <div id="conference-container"></div>
+
+          <!-- Preprints subsection: hidden until at least one preprint entry
+               (an @misc with an eprint/archivePrefix field, e.g. arXiv) is found
+               in publications.bib (shown by loadPublications()). -->
+          <div id="preprints-section" style="display: none">
+            <h3 class="pub-subheading">Preprints</h3>
+            <div id="preprint-container"></div>
+          </div>
 
           <!-- Datasets subsection: hidden until at least one @misc dataset entry
                is found in publications.bib (shown by loadPublications()). -->
@@ -2513,91 +2467,8 @@
       }
 
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      // ANIMATED STAT COUNTERS: Numbers count up when stats section scrolls in view.
-      // Sources: Citations/h-index from data.json, Total Pubs from publications.bib
-      // Fallback: data-target attributes in HTML if fetch fails
-      // Animation: Ease-out cubic, 1400ms, respects prefers-reduced-motion
+      // PUBLICATIONS: BibTeX parsing + rendering (publications.bib)
       // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      const statTargets = {};
-      const statAnimFrames = {};
-      const statShown = {};
-      let statsInView = false;
-      const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-
-      // Seed fallback targets from the data-target attributes.
-      document.querySelectorAll(".stat-num[data-target]").forEach((el) => {
-        statTargets[el.id] = Number(el.dataset.target) || 0;
-      });
-
-      function easeOutCubic(t) {
-        return 1 - Math.pow(1 - t, 3);
-      }
-
-      function animateCounter(el, target, duration) {
-        duration = duration || 1400;
-        if (statAnimFrames[el.id]) cancelAnimationFrame(statAnimFrames[el.id]);
-        if (prefersReducedMotion) {
-          el.innerText = target;
-          return;
-        }
-        const start = Number(el.innerText) || 0;
-        const startTime = performance.now();
-        function tick(now) {
-          const p = Math.min((now - startTime) / duration, 1);
-          el.innerText = Math.round(start + (target - start) * easeOutCubic(p));
-          if (p < 1) {
-            statAnimFrames[el.id] = requestAnimationFrame(tick);
-          } else {
-            el.innerText = target;
-            statAnimFrames[el.id] = null;
-          }
-        }
-        statAnimFrames[el.id] = requestAnimationFrame(tick);
-      }
-
-      // Animate one stat to its current target (only once visible, and only
-      // if the target has changed since the last run).
-      function animateStat(id) {
-        const el = document.getElementById(id);
-        if (!el || !statsInView) return;
-        const target = statTargets[id] || 0;
-        if (statShown[id] === target) return;
-        statShown[id] = target;
-        animateCounter(el, target);
-      }
-
-      // Called by the data loaders as real values arrive.
-      function setStat(id, value) {
-        statTargets[id] = Number(value) || 0;
-        animateStat(id);
-      }
-
-      // Start every counter once the stats grid scrolls into view.
-      function revealStats() {
-        if (statsInView) return;
-        statsInView = true;
-        Object.keys(statTargets).forEach(animateStat);
-      }
-
-      const statsGridEl = document.getElementById("stats-grid");
-      if (statsGridEl && "IntersectionObserver" in window) {
-        const statObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((e) => {
-              if (e.isIntersecting) {
-                revealStats();
-                statObserver.disconnect();
-              }
-            });
-          },
-          { threshold: 0.35 },
-        );
-        statObserver.observe(statsGridEl);
-      } else {
-        revealStats();
-      }
 
       // Clean BibTeX field values: Remove wrapping braces, quotes, and extra whitespace.
       function cleanBibValue(val) {
@@ -2670,8 +2541,8 @@
       }
 
       // Load and render publications from publications.bib.
-      // Parses BibTeX, separates journals from conferences, renders HTML.
-      // Auto-counts total pubs and updates stat. Handles fetch errors gracefully.
+      // Parses BibTeX, separates journals, conferences, preprints and datasets,
+      // then renders each list. Handles fetch errors gracefully.
       async function loadPublications() {
         try {
           const res = await fetch("publications.bib");
@@ -2689,13 +2560,21 @@
           const conferences = database
             .filter((e) => e.type === "inproceedings")
             .sort(byYearDesc);
-          const datasets = database
-            .filter((e) => e.type === "misc")
-            .sort(byYearDesc);
-
-          // "Total Pubs" counts peer-reviewed papers (journals + conferences);
-          // datasets are listed separately and not included in the tally.
-          setStat("stat-publications", journals.length + conferences.length);
+          // Both preprints and datasets are stored as @misc entries. A preprint
+          // is identified by the presence of a preprint-server field
+          // (eprint / archivePrefix / primaryClass) or an arXiv URL; everything
+          // else that is @misc is treated as a dataset.
+          const isPreprint = (e) =>
+            Boolean(
+              e.eprint ||
+                e.archiveprefix ||
+                e.primaryclass ||
+                /arxiv\.org/i.test(e.url || "") ||
+                /arxiv|preprint/i.test(e.howpublished || ""),
+            );
+          const miscEntries = database.filter((e) => e.type === "misc");
+          const preprints = miscEntries.filter(isPreprint).sort(byYearDesc);
+          const datasets = miscEntries.filter((e) => !isPreprint(e)).sort(byYearDesc);
 
           const jContainer = document.getElementById("journal-container");
           if (journals.length === 0) {
@@ -2753,6 +2632,49 @@
             `,
               )
               .join("");
+          }
+
+          // Preprints (@misc entries carrying eprint/archivePrefix data). The
+          // wrapper stays hidden unless at least one preprint entry exists.
+          // Venue line reads e.g. "arXiv:2608.06252 [cs.CV]".
+          const preprintVenue = (p) => {
+            const server = p.archiveprefix || (p.eprint ? "arXiv" : "");
+            const id = p.eprint ? `${server}:${p.eprint}` : server;
+            const cls = p.primaryclass ? ` [${p.primaryclass}]` : "";
+            return (id ? id + cls : p.howpublished || "Preprint").trim();
+          };
+
+          const pSection = document.getElementById("preprints-section");
+          const pContainer = document.getElementById("preprint-container");
+          if (pContainer) {
+            if (preprints.length === 0) {
+              if (pSection) pSection.style.display = "none";
+            } else {
+              if (pSection) pSection.style.display = "";
+              pContainer.innerHTML = preprints
+                .map(
+                  (p, idx) => `
+              <div class="pub-row-item">
+                <span class="pub-row-idx">
+                  <span class="pub-idx-num">[${idx + 1}]</span>
+                  <span class="pub-idx-year">${escapeHtml(p.year || "")}</span>
+                </span>
+                <div class="pub-row-content">
+                  <h4 class="pub-title">"${
+                    getPubLink(p)
+                      ? `<a href="${escapeHtml(getPubLink(p))}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.title || "Untitled Preprint")}</a>`
+                      : escapeHtml(p.title || "Untitled Preprint")
+                  }"</h4>
+                  <p class="pub-authors">${highlightAuthor(p.author)}</p>
+                  <p class="pub-venue">
+                    <span>${escapeHtml(preprintVenue(p))}</span>
+                  </p>
+                </div>
+              </div>
+            `,
+                )
+                .join("");
+            }
           }
 
           // Datasets (@misc). The wrapper stays hidden unless at least one
@@ -3010,15 +2932,6 @@
             }
           }
           const data = Object.assign({}, primary, extra);
-
-          const stats = (data && data.stats) || {};
-          if (stats.citations != null)
-            setStat("stat-citations", stats.citations);
-          if (stats.hIndex != null) setStat("stat-hindex", stats.hIndex);
-          // i10-index card is only present in the DOM when uncommented in the
-          // markup — guard so we don't wire a stat to a missing element.
-          if (stats.i10Index != null && document.getElementById("stat-i10index"))
-            setStat("stat-i10index", stats.i10Index);
 
           const courses = (data && data.courses) || [];
           const tbody = document.getElementById("teaching-container");

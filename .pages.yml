@@ -9,35 +9,34 @@
 # The CMS has THREE screens (one per file):
 #
 #   A. Publications (BibTeX)  → publications.bib
-#        journals, conferences AND datasets
+#        journals, conferences, preprints AND datasets
 #
 #   B. Profile, Experience & Research  → data.json   (top half of the page)
 #        1. Profile Card — subtitle, institution, objective line
 #        2. About — intro paragraph + research-focus tags
-#        3. Stats — Citations, h-index, i10-index counts
-#        4. Experience — the Experience timeline entries
-#        5. Education — degrees / certificates with results
-#        6. Research Projects — funded/collaborative project list
-#        7. Thesis — thesis / M.Sc. research entries
+#        3. Experience — the Experience timeline entries
+#        4. Education — degrees / certificates with results
+#        5. Research Projects — funded/collaborative project list
+#        6. Thesis — thesis / M.Sc. research entries
 #
 #   C. Activities, Teaching & Extras  → content.json  (lower half of the page)
-#        8.  Research Activities — review experience + undergrad thesis co-supervisions
-#        9.  Teaching Courses — rows in the "Teaching Duties" table
-#        10. Leadership & Co-curricular Activities — bulleted list
-#        11. Projects — software / web development projects
-#        12. Awards & Achievements — bulleted list
+#        7.  Research Activities — review experience + undergrad thesis co-supervisions
+#        8.  Teaching Courses — rows in the "Teaching Duties" table
+#        9.  Leadership & Co-curricular Activities — bulleted list
+#        10. Projects — software / web development projects
+#        11. Awards & Achievements — bulleted list
 #
 # Workflow: Edit in CMS → auto-commits to GitHub → live site updates in ~60 sec
 # Technical: Site fetches publications.bib, data.json and content.json in the
-# browser at load time. "Total Pubs" is auto-counted from BibTeX.
+# browser at load time.
 # ═══════════════════════════════════════════════════════════════════════════
 
 content:
   # ═══════════════════════════════════════════════════════════════════════════
   # PUBLICATIONS (BibTeX FILE)
   # The entire publications.bib file in a single code editor.
-  # The site parses this in the browser: splits entries, categorizes
-  # (journal / conference / dataset), and auto-counts total papers.
+  # The site parses this in the browser and splits entries into
+  # journals / conferences / preprints / datasets.
   # ═══════════════════════════════════════════════════════════════════════════
   - name: publications
     label: "Publications (BibTeX)"
@@ -48,14 +47,16 @@ content:
       Paste your COMPLETE BibTeX here — the entire contents of your .bib file
       exactly as if opened in a text editor. All entries must start with @
       (e.g., @article{...} for journals, @INPROCEEDINGS{...} for conferences,
-      @misc{...} for datasets). The site auto-sorts and counts entries.
-      How to add: Google Scholar / IEEE Xplore / Kaggle → Cite → BibTeX → copy & paste.
+      @misc{...} for preprints and datasets). Preprints are told apart from
+      datasets by their eprint / archivePrefix / primaryClass fields — an arXiv
+      BibTeX entry already has these, so paste it unchanged. The site auto-sorts
+      entries by year within each group.
+      How to add: Google Scholar / IEEE Xplore / arXiv / Kaggle → Cite → BibTeX → copy & paste.
       How to remove: Delete the entire entry block (from @ to closing }).
 
   # ═══════════════════════════════════════════════════════════════════════════
   # PROFILE, EXPERIENCE & RESEARCH (data.json)
   # The top half of the page: identity + the core academic / professional record.
-  # Note: "Total Pubs" is auto-counted from BibTeX, not stored here.
   # ═══════════════════════════════════════════════════════════════════════════
   - name: data
     label: "Profile, Experience & Research"
@@ -81,15 +82,6 @@ content:
         fields:
           - { name: paragraph, label: "Intro Paragraph", type: text }
           - { name: interests, label: "Core Research Focus", type: string, list: true, description: "Short interest tags, one per line" }
-
-      # ── Research metrics from Google Scholar ────────────────────────────────
-      - name: stats
-        label: "Google Scholar Stats"
-        type: object
-        fields:
-          - { name: citations, label: "Citations", type: number, description: "Total citation count across all papers" }
-          - { name: hIndex,    label: "h-index",   type: number, description: "h-index metric (papers with h+ citations)" }
-          - { name: i10Index,  label: "i10-index", type: number, description: "Number of papers with 10+ citations" }
 
       # ── Experience timeline ─────────────────────────────────────────────────
       - name: experience

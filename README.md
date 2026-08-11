@@ -5,7 +5,7 @@ Personal academic portfolio website for **Saad Ahmed**, Lecturer at the Departme
 🌐 **Live site:** [saadbaust.github.io](https://saadbaust.github.io/)
 🛠 **Edit content (CMS):** [app.pagescms.org/saadbaust/saadbaust.github.io](https://app.pagescms.org/saadbaust/saadbaust.github.io)
 
-This is a **single-page** portfolio. The scaffolding (layout, styling, hero name, social links, contact) is **hard-coded in the HTML**, but almost all of the résumé-style content is **content-managed through the CMS** — publications, profile card, About, citation/h-index stats, Experience, Education, Research Projects, Thesis, Research Activities, Teaching Courses, Leadership & Co-curricular Activities, Projects, and Awards — so you can update those without touching code or committing by hand. Each CMS-driven section also keeps a static copy in the HTML as a no-JS fallback.
+This is a **single-page** portfolio. The scaffolding (layout, styling, hero name, social links, contact) is **hard-coded in the HTML**, but almost all of the résumé-style content is **content-managed through the CMS** — publications, profile card, About, Experience, Education, Research Projects, Thesis, Research Activities, Teaching Courses, Leadership & Co-curricular Activities, Projects, and Awards — so you can update those without touching code or committing by hand. Each CMS-driven section also keeps a static copy in the HTML as a no-JS fallback.
 
 ---
 
@@ -31,10 +31,8 @@ To deploy, host the file as-is on GitHub Pages — nothing to compile.
 | **CV button** link | `index.html` (hard-coded URL) | Edit the `href` on `#cv-download-btn` |
 | **Email button** | `index.html` (`mailto:` link) | Edit the `href` on `#email-link` |
 | **Social links** (LinkedIn, Google Scholar, ORCID, ResearchGate, IEEE Xplore, Semantic Scholar, GitHub, YouTube) | `index.html` | Edit the `<a>` tags in the social block |
-| **Publications list** (journals, conferences **and datasets**) | `publications.bib` | **CMS** → "Publications (BibTeX)" |
-| **Total Pubs** number | auto-counted from `publications.bib` (journals + conferences) | nothing to set |
+| **Publications list** (journals, conferences, **preprints and datasets**) | `publications.bib` | **CMS** → "Publications (BibTeX)" |
 | **Profile card** + **About** text/tags | `data.json` | **CMS** → "Profile, Experience & Research" |
-| **Citations** + **h-index** | `data.json` | **CMS** → "Profile, Experience & Research" |
 | **Experience** timeline | `data.json` | **CMS** → "Profile, Experience & Research" |
 | **Education** (degrees + results) | `data.json` | **CMS** → "Profile, Experience & Research" |
 | **Research Projects** | `data.json` | **CMS** → "Profile, Experience & Research" |
@@ -52,8 +50,8 @@ To deploy, host the file as-is on GitHub Pages — nothing to compile.
 | File | What it does |
 |---|---|
 | `index.html` (delivered as `new.html`) | The entire site. All content, styling, and logic are inlined. At load time it renders the publications list from `publications.bib` and every structured section from `data.json` + `content.json` in the browser. Each section also has a static HTML copy as a no-JS fallback. |
-| `publications.bib` | All publications in BibTeX. The page reads it directly, splits it into entries, separates journals / conferences / datasets (`@misc`), and counts the total (journals + conferences). Managed via the CMS "Publications" screen. |
-| `data.json` | Top half of the page: `profile` card, `about` (paragraph + interests), publication stats (`citations`, `hIndex`), `experience`, `education`, `researchProjects`, and `thesis`. Managed via the CMS "Profile, Experience & Research" screen. (Total Pubs is counted from the BibTeX, so it isn't stored here.) |
+| `publications.bib` | All publications in BibTeX. The page reads it directly, splits it into entries, separates journals / conferences / preprints / datasets (`@misc`). Managed via the CMS "Publications" screen. |
+| `data.json` | Top half of the page: `profile` card, `about` (paragraph + interests), `experience`, `education`, `researchProjects`, and `thesis`. Managed via the CMS "Profile, Experience & Research" screen. |
 | `content.json` | Lower half of the page: `reviewExperience`, `coSupervisionsOngoing`, `coSupervisionsCompleted`, `courses` (Teaching), `leadership`, `devProjects`, and `awards`. Managed via the CMS "Activities, Teaching & Extras" screen. Split out from `data.json` so neither CMS screen is too long to scroll. |
 | `.pages.yml` | Pages CMS configuration — exposes the three editable files: Publications (`publications.bib`), Profile, Experience & Research (`data.json`), and Activities, Teaching & Extras (`content.json`). |
 | `sitemap.xml` | Tells search engines to index the home page (and the profile image). |
@@ -69,14 +67,13 @@ To deploy, host the file as-is on GitHub Pages — nothing to compile.
 Go to **[app.pagescms.org/saadbaust/saadbaust.github.io](https://app.pagescms.org/saadbaust/saadbaust.github.io)** and sign in. There are three screens (one per file):
 
 ### 1. Publications (BibTeX)
-One editor holding your entire `publications.bib`. **Paste the complete contents of your `.bib` file** — all entries together, exactly like opening the file in a text editor. Each entry must start with `@` (e.g. `@article{...}` for journals, `@INPROCEEDINGS{...}` for conferences, `@misc{...}` for datasets). The page splits the file into papers, separates journals / conference papers / datasets, and counts the journals + conferences as the **Total Pubs** number (datasets are listed under their own heading and not counted). To get an entry, click **Cite → BibTeX** on Google Scholar / IEEE Xplore / Kaggle and paste it in. To remove an entry, delete its block.
+One editor holding your entire `publications.bib`. **Paste the complete contents of your `.bib` file** — all entries together, exactly like opening the file in a text editor. Each entry must start with `@` (e.g. `@article{...}` for journals, `@INPROCEEDINGS{...}` for conferences, `@misc{...}` for preprints and datasets). The page splits the file into four lists — **Journal Articles**, **Conference Papers**, **Preprints**, and **Datasets** — each sorted newest first. Preprints and datasets are both `@misc`; an entry counts as a preprint when it carries `eprint` / `archivePrefix` / `primaryClass` fields (or an arXiv URL), which arXiv's own BibTeX already includes, so paste it unchanged. The Preprints and Datasets headings only appear when at least one such entry exists. To get an entry, click **Cite → BibTeX** on Google Scholar / IEEE Xplore / arXiv / Kaggle and paste it in. To remove an entry, delete its block.
 
 ### 2. Profile, Experience & Research (`data.json`)
 The top half of the page:
 
 - **Profile Card** — the subtitle/role, institution, and objective line under your photo.
 - **About** — the intro paragraph and the "Core Research Focus" tags.
-- **Stats** — the **Citations** and **h-index** numbers (Total Pubs is automatic, so it isn't listed here).
 - **Experience** — each position has a Job Title, Organization, optional Location, Duration, and a list of Bullet Points.
 - **Education** — each degree / certificate has a Degree, Institution, Duration, and Result / Grade (e.g. CGPA), newest first.
 - **Research Projects**, **Thesis** — indexed lists with title, duration, and a details/description line (Research Projects also take an optional status badge like "Ongoing").
@@ -130,7 +127,7 @@ After any significant content change, bump the `<lastmod>` date in `sitemap.xml`
 
 1. **Replace the profile image** (`images/saadahmed.webp`) and favicon (`images/logo.png`).
 2. **Edit `index.html`** with your own profile/About text, contact details, CV link, and social links (and the static fallback copy of the CMS-driven sections).
-3. **Edit `publications.bib`** — paste your own BibTeX — and set your profile, stats, experience, education, research projects, and thesis in `data.json`, plus activities, teaching, leadership, projects, and awards in `content.json`.
+3. **Edit `publications.bib`** — paste your own BibTeX — and set your profile, experience, education, research projects, and thesis in `data.json`, plus activities, teaching, leadership, projects, and awards in `content.json`.
 4. **Find-and-replace `saadbaust.github.io`** with your own URL across `index.html` (meta tags + JSON-LD), `sitemap.xml`, and `robots.txt`.
 5. **Update the CMS link** in the README and the comments in `.pages.yml` to your own repo path.
 6. **Publish on GitHub Pages:** create a repo named `yourusername.github.io`, upload the files (with the home file named `index.html`), then Settings → Pages → set the source to the `main` branch.
