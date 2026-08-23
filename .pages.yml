@@ -9,7 +9,7 @@
 # The CMS has THREE screens (one per file):
 #
 #   A. Publications (BibTeX)  → publications.bib
-#        journals, conferences, preprints AND datasets
+#        journals, conferences, preprints (@misc) AND datasets (@dataset)
 #
 #   B. Profile, Experience & Research  → data.json   (top half of the page)
 #        1. Profile Card — subtitle, institution, objective line
@@ -47,10 +47,11 @@ content:
       Paste your COMPLETE BibTeX here — the entire contents of your .bib file
       exactly as if opened in a text editor. All entries must start with @
       (e.g., @article{...} for journals, @INPROCEEDINGS{...} for conferences,
-      @misc{...} for preprints and datasets). Preprints are told apart from
-      datasets by their eprint / archivePrefix / primaryClass fields — an arXiv
-      BibTeX entry already has these, so paste it unchanged. The site auto-sorts
-      entries by year within each group.
+      @misc{...} for preprints, @dataset{...} for datasets). Preprints are
+      @misc entries carrying eprint / archivePrefix / primaryClass fields — an
+      arXiv BibTeX entry already has these, so paste it unchanged. Datasets use
+      the @dataset type (older @misc dataset entries still work too). The site
+      auto-sorts entries by year within each group.
       How to add: Google Scholar / IEEE Xplore / arXiv / Kaggle → Cite → BibTeX → copy & paste.
       How to remove: Delete the entire entry block (from @ to closing }).
 

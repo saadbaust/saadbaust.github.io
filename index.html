@@ -1971,8 +1971,9 @@
             <div id="preprint-container"></div>
           </div>
 
-          <!-- Datasets subsection: hidden until at least one @misc dataset entry
-               is found in publications.bib (shown by loadPublications()). -->
+          <!-- Datasets subsection: hidden until at least one dataset entry
+               (an @dataset entry, or a legacy non-preprint @misc) is found in
+               publications.bib (shown by loadPublications()). -->
           <div id="datasets-section" style="display: none">
             <h3 class="pub-subheading">Datasets</h3>
             <div id="dataset-container"></div>
@@ -2526,8 +2527,12 @@
           const key = match[2].trim();
           const fieldsRaw = match[3];
           const fields = {};
-          // Match: field = value (handles multiline values)
-          const fieldRegex = /^\s*([a-zA-Z0-9_\-]+)\s*=\s*([^]*?)(?=\s*[a-zA-Z0-9_\-]+\s*=|$)/gm;
+          // Match: field = value. Values may span multiple lines (e.g. an
+          // author list broken across lines); a value runs until the next line
+          // that begins a new "field =" or the end of the entry block. The
+          // next-field lookahead is anchored to \n so line breaks inside a
+          // value don't prematurely terminate it.
+          const fieldRegex = /(?:^|\n)[ \t]*([a-zA-Z0-9_\-]+)[ \t]*=\s*([^]*?)(?=\n[ \t]*[a-zA-Z0-9_\-]+[ \t]*=|$)/g;
           let fMatch;
           while ((fMatch = fieldRegex.exec(fieldsRaw)) !== null) {
             let fName = fMatch[1].toLowerCase().trim();
@@ -2548,6 +2553,14 @@
           const res = await fetch("publications.bib");
           if (!res.ok) throw new Error("Failed to fetch publications.bib");
           let rawText = await res.text();
+          // Normalize CRLF/CR line endings to LF so the line-anchored field
+          // parser behaves consistently regardless of how the .bib was saved.
+          rawText = rawText.replace(/\r\n?/g, "\n");
+          // Strip BibTeX comments: an unescaped "%" to end of line (handles
+          // both full-line "% ---- section ----" headers and trailing inline
+          // notes like "year = {2026} % TODO ..."), so comment text can never
+          // leak into a field value.
+          rawText = rawText.replace(/(^|[^\\])%[^\n]*/g, "$1");
           rawText = rawText + "\n\n";  // Ensure trailing newlines for regex
           const database = parseBibtex(rawText);
 
@@ -2560,10 +2573,8 @@
           const conferences = database
             .filter((e) => e.type === "inproceedings")
             .sort(byYearDesc);
-          // Both preprints and datasets are stored as @misc entries. A preprint
-          // is identified by the presence of a preprint-server field
-          // (eprint / archivePrefix / primaryClass) or an arXiv URL; everything
-          // else that is @misc is treated as a dataset.
+          // Preprints are @misc entries identified by a preprint-server field
+          // (eprint / archivePrefix / primaryClass) or an arXiv URL.
           const isPreprint = (e) =>
             Boolean(
               e.eprint ||
@@ -2572,9 +2583,19 @@
                 /arxiv\.org/i.test(e.url || "") ||
                 /arxiv|preprint/i.test(e.howpublished || ""),
             );
-          const miscEntries = database.filter((e) => e.type === "misc");
-          const preprints = miscEntries.filter(isPreprint).sort(byYearDesc);
-          const datasets = miscEntries.filter((e) => !isPreprint(e)).sort(byYearDesc);
+          const preprints = database
+            .filter((e) => e.type === "misc" && isPreprint(e))
+            .sort(byYearDesc);
+          // Datasets are the dedicated @dataset entry type. Legacy @misc
+          // entries that are not preprints are still accepted as datasets for
+          // backward compatibility with older .bib files.
+          const datasets = database
+            .filter(
+              (e) =>
+                e.type === "dataset" ||
+                (e.type === "misc" && !isPreprint(e)),
+            )
+            .sort(byYearDesc);
 
           const jContainer = document.getElementById("journal-container");
           if (journals.length === 0) {
