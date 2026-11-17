@@ -13,7 +13,7 @@
 #
 #   B. Profile, Experience & Research  → data.json   (top half of the page)
 #        1. Profile Card — subtitle, institution, objective line
-#        2. About — intro paragraph + research-focus tags
+#        2. About — intro paragraph + "Teaching" subject list
 #        3. Experience — the Experience timeline entries
 #        4. Education — degrees / certificates with results
 #        5. Research Projects — funded/collaborative project list
@@ -21,7 +21,7 @@
 #
 #   C. Activities, Teaching & Extras  → content.json  (lower half of the page)
 #        7.  Research Activities — review experience + undergrad thesis co-supervisions
-#        8.  Teaching Courses — rows in the "Teaching Duties" table
+#        8.  Teaching Courses — rows in the "Teaching" table
 #        9.  Leadership & Co-curricular Activities — bulleted list
 #        10. Projects — software / web development projects
 #        11. Awards & Achievements — bulleted list
@@ -51,7 +51,11 @@ content:
       @misc entries carrying eprint / archivePrefix / primaryClass fields — an
       arXiv BibTeX entry already has these, so paste it unchanged. Datasets use
       the @dataset type (older @misc dataset entries still work too). The site
-      auto-sorts entries by year within each group.
+      auto-sorts entries by year within each group, adds a "First author" badge
+      when Saad Ahmed is listed first, and shows buttons under each paper:
+      PDF / arXiv / DOI (from the standard fields) and BibTeX (copies the entry).
+      Optional extra fields add more buttons, e.g.
+      pdf = {https://...}, code = {https://github.com/...}, dataset = {https://...}
       How to add: Google Scholar / IEEE Xplore / arXiv / Kaggle → Cite → BibTeX → copy & paste.
       How to remove: Delete the entire entry block (from @ to closing }).
 
@@ -63,7 +67,7 @@ content:
     label: "Profile, Experience & Research"
     type: file
     path: data.json
-    description: "Profile card, About, Stats, Experience, Education, Research Projects, and Thesis."
+    description: "Profile card, About, Experience, Education, Research Projects, and Thesis."
     fields:
       # ── Profile rail (name card on the left) ────────────────────────────────
       - name: profile
@@ -79,10 +83,10 @@ content:
       - name: about
         label: "About"
         type: object
-        description: "The intro paragraph and research-focus tags in the About section."
+        description: "The intro paragraph and the short list shown under the \"Teaching\" heading in the About section."
         fields:
-          - { name: paragraph, label: "Intro Paragraph", type: text }
-          - { name: interests, label: "Core Research Focus", type: string, list: true, description: "Short interest tags, one per line" }
+          - { name: paragraph, label: "Intro Paragraph", type: text, description: "Wrap text in **double asterisks** to make it bold." }
+          - { name: interests, label: "Teaching Subjects", type: string, list: true, description: "One subject per line" }
 
       # ── Experience timeline ─────────────────────────────────────────────────
       - name: experience
@@ -144,11 +148,17 @@ content:
     description: "Research Activities, Teaching Courses, Leadership, Projects, and Awards."
     fields:
       # ── Research Activities: Review experience ──────────────────────────────
-      - name: reviewExperience
-        label: "Review Experience"
+      - name: reviewConferences
+        label: "Conference Reviews"
         type: string
         list: true
-        description: "Peer-review / reviewer roles. One entry per line."
+        description: "Conference peer-review roles. One entry per line."
+
+      - name: reviewJournals
+        label: "Journal Reviews"
+        type: string
+        list: true
+        description: "Journal peer-review roles. One entry per line."
 
       # ── Research Activities: Co-supervisions (ongoing) ──────────────────────
       - name: coSupervisionsOngoing
@@ -172,7 +182,7 @@ content:
         label: "Teaching Courses"
         type: object
         list: true
-        description: "Each row = one course in the Teaching Duties table. Drag to reorder."
+        description: "Each row = one course in the Teaching table. Drag to reorder."
         fields:
           - { name: code,      label: "Course Code",      type: string, description: "E.g., CSE 2101" }
           - { name: title,     label: "Course Title",     type: string, description: "E.g., Digital Logic Design" }
@@ -195,6 +205,7 @@ content:
           - { name: name,        label: "Project Name", type: string }
           - { name: description, label: "Description",  type: text }
           - { name: tools,       label: "Tools",        type: string, description: "E.g., WordPress, HTML, CSS" }
+          - { name: url,         label: "Project URL",  type: string, description: "Optional website link, e.g., https://example.com" }
 
       # ── Awards & Achievements ───────────────────────────────────────────────
       - name: awards

@@ -5,12 +5,14 @@
     "target": "Seeking MSc/PhD positions for Fall 2027"
   },
   "about": {
-    "paragraph": "I am a Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. I completed my B.Sc. in CSE with a CGPA of 3.96 out of 4.00 (1st position) and am currently pursuing my M.Sc. at RUET. I combine a formal academic career, course design, and student mentorship with an active publication record in machine learning, lightweight deep learning, computer vision, and explainable AI (XAI). My current research focuses on video data analytics and multimodal architectures, and I am seeking a Ph.D. or research-focused M.Sc. opportunity.",
+    "paragraph": "I am a Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. I completed my B.Sc. in CSE with a CGPA of **3.96 out of 4.00** and am currently pursuing my M.Sc. in CSE at RUET with a coursework CGPA of **3.75 out of 4.00**. My research spans computer vision, lightweight neural architectures, explainable AI, deep learning, multimodal learning, and vision-language models, with a focus on video analytics and applied AI for healthcare, agriculture, and educational assessment.",
     "interests": [
-      "Computer Vision",
-      "Deep Learning",
-      "Explainable AI",
-      "Multimodal Architectures"
+      "Digital Logic Design",
+      "Computer Graphics",
+      "Digital Image Processing",
+      "Artificial Intelligence",
+      "Database Management Systems",
+      "Operating Systems"
     ]
   },
   "experience": [
@@ -31,13 +33,13 @@
       "degree": "M.Sc. Engineering in Computer Science and Engineering (CSE)",
       "school": "Rajshahi University of Engineering & Technology (RUET), Rajshahi.",
       "duration": "March 2025 – Present",
-      "grade": "Ongoing"
+      "grade": "CGPA: 3.75 / 4.00 (coursework)"
     },
     {
       "degree": "B.Sc. Engineering in Computer Science and Engineering (CSE)",
       "school": "Bangladesh Army University of Science and Technology (BAUST), Saidpur.",
       "duration": "July 2020 – July 2024",
-      "grade": "CGPA: 3.96 / 4.00 (Ranked 1st)"
+      "grade": "CGPA: 3.96 / 4.00"
     }
   ],
   "researchProjects": [
@@ -50,14 +52,14 @@
   ],
   "thesis": [
     {
-      "title": "Confound-Robust Multimodal Representation Learning for Dose-Resolved Aquatic Stressor Identification from Fish Behavior and Water Chemistry",
+      "title": "Fish Behaviour as an Early Warning of Water Quality Problems Using Video-Based Fish Tracking and Temporal Deep Learning",
       "duration": "2026–Present",
-      "description": "An automated stress monitoring system that will help the production of fish in Bangladesh."
+      "description": "M.Sc. thesis, RUET. Supervisor: Dr. Julia Rahman. The study tracks fish movement in video and models temporal behavior to detect early signs of water-quality problems in aquaculture."
     },
     {
       "title": "Bangla Sign Language Recognition: Dataset Innovation and Methodologies",
       "duration": "2023–2024",
-      "description": "Thesis on classification of sign language for Bangla Sign Language (BdSL). The goal is to provide a brand new dataset and a comparative analysis of various deep learning methods including ensemble techniques."
+      "description": "B.Sc. thesis, BAUST. Supervisor: Prof. Dr. S. M. Jahangir Alam. Built a new Bangla Sign Language dataset and compared deep learning methods, including ensemble techniques."
     }
   ]
 }

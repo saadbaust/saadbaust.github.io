@@ -1,7 +1,11 @@
 {
-  "reviewExperience": [
+  "reviewConferences": [
     "Reviewer, 2025 IEEE International Conference on Quantum Photonics, Artificial Intelligence & Networking (QPAIN).",
+    "Reviewer, 2026 IEEE International Conference on Computing, Applications and Systems (COMPAS).",
     "Reviewer, International Conference on Computing Advancements (ICCA) 2026, ACM."
+  ],
+  "reviewJournals": [
+    "Reviewer, Data in Brief (Elsevier), 2026."
   ],
   "coSupervisionsOngoing": [
     {
@@ -88,14 +92,16 @@
   ],
   "devProjects": [
     {
-      "name": "EcoFishLab",
+      "name": "Eco Fish Lab",
       "description": "Developed and deployed the official website of the Laboratory of Fish Ecophysiology using WordPress, delivering a responsive interface to showcase environmental and aquaculture research.",
-      "tools": "WordPress, HTML, CSS"
+      "tools": "WordPress, HTML, CSS",
+      "url": "https://ecofish.bau.edu.bd/"
     },
     {
-      "name": "Safeline Energy Tech",
+      "name": "Safeline",
       "description": "Built and maintained an online service-providing platform for Safeline Energy Tech Ltd. across the full software development life cycle, adapting to evolving client requirements.",
-      "tools": "HTML, Tailwind CSS, PHP, MySQL"
+      "tools": "HTML, Tailwind CSS, PHP, MySQL",
+      "url": "https://safelineenergy.com/"
     }
   ],
   "awards": [
