@@ -13,7 +13,7 @@
 #
 #   B. Profile, Experience & Research  → data.json   (top half of the page)
 #        1. Profile Card — subtitle, institution, objective line
-#        2. About — intro paragraph + "Teaching" subject list
+#        2. About — intro paragraph + "Research Interests" grid
 #        3. Experience — the Experience timeline entries
 #        4. Education — degrees / certificates with results
 #        5. Research Projects — funded/collaborative project list
@@ -83,10 +83,10 @@ content:
       - name: about
         label: "About"
         type: object
-        description: "The intro paragraph and the short list shown under the \"Teaching\" heading in the About section."
+        description: "The intro paragraph and the \"Research Interests\" grid in the About section."
         fields:
           - { name: paragraph, label: "Intro Paragraph", type: text, description: "Wrap text in **double asterisks** to make it bold." }
-          - { name: interests, label: "Teaching Subjects", type: string, list: true, description: "One subject per line" }
+          - { name: interests, label: "Research Interests", type: string, list: true, description: "One interest per line. Shown 3 per row on desktop — 6 items fill a neat 3×2 grid." }
 
       # ── Experience timeline ─────────────────────────────────────────────────
       - name: experience

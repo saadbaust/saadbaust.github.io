@@ -607,8 +607,21 @@ html.dark .btn-secondary:hover {
   flex-direction: column;
   padding-left: 4px;
 }
+/* Research interests: 3 columns × 2 rows on desktop, fewer on small screens. */
 .interests-list {
-  gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 20px;
+}
+@media (max-width: 760px) {
+  .interests-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 420px) {
+  .interests-list {
+    grid-template-columns: 1fr;
+  }
 }
 .academic-list {
   gap: 12px;

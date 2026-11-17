@@ -7,12 +7,12 @@
   "about": {
     "paragraph": "I am a Lecturer in the Department of CSE at Bangladesh Army University of Science and Technology (BAUST), Saidpur. I completed my B.Sc. in CSE with a CGPA of **3.96 out of 4.00** and am currently pursuing my M.Sc. in CSE at RUET with a coursework CGPA of **3.75 out of 4.00**. My research spans computer vision, lightweight neural architectures, explainable AI, deep learning, multimodal learning, and vision-language models, with a focus on video analytics and applied AI for healthcare, agriculture, and educational assessment.",
     "interests": [
-      "Digital Logic Design",
-      "Computer Graphics",
-      "Digital Image Processing",
-      "Artificial Intelligence",
-      "Database Management Systems",
-      "Operating Systems"
+      "Computer Vision",
+      "Explainable AI",
+      "Video Processing",
+      "Applied AI for Healthcare",
+      "Applied AI for Agriculture",
+      "Applied AI for Education"
     ]
   },
   "experience": [

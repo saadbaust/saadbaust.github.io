@@ -86,7 +86,7 @@ One editor holding your entire `publications.bib`. **Paste the complete contents
 The top half of the page:
 
 - **Profile Card** — the subtitle/role, institution, and objective line under your photo.
-- **About** — the intro paragraph (wrap text in `**double asterisks**` to make it bold) and the short "Teaching" subject list.
+- **About** — the intro paragraph (wrap text in `**double asterisks**` to make it bold) and the "Research Interests" grid (3 per row on desktop, so 6 items make a neat 3×2 grid).
 - **Experience** — each position has a Job Title, Organization, optional Location, Duration, and a list of Bullet Points.
 - **Education** — each degree / certificate has a Degree, Institution, Duration, and Result / Grade (e.g. CGPA), newest first.
 - **Research Projects**, **Thesis** — indexed lists with title, duration, and a details/description line (Research Projects also take an optional status badge like "Ongoing").
