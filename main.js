@@ -326,7 +326,7 @@ function timelineItem(title, duration, org, extra) {
     </div>`;
 }
 
-// Numbered row (Research Projects, Thesis, ongoing co-supervisions).
+// [n] indexed row (ongoing co-supervisions).
 function indexedRow(idx, { title, year, note, badge, footer, level = 3 }) {
   return `
     <div class="pub-row-item">
@@ -341,6 +341,28 @@ function indexedRow(idx, { title, year, note, badge, footer, level = 3 }) {
         ${footer ? `<p class="pub-venue"><span>${escapeHtml(footer)}</span></p>` : ""}
       </div>
     </div>`;
+}
+
+// Numbered list in the same style as Publications (Research Projects,
+// Thesis):  1. Title                                   Year
+//              Details / description [BADGE]
+function renderNumberedList(id, list, toItem) {
+  const c = $(id);
+  if (!c || !hasItems(list)) return;
+  c.innerHTML = `<ol class="pub-list">${list
+    .map((raw) => {
+      const { title, year, note, badge } = toItem(raw);
+      const badgeHtml = badge ? ` <span class="pub-meta-badge">${escapeHtml(badge)}</span>` : "";
+      return `
+        <li class="pub-item">
+          <div class="pub-head">
+            <h3 class="pub-title">${escapeHtml(title || "")}</h3>
+            ${year ? `<span class="pub-year">${escapeHtml(year)}</span>` : ""}
+          </div>
+          ${note || badge ? `<p class="pub-authors">${escapeHtml(note || "")}${badgeHtml}</p>` : ""}
+        </li>`;
+    })
+    .join("")}</ol>`;
 }
 
 function renderProfile(p) {
@@ -439,12 +461,12 @@ async function loadData() {
       e.grade ? `<p class="edu-grade">${escapeHtml(e.grade)}</p>` : "",
     ),
   );
-  renderList("projects-container", data.researchProjects, (p, i) =>
-    indexedRow(i, { title: p.title, year: p.duration || p.year, note: p.meta, badge: p.status }),
-  );
-  renderList("thesis-container", data.thesis, (t, i) =>
-    indexedRow(i, { title: t.title, year: t.duration || t.year, note: t.description }),
-  );
+  renderNumberedList("projects-container", data.researchProjects, (p) => ({
+    title: p.title, year: p.duration || p.year, note: p.meta, badge: p.status,
+  }));
+  renderNumberedList("thesis-container", data.thesis, (t) => ({
+    title: t.title, year: t.duration || t.year, note: t.description,
+  }));
   renderList("review-conferences-container", data.reviewConferences, bulletItem);
   renderList("review-journals-container", data.reviewJournals, bulletItem);
   renderCoSupervisions(data.coSupervisionsOngoing, data.coSupervisionsCompleted);
