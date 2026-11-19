@@ -834,38 +834,60 @@ html.dark .edu-grade {
   text-transform: uppercase;
 }
 
-/* Link buttons under each paper (PDF / arXiv / DOI / Code / Dataset / BibTeX). */
-.pub-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 6px;
+/* Publications: numbered list (1. 2. 3.) — bold quoted title, authors with
+   the owner highlighted + "First author" badge, then "Venue, Year". */
+.pub-list {
+  padding-left: 1.6em;
+  color: var(--text-main);
+  line-height: 1.55;
 }
-.pub-btn {
-  font: inherit;
-  font-size: 0.72rem;
+.pub-list .pub-item {
+  margin-bottom: 15px;
+  padding-left: 4px;
+}
+.pub-list .pub-item:last-child {
+  margin-bottom: 0;
+}
+.pub-list .pub-item::marker {
   font-weight: 600;
-  line-height: 1.4;
-  padding: 2px 9px;
-  border-radius: 6px;
-  border: 1px solid var(--border-divider);
-  background: var(--badge-bg);
   color: var(--text-muted);
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    color 0.15s,
-    border-color 0.15s,
-    background-color 0.15s;
 }
-.pub-btn:hover,
-.pub-btn.copied {
-  color: var(--brand-color);
-  border-color: var(--brand-color);
+/* Title on the left, year pinned to the right edge (like a CV). */
+.pub-list .pub-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 2px;
 }
-.pub-btn.copied {
-  background: var(--brand-muted);
+.pub-list .pub-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0;
 }
+.pub-list .pub-year {
+  flex-shrink: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.pub-list .pub-authors,
+.pub-list .pub-venue {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: var(--text-main);
+  margin-bottom: 1px;
+}
+.pub-list .pub-meta-badge {
+  margin-left: 6px;
+  padding: 2px 8px;
+  font-weight: 700;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
 .empty-note {
   font-size: 0.875rem;
   font-style: italic;

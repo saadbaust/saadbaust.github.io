@@ -144,9 +144,8 @@ function cleanBibValue(val) {
     .trim();
 }
 
-// Parse BibTeX into [{type, key, field: value, …, bibtex}]. Each entry runs
+// Parse BibTeX into [{type, key, field: value, …}]. Each entry runs
 // until a line that starts with "}"; values may span several lines.
-// `bibtex` keeps the entry's original text for the "Copy BibTeX" button.
 function parseBibtex(text) {
   const entries = [];
   const entryRegex = /@([a-zA-Z]+)\s*\{\s*([^,]+),([^]*?)\n\s*\}/g;
@@ -165,7 +164,6 @@ function parseBibtex(text) {
       ...fields,
       type: match[1].toLowerCase(),
       key: match[2].trim(),
-      bibtex: match[0].replace(/[ \t]+$/gm, "").trim(),
     });
   }
   return entries;
@@ -196,110 +194,58 @@ function formatAuthors(names) {
 
 const pubLink = (e) => safeUrl(e.url) || (e.doi ? `https://doi.org/${e.doi}` : "");
 
-// arXiv id for preprints (from eprint, or parsed from an arxiv.org URL).
-function arxivId(e) {
-  if (e.eprint && (!e.archiveprefix || /arxiv/i.test(e.archiveprefix))) return e.eprint;
-  const m = /arxiv\.org\/(?:abs|pdf)\/([^\s?#]+?)(?:\.pdf)?$/i.exec(e.url || "");
-  return m ? m[1] : "";
+// Short venue names, like a CV. An optional `venue = {…}` field in an
+// entry always wins (e.g. venue = {Under review, Data in Brief}).
+const isIeee = (e) => /\bIEEE\b/.test(e.booktitle || "") || /^10\.1109\//.test(e.doi || "");
+
+// "2026 IEEE 2nd International Conference on … (QPAIN)" → "IEEE QPAIN"
+function conferenceVenue(c) {
+  if (c.venue) return c.venue;
+  const m = /\(([^()]+)\)\s*$/.exec(c.booktitle || "");
+  if (!m) return c.booktitle || "Conference";
+  return (isIeee(c) ? "IEEE " : "") + m[1].trim();
 }
 
-// Button row under a paper. Built from standard fields (doi, eprint, url)
-// plus optional custom BibTeX fields: pdf, code, dataset.
-const bibtexStore = [];
-function pubButtons(e) {
-  const arxiv = arxivId(e);
-  const links = [];
-  const add = (label, url) => url && links.push([label, url]);
-  add("PDF", safeUrl(e.pdf) || (arxiv ? `https://arxiv.org/pdf/${arxiv}` : ""));
-  add("arXiv", arxiv ? `https://arxiv.org/abs/${arxiv}` : "");
-  add("DOI", e.doi ? `https://doi.org/${e.doi}` : "");
-  add("Code", safeUrl(e.code));
-  add("Dataset", safeUrl(e.dataset));
-  if (!links.length) add("Link", safeUrl(e.url));
-
-  const bibIdx = bibtexStore.push(e.bibtex) - 1;
-  return `
-    <div class="pub-actions">
-      ${links
-        .map(
-          ([label, url]) =>
-            `<a class="pub-btn" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${label}</a>`,
-        )
-        .join("")}
-      <button type="button" class="pub-btn" data-bibtex="${bibIdx}">BibTeX</button>
-    </div>`;
-}
-
-// "Copy BibTeX" buttons (one delegated listener for all of them).
-async function copyText(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-  } catch (e) {
-    // Fallback for browsers / contexts without the async Clipboard API.
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    ta.setAttribute("readonly", "");
-    ta.style.cssText = "position:fixed;opacity:0";
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    ta.remove();
-  }
-}
-$("publications").addEventListener("click", async (ev) => {
-  const btn = ev.target.closest("button[data-bibtex]");
-  if (!btn) return;
-  await copyText(bibtexStore[Number(btn.dataset.bibtex)] || "");
-  btn.textContent = "Copied!";
-  btn.classList.add("copied");
-  clearTimeout(btn._reset);
-  btn._reset = setTimeout(() => {
-    btn.textContent = "BibTeX";
-    btn.classList.remove("copied");
-  }, 1600);
-});
-
-// "arXiv:2608.06252 [cs.CV]"
+// arXiv entries → "arXiv preprint"
 function preprintVenue(p) {
+  if (p.venue) return p.venue;
   const server = p.archiveprefix || (p.eprint ? "arXiv" : "");
-  const id = p.eprint ? `${server}:${p.eprint}` : server;
-  const cls = p.primaryclass ? ` [${p.primaryclass}]` : "";
-  return id ? id + cls : p.howpublished || "Preprint";
+  return server ? `${server} preprint` : p.howpublished || "Preprint";
 }
 
-// Render one publication list. Returns false when the list is empty.
+// Render one publication list as a numbered <ol>:
+//   "Title"                              Year
+//   Authors [FIRST AUTHOR]
+//   Venue
+// Returns false when the list is empty.
 function renderPubList(containerId, items, venue, untitled) {
   const c = $(containerId);
   if (!c || !items.length) return false;
-  c.innerHTML = items
-    .map((p, idx) => {
+  c.innerHTML = `<ol class="pub-list">${items
+    .map((p) => {
       const link = pubLink(p);
       const title = escapeHtml(p.title || untitled);
       const authors = splitAuthors(p.author);
       // Automatic badge when the site owner is listed first.
       const firstAuthor =
         authors.length && isMe(authors[0])
-          ? '<span class="pub-meta-badge">First author</span>'
+          ? ' <span class="pub-meta-badge">First author</span>'
           : "";
       return `
-        <div class="pub-row-item">
-          <span class="pub-row-idx">
-            <span class="pub-idx-num">[${idx + 1}]</span>
-            <span class="pub-idx-year">${escapeHtml(p.year || "")}</span>
-          </span>
-          <div class="pub-row-content">
+        <li class="pub-item">
+          <div class="pub-head">
             <h4 class="pub-title">"${
               link
                 ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${title}</a>`
                 : title
             }"</h4>
-            <p class="pub-authors">${formatAuthors(authors)}</p>
-            <p class="pub-venue"><span>${escapeHtml(venue(p))}</span>${firstAuthor}</p>
-            ${pubButtons(p)}
+            ${p.year ? `<span class="pub-year">${escapeHtml(p.year)}</span>` : ""}
           </div>
-        </div>`;
+          <p class="pub-authors">${formatAuthors(authors)}${firstAuthor}</p>
+          <p class="pub-venue">${escapeHtml(venue(p))}</p>
+        </li>`;
     })
-    .join("");
+    .join("")}</ol>`;
   return true;
 }
 
@@ -333,17 +279,17 @@ async function loadPublications() {
       (e) => e.type === "dataset" || (e.type === "misc" && !isPreprint(e)),
     );
 
-    if (!renderPubList("journal-container", journals, (j) => j.journal || "Journal", "Untitled Journal Paper"))
+    if (!renderPubList("journal-container", journals, (j) => j.venue || j.journal || "Journal", "Untitled Journal Paper"))
       $("journal-container").innerHTML =
         '<p class="empty-note">Journal records will appear here upon publication.</p>';
-    if (!renderPubList("conference-container", conferences, (c) => c.booktitle || "Conference", "Untitled Conference Paper"))
+    if (!renderPubList("conference-container", conferences, conferenceVenue, "Untitled Conference Paper"))
       $("conference-container").innerHTML =
         '<p class="empty-note">Conference records will appear here upon publication.</p>';
     $("preprints-section").hidden = !renderPubList(
       "preprint-container", preprints, preprintVenue, "Untitled Preprint",
     );
     $("datasets-section").hidden = !renderPubList(
-      "dataset-container", datasets, (d) => d.publisher || "Dataset", "Untitled Dataset",
+      "dataset-container", datasets, (d) => d.venue || d.publisher || "Dataset", "Untitled Dataset",
     );
   } catch (err) {
     console.error("Could not load publications.bib:", err);

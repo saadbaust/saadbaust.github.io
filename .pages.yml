@@ -51,11 +51,12 @@ content:
       @misc entries carrying eprint / archivePrefix / primaryClass fields — an
       arXiv BibTeX entry already has these, so paste it unchanged. Datasets use
       the @dataset type (older @misc dataset entries still work too). The site
-      auto-sorts entries by year within each group, adds a "First author" badge
-      when Saad Ahmed is listed first, and shows buttons under each paper:
-      PDF / arXiv / DOI (from the standard fields) and BibTeX (copies the entry).
-      Optional extra fields add more buttons, e.g.
-      pdf = {https://...}, code = {https://github.com/...}, dataset = {https://...}
+      auto-sorts entries by year within each group, shows them as a numbered
+      list (title + year on the right, authors, short venue), and adds a
+      "First author" badge when Saad Ahmed is listed first. The title links to
+      the url or DOI field. Venues are shortened automatically (e.g. IEEE QPAIN,
+      arXiv preprint); to set one yourself add e.g.
+      venue = {Under review, Data in Brief}
       How to add: Google Scholar / IEEE Xplore / arXiv / Kaggle → Cite → BibTeX → copy & paste.
       How to remove: Delete the entire entry block (from @ to closing }).
 
