@@ -153,6 +153,20 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+/* Poppins is a heavy font, so bold text and default headings use one step
+   lighter than the browser default (700). Components set their own. */
+strong,
+b {
+  font-weight: 600;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
 a {
   color: inherit;
 }
@@ -214,7 +228,7 @@ a {
   white-space: normal;
   background: var(--brand-solid);
   color: #ffffff;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.875rem;
   border-radius: 8px;
   box-shadow: var(--shadow);
@@ -260,7 +274,7 @@ a {
   gap: 16px;
 }
 .nav-brand {
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.1rem;
   letter-spacing: -0.01em;
   text-decoration: none;
@@ -401,7 +415,7 @@ main {
 }
 .profile-name {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
@@ -446,7 +460,7 @@ html.dark .profile-target {
   align-items: center;
   gap: 6px;
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   background: var(--badge-bg);
   border: 2px solid var(--border-divider);
@@ -504,7 +518,7 @@ html.dark .social-badge-item.ieee:hover {
   gap: 8px;
   margin-top: 18px;
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-muted);
   text-decoration: none;
   transition: color 0.15s;
@@ -528,7 +542,7 @@ html.dark .social-badge-item.ieee:hover {
 }
 .section-heading {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.015em;
   line-height: 1.15;
 }
@@ -536,7 +550,7 @@ html.dark .social-badge-item.ieee:hover {
 /* ── About ────────────────────────────────────────────────────────── */
 .about-greeting {
   font-size: clamp(1.7rem, 3.4vw, 2.1rem);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.1;
   margin-bottom: 18px;
@@ -567,7 +581,7 @@ html.dark .social-badge-item.ieee:hover {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.875rem;
   padding: 10px 20px;
   border-radius: 8px;
@@ -645,7 +659,7 @@ html.dark .btn-secondary:hover {
 .academic-list-item::before {
   content: "•";
   color: var(--brand-color);
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.2rem;
   line-height: 1;
 }
@@ -706,7 +720,7 @@ html.dark .timeline-item::before {
 }
 .timeline-duration {
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--brand-color);
   background: var(--brand-muted);
   padding: 3px 10px;
@@ -754,7 +768,7 @@ html.dark .edu-grade {
 /* ── Indexed rows (Publications, Research Projects, Thesis, Co-sup.) */
 .pub-subheading {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 500;
   margin: 20px 0 12px;
 }
 .section-heading-wrap + .pub-subheading {
@@ -777,7 +791,7 @@ html.dark .edu-grade {
   min-width: 36px;
   padding-top: 2px;
   flex-shrink: 0;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-muted);
   line-height: 1.5;
 }
@@ -813,7 +827,7 @@ html.dark .edu-grade {
 }
 .pub-authors .me {
   color: var(--brand-color);
-  font-weight: 600;
+  font-weight: 500;
 }
 .pub-venue {
   font-size: 0.86rem;
@@ -830,7 +844,7 @@ html.dark .edu-grade {
   color: var(--brand-color);
   padding: 1px 8px;
   border-radius: 4px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
 }
 
@@ -849,7 +863,7 @@ html.dark .edu-grade {
   margin-bottom: 0;
 }
 .pub-list .pub-item::marker {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-muted);
 }
 /* Title on the left, year pinned to the right edge (like a CV). */
@@ -863,29 +877,106 @@ html.dark .edu-grade {
   flex: 1;
   min-width: 0;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 0;
 }
 .pub-list .pub-year {
   flex-shrink: 0;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-muted);
 }
+/* Venue right after the title ("Title", IEEE QPAIN), in normal weight. */
+.pub-list .pub-venue-inline {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+/* Authors (and project/thesis details) sit quietly under the title:
+   smaller and in the muted grey, so the title stays the focus. */
 .pub-list .pub-authors,
 .pub-list .pub-venue {
   display: block;
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 400;
-  color: var(--text-main);
+  color: var(--text-muted);
+  margin-top: 1px;
   margin-bottom: 1px;
 }
-.pub-list .pub-meta-badge {
+.pub-list .pub-meta-badge,
+.pub-cards .pub-meta-badge {
   margin-left: 6px;
   padding: 2px 8px;
-  font-weight: 700;
+  font-weight: 600;
   vertical-align: middle;
   white-space: nowrap;
+}
+
+/* Publications: cards with a left accent bar. Year + venue pills sit above
+   the title, authors (owner highlighted, "First author" badge) below. */
+.pub-cards {
+  color: var(--text-main);
+  line-height: 1.55;
+  counter-reset: pub; /* numbering restarts in each list (1., 2., …) */
+}
+/* Numbered list: the number sits in its own left column, the pills, title
+   and authors stack in the right column. */
+.pub-card {
+  counter-increment: pub;
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  margin-bottom: 16px;
+}
+.pub-card::before {
+  content: counter(pub) ".";
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+.pub-card > * {
+  grid-column: 2;
+}
+.pub-card:last-child {
+  margin-bottom: 0;
+}
+.pub-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+.pub-pill {
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 1px 9px;
+  border-radius: 9999px;
+  background: var(--badge-bg);
+  border: 1px solid var(--border-divider);
+  color: var(--text-muted);
+}
+/* Venue pill: a bit bolder and darker than the year pill. */
+.pub-pill:not(.pub-pill-year) {
+  font-weight: 600;
+  color: var(--text-main);
+}
+.pub-pill-year {
+  background: var(--brand-muted);
+  border-color: var(--brand-muted);
+  color: var(--brand-color);
+}
+.pub-cards .pub-title {
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+.pub-cards .pub-authors {
+  font-size: 0.84rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 3px;
 }
 
 .empty-note {
@@ -928,7 +1019,7 @@ html.dark .edu-grade {
   color: var(--text-muted);
 }
 .simple-entry-meta .meta-label {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-main);
 }
 
@@ -948,7 +1039,7 @@ html.dark .edu-grade {
 }
 .teaching-table th {
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: 500;
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -963,10 +1054,9 @@ html.dark .edu-grade {
   border-bottom: none;
 }
 .course-code {
-  font-family: monospace;
-  font-weight: 700;
+  font-family: inherit; /* same font as the rest of the table */
+  font-weight: 500;
   font-size: 0.88rem;
-  letter-spacing: 0.01em;
   white-space: nowrap;
 }
 
@@ -980,7 +1070,7 @@ html.dark .edu-grade {
   color: var(--brand-color);
 }
 .contact-label {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-muted);
   margin-right: 4px;
 }

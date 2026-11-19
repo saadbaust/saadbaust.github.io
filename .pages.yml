@@ -51,8 +51,8 @@ content:
       @misc entries carrying eprint / archivePrefix / primaryClass fields — an
       arXiv BibTeX entry already has these, so paste it unchanged. Datasets use
       the @dataset type (older @misc dataset entries still work too). The site
-      auto-sorts entries by year within each group, shows them as a numbered
-      list (title + year on the right, authors, short venue), and adds a
+      auto-sorts entries by year within each group, shows each as a card
+      (year + short venue pills, then the title, then authors), and adds a
       "First author" badge when Saad Ahmed is listed first. The title links to
       the url or DOI field. Venues are shortened automatically (e.g. IEEE QPAIN,
       arXiv preprint); to set one yourself add e.g.

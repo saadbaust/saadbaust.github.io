@@ -213,15 +213,15 @@ function preprintVenue(p) {
   return server ? `${server} preprint` : p.howpublished || "Preprint";
 }
 
-// Render one publication list as a numbered <ol>:
-//   "Title"                              Year
+// Render one publication list as cards with an accent bar:
+//   Title
 //   Authors [FIRST AUTHOR]
-//   Venue
+//   [Year] [Venue]
 // Returns false when the list is empty.
 function renderPubList(containerId, items, venue, untitled) {
   const c = $(containerId);
   if (!c || !items.length) return false;
-  c.innerHTML = `<ol class="pub-list">${items
+  c.innerHTML = `<div class="pub-cards">${items
     .map((p) => {
       const link = pubLink(p);
       const title = escapeHtml(p.title || untitled);
@@ -231,21 +231,22 @@ function renderPubList(containerId, items, venue, untitled) {
         authors.length && isMe(authors[0])
           ? ' <span class="pub-meta-badge">First author</span>'
           : "";
+      const venueText = venue(p);
+      const pills =
+        (p.year ? `<span class="pub-pill pub-pill-year">${escapeHtml(p.year)}</span>` : "") +
+        (venueText ? `<span class="pub-pill">${escapeHtml(venueText)}</span>` : "");
       return `
-        <li class="pub-item">
-          <div class="pub-head">
-            <h4 class="pub-title">"${
-              link
-                ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${title}</a>`
-                : title
-            }"</h4>
-            ${p.year ? `<span class="pub-year">${escapeHtml(p.year)}</span>` : ""}
-          </div>
+        <article class="pub-card">
+          <h4 class="pub-title">${
+            link
+              ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer">${title}</a>`
+              : title
+          }</h4>
           <p class="pub-authors">${formatAuthors(authors)}${firstAuthor}</p>
-          <p class="pub-venue">${escapeHtml(venue(p))}</p>
-        </li>`;
+          ${pills ? `<div class="pub-pills">${pills}</div>` : ""}
+        </article>`;
     })
-    .join("")}</ol>`;
+    .join("")}</div>`;
   return true;
 }
 
