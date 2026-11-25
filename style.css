@@ -72,50 +72,44 @@
    THEME TOKENS — light in :root, dark overrides in html.dark
    ═══════════════════════════════════════════════════════════════════ */
 :root {
-  --bg-main: linear-gradient(180deg, #f8f9fd 0%, #edf0f7 100%);
-  --text-main: #1e293b;
-  --text-muted: #475569;
-  --brand-color: #4f46e5;
-  --brand-solid: #4f46e5; /* filled buttons / active pills */
-  --brand-solid-hover: #4338ca;
-  --brand-muted: #e0e7ff;
-  --card-bg: rgba(255, 255, 255, 0.52);
-  --card-border: rgba(255, 255, 255, 0.55);
-  --card-highlight: rgba(255, 255, 255, 0.65);
-  --badge-bg: #f8fafc;
+  --bg-main: #f4f6f9;
+  --text-main: #1c293b;
+  --text-muted: #46566a;
+  --brand-color: #304f82;
+  --brand-solid: #304f82;
+  --brand-solid-hover: #233d68;
+  --brand-muted: #eaf0f8;
+  --card-bg: #ffffff;
+  --card-border: #dce3eb;
+  --badge-bg: #f7f9fc;
   --surface-solid: #ffffff; /* opaque panels (mobile menu, target card) */
-  --hover-bg: rgba(0, 0, 0, 0.05);
-  --border-divider: #e2e8f0;
+  --hover-bg: #eef2f7;
+  --border-divider: #e1e6ed;
   --shadow:
-    0 1px 2px rgba(2, 6, 23, 0.03), 0 3px 8px -4px rgba(2, 6, 23, 0.05);
-  --glow-opacity: 0.1;
-  --glow-blur: 90px;
-  --timeline-line: #cbd5e1;
+    0 1px 2px rgba(24, 39, 61, 0.035), 0 4px 14px rgba(24, 39, 61, 0.035);
+  --timeline-line: #c4cfdd;
   --scrollbar: #cbd5e1;
   --nav-height: 62px;
 }
 
 html.dark {
-  --bg-main: #0b0f19;
-  --text-main: #e2e8f0;
-  --text-muted: #a3aec1;
-  --brand-color: #818cf8;
-  --brand-solid: #6366f1;
-  --brand-solid-hover: #818cf8;
-  --brand-muted: #1e1b4b;
-  --card-bg: rgba(17, 23, 40, 0.52);
-  --card-border: rgba(129, 140, 248, 0.18);
-  --card-highlight: rgba(255, 255, 255, 0.06);
-  --badge-bg: #101729;
-  --surface-solid: #151b2c;
+  --bg-main: #101721;
+  --text-main: #edf2f8;
+  --text-muted: #bdc9d8;
+  --brand-color: #b6d0f7;
+  --brand-solid: #375982;
+  --brand-solid-hover: #476d9a;
+  --brand-muted: #25364e;
+  --card-bg: #192330;
+  --card-border: #354354;
+  --badge-bg: #202c3b;
+  --surface-solid: #192330;
   --hover-bg: rgba(255, 255, 255, 0.06);
-  --border-divider: #222d44;
+  --border-divider: #354354;
   --shadow:
-    0 1px 2px rgba(0, 0, 0, 0.12), 0 3px 10px -4px rgba(0, 0, 0, 0.18);
-  --glow-opacity: 0.16;
-  --glow-blur: 96px;
-  --timeline-line: #334155;
-  --scrollbar: #334155;
+    0 1px 2px rgba(0, 0, 0, 0.16), 0 4px 14px rgba(0, 0, 0, 0.12);
+  --timeline-line: #65768c;
+  --scrollbar: #65768c;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -140,7 +134,6 @@ html {
 }
 body {
   background: var(--bg-main);
-  background-attachment: fixed;
   color: var(--text-main);
   font-family:
     "Poppins",
@@ -187,20 +180,7 @@ a {
 }
 
 .corner-glow {
-  position: fixed;
-  top: -280px;
-  right: -150px;
-  width: 700px;
-  height: 700px;
-  z-index: -10;
-  pointer-events: none;
-  border-radius: 50%;
-  opacity: var(--glow-opacity);
-  filter: blur(var(--glow-blur));
-  background:
-    radial-gradient(circle at 32% 34%, rgba(99, 102, 241, 0.7), transparent 60%),
-    radial-gradient(circle at 68% 56%, rgba(168, 85, 247, 0.5), transparent 60%),
-    radial-gradient(circle at 52% 80%, rgba(56, 189, 248, 0.34), transparent 62%);
+  display: none;
 }
 
 /* Visually hidden; the "Skip to content" link reappears on focus. */
@@ -239,17 +219,15 @@ a {
   outline-offset: 2px;
 }
 
-/* Frosted-glass surface shared by the navbar and every card. */
+/* Quiet, opaque surfaces keep content readable in both themes. */
 .top-navbar,
 .content-block {
   background: var(--card-bg);
-  -webkit-backdrop-filter: blur(20px) saturate(1.55);
-  backdrop-filter: blur(20px) saturate(1.55);
 }
 .content-block {
-  border-radius: 20px;
+  border-radius: 14px;
   border: 1px solid var(--card-border);
-  box-shadow: var(--shadow), inset 0 1px 0 var(--card-highlight);
+  box-shadow: var(--shadow);
   padding: 32px;
 }
 
@@ -262,7 +240,7 @@ a {
   z-index: 50;
   width: 100%;
   border-bottom: 1px solid var(--card-border);
-  box-shadow: inset 0 1px 0 var(--card-highlight);
+  box-shadow: var(--shadow);
 }
 .nav-inner {
   max-width: 1152px;
@@ -274,7 +252,7 @@ a {
   gap: 16px;
 }
 .nav-brand {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.1rem;
   letter-spacing: -0.01em;
   text-decoration: none;
@@ -310,7 +288,6 @@ a {
 .nav-link.active {
   background: var(--brand-solid);
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.18);
 }
 .nav-tools {
   display: flex;
@@ -341,10 +318,6 @@ a {
 .nav-tool-btn svg {
   width: 20px;
   height: 20px;
-}
-/* The theme toggle is just its icon wide (the hamburger stays 38px). */
-.theme-toggle-btn {
-  width: auto;
 }
 .theme-toggle-btn .icon-sun,
 html.dark .theme-toggle-btn .icon-moon {
@@ -402,7 +375,7 @@ main {
   width: 168px;
   height: 168px;
   margin: 0 auto 18px;
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 4px;
   background: #e2e8f0;
 }
@@ -411,11 +384,11 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 8px;
 }
 .profile-name {
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
@@ -433,7 +406,7 @@ main {
 .profile-target {
   display: inline-block;
   margin-top: 14px;
-  padding: 5px;
+  padding: 7px 10px;
   font-size: 0.8rem;
   font-weight: 500;
   line-height: 1.5;
@@ -463,53 +436,21 @@ html.dark .profile-target {
   font-weight: 500;
   text-decoration: none;
   background: var(--badge-bg);
-  border: 2px solid var(--border-divider);
-  padding: 6px;
+  border: 1px solid var(--card-border);
+  padding: 7px 9px;
   border-radius: 9999px;
   transition:
     background-color 0.2s,
     color 0.2s;
 }
 .social-badge-item svg {
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
 }
 .social-badge-item:hover {
-  background: var(--surface-solid);
-}
-html.dark .social-badge-item:hover {
-  background: #1c2a45;
-}
-.social-badge-item.linkedin:hover {
-  color: #0a66c2;
-}
-.social-badge-item.scholar:hover {
-  color: #4285f4;
-}
-.social-badge-item.orcid:hover {
-  color: #a6ce39;
-}
-.social-badge-item.github:hover {
-  color: #24292e;
-}
-html.dark .social-badge-item.github:hover {
-  color: #ffffff;
-}
-.social-badge-item.researchgate:hover {
-  color: #00ccbb;
-}
-.social-badge-item.ieee:hover {
-  color: #00629b;
-}
-html.dark .social-badge-item.ieee:hover {
-  color: #60a5fa;
-}
-.social-badge-item.semantic-scholar:hover {
-  color: #52b788;
-}
-.social-badge-item.youtube:hover {
-  color: #ff0000;
+  background: var(--hover-bg);
+  color: var(--brand-color);
 }
 
 .profile-cms {
@@ -541,8 +482,8 @@ html.dark .social-badge-item.ieee:hover {
   border-bottom: 1px solid var(--border-divider);
 }
 .section-heading {
-  font-size: 1.5rem;
-  font-weight: 500;
+  font-size: 1.4rem;
+  font-weight: 600;
   letter-spacing: -0.015em;
   line-height: 1.15;
 }
@@ -550,7 +491,7 @@ html.dark .social-badge-item.ieee:hover {
 /* ── About ────────────────────────────────────────────────────────── */
 .about-greeting {
   font-size: clamp(1.7rem, 3.4vw, 2.1rem);
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.1;
   margin-bottom: 18px;
@@ -559,10 +500,9 @@ html.dark .social-badge-item.ieee:hover {
   color: var(--brand-color);
 }
 .about-paragraph {
-  font-size: 0.95rem;
-  line-height: 1.65;
-  text-align: justify;
-  hyphens: auto;
+  font-size: 1rem;
+  line-height: 1.8;
+  text-align: left;
 }
 .interests-title {
   font-size: 1.05rem;
@@ -595,10 +535,10 @@ html.dark .social-badge-item.ieee:hover {
   flex-shrink: 0;
 }
 .btn-primary {
-  background-color: #4f46e5;
+  background-color: var(--brand-solid);
 }
 .btn-primary:hover {
-  background-color: #4338ca;
+  background-color: var(--brand-solid-hover);
 }
 .btn-secondary {
   background-color: #334155;
@@ -653,7 +593,7 @@ html.dark .btn-secondary:hover {
   font-size: 0.95rem;
   align-items: flex-start;
   gap: 12px;
-  line-height: 1.5;
+  line-height: 1.65;
 }
 .interests-list li::before,
 .academic-list-item::before {
@@ -716,7 +656,7 @@ html.dark .timeline-item::before {
 }
 .timeline-title {
   font-size: 1.05rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 .timeline-duration {
   font-size: 0.82rem;
@@ -734,24 +674,21 @@ html.dark .timeline-item::before {
 }
 .edu-grade {
   font-size: 0.88rem;
-  color: #4f46e5;
-  font-weight: 500;
-}
-html.dark .edu-grade {
-  color: var(--brand-color); /* lighter indigo, readable on dark */
+  color: var(--brand-color);
+  font-weight: 600;
 }
 .job-desc-list {
   list-style: none;
   margin-top: 8px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 7px;
 }
 .job-desc-list li {
   position: relative;
   padding-left: 16px;
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.65;
   color: var(--text-muted);
 }
 .job-desc-list li::before {
@@ -768,8 +705,8 @@ html.dark .edu-grade {
 /* ── Indexed rows (Publications, Research Projects, Thesis, Co-sup.) */
 .pub-subheading {
   font-size: 1.1rem;
-  font-weight: 500;
-  margin: 20px 0 12px;
+  font-weight: 600;
+  margin: 24px 0 14px;
 }
 .section-heading-wrap + .pub-subheading {
   margin-top: 0;
@@ -812,16 +749,20 @@ html.dark .edu-grade {
 }
 .pub-title a,
 .simple-entry-title a {
-  text-decoration: none;
+  color: var(--brand-color);
+  text-decoration: underline;
+  text-decoration-color: var(--timeline-line);
+  text-underline-offset: 3px;
 }
 .pub-title a:hover,
 .pub-title a:focus,
 .simple-entry-title a:hover {
   color: var(--brand-color);
+  text-decoration-color: currentColor;
 }
 .pub-authors {
-  font-size: 0.86rem;
-  line-height: 1.45;
+  font-size: 0.9rem;
+  line-height: 1.6;
   color: var(--text-muted);
   margin-bottom: 2px;
 }
@@ -896,7 +837,7 @@ html.dark .edu-grade {
 .pub-list .pub-authors,
 .pub-list .pub-venue {
   display: block;
-  font-size: 0.84rem;
+  font-size: 0.9rem;
   font-weight: 400;
   color: var(--text-muted);
   margin-top: 1px;
@@ -924,7 +865,7 @@ html.dark .edu-grade {
   counter-increment: pub;
   display: grid;
   grid-template-columns: 2.1rem minmax(0, 1fr);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 .pub-card::before {
   content: counter(pub) ".";
@@ -968,12 +909,12 @@ html.dark .edu-grade {
 }
 .pub-cards .pub-title {
   font-size: 0.95rem;
-  font-weight: 500;
-  line-height: 1.4;
+  font-weight: 600;
+  line-height: 1.5;
   margin-bottom: 0;
 }
 .pub-cards .pub-authors {
-  font-size: 0.84rem;
+  font-size: 0.9rem;
   font-weight: 400;
   color: var(--text-muted);
   margin-top: 3px;
@@ -1008,11 +949,10 @@ html.dark .edu-grade {
 }
 .simple-entry-desc {
   font-size: 0.9rem;
-  line-height: 1.5;
+  line-height: 1.65;
   color: var(--text-muted);
   margin-bottom: 4px;
-  text-align: justify;
-  hyphens: auto;
+  text-align: left;
 }
 .simple-entry-meta {
   font-size: 0.85rem;
@@ -1040,7 +980,7 @@ html.dark .edu-grade {
 .teaching-table th {
   color: var(--text-muted);
   font-weight: 500;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: 10px 16px;
@@ -1062,12 +1002,17 @@ html.dark .edu-grade {
 
 /* ── Contact + footer ─────────────────────────────────────────────── */
 .contact-list-link {
-  text-decoration: none;
+  color: var(--brand-color);
+  text-decoration: underline;
+  text-decoration-color: var(--timeline-line);
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
   font-weight: 500;
   transition: color 0.15s;
 }
 .contact-list-link:hover {
   color: var(--brand-color);
+  text-decoration-color: currentColor;
 }
 .contact-label {
   font-weight: 500;
@@ -1098,7 +1043,7 @@ html.dark .edu-grade {
   background-color: var(--brand-solid);
   color: #ffffff;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.35);
+  box-shadow: var(--shadow);
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px);
@@ -1115,9 +1060,6 @@ html.dark .edu-grade {
 }
 .back-to-top:hover {
   background-color: var(--brand-solid-hover);
-}
-html.dark .back-to-top {
-  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
 }
 .back-to-top svg {
   width: 22px;
@@ -1190,5 +1132,28 @@ html.dark .back-to-top {
   .back-to-top {
     bottom: 18px;
     right: 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .content-block {
+    padding: 24px 20px;
+  }
+  .profile-card {
+    padding: 24px;
+  }
+  .pub-list .pub-head {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

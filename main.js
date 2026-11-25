@@ -29,12 +29,14 @@ function storeTheme(value) {
 // ── Theme toggle ────────────────────────────────────────────────────────
 // Dark mode is manual only (saved choice applied in <head> before paint).
 const themeColorMeta = $("theme-color-meta");
+const themeToggle = $("theme-toggle");
 function syncThemeColor() {
   const isDark = document.documentElement.classList.contains("dark");
+  themeToggle.setAttribute("aria-pressed", String(isDark));
   if (themeColorMeta)
-    themeColorMeta.setAttribute("content", isDark ? "#0b0f19" : "#f8f9fd");
+    themeColorMeta.setAttribute("content", isDark ? "#101721" : "#f4f6f9");
 }
-$("theme-toggle").addEventListener("click", () => {
+themeToggle.addEventListener("click", () => {
   const isDark = document.documentElement.classList.toggle("dark");
   storeTheme(isDark ? "dark" : "light");
   syncThemeColor();
