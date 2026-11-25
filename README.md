@@ -8,7 +8,7 @@ All portfolio content lives in `index.html`. Edit it directly (or with AI) and p
 
 Update the page's description, social metadata, and Person JSON-LD when relevant profile details change. Keep the profile image references and dimensions in sync if replacing the photo.
 
-`style.css` contains the responsive layout and light/dark styles. `main.js` handles the theme, navigation, scroll highlighting, and back-to-top button; the content is readable without JavaScript.
+`style.css` contains the responsive layout and light/dark styles. `main.js` handles the theme, navigation, scroll highlighting, and back-to-top button; the deploy workflow minifies CSS, JS and HTML at publish time, so keep the sources readable; the content is readable without JavaScript.
 
 ## Preview and deployment
 

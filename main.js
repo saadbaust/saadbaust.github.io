@@ -55,63 +55,106 @@ document.addEventListener("click", (e) => {
     setMenu(false);
 });
 
-// ── Scroll-spy + back-to-top (one rAF-throttled scroll handler) ─────────
-// The active link is the last nav-linked section whose top has passed
-// just below the navbar; at the very bottom of the page the last one
-// (Contact) wins even if it is too short to reach the top.
+// ── Scroll-spy (IntersectionObserver) ──────────────────────────────────
+// The observed root is everything above a line just below the navbar, so a
+// section intersects once its top has passed that line. The active link is
+// the last such section; at the very bottom of the page the last one
+// (Contact) wins even if it is too short to reach the line.
+const header = $("site-header");
 const navLinks = [...navLinksEl.querySelectorAll('.nav-link[href^="#"]')];
 const spyTargets = navLinks
   .map((link) => ({ link, section: $(link.getAttribute("href").slice(1)) }))
   .filter((t) => t.section);
+const passed = new Set();
+let activeIndex = -1;
+let atBottom = false;
+let spyObserver = null;
+
+function refreshActive() {
+  const index = atBottom
+    ? spyTargets.length - 1
+    : passed.size
+      ? Math.max(...passed)
+      : -1;
+  if (index === activeIndex) return;
+  if (activeIndex >= 0) spyTargets[activeIndex].link.classList.remove("active");
+  if (index >= 0) spyTargets[index].link.classList.add("active");
+  activeIndex = index;
+}
+function observeSections(navH, viewportH) {
+  if (spyObserver) spyObserver.disconnect();
+  passed.clear();
+  const bottomMargin = Math.max(0, viewportH - navH - 40);
+  spyObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const i = spyTargets.findIndex((t) => t.section === entry.target);
+        if (entry.isIntersecting) passed.add(i);
+        else passed.delete(i);
+      }
+      refreshActive();
+    },
+    { rootMargin: `100000px 0px -${bottomMargin}px 0px` },
+  );
+  spyTargets.forEach((t) => spyObserver.observe(t.section));
+}
+
+// ── Back-to-top + bottom-of-page check (reads first, then writes) ───────
 const backToTopBtn = $("back-to-top");
-let activeLink = null;
-
 function onScroll() {
-  backToTopBtn.classList.toggle("visible", window.scrollY > 400);
-
-  const offset = $("site-header").offsetHeight + 40;
-  const atBottom =
-    window.innerHeight + window.scrollY >=
-    document.documentElement.scrollHeight - 4;
-  let current = null;
-  if (atBottom && spyTargets.length) {
-    current = spyTargets[spyTargets.length - 1].link;
-  } else {
-    for (const t of spyTargets) {
-      if (t.section.getBoundingClientRect().top - offset <= 0) current = t.link;
-    }
-  }
-  if (current !== activeLink) {
-    if (activeLink) activeLink.classList.remove("active");
-    if (current) current.classList.add("active");
-    activeLink = current;
+  const y = window.scrollY;
+  const bottom =
+    window.innerHeight + y >= document.documentElement.scrollHeight - 4;
+  backToTopBtn.classList.toggle("visible", y > 400);
+  if (bottom !== atBottom) {
+    atBottom = bottom;
+    refreshActive();
   }
 }
 let scrollTicking = false;
-function requestScrollUpdate() {
-  if (scrollTicking) return;
-  scrollTicking = true;
-  requestAnimationFrame(() => {
-    scrollTicking = false;
-    onScroll();
-  });
-}
-// Sticky profile card: stick just below the navbar if the card fits in the
-// window, otherwise use a negative offset so its bottom stays on screen.
-const rail = document.querySelector("aside.profile-rail");
-function updateRailTop() {
-  const navH = $("site-header").offsetHeight;
-  const top = Math.min(navH, window.innerHeight - rail.offsetHeight);
-  rail.style.setProperty("--rail-top", `${top}px`);
-}
-if ("ResizeObserver" in window) new ResizeObserver(updateRailTop).observe(rail);
-window.addEventListener("resize", updateRailTop, { passive: true });
-updateRailTop();
-
-window.addEventListener("scroll", requestScrollUpdate, { passive: true });
-window.addEventListener("resize", requestScrollUpdate, { passive: true });
+window.addEventListener(
+  "scroll",
+  () => {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(() => {
+      scrollTicking = false;
+      onScroll();
+    });
+  },
+  { passive: true },
+);
 backToTopBtn.addEventListener("click", () => {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
 });
-onScroll();
+
+// ── Layout-dependent setup ──────────────────────────────────────────────
+// Sticky profile card: stick just below the navbar if the card fits in the
+// window, otherwise use a negative offset so its bottom stays on screen.
+// ResizeObserver fires once when observation starts, so there is no
+// separate initial call; all reads happen before the write.
+const rail = document.querySelector("aside.profile-rail");
+let lastNavH = -1;
+let lastViewportH = -1;
+function updateLayout() {
+  const navH = header.offsetHeight;
+  const viewportH = window.innerHeight;
+  const railH = rail.offsetHeight;
+  rail.style.setProperty("--rail-top", `${Math.min(navH, viewportH - railH)}px`);
+  if (navH !== lastNavH || viewportH !== lastViewportH) {
+    lastNavH = navH;
+    lastViewportH = viewportH;
+    observeSections(navH, viewportH);
+  }
+  onScroll();
+}
+if ("ResizeObserver" in window) {
+  const ro = new ResizeObserver(updateLayout);
+  ro.observe(rail);
+  ro.observe(header);
+  ro.observe(document.documentElement);
+} else {
+  window.addEventListener("load", updateLayout);
+}
+window.addEventListener("resize", updateLayout, { passive: true });

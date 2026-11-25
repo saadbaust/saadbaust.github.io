@@ -40,7 +40,23 @@ jobs:
           echo "Stamped ${DATE}"
 
       - name: Remove repo-only files from the published site
-        run: rm -rf .github README.md
+        run: rm -rf .github .claude README.md fonts/OFL.txt
+
+      - name: Minify CSS, JS and HTML
+        run: |
+          npx --yes esbuild style.css --minify --outfile=style.css --allow-overwrite
+          npx --yes esbuild main.js --minify --outfile=main.js --allow-overwrite
+          npx --yes html-minifier-terser --collapse-whitespace --remove-comments --minify-css true --minify-js true -o index.html index.html
+          # Fail the deploy if minification damaged the JSON-LD or the stamped date.
+          python3 - <<'PY'
+          import json, re
+          html = open("index.html", encoding="utf-8").read()
+          blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+          assert len(blocks) == 2, f"expected 2 JSON-LD blocks, found {len(blocks)}"
+          for b in blocks:
+              json.loads(b)
+          assert '"dateModified"' in html
+          PY
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
