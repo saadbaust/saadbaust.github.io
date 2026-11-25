@@ -453,26 +453,6 @@ html.dark .profile-target {
   color: var(--brand-color);
 }
 
-.profile-cms {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 18px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.profile-cms:hover {
-  color: var(--brand-color);
-}
-.profile-cms svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-}
-
 /* ═══════════════════════════════════════════════════════════════════
    SECTIONS
    ═══════════════════════════════════════════════════════════════════ */
@@ -561,18 +541,13 @@ html.dark .btn-secondary:hover {
   flex-direction: column;
   padding-left: 4px;
 }
-/* Research interests: 3 columns × 2 rows on desktop, fewer on small screens. */
+/* Three research interests side by side on desktop, stacked on mobile. */
 .interests-list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px 20px;
 }
 @media (max-width: 760px) {
-  .interests-list {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (max-width: 420px) {
   .interests-list {
     grid-template-columns: 1fr;
   }
@@ -708,6 +683,11 @@ html.dark .timeline-item::before {
   font-weight: 600;
   margin: 24px 0 14px;
 }
+.subsection-heading {
+  margin: 28px 0 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
 .section-heading-wrap + .pub-subheading {
   margin-top: 0;
 }
@@ -734,9 +714,6 @@ html.dark .timeline-item::before {
 }
 .pub-idx-num {
   font-size: 0.85rem;
-}
-.pub-idx-year {
-  font-size: 0.75rem;
 }
 .pub-row-content {
   flex-grow: 1;
@@ -827,11 +804,6 @@ html.dark .timeline-item::before {
   font-weight: 500;
   color: var(--text-muted);
 }
-/* Venue right after the title ("Title", IEEE QPAIN), in normal weight. */
-.pub-list .pub-venue-inline {
-  font-weight: 400;
-  color: var(--text-muted);
-}
 /* Authors (and project/thesis details) sit quietly under the title:
    smaller and in the muted grey, so the title stays the focus. */
 .pub-list .pub-authors,
@@ -852,8 +824,7 @@ html.dark .timeline-item::before {
   white-space: nowrap;
 }
 
-/* Publications: cards with a left accent bar. Year + venue pills sit above
-   the title, authors (owner highlighted, "First author" badge) below. */
+/* Publications: numbered titles, authors, and year / venue pills. */
 .pub-cards {
   color: var(--text-main);
   line-height: 1.55;
@@ -918,13 +889,6 @@ html.dark .timeline-item::before {
   font-weight: 400;
   color: var(--text-muted);
   margin-top: 3px;
-}
-
-.empty-note {
-  font-size: 0.875rem;
-  font-style: italic;
-  color: var(--text-muted);
-  padding-left: 4px;
 }
 
 /* Status sub-titles (Conferences / Journals, Ongoing / Completed). */
@@ -1069,7 +1033,7 @@ html.dark .timeline-item::before {
 /* ═══════════════════════════════════════════════════════════════════
    ≤ 1024px: hamburger menu, profile card stacks above content
    ═══════════════════════════════════════════════════════════════════ */
-/* Mid-size desktops: tighten the nine nav links so they never crowd the
+/* Mid-size desktops: tighten the nav links so they never crowd the
    brand or wrap onto a second line. */
 @media (min-width: 1025px) and (max-width: 1199px) {
   .nav-inner {

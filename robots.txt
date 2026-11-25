@@ -1,12 +1,4 @@
-# Allow everything.
-#
-# SEO note: data.json, content.json and publications.bib are NOT blocked here,
-# and that's intentional, not an oversight. Google's crawler renders the page's
-# JavaScript before indexing content, and the page fetches all three files at
-# runtime to show the live publication list (from publications.bib) and every
-# structured section (from data.json + content.json). If you ever add a Disallow
-# line for any of them, Googlebot's renderer will fail to fetch it and those
-# parts of the page will effectively go un-indexed.
+# Allow search engines to crawl the site.
 User-agent: *
 Allow: /
 

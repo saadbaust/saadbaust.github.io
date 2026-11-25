@@ -1,5 +1,4 @@
-# Publishes the site to GitHub Pages on every push to main (including saves
-# from Pages CMS) and stamps the deploy date into:
+# Publishes the site to GitHub Pages on every push to main and stamps the deploy date into:
 #   • sitemap.xml  → <lastmod>
 #   • index.html   → "dateModified" in the JSON-LD block
 # so those dates never need to be updated by hand.
@@ -40,13 +39,8 @@ jobs:
           grep -q "\"dateModified\": \"${DATE}\"" index.html
           echo "Stamped ${DATE}"
 
-      - name: Validate CMS data files
-        run: |
-          python3 -m json.tool data.json > /dev/null
-          python3 -m json.tool content.json > /dev/null
-
       - name: Remove repo-only files from the published site
-        run: rm -rf .github .pages.yml README.md
+        run: rm -rf .github README.md
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
